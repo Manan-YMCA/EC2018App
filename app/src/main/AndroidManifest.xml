@@ -11,10 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CatgoryDashboardActivity">
         </activity>
-        <activity android:name="com.example.yatindhingra.ec2k18.homepage">
+        <activity android:name=".homepage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
