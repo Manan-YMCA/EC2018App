@@ -9,7 +9,9 @@
         android:roundIcon="@drawable/ec_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.manan.dev.ec2k18.CatgoryDashboardActivity">
+        <activity android:name=".CatgoryDashboardActivity">
+        </activity>
+        <activity android:name="com.example.yatindhingra.ec2k18.homepage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
