@@ -1,4 +1,4 @@
-package com.example.yatindhingra.ec2k18;
+package com.manan.dev.ec2k18;
 
 import org.junit.Test;
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.yatindhingra.ec2k18">
+    package="com.manan.dev.ec2k18">
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ec_app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ec_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CatgoryDashboardActivity">
+        <activity android:name="com.manan.dev.ec2k18.CatgoryDashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
