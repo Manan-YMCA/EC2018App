@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DashboardCategoryActivity">
+
+        </activity>
+        <activity android:name=".UserLoginActivity"
+            android:theme="@style/LoginActivityTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
