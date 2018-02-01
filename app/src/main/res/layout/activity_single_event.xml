@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.manan.dev.ec2018app.SingleEventActivity">
+
+    <TextView
+        android:id="@+id/tv_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/futura"
+        android:gravity="center"
+        android:text="Event name"
+        android:textColor="#000"
+        android:textSize="32sp" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_event_name"
+        android:layout_margin="10dp"
+        android:background="#222" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="#000"
+        android:text="Register"
+        android:textColor="#fff" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/btn_register"
+        android:layout_margin="10dp"
+        android:background="#222" />
+
+    <RelativeLayout
+        android:id="@+id/rl_time_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_vector_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/vector_time"
+            android:tint="#217c31" />
+
+        <TextView
+            android:id="@+id/tv_event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/iv_vector_time"
+            android:layout_toRightOf="@+id/iv_vector_time"
+            android:fontFamily="@font/futura"
+            android:text="Sunday, 18 March 2018"
+            android:textColor="#111"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/tv_event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_event_date"
+            android:layout_alignStart="@id/tv_event_date"
+            android:layout_below="@id/tv_event_date"
+            android:fontFamily="@font/futura"
+            android:text="10:00 to 16:30"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_time_date"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_vector_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/vector_location"
+            android:tint="#217c31" />
+
+        <TextView
+            android:id="@+id/tv_event_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/iv_vector_location"
+            android:layout_toRightOf="@+id/iv_vector_location"
+            android:fontFamily="@font/futura"
+            android:text="Lal Chowk"
+            android:textColor="#111"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/tv_event_location_full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/iv_vector_location"
+            android:layout_alignStart="@id/tv_event_location"
+            android:layout_below="@id/tv_event_location"
+            android:fontFamily="@font/futura"
+            android:text="Lal Chowk, Sector-6, YMCA UST, Faridabad"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_location"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="5dp"
+            android:src="@drawable/vector_person"
+            android:tint="#217c31" />
+
+        <TextView
+            android:id="@+id/tv_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_host"
+            android:fontFamily="@font/futura"
+            android:padding="5dp"
+            android:text="Hosted by [Club Name]"
+            android:textColor="#111"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_money_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_host"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="5dp"
+            android:src="@drawable/vector_money"
+            android:tint="#217c31" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_money"
+            android:fontFamily="@font/futura"
+            android:padding="5dp"
+            android:text="Cost : Rs. 10"
+            android:textColor="#111"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <ImageView
+            android:id="@+id/iv_type_of_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_money"
+            android:paddingLeft="80dp"
+            android:src="@drawable/vector_event"
+            android:tint="#217c31" />
+
+        <TextView
+            android:id="@+id/tv_type_of_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_type_of_event"
+            android:fontFamily="@font/futura"
+            android:padding="5dp"
+            android:text="Single/Team Event"
+            android:textColor="#111"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/rl_money_type"
+        android:layout_margin="10dp"
+        android:background="#222" />
+
+</RelativeLayout>
