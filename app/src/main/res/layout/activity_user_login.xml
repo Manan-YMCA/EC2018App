@@ -1,108 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_main"
+    android:background="#000"
     android:orientation="vertical"
+
     tools:context="com.manan.dev.ec2018app.UserLoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/futura"
-        android:text="Elements Culmyca"
-        android:textSize="25sp"
-        android:textColor="@color/White"
-        android:layout_marginTop="90dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/ECText"
-        />
-    <ImageView
-        android:layout_width="250sp"
-        android:layout_height="250sp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/EClogo"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/ECText"
-        />
-    <com.victor.loading.newton.NewtonCradleLoading
-        android:id="@+id/newton_cradle_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/EClogo"
-        />
-    <View
-        android:layout_width="310dp"
-        android:layout_height="2.5dp"
-        android:background="@color/White"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/newton_cradle_loading"
-        android:id="@+id/view" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ready to enjoy?"
-        android:textColor="@color/White"
-        android:textSize="23sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/view"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/futura"
-        android:id="@+id/ReadyText"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/White"
-        android:background="@color/baseDark"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:text="login with facebook"
-        android:padding="10dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingEnd="30dp"
-        android:textSize="21sp"
-        android:fontFamily="@font/futura"
-        android:layout_below="@id/ReadyText"
-        android:id="@+id/LoginButton"
-        android:paddingStart="30dp"
-        tools:ignore="RtlSymmetry" />
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/LoginButton"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Continue as a  "
-        android:textColor="@color/White"
-        android:textSize="23sp"
-        android:id="@+id/ContinueText"
-        android:fontFamily="@font/futura"
-        />
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/GuestText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ContinueText"
-        android:layout_alignBottom="@+id/ContinueText"
-        android:layout_toEndOf="@+id/ContinueText"
-        android:layout_toRightOf="@+id/ContinueText"
-        android:fontFamily="@font/futura"
-        android:text="Guest?"
-        android:textColor="@color/baseDark"
-        android:textSize="23sp" />
+        <TextView
+            android:id="@+id/ECText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/futura"
+            android:text="Elements Culmyca"
+            android:textColor="@color/White"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/EClogo"
+            android:layout_width="230sp"
+            android:layout_height="200sp"
+            android:layout_below="@id/ECText"
+            android:layout_centerHorizontal="true"
+
+
+            android:src="@drawable/logo_300" />
+
+        <com.victor.loading.newton.NewtonCradleLoading
+            android:id="@+id/newton_cradle_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/EClogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="310dp"
+            android:layout_height="2.5dp"
+            android:layout_below="@id/newton_cradle_loading"
+            android:layout_centerHorizontal="true"
+            android:background="@color/White" />
+
+        <TextView
+            android:id="@+id/ReadyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/futura"
+            android:text="Ready to enjoy?"
+            android:textColor="@color/White"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ReadyText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/baseDark"
+            android:fontFamily="@font/futura"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:text="login with facebook"
+            android:textColor="@color/White"
+            android:textSize="21sp"
+
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LoginButton"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/ContinueText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futura"
+                android:text="Continue as a  "
+                android:textColor="@color/White"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/GuestText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ContinueText"
+                android:layout_alignBottom="@+id/ContinueText"
+                android:layout_toEndOf="@+id/ContinueText"
+                android:layout_toRightOf="@+id/ContinueText"
+                android:fontFamily="@font/futura"
+                android:text="Guest?"
+                android:textColor="@color/baseDark"
+                android:textSize="20sp" />
+        </LinearLayout>
     </LinearLayout>
+    <ImageView
+        android:layout_width="280sp"
+        android:layout_height="380sp"
+        android:layout_alignParentLeft="true"
+
+        android:src="@drawable/sidevector" />
 
 
 </RelativeLayout>

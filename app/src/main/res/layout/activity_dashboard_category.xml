@@ -1,20 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
+
     tools:context="com.manan.dev.ec2018app.DashboardCategoryActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/futura"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/tv_hello_world"/>
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/dash_nav"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+
+        android:layout_gravity="center"
+        android:src="@drawable/ic_drag_handle_black_24dp" />
+    <ImageView
+        android:id="@+id/dasd_noti"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+       android:layout_below="@id/dash_nav"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_notifications_none_black_24dp" />
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/imageVmniew"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
+          android:layout_gravity="center"
+            app:srcCompat="@drawable/logo_300" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginTop="150dp">
+
+
+            <ImageView
+                android:id="@+id/jhalak"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/jh"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"/>
+
+            <ImageView
+                android:id="@+id/manan"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/an" />
+
+            <ImageView
+                android:id="@+id/vividha"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/dk" />
+
+            <ImageView
+                android:id="@+id/ananya"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/jh" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginTop="90dp">
+
+
+
+            <ImageView
+                android:id="@+id/club1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:srcCompat="@drawable/dk" />
+
+            <ImageView
+                android:id="@+id/club2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ek"
+                android:clickable="true"/>
+            <ImageView
+                android:id="@+id/club3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/an" />
+            <ImageView
+                android:id="@+id/club4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/jh" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginTop="40dp">
+
+
+            <ImageView
+                android:id="@+id/club6"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:srcCompat="@drawable/an" />
+
+            <ImageView
+                android:id="@+id/club7"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/jh" />
+            <ImageView
+                android:id="@+id/club8"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/an"
+                android:clickable="true"/>
+            <ImageView
+                android:id="@+id/club9"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/dk" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/club10"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/jh"
+                android:clickable="true"
+           android:background="?attr/selectableItemBackground"
+                />
+
+            <ImageView
+                android:id="@+id/club11"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ek"
+                android:clickable="true"/>
+        </LinearLayout>
+</LinearLayout>
+</LinearLayout>
+
+    <ImageView
+        android:id="@+id/imagjkeVmnhiew"
+        android:layout_width="250sp"
+        android:layout_height="340sp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/right" />
+</RelativeLayout>

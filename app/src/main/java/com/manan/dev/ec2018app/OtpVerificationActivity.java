@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
         etOtpCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etOtpCode.setText("");
+                startActivity(new Intent(OtpVerificationActivity.this,DashboardCategoryActivity.class));
             }
         });
 
