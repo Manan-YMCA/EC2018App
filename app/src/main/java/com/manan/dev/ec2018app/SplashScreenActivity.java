@@ -50,7 +50,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 // This method will be executed once the timer is over
                 // Start your app main activity
                 mLoadingView.pauseAnimation();
-                Intent i = new Intent(SplashScreenActivity.this, DashboardCategoryActivity.class);
+                Intent i = new Intent(SplashScreenActivity.this, ContentActivity.class);
                 startActivity(i);
 
                 // close this activity

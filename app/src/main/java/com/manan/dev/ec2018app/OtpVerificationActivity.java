@@ -32,7 +32,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
         etOtpCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OtpVerificationActivity.this,DashboardCategoryActivity.class));
+                startActivity(new Intent(OtpVerificationActivity.this,ContentActivity.class));
             }
         });
 
