@@ -207,9 +207,9 @@
                     android:layout_toRightOf="@+id/iv_money"
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
+                    android:textSize="15sp"
                     android:text="Fees : Rs. 10"
                     android:textColor="#111"
-                    android:textSize="13sp"
                     android:textStyle="normal" />
             </LinearLayout>
 
@@ -223,7 +223,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tv_fees "
                     android:src="@drawable/vector_event"
                     android:tint="#217c31" />
 
@@ -237,7 +236,7 @@
                     android:padding="5dp"
                     android:text="Single/Team Event"
                     android:textColor="#111"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
             </LinearLayout>
@@ -321,6 +320,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DUMMY DATA!"/>
+
+
 
             </LinearLayout>
         </RelativeLayout>

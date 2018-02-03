@@ -8,25 +8,25 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <ImageView
-            android:id="@+id/iv_coords_photo"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:padding="5dp"
-            android:src="@drawable/ec_app_logo" />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_coords_photo"-->
+            <!--android:layout_width="55dp"-->
+            <!--android:layout_height="55dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:padding="5dp"-->
+            <!--android:src="@drawable/ec_app_logo" />-->
 
         <TextView
             android:id="@+id/tv_coords_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_coords_photo"
             android:text="[Full Name]"
             android:textColor="#000"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
+        <!--android:layout_toRightOf="@+id/iv_coords_photo"-->
 
         <TextView
             android:id="@+id/tv_coords_phone_no"
