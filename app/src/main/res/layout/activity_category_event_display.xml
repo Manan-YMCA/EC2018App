@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manan.dev.ec2018app.CategoryEventDisplayActivity"
-    android:background="#000">
-
+    android:background="#000"
+    tools:context="com.manan.dev.ec2018app.CategoryEventDisplayActivity">
 
     <ImageView
         android:id="@+id/adsd"
         android:layout_width="60dp"
         android:layout_height="60dp"
-android:layout_centerInParent="true"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
         app:srcCompat="@drawable/logo_300" />
-
-
 
 </RelativeLayout>

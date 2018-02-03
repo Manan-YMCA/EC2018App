@@ -1,15 +1,10 @@
 package com.manan.dev.ec2018app;
 
-import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import static com.manan.dev.ec2018app.Utilities.BitmapHandler.decodeSampledBitmapFromResource;
 
 public class DashboardCategoryActivity extends AppCompatActivity {
 
@@ -18,7 +13,13 @@ public class DashboardCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_category);
 
-
+        ImageView ivEc = findViewById(R.id.imageVmniew);
+        ivEc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardCategoryActivity.this, CategoryEventDisplayActivity.class));
+            }
+        });
 //        View myView = findViewById(R.id.jhalak);
 //
 //// get the center for the clipping circle

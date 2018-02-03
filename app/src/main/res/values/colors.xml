@@ -5,5 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="baseDark">#de4c49</color>
     <color name="baseLight">#ed8979</color>
+    <color name="primaryFocused">#ae1010</color>
+    <color name="primaryPressed">#830202</color>
     <color name="White">#FFF</color>
+    <color name="Black">#000</color>
 </resources>
