@@ -1,10 +1,9 @@
 package com.manan.dev.ec2018app;
 
-import android.animation.Animator;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,9 +22,11 @@ public class UserLoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_login);
+
         final NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading=(NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.start();
+
         ECText=(TextView)this.findViewById(R.id.ECText);
         ContinueText=(TextView)this.findViewById(R.id.ContinueText);
         GuestText=(TextView)this.findViewById(R.id.GuestText);
