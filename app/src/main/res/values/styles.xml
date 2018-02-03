@@ -19,4 +19,13 @@
 
     </style>
 
+    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.AppBarOverlay"/>
+
+    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.PopupOverlay"/>
+
+
+    <style name="MainMenu" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
+
 </resources>

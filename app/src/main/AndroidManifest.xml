@@ -15,18 +15,21 @@
         <activity
             android:name=".UserLoginActivity"
             android:theme="@style/CodeFont">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SingleEventActivity" />
         <activity
             android:name=".OtpVerificationActivity"
             android:theme="@style/CodeFont" />
-        <activity android:name=".CategoryEventDisplayActivity"
-            android:theme="@style/CodeFont"></activity>
+        <activity
+            android:name=".CategoryEventDisplayActivity"
+            android:theme="@style/CodeFont" />
+        <activity android:name=".XunbaoActivity"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
