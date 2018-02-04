@@ -5,17 +5,21 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Fragments.DashboardCategoryFragment;
 
 import java.util.ArrayList;
@@ -45,47 +49,27 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
     private DashboardCategoryFragment dashboardCategoryFragment;
     private ViewAnimator viewAnimator;
     private LinearLayout linearLayout;
+    private ViewPager mPager;
+    private ViewPager viewPager;
+    private TextView[] dots;
+
+    private DashboardSlideAdapter myViewPagerAdapter;
+    private LinearLayout dotsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+
+        viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
+        myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        addBottomDots(0);
 
 
-//        View myView = findViewById(R.id.jhalak);
-//
-//// get the center for the clipping circle
-//        int cx = myView.getWidth() / 2;
-//        int cy = myView.getHeight() / 2;
-//
-//// get the final radius for the clipping circle
-//        float finalRadius = (float) Math.hypot(cx, cy);
-//
-//// create the animator for this view (the start radius is zero)
-//        Animator anim =
-//                null;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//            anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
-//        }
-//
-//// make the view visible and start the animation
-//        myView.setVisibility(View.VISIBLE);
-//        anim.start();
-
-
-//ImageView imageViewdrama= (ImageView) findViewById(R.id.but1);
-
-//        imageViewdrama.setImageBitmap(
-//                decodeSampledBitmapFromResource(getResources(), R.drawable.an, 92, 92));
-//        TextView tvHelloWorld = findViewById(R.id.tv_hello_world);
-//
-//        tvHelloWorld.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(ContentActivity.this , SingleEventActivity.class);
-//                startActivity(i);
-//            }
-//        });
         dashboardCategoryFragment = DashboardCategoryFragment.newInstance();   //Default Set for Dashboard
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, dashboardCategoryFragment)
@@ -118,6 +102,61 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
 
     }
 
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[3];
+
+        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(colorsInactive[currentPage]);
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(colorsActive[currentPage]);
+    }
+
+    private int getItem(int i) {
+        return viewPager.getCurrentItem() + i;
+    }
+
+
+
+    //  viewpager change listener
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            addBottomDots(position);
+
+
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        } else {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        }
+    }
+
 
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(CLOSE, R.drawable.icn_close);
@@ -141,6 +180,7 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         drawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 drawerLayout,         /* DrawerLayout object */

@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     android:background="#000"
     android:orientation="vertical"
+
     tools:context="com.manan.dev.ec2018app.UserLoginActivity">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
         <TextView
@@ -32,6 +35,8 @@
             android:layout_height="200sp"
             android:layout_below="@id/ECText"
             android:layout_centerHorizontal="true"
+
+
             android:src="@drawable/logo_300" />
 
         <com.victor.loading.newton.NewtonCradleLoading
@@ -75,7 +80,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="20dp"
-            android:text="Login with Mobile OTP"
+            android:text="login with facebook"
             android:textColor="@color/White"
             android:textSize="21sp"
 
@@ -85,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/LoginButton"
+
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp">
 
@@ -111,12 +117,12 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
-
     <ImageView
+        android:layout_width="280sp"
+        android:layout_height="380sp"
         android:id="@+id/iv_background"
-        android:layout_width="280dp"
-        android:layout_height="380dp"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/sidevector" />
+        android:src="@drawable/topright_basic_vector" />
+
 
 </RelativeLayout>
