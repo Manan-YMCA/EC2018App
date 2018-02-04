@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
@@ -19,8 +22,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Fragments.DashboardCategoryFragment;
+import com.manan.dev.ec2018app.Models.CategoryItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +60,7 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
 
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
-
+    private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +71,30 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+TextView developersnav = findViewById(R.id.developers);
+developersnav.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(ContentActivity.this,DevelopersActivity.class));
+    }
+});
+
+
 
         addBottomDots(0);
+
+       addData();
+
+        RecyclerView categoryRecycleview = (RecyclerView) findViewById(R.id.category_recycler_view);
+
+        categoryRecycleview.setHasFixedSize(true);
+
+        DashboardCategoryScrollerAdapter adapter = new DashboardCategoryScrollerAdapter(ContentActivity.this, allSampleData);
+
+        categoryRecycleview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        categoryRecycleview.setAdapter(adapter);
+
+
 
 
         dashboardCategoryFragment = DashboardCategoryFragment.newInstance();   //Default Set for Dashboard
@@ -100,6 +127,38 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
             }
         });
 
+    }
+
+    private void addData() {
+        CategoryItemModel item1 = new CategoryItemModel();
+        item1.setName("Dance");
+        item1.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
+                R.drawable.ek));
+
+        allSampleData.add(item1);
+
+        CategoryItemModel item3 = new CategoryItemModel();
+        item3.setName("Photography");
+        item3.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
+                R.drawable.jh));
+        allSampleData.add(item3);
+        CategoryItemModel item4 = new CategoryItemModel();
+        item4.setName("Debate");
+        item4.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
+                R.drawable.dk));
+        allSampleData.add(item4);
+
+        CategoryItemModel item5 = new CategoryItemModel();
+        item5.setName("Music");
+        item5.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
+                R.drawable.ek));
+        allSampleData.add(item5);
+        CategoryItemModel item6 = new CategoryItemModel();
+        item6.setName("Love");
+
+        item6.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
+                R.drawable.an));
+        allSampleData.add(item6);
     }
 
     private void addBottomDots(int currentPage) {
@@ -173,6 +232,8 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
         list.add(menuItem5);
         SlideMenuItem menuItem6 = new SlideMenuItem(DEVELOPERS, R.drawable.icn_close);
         list.add(menuItem6);
+        SlideMenuItem menuItem7 = new SlideMenuItem(DEVELOPERS, R.drawable.icn_ec);
+        list.add(menuItem7);
     }
 
     private void setActionBar() {
