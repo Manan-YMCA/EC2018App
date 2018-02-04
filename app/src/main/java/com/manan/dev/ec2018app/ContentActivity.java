@@ -10,8 +10,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.manan.dev.ec2018app.Fragments.DashboardCategoryFragment;
@@ -38,6 +40,7 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private ImageView drawerToggleBtn;
     private List<SlideMenuItem> list = new ArrayList<>();
     private DashboardCategoryFragment dashboardCategoryFragment;
     private ViewAnimator viewAnimator;
@@ -89,6 +92,7 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
                 .commit();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggleBtn = findViewById(R.id.drawerTogglebtn);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         linearLayout = (LinearLayout) findViewById(R.id.left_drawer);
         linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -105,21 +109,28 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
         Log.d("hey", list.get(0).getName());
         viewAnimator = new ViewAnimator<>(this, list, dashboardCategoryFragment, drawerLayout, this);
 
+        drawerToggleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
     }
 
 
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(PROFILE, R.drawable.logo_300);
+        SlideMenuItem menuItem = new SlideMenuItem(PROFILE, R.drawable.icn_ec);
         list.add(menuItem);
-        SlideMenuItem menuItem2 = new SlideMenuItem(TRENDING, R.drawable.an);
+        SlideMenuItem menuItem2 = new SlideMenuItem(TRENDING, R.drawable.icn_close);
         list.add(menuItem2);
-        SlideMenuItem menuItem3 = new SlideMenuItem(MYTICKETS, R.drawable.ek);
+        SlideMenuItem menuItem3 = new SlideMenuItem(MYTICKETS, R.drawable.icn_ec);
         list.add(menuItem3);
         SlideMenuItem menuItem4 = new SlideMenuItem(SPONSORS, R.drawable.icn_close);
         list.add(menuItem4);
-        SlideMenuItem menuItem5 = new SlideMenuItem(ABOUT, R.drawable.icn_close);
+        SlideMenuItem menuItem5 = new SlideMenuItem(ABOUT, R.drawable.icn_ec);
         list.add(menuItem5);
         SlideMenuItem menuItem6 = new SlideMenuItem(DEVELOPERS, R.drawable.icn_close);
         list.add(menuItem6);

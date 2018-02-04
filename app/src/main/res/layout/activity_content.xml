@@ -23,9 +23,22 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@android:color/black"
             android:minHeight="?attr/actionBarSize" />
+        <!--<com.manan.dev.ec2018app.Utilities.DrawerToggleBtn-->
+            <!--android:id="@+id/drawerTogglebtn"-->
+            <!--android:src="@drawable/ek"-->
+            <!--android:layout_width="48dp"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:layout_height="48dp"/>-->
+        <ImageView
+            android:id="@+id/drawerTogglebtn"
+            android:src="@drawable/ek"
+            android:layout_width="48dp"
+            android:layout_margin="8dp"
+            android:layout_height="48dp" />
+
 
     </io.codetail.widget.RevealFrameLayout>
 
