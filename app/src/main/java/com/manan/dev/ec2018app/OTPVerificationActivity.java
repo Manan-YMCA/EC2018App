@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class OtpVerificationActivity extends AppCompatActivity {
+public class OTPVerificationActivity extends AppCompatActivity {
 
     EditText etPhoneNumber;
     EditText etOtpCode;
@@ -32,7 +32,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
         etOtpCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OtpVerificationActivity.this,ContentActivity.class));
+                startActivity(new Intent(OTPVerificationActivity.this,ContentActivity.class));
             }
         });
 

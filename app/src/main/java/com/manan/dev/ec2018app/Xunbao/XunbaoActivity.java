@@ -1,18 +1,16 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.Xunbao;
 
 import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.manan.dev.ec2018app.R;
 
 public class XunbaoActivity extends FragmentActivity implements ActionBar.TabListener {
 
@@ -61,7 +59,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
 
 
         for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(com.manan.dev.ec2018app.XunbaoActivity.this));
+            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(XunbaoActivity.this));
         }
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

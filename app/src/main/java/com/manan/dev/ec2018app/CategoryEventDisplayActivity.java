@@ -13,7 +13,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_event_display);
 
-        ImageView iv = findViewById(R.id.adsd);
+        ImageView iv = findViewById(R.id.ec_logo);
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override

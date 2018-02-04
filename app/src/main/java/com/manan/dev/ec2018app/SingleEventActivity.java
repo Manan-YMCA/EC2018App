@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+
 public class SingleEventActivity extends AppCompatActivity {
 
     Button registerButton;
@@ -19,11 +21,15 @@ public class SingleEventActivity extends AppCompatActivity {
             rulesTextView;
     RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, coordsRelativeLayout;
     LinearLayout coordsLinearLayout;
+    SmoothProgressBar spb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
+
+        spb = (SmoothProgressBar) findViewById(R.id.progress_bar_google_now);
+        spb.setVisibility(View.INVISIBLE);
 
         registerButton = findViewById(R.id.btn_register);
 
@@ -62,6 +68,7 @@ public class SingleEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SingleEventActivity.this, "Mujhe Event pe Register karna hai", Toast.LENGTH_SHORT).show();
+                spb.setVisibility(View.VISIBLE);
             }
         });
 

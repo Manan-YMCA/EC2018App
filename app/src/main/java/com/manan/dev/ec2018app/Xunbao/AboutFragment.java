@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.Xunbao;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.manan.dev.ec2018app.R;
 
 
 public class AboutFragment extends Fragment {

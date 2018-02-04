@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.Xunbao;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

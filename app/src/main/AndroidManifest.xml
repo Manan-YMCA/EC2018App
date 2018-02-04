@@ -27,12 +27,12 @@
             android:label="[Event Name]"
             android:parentActivityName=".CategoryEventDisplayActivity"/>
         <activity
-            android:name=".OtpVerificationActivity"
+            android:name=".OTPVerificationActivity"
             android:theme="@style/CodeFont" />
         <activity
             android:name=".CategoryEventDisplayActivity"
             android:theme="@style/CodeFont" />
-        <activity android:name=".XunbaoActivity"
+        <activity android:name=".Xunbao.XunbaoActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
         </activity>
     </application>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<io.codetail.widget.RevealFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,6 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
@@ -23,6 +23,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_drag_handle_black_24dp" />
+
             <ImageView
                 android:id="@+id/dasd_noti"
                 android:layout_width="60dp"
@@ -30,11 +31,12 @@
                 android:layout_below="@id/dash_nav"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_notifications_none_black_24dp" />
+
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/linearLayout">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageVmniew"
@@ -47,24 +49,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_marginTop="150dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="150dp">
+                        android:orientation="vertical">
 
 
                         <ImageView
                             android:id="@+id/jhalak"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            app:srcCompat="@drawable/jh"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:clickable="true"/>
+                            android:clickable="true"
+                            app:srcCompat="@drawable/jh" />
 
                         <ImageView
                             android:id="@+id/manan"
@@ -90,13 +92,13 @@
                             android:layout_centerHorizontal="true"
                             app:srcCompat="@drawable/jh" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_marginTop="90dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="90dp">
-
+                        android:orientation="vertical">
 
 
                         <ImageView
@@ -115,8 +117,9 @@
                             android:layout_height="80dp"
                             android:layout_below="@+id/imageView"
                             android:layout_centerHorizontal="true"
-                            app:srcCompat="@drawable/ek"
-                            android:clickable="true"/>
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ek" />
+
                         <ImageView
                             android:id="@+id/club3"
                             android:layout_width="80dp"
@@ -124,6 +127,7 @@
                             android:layout_below="@+id/imageView"
                             android:layout_centerHorizontal="true"
                             app:srcCompat="@drawable/an" />
+
                         <ImageView
                             android:id="@+id/club4"
                             android:layout_width="80dp"
@@ -136,9 +140,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_marginTop="40dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="40dp">
+                        android:orientation="vertical">
 
 
                         <ImageView
@@ -158,14 +162,16 @@
                             android:layout_below="@+id/imageView"
                             android:layout_centerHorizontal="true"
                             app:srcCompat="@drawable/jh" />
+
                         <ImageView
                             android:id="@+id/club8"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_below="@+id/imageView"
                             android:layout_centerHorizontal="true"
-                            app:srcCompat="@drawable/an"
-                            android:clickable="true"/>
+                            android:clickable="true"
+                            app:srcCompat="@drawable/an" />
+
                         <ImageView
                             android:id="@+id/club9"
                             android:layout_width="80dp"
@@ -178,8 +184,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/club10"
@@ -187,10 +193,9 @@
                             android:layout_height="80dp"
                             android:layout_below="@+id/imageView"
                             android:layout_centerHorizontal="true"
-                            app:srcCompat="@drawable/jh"
-                            android:clickable="true"
                             android:background="?attr/selectableItemBackground"
-                            />
+                            android:clickable="true"
+                            app:srcCompat="@drawable/jh" />
 
                         <ImageView
                             android:id="@+id/club11"
@@ -198,8 +203,8 @@
                             android:layout_height="80dp"
                             android:layout_below="@+id/imageView"
                             android:layout_centerHorizontal="true"
-                            app:srcCompat="@drawable/ek"
-                            android:clickable="true"/>
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ek" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

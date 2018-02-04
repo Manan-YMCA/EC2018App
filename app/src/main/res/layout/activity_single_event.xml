@@ -10,11 +10,18 @@
         android:layout_height="wrap_content"
         tools:context="com.manan.dev.ec2018app.SingleEventActivity">
 
+        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+            android:id="@+id/progress_bar_google_now"
+            style="@style/GNowProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+
         <TextView
             android:id="@+id/tv_event_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/futura"
             android:gravity="center"
             android:text="Event name"

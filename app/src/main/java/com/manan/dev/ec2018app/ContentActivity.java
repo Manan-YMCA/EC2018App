@@ -195,12 +195,13 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
 //                DashboardCategoryFragment contentFragment = DashboardCategoryFragment.newInstance();
 //                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
 //                return contentFragment;
-                startActivity(new Intent(ContentActivity.this, SingleEventActivity.class));
+                startActivity(new Intent(ContentActivity.this, CategoryEventDisplayActivity.class));
             }
             case TRENDING: {
-                DashboardCategoryFragment contentFragment = DashboardCategoryFragment.newInstance();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
-                return contentFragment;
+//                DashboardCategoryFragment contentFragment = DashboardCategoryFragment.newInstance();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
+//                return contentFragment;
+//                startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
             }
             case MYTICKETS: {
                 DashboardCategoryFragment contentFragment = DashboardCategoryFragment.newInstance();
