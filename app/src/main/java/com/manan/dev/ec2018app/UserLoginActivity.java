@@ -73,6 +73,8 @@ public class UserLoginActivity extends AppCompatActivity {
             public void run() {
                 newtonCradleLoading.stop();
 
+                newtonCradleLoading.animate().alpha(0.0f).setDuration(1500).setListener(null);
+
                 backImage.setVisibility(View.VISIBLE);
                 backImage.animate().alpha(1.0f).setDuration(1500).setListener(null);
                 lineView.setVisibility(View.VISIBLE);
@@ -91,7 +93,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 ECLogo.animate().alpha(1.0f).setDuration(1500).setListener(null);
 
             }
-        },2500);
+        },1700);
 
     }
 }

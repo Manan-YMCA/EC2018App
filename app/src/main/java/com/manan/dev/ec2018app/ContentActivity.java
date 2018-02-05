@@ -26,6 +26,7 @@ import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Fragments.DashboardCategoryFragment;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
     public static final String SPONSORS = "Sponsors";
     public static final String ABOUT = "About";
     public static final String DEVELOPERS = "Developers";
+    public static final String LOGOUT = "Log Out";
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -61,6 +63,8 @@ public class ContentActivity extends AppCompatActivity implements ViewAnimator.V
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -226,14 +230,16 @@ developersnav.setOnClickListener(new View.OnClickListener() {
         list.add(menuItem2);
         SlideMenuItem menuItem3 = new SlideMenuItem(MYTICKETS, R.drawable.icn_ec);
         list.add(menuItem3);
+        SlideMenuItem menuItem7 = new SlideMenuItem(LOGOUT, R.drawable.icn_close);
+        list.add(menuItem7);
         SlideMenuItem menuItem4 = new SlideMenuItem(SPONSORS, R.drawable.icn_close);
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ABOUT, R.drawable.icn_ec);
         list.add(menuItem5);
         SlideMenuItem menuItem6 = new SlideMenuItem(DEVELOPERS, R.drawable.icn_close);
         list.add(menuItem6);
-        SlideMenuItem menuItem7 = new SlideMenuItem(DEVELOPERS, R.drawable.icn_ec);
-        list.add(menuItem7);
+        SlideMenuItem menuItem8 = new SlideMenuItem(DEVELOPERS, R.drawable.icn_ec);
+        list.add(menuItem8);
     }
 
     private void setActionBar() {
@@ -331,6 +337,12 @@ developersnav.setOnClickListener(new View.OnClickListener() {
                 return contentFragment;
             }
             case DEVELOPERS: {
+//                DashboardCategoryFragment contentFragment = DashboardCategoryFragment.newInstance();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
+//                return contentFragment;
+                  startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
+            }
+            case LOGOUT: {
                 DashboardCategoryFragment contentFragment = DashboardCategoryFragment.newInstance();
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
                 return contentFragment;

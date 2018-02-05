@@ -80,7 +80,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="20dp"
-            android:text="login with facebook"
+            android:text="Continue with Mobile"
             android:textColor="@color/White"
             android:textSize="21sp"
 
