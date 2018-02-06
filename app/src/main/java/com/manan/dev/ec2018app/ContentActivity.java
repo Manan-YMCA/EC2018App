@@ -2,7 +2,6 @@ package com.manan.dev.ec2018app;
 
 
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -10,13 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
-import com.manan.dev.ec2018app.Fragments.DashboardCategoryFragment;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ public class ContentActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TextView[] dots;
-    private DashboardCategoryFragment dashboardCategoryFragment;
+
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
@@ -36,10 +33,7 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
 
-        dashboardCategoryFragment = DashboardCategoryFragment.newInstance();   //Default Set for Dashboard
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, dashboardCategoryFragment)
-                .commit();
+
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
