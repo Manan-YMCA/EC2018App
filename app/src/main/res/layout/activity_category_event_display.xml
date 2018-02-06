@@ -8,54 +8,65 @@
     tools:context="com.manan.dev.ec2018app.CategoryEventDisplayActivity">
 
     <ImageView
+        android:layout_marginTop="15dp"
         android:id="@+id/ec_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo_300" />
 
-    <LinearLayout
-        android:id="@+id/ll_event_category_photo_name"
+    <RelativeLayout
+        android:id="@+id/rl_event_category_photo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ec_logo"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="27dp">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/iv_category_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@drawable/jh" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/iv_category_image"
+            android:layout_toRightOf="@+id/iv_category_image"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_category_name_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="[Event Category]"
+                android:paddingTop="20dp"
+                android:text="Photography"
                 android:textAllCaps="true"
                 android:textColor="#fff"
                 android:textSize="30sp" />
 
             <View
-                android:layout_width="280dp"
-                android:layout_height="2dp"
+                android:layout_width="170dp"
+                android:layout_height="1dp"
+                android:layout_alignLeft="@id/tv_category_name_heading"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/tv_category_name_heading"
+                android:layout_below="@+id/tv_category_name_heading"
                 android:layout_gravity="right"
                 android:layout_marginTop="35dp"
                 android:background="#CE5952" />
         </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_single_event_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_event_category_photo_name">
+        android:layout_below="@+id/rl_event_category_photo_name">
 
         <RelativeLayout
             android:id="@+id/rl_single_event_card"
@@ -104,7 +115,7 @@
                     android:textColor="#fff" />
 
                 <TextView
-                    android:id="@+id/tv_single_event_date"
+                    android:id="@+id/tvA_single_event_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Event Date"
@@ -114,7 +125,7 @@
                     android:id="@+id/tv_single_event_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Event Fees"
+                    android:text="Event Time"
                     android:textColor="#fff" />
 
                 <View
@@ -138,5 +149,12 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="280dp"
+        android:layout_height="380dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/topright_basic_vector" />
 
 </RelativeLayout>

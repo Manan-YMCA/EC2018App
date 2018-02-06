@@ -23,22 +23,22 @@ public class UserLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_login);
 
         final NewtonCradleLoading newtonCradleLoading;
-        newtonCradleLoading=(NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
+        newtonCradleLoading = (NewtonCradleLoading) findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.start();
 
 
-        ECText = this.findViewById(R.id.ECText);
-        ContinueText = this.findViewById(R.id.ContinueText);
-        GuestText = this.findViewById(R.id.GuestText);
-        ReadyText = this.findViewById(R.id.ReadyText);
-        LoginButton = this.findViewById(R.id.LoginButton);
-        ECLogo = this.findViewById(R.id.EClogo);
+        ECText = (TextView) this.findViewById(R.id.ECText);
+        ContinueText = (TextView) this.findViewById(R.id.ContinueText);
+        GuestText = (TextView) this.findViewById(R.id.GuestText);
+        ReadyText = (TextView) this.findViewById(R.id.ReadyText);
+        LoginButton = (Button) this.findViewById(R.id.LoginButton);
+        ECLogo = (ImageView) this.findViewById(R.id.EClogo);
         lineView = this.findViewById(R.id.view);
-        backImage = this.findViewById(R.id.iv_background);
+        backImage = (ImageView) this.findViewById(R.id.iv_background);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,19 +5,23 @@ package com.manan.dev.ec2018app.Xunbao;
  */
 
 public class LeaderboardList {
-    public String name1,rank,level;
-    public LeaderboardList(String name1,String rank,String level) {
-        this.name1=name1;
-        this.rank=rank;
-        this.level=level;
+    public String name1, rank, level;
+
+    public LeaderboardList(String name1, String rank, String level) {
+        this.name1 = name1;
+        this.rank = rank;
+        this.level = level;
     }
+
     public String getName1() {
         return name1;
     }
-    public String getRank(){
+
+    public String getRank() {
         return rank;
     }
-    public String getLevel(){
+
+    public String getLevel() {
         return level;
     }
 }

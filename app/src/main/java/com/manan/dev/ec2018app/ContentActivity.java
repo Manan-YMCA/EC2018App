@@ -1,7 +1,7 @@
 package com.manan.dev.ec2018app;
 
 
-
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 
 import java.util.ArrayList;
+
 public class ContentActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -26,6 +28,7 @@ public class ContentActivity extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
 
+    TextView categoriesHeadingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,18 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
 
-
+        categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        categoriesHeadingTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ContentActivity.this , CategoryEventDisplayActivity.class));
+            }
+        });
 
 
         addBottomDots(0);
