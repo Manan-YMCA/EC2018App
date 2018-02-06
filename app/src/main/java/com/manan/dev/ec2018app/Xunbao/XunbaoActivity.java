@@ -6,10 +6,20 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.R;
 
 public class XunbaoActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -62,17 +72,20 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
             actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(XunbaoActivity.this));
         }
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
                 actionBar.setSelectedNavigationItem(position);
+                if(position==2){
+                    LeaderboardFragment k=new LeaderboardFragment();
+                    k.setData();
+                }
             }
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
+
             }
 
             @Override
