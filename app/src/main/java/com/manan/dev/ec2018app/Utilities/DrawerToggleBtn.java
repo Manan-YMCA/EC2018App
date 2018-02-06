@@ -19,18 +19,20 @@ public class DrawerToggleBtn extends android.support.v7.widget.AppCompatImageVie
     public DrawerToggleBtn(Context context) {
         super(context);
     }
+
     public DrawerToggleBtn(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
     public DrawerToggleBtn(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public void changeState(){
-        if ( mDrawerLayout.isDrawerOpen( side ) ){
-            mDrawerLayout.closeDrawer( side );
-        }else{
-            mDrawerLayout.openDrawer( side );
+    public void changeState() {
+        if (mDrawerLayout.isDrawerOpen(side)) {
+            mDrawerLayout.closeDrawer(side);
+        } else {
+            mDrawerLayout.openDrawer(side);
         }
     }
 
@@ -38,14 +40,17 @@ public class DrawerToggleBtn extends android.support.v7.widget.AppCompatImageVie
     public void onDrawerSlide(View drawerView, float slideOffset) {
         Log.e("BUTTOM DRAWER: ", "onDrawerSlide");
     }
+
     @Override
     public void onDrawerOpened(View drawerView) {
         Log.e("BUTTOM DRAWER: ", "onDrawerOpened");
     }
+
     @Override
     public void onDrawerClosed(View drawerView) {
         Log.e("BUTTOM DRAWER: ", "onDrawerClosed");
     }
+
     @Override
     public void onDrawerStateChanged(int newState) {
         Log.e("BUTTOM DRAWER: ", "onDrawerStateChanged");
@@ -54,6 +59,7 @@ public class DrawerToggleBtn extends android.support.v7.widget.AppCompatImageVie
     public DrawerLayout getDrawerLayout() {
         return mDrawerLayout;
     }
+
     public DrawerToggleBtn setDrawerLayout(DrawerLayout mDrawerLayout) {
         this.mDrawerLayout = mDrawerLayout;
         return this;

@@ -30,7 +30,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
         viewPager = (ViewPager) findViewById(R.id.pager);
 
 
-        TextView tv=new TextView(getApplicationContext());
+        TextView tv = new TextView(getApplicationContext());
 
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
@@ -48,7 +48,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
         tv.setGravity(Gravity.CENTER);
 
 
-        actionBar =getActionBar();
+        actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(tv);
 
@@ -86,7 +86,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
     @Override
     public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         viewPager.setCurrentItem(tab.getPosition());
-   }
+    }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {

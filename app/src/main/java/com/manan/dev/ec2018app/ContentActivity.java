@@ -1,7 +1,6 @@
 package com.manan.dev.ec2018app;
 
 
-
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,19 +15,20 @@ import android.widget.TextView;
 
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
-import com.manan.dev.ec2018app.Fragments.DashboardCategoryFragment;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 
 import java.util.ArrayList;
+
 public class ContentActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TextView[] dots;
-    private DashboardCategoryFragment dashboardCategoryFragment;
+
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
 
+    TextView categoriesHeadingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,18 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
 
-        dashboardCategoryFragment = DashboardCategoryFragment.newInstance();   //Default Set for Dashboard
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, dashboardCategoryFragment)
-                .commit();
+        categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        categoriesHeadingTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ContentActivity.this , CategoryEventDisplayActivity.class));
+            }
+        });
 
 
         addBottomDots(0);

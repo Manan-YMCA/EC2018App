@@ -19,9 +19,7 @@ import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.R;
 
 
-
 import java.util.ArrayList;
-
 
 
 public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<DashboardCategoryScrollerAdapter.SingleItemRowHolder> {
@@ -47,7 +45,7 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
         CategoryItemModel singleItem = itemsList.get(i);
 
         holder.tvTitle.setText(singleItem.getName());
-        Drawable drawable = new BitmapDrawable(mContext.getResources(),singleItem.getImage());
+        Drawable drawable = new BitmapDrawable(mContext.getResources(), singleItem.getImage());
 
         holder.itemImage.setImageDrawable(drawable);
     }

@@ -9,10 +9,8 @@ import android.graphics.Bitmap;
 public class CategoryItemModel {
 
 
-
     private String name;
     private Bitmap image;
-
 
 
     public CategoryItemModel() {
@@ -39,7 +37,6 @@ public class CategoryItemModel {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
 }

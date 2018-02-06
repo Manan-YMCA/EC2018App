@@ -31,24 +31,24 @@ public class SingleEventActivity extends AppCompatActivity {
         spb = (SmoothProgressBar) findViewById(R.id.progress_bar_google_now);
         spb.setVisibility(View.INVISIBLE);
 
-        registerButton = findViewById(R.id.btn_register);
+        registerButton = (Button) findViewById(R.id.btn_register);
 
-        eventDateTextView = findViewById(R.id.tv_event_date);
-        eventTimeTextView = findViewById(R.id.tv_event_time);
-        locationTextView = findViewById(R.id.tv_event_location);
-        locationFullTextView = findViewById(R.id.tv_event_location_full);
-        hostClubTextView = findViewById(R.id.tv_host);
-        feesTextView = findViewById(R.id.tv_fees);
-        typeOfEventTextView = findViewById(R.id.tv_type_of_event);
-        firstPrizeTextView = findViewById(R.id.tv_prize_first);
-        secondPrizeTextView = findViewById(R.id.tv_prize_second);
-        thirdPrizeTextView = findViewById(R.id.tv_prize_third);
-        descriptionTextView = findViewById(R.id.tv_description);
-        rulesTextView = findViewById(R.id.tv_rules);
+        eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
+        eventTimeTextView = (TextView) findViewById(R.id.tv_event_time);
+        locationTextView = (TextView) findViewById(R.id.tv_event_location);
+        locationFullTextView = (TextView) findViewById(R.id.tv_event_location_full);
+        hostClubTextView = (TextView) findViewById(R.id.tv_host);
+        feesTextView = (TextView) findViewById(R.id.tv_fees);
+        typeOfEventTextView = (TextView) findViewById(R.id.tv_type_of_event);
+        firstPrizeTextView = (TextView) findViewById(R.id.tv_prize_first);
+        secondPrizeTextView = (TextView) findViewById(R.id.tv_prize_second);
+        thirdPrizeTextView = (TextView) findViewById(R.id.tv_prize_third);
+        descriptionTextView = (TextView) findViewById(R.id.tv_description);
+        rulesTextView = (TextView) findViewById(R.id.tv_rules);
 
-        dateTimeRelativeLayout = findViewById(R.id.rl_time_date);
-        locationRelativeLayout = findViewById(R.id.rl_location);
-        coordsLinearLayout = findViewById(R.id.ll_coordinators);
+        dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
+        locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
+        coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
 
         dateTimeRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

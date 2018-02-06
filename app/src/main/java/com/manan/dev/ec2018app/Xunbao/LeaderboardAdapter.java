@@ -20,9 +20,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     private List<LeaderboardList> leaderboardList;
     private Context context;
 
-    public LeaderboardAdapter(Context context, List<LeaderboardList> ll){
-        this.context=context;
-        this.leaderboardList=ll;
+    public LeaderboardAdapter(Context context, List<LeaderboardList> ll) {
+        this.context = context;
+        this.leaderboardList = ll;
     }
 
     @Override
@@ -47,13 +47,13 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView rank,name1,level;
+        public TextView rank, name1, level;
 
         public MyViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            rank =(TextView) itemLayoutView.findViewById(R.id.Rank);
-            name1=(TextView) itemLayoutView.findViewById(R.id.name);
-            level=(TextView) itemLayoutView.findViewById(R.id.level);
+            rank = (TextView) itemLayoutView.findViewById(R.id.Rank);
+            name1 = (TextView) itemLayoutView.findViewById(R.id.name);
+            level = (TextView) itemLayoutView.findViewById(R.id.level);
         }
     }
 
