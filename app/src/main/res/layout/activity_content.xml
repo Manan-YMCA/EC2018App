@@ -1,159 +1,91 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000">
-    <!--tools:showIn="@layout/activity_content">-->
 
-
-    <io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/container_frame"
+    <LinearLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 
-        <LinearLayout
-            android:id="@+id/content_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@android:color/black"
-            android:minHeight="?attr/actionBarSize" />
-        <!--<com.manan.dev.ec2018app.Utilities.DrawerToggleBtn-->
-            <!--android:id="@+id/drawerTogglebtn"-->
-            <!--android:src="@drawable/ek"-->
-            <!--android:layout_width="48dp"-->
-            <!--android:layout_margin="8dp"-->
-            <!--android:layout_height="48dp"/>-->
-<RelativeLayout
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/slliderview_pager"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                />
+                android:layout_height="300dp" />
 
             <ImageView
                 android:id="@+id/ddss"
-                android:src="@drawable/topleftbasic_vector"
-                android:layout_width="450dp"
-                android:layout_alignParentTop="true"
-android:layout_alignParentRight="true"
+                android:layout_width="match_parent"
                 android:layout_height="270dp"
-                android:layout_centerHorizontal="true"
-                />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/topleftbasic_vector" />
 
             <ImageView
-            android:id="@+id/drawerTogglebtn"
-            android:src="@drawable/ic_drag_handle_black_24dp"
-            android:layout_width="48dp"
-            android:layout_margin="8dp"
-            android:layout_height="48dp"
+                android:id="@+id/drawerTogglebtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_drag_handle_black_24dp" />
 
-            />
             <ImageView
                 android:id="@+id/ds"
-                android:src="@drawable/logo_300"
                 android:layout_width="48dp"
-                android:layout_margin="8dp"
                 android:layout_height="48dp"
                 android:layout_centerHorizontal="true"
-                />
+                android:layout_margin="8dp"
+                android:src="@drawable/logo_300" />
+
             <LinearLayout
-                android:layout_marginTop="30dp"
                 android:id="@+id/layoutDots"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:orientation="horizontal"></LinearLayout>
+                android:orientation="horizontal" />
 
             <TextView
+                android:id="@+id/text_viewcategories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                android:text="Categories"
-                android:layout_marginTop="5dp"
+                android:layout_above="@+id/categories_underline_view"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/text_viewcategories"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/futura"
-                android:layout_below="@id/layoutDots"
-                android:textSize="32sp"
-                />
+                android:text="Categories"
+                android:textColor="@color/White"
+                android:textSize="32sp" />
 
 
             <View
-    android:layout_height="2dp"
-    android:layout_width="200dp"
-
-    android:layout_below="@+id/text_viewcategories"
-    android:background="@color/baseLight"/>
+                android:id="@+id/categories_underline_view"
+                android:layout_width="200dp"
+                android:layout_height="2dp"
+                android:layout_above="@+id/category_recycler_view"
+                android:background="@color/baseLight" />
 
             <android.support.v7.widget.RecyclerView
-
                 android:id="@+id/category_recycler_view"
-                android:layout_below="@id/text_viewcategories"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_marginTop="20dp"/>
-
-
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:scrollbars="none" />
 
         </RelativeLayout>
-    <View
-        android:layout_height="2dp"
-
-        android:layout_width="200dp"
-      android:layout_alignParentRight="true"
-android:layout_above="@+id/developers"
-        android:background="@color/baseLight"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/White"
-            android:fontFamily="@font/futura"
-            android:id="@+id/developers"
-            android:textSize="18sp"
-            android:layout_marginLeft="5dp"
-android:padding="10dp"
-          android:layout_marginBottom="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="Loved the App? Say hii to Developers!"/>
-</RelativeLayout>>
-    </io.codetail.widget.RevealFrameLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start|bottom"
-        android:scrollbarThumbVertical="@android:color/transparent">
-
-        <LinearLayout
-            android:id="@+id/left_drawer"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:divider="@android:color/transparent"
-            android:orientation="vertical" />
-    </ScrollView>
-</android.support.v4.widget.DrawerLayout>
+    </RelativeLayout>
+</RelativeLayout>
