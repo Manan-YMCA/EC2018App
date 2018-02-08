@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -10,12 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
 import java.util.ArrayList;
 
@@ -41,6 +44,13 @@ public class ContentActivity extends AppCompatActivity {
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+        ImageView img = findViewById(R.id.drawerTogglebtn);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
+            }
+        });
 
         categoriesHeadingTextView.setOnClickListener(new View.OnClickListener() {
             @Override
