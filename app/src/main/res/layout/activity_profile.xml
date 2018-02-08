@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="com.manan.dev.ec2018app.ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/EClogo"
+            android:layout_width="230sp"
+            android:layout_height="100sp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icn_ec" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="200dp"
+            android:layout_height="3dp"
+            android:layout_below="@+id/EClogo"
+            android:background="@color/baseDark" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/futura"
+            android:text="WELCOME to your Culmyca 2K18 Profile"
+            android:textColor="@color/White"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv1"
+            android:layout_marginLeft="18dp"
+            android:fontFamily="@font/futura"
+            android:text="This is how you look in Culmyca Database"
+            android:textColor="@color/White"
+            android:textSize="16sp" />
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/profile_picture_layout"
+            android:layout_below="@+id/tv2"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true">
+<ImageView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+android:id="@+id/profile_pic"
+
+
+    />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_picture_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/futura"
+            android:text="It seems that you are,"
+            android:textColor="@color/White"
+            android:textSize="19sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv3"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:background="@layout/rounded_rectangle">
+
+
+            <ImageView
+                android:id="@+id/edit_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/vector_pencil" />
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/futura"
+                android:textColor="@color/White"
+                android:textSize="28sp"
+                tools:text="Prerna Suneja" />
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/futura"
+                android:textColor="@color/White"
+                android:textSize="20sp"
+                tools:text="prernasuneja@gmail.com" />
+
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/futura"
+                android:textColor="@color/White"
+                android:textSize="25sp"
+                tools:text="YMCAUST"
+
+                />
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/futura"
+                android:textColor="@color/White"
+                android:textSize="22sp"
+                tools:text="9467558310" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/futura"
+            android:text="Tap on pencil to edit"
+            android:textColor="@color/White" />
+    </RelativeLayout>
+
+</ScrollView>
