@@ -85,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.367418, 77.316191)).title("Electrical Chowk").icon(BitmapDescriptorFactory.fromResource(R.drawable.loc)));
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.366661, 77.316368)).title("Eco Café").icon(BitmapDescriptorFactory.fromResource(R.drawable.loc)));
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.366557, 77.315696)).title("Mother Dairy").icon(BitmapDescriptorFactory.fromResource(R.drawable.loc)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(28.367620, 77.317181)).title("Lal Chowk").icon(BitmapDescriptorFactory.fromResource(R.drawable.loc)));
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 

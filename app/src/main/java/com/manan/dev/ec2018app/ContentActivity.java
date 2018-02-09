@@ -5,11 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +28,7 @@ import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
 import java.util.ArrayList;
 
-public class ContentActivity extends AppCompatActivity {
+public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private TextView[] dots;
@@ -32,12 +38,25 @@ public class ContentActivity extends AppCompatActivity {
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
 
     TextView categoriesHeadingTextView;
+    private DrawerLayout drawer;
+    private NavigationView nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
+        setContentView(R.layout.navbar_content);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                ContentActivity.this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        nav_view = (NavigationView) findViewById(R.id.nav_view);
+        nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+        nav_view.setCheckedItem(R.id.nav_home);
+
 
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
@@ -48,7 +67,9 @@ public class ContentActivity extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
+                if(!drawer.isDrawerOpen(GravityCompat.START)){
+                    drawer.openDrawer(GravityCompat.START);
+                }
             }
         });
 
@@ -155,10 +176,70 @@ public class ContentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START, true);
         }
+        if(!drawer.isDrawerOpen(GravityCompat.START)){
+            super.onBackPressed();
+        }
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        item.setChecked(false);
+
+        switch (id){
+            case R.id.nav_home:
+                //handle home case
+                break;
+            case R.id.nav_profile:
+                //TODO
+                //check whether guest or logged in user
+                //if guest pass intent to reg activity
+                //if logged in pass intent to user profile activity
+                break;
+            case R.id.nav_tickets:
+                //TODO
+                //if logged in show users tickets
+                //if guest user pass intent to reg activity
+                break;
+            case R.id.nav_trending:
+                //TODO
+                //pass intent to activity with tab layout with 2 tabs
+                //first for trending among all users using firebase analytics
+                //second for trending among facebook friends
+
+                //currently xunbao.. remove it later
+                startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
+                break;
+            case R.id.nav_about:
+                //TODO
+                //display about fest and college
+                break;
+            case R.id.nav_logout:
+                //TODO
+                //log the user out
+                break;
+            case R.id.nav_sponsors:
+                //TODO
+                //add sponsors
+                break;
+            case R.id.nav_share:
+                //TODO
+                //app share kardo
+                break;
+            case R.id.nav_bug:
+                //TODO
+                //report bugs
+                break;
+            case R.id.nav_dev:
+                //TODO
+                //show developers
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
