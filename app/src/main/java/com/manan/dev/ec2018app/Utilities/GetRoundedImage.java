@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.Utilities;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

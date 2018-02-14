@@ -159,8 +159,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
-
-
         }
 
         @Override
@@ -199,6 +197,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //check whether guest or logged in user
                 //if guest pass intent to reg activity
                 //if logged in pass intent to user profile activity
+                startActivity(new Intent(ContentActivity.this, ProfileActivity.class));
                 break;
             case R.id.nav_tickets:
                 //TODO
@@ -237,6 +236,9 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_dev:
                 //TODO
                 //show developers
+                break;
+            case R.id.nav_location:
+                startActivity(new Intent(ContentActivity.this, MapsActivity.class));
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

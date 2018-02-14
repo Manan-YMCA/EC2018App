@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -61,7 +62,8 @@ public class LeaderboardFragment extends Fragment {
     public void setData(){
         RequestQueue queue = Volley.newRequestQueue(c);
         Log.d("HEYT","resumed");
-        String url = "https://xunbao-1.herokuapp.com/leaderboard_api/";
+        String url = c.getResources().getString(R.string.xunbao_leaderboard_api);
+        Toast.makeText(c, url, Toast.LENGTH_LONG).show();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     List<LeaderboardList> leaderboardList=new ArrayList<>();
