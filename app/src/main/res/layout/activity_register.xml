@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.manan.dev.ec2018app.RegisterActivity"
+    android:background="@color/Black">
+
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/logo_300"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="180dp"
+        android:layout_height="3.5dp"
+        android:layout_below="@id/logo"
+        android:background="@color/baseDark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration"
+        android:textColor="@color/White"
+        android:textSize="30sp"
+        android:fontFamily="@font/futura"
+        android:id="@+id/txt_reg"
+        android:layout_below="@+id/view"
+        android:layout_marginLeft="40dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_wel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to registration portal of"
+        android:textColor="@color/White"
+        android:layout_below="@+id/txt_reg"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/futura"
+        />
+    <TextView
+        android:id="@+id/txt_ec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_wel"
+        android:text="Elements Culmyca 2K18!"
+        android:textSize="20dp"
+        android:textColor="@color/White"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/futura"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/futura"
+        android:text="Fill up the following details to REGISTER in EC-2K18"
+        android:textColor="@color/White"
+        android:layout_below="@+id/txt_ec"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:id="@+id/txt_fill"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/hint_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/layout_rounded_background"
+        android:layout_below="@+id/txt_fill"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="70dp"
+
+
+        >
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:id="@+id/name"
+            android:textSize="25sp"
+            android:shadowColor="@color/White"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/White"
+            android:fontFamily="@font/futura"
+            android:layout_marginLeft="10dp"
+            android:textColorHint="@color/White"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hint_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/layout_rounded_background"
+        android:layout_below="@+id/hint_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        >
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Email"
+            android:id="@+id/email"
+            android:textSize="25sp"
+            android:textColor="@color/White"
+            android:gravity="center"
+            android:padding="5dp"
+            android:fontFamily="@font/futura"
+            android:layout_marginLeft="10dp"
+            android:textColorHint="@color/White"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hint_clg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/layout_rounded_background"
+        android:layout_below="@+id/hint_email"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        >
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="College"
+            android:id="@+id/clg"
+            android:textColor="@color/White"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:fontFamily="@font/futura"
+            android:layout_marginLeft="10dp"
+            android:textColorHint="@color/White"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hint_mob"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/layout_rounded_background"
+        android:layout_below="@+id/hint_clg"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        >
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Mobile No."
+            android:id="@+id/mob"
+            android:textColor="@color/White"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:fontFamily="@font/futura"
+            android:padding="5dp"
+            android:textColorHint="@color/White"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/hint_set"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@layout/rounded_rectangle_a"
+        android:layout_below="@+id/hint_mob"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="70dp"
+        >
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="All set to fire?"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:fontFamily="@font/futura"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+

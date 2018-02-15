@@ -45,7 +45,7 @@ public class UserLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO
                 //facebook login here
-                startActivity(new Intent(UserLoginActivity.this, OTPVerificationActivity.class));
+                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class));
             }
         });
 

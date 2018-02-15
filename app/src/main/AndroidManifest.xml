@@ -54,6 +54,9 @@
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/CodeFont" />
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/CodeFont" />
     </application>
 
 </manifest>
