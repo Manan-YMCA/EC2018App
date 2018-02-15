@@ -88,7 +88,7 @@
             />
         <RelativeLayout android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@layout/rounded_rectangle"
+            android:background="@drawable/edit_text_background"
             android:layout_centerInParent="true"
             android:layout_below="@+id/tv3"
             android:id="@+id/rl"

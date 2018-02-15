@@ -82,7 +82,7 @@ android:id="@+id/profile_pic"
             android:layout_below="@+id/tv3"
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
-            android:background="@layout/rounded_rectangle">
+            android:background="@drawable/edit_text_background">
 
 
             <ImageView
