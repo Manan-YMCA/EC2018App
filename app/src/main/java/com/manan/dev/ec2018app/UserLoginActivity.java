@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,13 @@ public class UserLoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_login);
+
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        String restoredText = prefs.getString("Phone", null);
+        if (restoredText != null) {
+            startActivity(new Intent(getApplicationContext(), ContentActivity.class));
+            finish();
+        }
 
         final NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading) findViewById(R.id.newton_cradle_loading);

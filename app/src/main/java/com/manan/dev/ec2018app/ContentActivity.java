@@ -3,6 +3,7 @@ package com.manan.dev.ec2018app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -218,8 +219,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //display about fest and college
                 break;
             case R.id.nav_logout:
-                //TODO
-                //log the user out
+                SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                startActivity(new Intent(getApplicationContext(), UserLoginActivity.class));
+                finish();
                 break;
             case R.id.nav_sponsors:
                 //TODO
