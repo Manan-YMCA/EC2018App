@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
@@ -223,6 +224,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.commit();
+                AccessToken.setCurrentAccessToken(null);
                 startActivity(new Intent(getApplicationContext(), UserLoginActivity.class));
                 finish();
                 break;

@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
                 editor.putString("Phone", userDetails.getmPhone());
                 editor.apply();
-                startActivity(new Intent(getApplicationContext(), ContentActivity.class));
+                startActivity(new Intent(getApplicationContext(), FBLoginActivity.class));
                 finish();
 
             }
