@@ -95,7 +95,7 @@ android:id="@+id/profile_pic"
                 android:src="@drawable/vector_pencil" />
 
             <TextView
-                android:id="@+id/tv4"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -106,10 +106,10 @@ android:id="@+id/profile_pic"
                 tools:text="Prerna Suneja" />
 
             <TextView
-                android:id="@+id/tv5"
+                android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv4"
+                android:layout_below="@id/tv_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/futura"
@@ -118,10 +118,10 @@ android:id="@+id/profile_pic"
                 tools:text="prernasuneja@gmail.com" />
 
             <TextView
-                android:id="@+id/tv6"
+                android:id="@+id/tv_college"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv5"
+                android:layout_below="@+id/tv_email"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/futura"
@@ -132,10 +132,10 @@ android:id="@+id/profile_pic"
                 />
 
             <TextView
-                android:id="@+id/tv7"
+                android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv6"
+                android:layout_below="@+id/tv_college"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
