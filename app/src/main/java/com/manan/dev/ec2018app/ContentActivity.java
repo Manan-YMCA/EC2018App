@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,11 +23,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Models.Coordinators;
+import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -33,11 +47,10 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
     private ViewPager viewPager;
     private TextView[] dots;
-
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
-
+    private ArrayList<EventDetails> allEvents;
     TextView categoriesHeadingTextView;
     private DrawerLayout drawer;
     private NavigationView nav_view;
@@ -47,7 +60,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-
+        allEvents = new ArrayList<>();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 ContentActivity.this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,7 +98,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         addBottomDots(0);
 
         addData();
-
+        retreiveEvents();
         RecyclerView categoryRecycleview = (RecyclerView) findViewById(R.id.category_recycler_view);
 
         categoryRecycleview.setHasFixedSize(true);
@@ -94,6 +107,67 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         categoryRecycleview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         categoryRecycleview.setAdapter(adapter);
+
+    }
+
+    private void retreiveEvents() {
+        if (true)
+        {
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = getResources().getString(R.string.get_all_events_api);
+            StringRequest stringRequest =new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject object=new JSONObject(response);
+                        JSONArray eventArray =object.getJSONArray("data");
+                        EventDetails event = new EventDetails();
+                        for(int i=0;i<eventArray.length();i++)
+                        {
+                            JSONObject currEvent = eventArray.getJSONObject(i);
+                            event.setmName(currEvent.getString("title"));
+                            event.setmFees(currEvent.getLong("fee"));
+                            JSONObject timing =currEvent.getJSONObject("timing");
+                            event.setmStartTime(timing.getLong("from"));
+                            event.setmEndTime(timing.getLong("to"));
+                            event.setmClubname(currEvent.getString("clubname"));
+                            event.setmCategory(currEvent.getString("category"));
+                            event.setmDesc(currEvent.getString("desc"));
+                            event.setmVenue(currEvent.getString("venue"));
+                            event.setmRules(currEvent.getString("rules"));
+                            event.setmPhotoUrl(currEvent.getString("photolink"));
+                            JSONArray coordinators =currEvent.getJSONArray("coordinators");
+                            event.setmCoordinators(new ArrayList<Coordinators>());
+                            for(int j=0;j<coordinators.length();j++)
+                            {
+                                JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
+                                Coordinators coord = new Coordinators();
+                                coord.setmCoordId(coordinatorsDetail.getString("_id"));
+                                coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
+                                coord.setmCoordName(coordinatorsDetail.getString("name"));
+                                event.getmCoordinators().add(coord);
+                            }
+
+                            event.setmEventId(currEvent.getString("_id"));
+                            Toast.makeText(ContentActivity.this, event.toString(), Toast.LENGTH_SHORT).show();
+                            allEvents.add(event);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Toast.makeText(ContentActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            queue.add(stringRequest);
+        }
 
     }
 
@@ -249,4 +323,11 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }
