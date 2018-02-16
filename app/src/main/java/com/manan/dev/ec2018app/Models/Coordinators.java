@@ -4,7 +4,7 @@ package com.manan.dev.ec2018app.Models;
  * Created by yatindhingra on 14/02/18.
  */
 
-class Coordinators {
+public class Coordinators {
 
     private String mCoordName, mCoordId;
     private long mCoordPhone;
