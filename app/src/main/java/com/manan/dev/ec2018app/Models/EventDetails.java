@@ -8,14 +8,15 @@ import java.util.ArrayList;
 
 public class EventDetails {
 
-    private String mName, mClubname, mCategory, mDesc, mRules, mVenue, mPrizes, mPhotoUrl, mEventId;
+    private String mName, mClubname, mCategory, mDesc, mRules, mVenue, mPhotoUrl, mEventId;
     private long mStartTime, mEndTime, mFees;
     private ArrayList<Coordinators> mCoordinators;
+    private ArrayList<String> mPrizes;
 
     public EventDetails() {
     }
 
-    public EventDetails(String mName, String mClubname, String mCategory, String mDesc, String mRules, String mVenue, String mPrizes, String mPhotoUrl, String mEventId, long mStartTime, long mEndTime, long mFees, ArrayList<Coordinators> mCoordinators) {
+    public EventDetails(String mName, String mClubname, String mCategory, String mDesc, String mRules, String mVenue, ArrayList<String> mPrizes, String mPhotoUrl, String mEventId, long mStartTime, long mEndTime, long mFees, ArrayList<Coordinators> mCoordinators) {
         this.mName = mName;
         this.mClubname = mClubname;
         this.mCategory = mCategory;
@@ -79,11 +80,11 @@ public class EventDetails {
         this.mVenue = mVenue;
     }
 
-    public String getmPrizes() {
+    public ArrayList<String> getmPrizes() {
         return mPrizes;
     }
 
-    public void setmPrizes(String mPrizes) {
+    public void setmPrizes(ArrayList<String> mPrizes) {
         this.mPrizes = mPrizes;
     }
 

@@ -10,15 +10,19 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.victor.loading.newton.NewtonCradleLoading;
 
 public class UserLoginActivity extends AppCompatActivity {
-    TextView  ECText,ContinueText,GuestText, ReadyText;
+    TextView ECText, ContinueText, GuestText, ReadyText;
     Button LoginButton;
-    ImageView ECLogo,backImage;
+    ImageView ECLogo, backImage;
     View lineView;
+    LinearLayout guestLogin;
+
+    private NewtonCradleLoading newtonCradleLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +38,9 @@ public class UserLoginActivity extends AppCompatActivity {
             finish();
         }
 
-        final NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading) findViewById(R.id.newton_cradle_loading);
-        newtonCradleLoading.start();
 
-
+        guestLogin = (LinearLayout) this.findViewById(R.id.guest_user_ll);
         ECText = (TextView) this.findViewById(R.id.ECText);
         ContinueText = (TextView) this.findViewById(R.id.ContinueText);
         GuestText = (TextView) this.findViewById(R.id.GuestText);
@@ -47,17 +49,7 @@ public class UserLoginActivity extends AppCompatActivity {
         ECLogo = (ImageView) this.findViewById(R.id.EClogo);
         lineView = this.findViewById(R.id.view);
         backImage = (ImageView) this.findViewById(R.id.iv_background);
-
-        LoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO
-                //facebook login here
-                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class));
-            }
-        });
-
-
+        newtonCradleLoading.setVisibility(View.INVISIBLE);
         backImage.setAlpha(0f);
         backImage.setVisibility(View.INVISIBLE);
         lineView.setAlpha(0f);
@@ -75,33 +67,58 @@ public class UserLoginActivity extends AppCompatActivity {
         ECLogo.setAlpha(0f);
         ECLogo.setVisibility(View.INVISIBLE);
 
-        final Handler handler=new Handler();
-        handler.postDelayed(new Runnable() {
+        if (getIntent().getBooleanExtra("logout", false)) {
+            postAnimation();
+        } else {
+            newtonCradleLoading.setVisibility(View.VISIBLE);
+            newtonCradleLoading.start();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    newtonCradleLoading.stop();
+
+                    postAnimation();
+
+                    newtonCradleLoading.animate().alpha(0.0f).setDuration(1500).setListener(null);
+
+                }
+            }, 1700);
+        }
+
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                newtonCradleLoading.stop();
-
-                newtonCradleLoading.animate().alpha(0.0f).setDuration(1500).setListener(null);
-
-                backImage.setVisibility(View.VISIBLE);
-                backImage.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                lineView.setVisibility(View.VISIBLE);
-                lineView.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                ECText.setVisibility(View.VISIBLE);
-                ECText.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                ContinueText.setVisibility(View.VISIBLE);
-                ContinueText.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                GuestText.setVisibility(View.VISIBLE);
-                GuestText.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                ReadyText.setVisibility(View.VISIBLE);
-                ReadyText.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                LoginButton.setVisibility(View.VISIBLE);
-                LoginButton.animate().alpha(1.0f).setDuration(1500).setListener(null);
-                ECLogo.setVisibility(View.VISIBLE);
-                ECLogo.animate().alpha(1.0f).setDuration(1500).setListener(null);
-
+            public void onClick(View v) {
+                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class));
             }
-        },1700);
+        });
+
+        guestLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserLoginActivity.this, ContentActivity.class));
+            }
+        });
+
+    }
+
+    private void postAnimation() {
+        backImage.setVisibility(View.VISIBLE);
+        backImage.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        lineView.setVisibility(View.VISIBLE);
+        lineView.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ECText.setVisibility(View.VISIBLE);
+        ECText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ContinueText.setVisibility(View.VISIBLE);
+        ContinueText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        GuestText.setVisibility(View.VISIBLE);
+        GuestText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ReadyText.setVisibility(View.VISIBLE);
+        ReadyText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        LoginButton.setVisibility(View.VISIBLE);
+        LoginButton.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ECLogo.setVisibility(View.VISIBLE);
+        ECLogo.animate().alpha(1.0f).setDuration(1500).setListener(null);
 
     }
 }

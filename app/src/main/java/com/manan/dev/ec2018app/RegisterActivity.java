@@ -37,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText userName, userEmail, userPhone, userCollege;
     private RelativeLayout view;
     private ProgressDialog mProgress;
+    private TextView LoginText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         userCollege = (EditText) findViewById(R.id.et_reg_clg);
         userPhone = (EditText) findViewById(R.id.et_reg_mob);
         view = (RelativeLayout) findViewById(R.id.rl_main_view);
+        LoginText = (TextView) this.findViewById(R.id.tv_log_in);
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("I am working");
         mProgress.setTitle("yes i am");
@@ -68,6 +70,13 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Done", Toast.LENGTH_SHORT).show();
                     checkOTP(userDetails);
                 }
+            }
+        });
+
+        LoginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
 

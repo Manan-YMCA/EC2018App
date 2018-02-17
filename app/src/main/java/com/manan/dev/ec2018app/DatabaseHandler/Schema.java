@@ -28,6 +28,8 @@ public class Schema {
         public static final String EVENT_COORDINATOR_PHONE_2 = "coordinatorPhone2";
         public static final String EVENT_COORDINATOR_ID_2 = "coordinatorId2";
         public static final String EVENT_PHOTO = "photoUrl";
-        public static final String EVENT_PRIZES = "prizes";
+        public static final String EVENT_PRIZES_1 = "prize1";
+        public static final String EVENT_PRIZES_2 = "prize2";
+        public static final String EVENT_PRIZES_3 = "prize3";
     }
 }

@@ -5,13 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class CategoryEventDisplayActivity extends AppCompatActivity {
+
+    private String clubName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_event_display);
+
+        clubName = getIntent().getStringExtra("clubname");
+        Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
 
         ImageView iv = (ImageView) findViewById(R.id.ec_logo);
 

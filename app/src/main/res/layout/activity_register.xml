@@ -185,6 +185,18 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tv_log_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:layout_below="@id/hint_set"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:text="Already a User!! LOG IN"
+        android:textSize="24sp"
+        />
+
 
 </RelativeLayout>
 
