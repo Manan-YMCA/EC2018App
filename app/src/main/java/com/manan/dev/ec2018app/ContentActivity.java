@@ -118,6 +118,10 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 @Override
                 public void onResponse(String response) {
                     try {
+
+                        //if no prizes, it stores string "null"
+                        //if no coordinator
+
                         JSONObject object = new JSONObject(response);
                         JSONArray eventArray = object.getJSONArray("data");
                         EventDetails event = new EventDetails();
@@ -145,10 +149,16 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                 event.getmCoordinators().add(coord);
                             }
                             event.setmPrizes(new ArrayList<String>());
-                            JSONObject prize = currEvent.getJSONObject("prizes");
-                            event.getmPrizes().add(prize.getString("prize1"));
-                            event.getmPrizes().add(prize.getString("prize2"));
-                            event.getmPrizes().add(prize.getString("prize3"));
+                            if (currEvent.has("prizes")) {
+                                JSONObject prize = currEvent.getJSONObject("prizes");
+                                event.getmPrizes().add(prize.getString("prize1"));
+                                event.getmPrizes().add(prize.getString("prize2"));
+                                event.getmPrizes().add(prize.getString("prize3"));
+                            } else {
+                                event.getmPrizes().add(null);
+                                event.getmPrizes().add(null);
+                                event.getmPrizes().add(null);
+                            }
                             event.setmEventId(currEvent.getString("_id"));
 
                             Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
@@ -174,16 +184,18 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     }
 
     private void updateDatabase() {
-        if (mDatabaseController.getCount() == 0) {
+        if (allEvents.size() > mDatabaseController.getCount()) {
             for (EventDetails eventDetails : allEvents) {
                 mDatabaseController.addEntryToDb(eventDetails);
             }
-        }
-        else {
+        } else {
             for (EventDetails eventDetails : allEvents) {
                 mDatabaseController.updateDb(eventDetails);
             }
         }
+        Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
+        if (mDatabaseController.retreiveCategory("Manan").get(0).getmCoordinators().get(0).getmCoordName() != null)
+            Log.d("DBChecker", mDatabaseController.retreiveCategory("Manan").get(0).getmCoordinators().get(0).getmCoordName());
     }
 
     private void addData() {
@@ -342,8 +354,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 String restoredText = prefs.getString("Phone", null);
                 if (restoredText == null) {
                     startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-                }
-                else {
+                } else {
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 }
                 break;

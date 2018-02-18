@@ -25,31 +25,37 @@
 
         <ImageView
             android:id="@+id/iv_category_image"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:layout_height="150dp"
             android:src="@drawable/jh" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_category_name_heading"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:text="Photography"
+                android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="#fff"
                 android:textSize="30sp" />
 
             <View
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginTop="35dp"
-                android:background="#CE5952" />
+                android:layout_margin="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#CE5952"
+                android:layout_marginEnd="8dp" />
         </LinearLayout>
 
     </LinearLayout>

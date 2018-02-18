@@ -6,6 +6,7 @@ package com.manan.dev.ec2018app.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.R;
 
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 
@@ -53,8 +55,14 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
         holder.itemImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100 ,stream);
+                byte[] byteArray = stream.toByteArray();
                 mContext.startActivity(new Intent(mContext, CategoryEventDisplayActivity.class)
-                        .putExtra("clubname", singleItem.getClubName()));
+                        .putExtra("clubname", singleItem.getClubName())
+                        .putExtra("clubPhoto", byteArray)
+                        .putExtra("clubdisplay", singleItem.getDisplayName()));
             }
         });
     }

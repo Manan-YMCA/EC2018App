@@ -41,29 +41,31 @@ public class DatabaseController extends SQLiteOpenHelper {
     public void addEntryToDb(EventDetails event) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Schema.DbEntry.EVENT_ID_COLUMN_NAME, event.getmEventId());
-        values.put(Schema.DbEntry.EVENT_NAME_COLUMN_NAME, event.getmName());
-        values.put(Schema.DbEntry.EVENT_CLUB_COLUMN_NAME, event.getmClubname());
-        values.put(Schema.DbEntry.EVENT_CATEGORY_COLUMN_NAME, event.getmCategory());
-        values.put(Schema.DbEntry.EVENT_DESCRIPTION_COLUMN_NAME, event.getmDesc());
-        values.put(Schema.DbEntry.EVENT_RULES_COLUMN_NAME, event.getmRules());
-        values.put(Schema.DbEntry.EVENT_VENUE_COLUMN_NAME, event.getmVenue());
-        values.put(Schema.DbEntry.EVENT_FEE_COLUMN_NAME, event.getmFees());
-        values.put(Schema.DbEntry.EVENT_START_TIME_COLUMN_NAME, event.getmStartTime());
-        values.put(Schema.DbEntry.EVENT_END_TIME_COLUMN_NAME, event.getmEndTime());
-        values.put(Schema.DbEntry.EVENT_PHOTO, event.getmPhotoUrl());
-        values.put(Schema.DbEntry.EVENT_PRIZES_1, event.getmPrizes().get(0));
-        values.put(Schema.DbEntry.EVENT_PRIZES_2, event.getmPrizes().get(1));
-        values.put(Schema.DbEntry.EVENT_PRIZES_3, event.getmPrizes().get(2));
-        values.put(Schema.DbEntry.EVENT_COORDINATOR_ID_1, event.getmCoordinators().get(0).getmCoordId());
-        values.put(Schema.DbEntry.EVENT_COORDINATOR_NAME_1, event.getmCoordinators().get(0).getmCoordName());
-        values.put(Schema.DbEntry.EVENT_COORDINATOR_PHONE_1, event.getmCoordinators().get(0).getmCoordPhone());
-        if (event.getmCoordinators().size() == 2) {
-            values.put(Schema.DbEntry.EVENT_COORDINATOR_ID_2, event.getmCoordinators().get(1).getmCoordId());
-            values.put(Schema.DbEntry.EVENT_COORDINATOR_NAME_2, event.getmCoordinators().get(1).getmCoordName());
-            values.put(Schema.DbEntry.EVENT_COORDINATOR_PHONE_2, event.getmCoordinators().get(1).getmCoordPhone());
+        if(!checkIfValueExists(event.getmEventId())) {
+            values.put(Schema.DbEntry.EVENT_ID_COLUMN_NAME, event.getmEventId());
+            values.put(Schema.DbEntry.EVENT_NAME_COLUMN_NAME, event.getmName());
+            values.put(Schema.DbEntry.EVENT_CLUB_COLUMN_NAME, event.getmClubname());
+            values.put(Schema.DbEntry.EVENT_CATEGORY_COLUMN_NAME, event.getmCategory());
+            values.put(Schema.DbEntry.EVENT_DESCRIPTION_COLUMN_NAME, event.getmDesc());
+            values.put(Schema.DbEntry.EVENT_RULES_COLUMN_NAME, event.getmRules());
+            values.put(Schema.DbEntry.EVENT_VENUE_COLUMN_NAME, event.getmVenue());
+            values.put(Schema.DbEntry.EVENT_FEE_COLUMN_NAME, event.getmFees());
+            values.put(Schema.DbEntry.EVENT_START_TIME_COLUMN_NAME, event.getmStartTime());
+            values.put(Schema.DbEntry.EVENT_END_TIME_COLUMN_NAME, event.getmEndTime());
+            values.put(Schema.DbEntry.EVENT_PHOTO, event.getmPhotoUrl());
+            values.put(Schema.DbEntry.EVENT_PRIZES_1, event.getmPrizes().get(0));
+            values.put(Schema.DbEntry.EVENT_PRIZES_2, event.getmPrizes().get(1));
+            values.put(Schema.DbEntry.EVENT_PRIZES_3, event.getmPrizes().get(2));
+            values.put(Schema.DbEntry.EVENT_COORDINATOR_ID_1, event.getmCoordinators().get(0).getmCoordId());
+            values.put(Schema.DbEntry.EVENT_COORDINATOR_NAME_1, event.getmCoordinators().get(0).getmCoordName());
+            values.put(Schema.DbEntry.EVENT_COORDINATOR_PHONE_1, event.getmCoordinators().get(0).getmCoordPhone());
+            if (event.getmCoordinators().size() == 2) {
+                values.put(Schema.DbEntry.EVENT_COORDINATOR_ID_2, event.getmCoordinators().get(1).getmCoordId());
+                values.put(Schema.DbEntry.EVENT_COORDINATOR_NAME_2, event.getmCoordinators().get(1).getmCoordName());
+                values.put(Schema.DbEntry.EVENT_COORDINATOR_PHONE_2, event.getmCoordinators().get(1).getmCoordPhone());
+            }
+            db.insert(Schema.DbEntry.EVENT_LIST_TABLE_NAME, null, values);
         }
-        db.insert(Schema.DbEntry.EVENT_LIST_TABLE_NAME, null, values);
         db.close();
     }
 
@@ -191,5 +193,17 @@ public class DatabaseController extends SQLiteOpenHelper {
         i = cursor.getCount();
         cursor.close();
         return i;
+    }
+
+    private Boolean checkIfValueExists(String eventId){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_ID_COLUMN_NAME + " =?";
+        Cursor cs = db.rawQuery(query, new String[]{eventId});
+        if(cs.getCount() <= 0){
+            cs.close();
+            return false;
+        }
+        cs.close();
+        return true;
     }
 }
