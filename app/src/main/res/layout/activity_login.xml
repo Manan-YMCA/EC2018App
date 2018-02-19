@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.manan.dev.ec2018app.LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/llayout_login_activity">
 
 
 

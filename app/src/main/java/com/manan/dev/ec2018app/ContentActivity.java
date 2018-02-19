@@ -331,11 +331,17 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onBackPressed() {
+        //super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
+            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(GravityCompat.START, true);
         }
-        if (!drawer.isDrawerOpen(GravityCompat.START)) {
-            super.onBackPressed();
+        else {
+            startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
+                    .putExtra("closeApp", true)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            finish();
         }
     }
 

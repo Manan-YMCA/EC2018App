@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.victor.loading.newton.NewtonCradleLoading;
 
@@ -30,13 +31,6 @@ public class UserLoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_login);
-
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-        String restoredText = prefs.getString("Phone", null);
-        if (restoredText != null) {
-            startActivity(new Intent(getApplicationContext(), ContentActivity.class));
-            finish();
-        }
 
         newtonCradleLoading = (NewtonCradleLoading) findViewById(R.id.newton_cradle_loading);
 
@@ -67,7 +61,17 @@ public class UserLoginActivity extends AppCompatActivity {
         ECLogo.setAlpha(0f);
         ECLogo.setVisibility(View.INVISIBLE);
 
-        if (getIntent().getBooleanExtra("logout", false)) {
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        String restoredText = prefs.getString("Phone", null);
+
+        if(getIntent().getBooleanExtra("closeApp", false)){
+            finish();
+            Toast.makeText(UserLoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+        }else if (restoredText != null) {
+            startActivity(new Intent(getApplicationContext(), ContentActivity.class));
+            finish();
+        }
+        else if (getIntent().getBooleanExtra("logout", false)) {
             postAnimation();
         } else {
             newtonCradleLoading.setVisibility(View.VISIBLE);

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginMobileNum;
     private UserDetails userDetails;
     private ProgressDialog mProgress;
+    private LinearLayout lLayoutView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         setContentView(R.layout.activity_login);
         userDetails = new UserDetails();
-        mobileNum=(EditText)findViewById(R.id.mobileNum);
-        loginMobileNum=(Button)findViewById(R.id.login_mobileNum);
+        mobileNum = (EditText) findViewById(R.id.mobileNum);
+        loginMobileNum = (Button) findViewById(R.id.login_mobileNum);
+        lLayoutView = (LinearLayout) findViewById(R.id.llayout_login_activity);
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("I am working");
         mProgress.setTitle("yes i am");
@@ -51,8 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Boolean checker = validateCredentials();
-                if(checker)
-                {
+                if (checker) {
                     userDetails.setmPhone(mobileNum.getText().toString());
                     checkOTP(mobileNum.getText().toString());
 
@@ -72,12 +75,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkOTP(String mobileNum) {
         boolean check = true;
-        if(check){
-            getDetails(userDetails,mobileNum);
+        if(isNetworkAvailable()) {
+            if (check) {
+                getDetails(userDetails, mobileNum);
+            }
+        } else {
+            Snackbar.make(lLayoutView, "CONNECT TO A HOTSPOT", Snackbar.LENGTH_LONG).show();
         }
     }
+
     private void getDetails(final UserDetails userDetails, final String phone) {
-        String url = getResources().getString(R.string.get_user_details_api)+phone;
+        String url = getResources().getString(R.string.get_user_details_api) + phone;
         Toast.makeText(this, "URL: " + url, Toast.LENGTH_LONG).show();
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
@@ -86,14 +94,19 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject obj1 = new JSONObject(response);
-                            JSONObject obj = obj1.getJSONObject("data");
-                            Toast.makeText(LoginActivity.this, obj.getString("name"), Toast.LENGTH_LONG).show();
-                            userDetails.setmName(obj.getString("name"));
-                            userDetails.setEmail(obj.getString("email"));
-                            userDetails.setmCollege(obj.getString("college"));
-                            userDetails.setmPhone(phone);
-                            userDetails.setmFbId(obj.getString("fbID"));
-                            registerUser(userDetails);
+                            Long success = obj1.getLong("success");
+                            if(success == 1) {
+                                SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
+                                editor.putString("Phone", userDetails.getmPhone());
+                                editor.apply();
+                                startActivity(new Intent(LoginActivity.this, ContentActivity.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                finish();
+                            }
+                            else {
+                                Snackbar.make(lLayoutView, "USER DOES NOT EXIST", Snackbar.LENGTH_LONG).show();
+                            }
                         }
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
@@ -116,62 +129,22 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(obreq);
     }
 
-    private void registerUser(final UserDetails userDetails) {
-        String url = getResources().getString(R.string.register_user_api);
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                Toast.makeText(getApplicationContext(), "abc"+response, Toast.LENGTH_SHORT).show();
-                Log.i("My success",""+response);
-                mProgress.dismiss();
-                SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
-                editor.putString("Phone", userDetails.getmPhone());
-                editor.apply();
-                startActivity(new Intent(getApplicationContext(), ContentActivity.class));
-                finish();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), "my error :"+error, Toast.LENGTH_LONG).show();
-                Log.i("My error",""+error);
-                mProgress.dismiss();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String,String> map = new HashMap<String, String>();
-                map.put("name",userDetails.getmName());
-                map.put("email",userDetails.getEmail());
-                map.put("phone",userDetails.getmPhone());
-                map.put("college", userDetails.getmCollege());
-                return map;
-            }
-        };
-        queue.add(request);
-    }
-    private Boolean validateCredentials()
-    {
-        if(mobileNum.getText().toString().equals("")){
+    private Boolean validateCredentials() {
+        if (mobileNum.getText().toString().equals("")) {
             mobileNum.setError("Enter a Phone Number");
             return false;
         }
-        if(!Patterns.PHONE.matcher(mobileNum.getText().toString()).matches()){
+        if (!Patterns.PHONE.matcher(mobileNum.getText().toString()).matches()) {
             mobileNum.setError("Enter a valid Phone Number");
             return false;
         }
-        if(mobileNum.getText().toString().length() != 10){
+        if (mobileNum.getText().toString().length() != 10) {
             mobileNum.setError("Enter a valid Phone Number");
             return false;
         }
         return true;
     }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
