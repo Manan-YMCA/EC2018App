@@ -337,11 +337,22 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             drawer.closeDrawer(GravityCompat.START, true);
         }
         else {
-            startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
-                    .putExtra("closeApp", true)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            finish();
+            SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+            final String phoneNumber = prefs.getString("Phone", null);
+            if (phoneNumber != null) {
+                startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
+                        .putExtra("closeApp", true)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+            } else {
+                startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
+                        .putExtra("logout", true)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+            }
+
         }
     }
 

@@ -64,14 +64,13 @@ public class UserLoginActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         String restoredText = prefs.getString("Phone", null);
 
-        if(getIntent().getBooleanExtra("closeApp", false)){
+        if (getIntent().getBooleanExtra("closeApp", false)) {
             finish();
             Toast.makeText(UserLoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
-        }else if (restoredText != null) {
+        } else if (restoredText != null) {
             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
             finish();
-        }
-        else if (getIntent().getBooleanExtra("logout", false)) {
+        } else if (getIntent().getBooleanExtra("logout", false)) {
             postAnimation();
         } else {
             newtonCradleLoading.setVisibility(View.VISIBLE);
@@ -81,9 +80,22 @@ public class UserLoginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     newtonCradleLoading.stop();
-
-                    postAnimation();
-
+                    backImage.setVisibility(View.VISIBLE);
+                    backImage.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    lineView.setVisibility(View.VISIBLE);
+                    lineView.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    ECText.setVisibility(View.VISIBLE);
+                    ECText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    ContinueText.setVisibility(View.VISIBLE);
+                    ContinueText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    GuestText.setVisibility(View.VISIBLE);
+                    GuestText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    ReadyText.setVisibility(View.VISIBLE);
+                    ReadyText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    LoginButton.setVisibility(View.VISIBLE);
+                    LoginButton.animate().alpha(1.0f).setDuration(1500).setListener(null);
+                    ECLogo.setVisibility(View.VISIBLE);
+                    ECLogo.animate().alpha(1.0f).setDuration(1500).setListener(null);
                     newtonCradleLoading.animate().alpha(0.0f).setDuration(1500).setListener(null);
 
                 }
@@ -107,22 +119,23 @@ public class UserLoginActivity extends AppCompatActivity {
     }
 
     private void postAnimation() {
+
         backImage.setVisibility(View.VISIBLE);
-        backImage.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        backImage.setAlpha(1.0f);
         lineView.setVisibility(View.VISIBLE);
-        lineView.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        lineView.setAlpha(1.0f);
         ECText.setVisibility(View.VISIBLE);
-        ECText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ECText.setAlpha(1.0f);
         ContinueText.setVisibility(View.VISIBLE);
-        ContinueText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ContinueText.setAlpha(1.0f);
         GuestText.setVisibility(View.VISIBLE);
-        GuestText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        GuestText.setAlpha(1.0f);
         ReadyText.setVisibility(View.VISIBLE);
-        ReadyText.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ReadyText.setAlpha(1.0f);
         LoginButton.setVisibility(View.VISIBLE);
-        LoginButton.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        LoginButton.setAlpha(1.0f);
         ECLogo.setVisibility(View.VISIBLE);
-        ECLogo.animate().alpha(1.0f).setDuration(1500).setListener(null);
+        ECLogo.setAlpha(1.0f);
 
     }
 }

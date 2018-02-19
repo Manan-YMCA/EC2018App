@@ -3,23 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="340dp"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/iv_event_pic"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ec_app_logo" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="150dp"
-            android:background="#000" />
+    app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="@color/Black"
+    app:cardElevation="4dp">
 
         <LinearLayout
             android:id="@+id/ll_single_event_all_details"
@@ -35,11 +21,20 @@
                 android:layout_height="wrap_content"
                 android:text="CODE GOLF"
                 android:textSize="20sp"
-                android:textColor="@color/Black"/>
+                android:textColor="@color/baseDark"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/White"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
                 <ImageView
                     android:layout_width="0dp"
@@ -50,19 +45,23 @@
                 <TextView
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:text="Date:"
-                    android:layout_marginLeft="4dp"/>
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/White"/>
 
                 <TextView
                     android:id="@+id/tv_cv_event_date"
                     android:layout_marginTop="2dp"
+                    android:textAlignment="center"
                     android:layout_width="0dp"
-                    android:layout_weight="1.3"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="March 22"
                     android:layout_marginLeft="12dp"
+                    android:textColor="@color/White"
                     android:maxLines="1"/>
             </LinearLayout>
 
@@ -79,16 +78,20 @@
                 <TextView
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:text="Time:"
+                    android:textColor="@color/White"
                     android:layout_marginLeft="4dp" />
 
                 <TextView
                     android:id="@+id/tv_cv_event_time"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="1.3"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
                     android:layout_width="0dp"
+                    android:textColor="@color/White"
                     android:layout_height="wrap_content"
                     android:text="2pm"
                     android:layout_marginLeft="12dp"/>
@@ -107,18 +110,22 @@
                 <TextView
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
-                    android:layout_weight="0.7"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Fees:"
+                    android:textColor="@color/White"
                     android:layout_marginLeft="4dp"/>
 
                 <TextView
                     android:id="@+id/tv_cv_event_fees"
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
-                    android:layout_weight="1.3"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="50"
+                    android:textColor="@color/White"
+                    android:textAlignment="center"
                     android:layout_marginLeft="12dp"/>
             </LinearLayout>
 
@@ -138,14 +145,15 @@
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
                     android:layout_weight="1.75"
+                    android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:text="Computer Labs"
+                    android:textColor="@color/White"
                     android:layout_marginLeft="12dp"
                     android:maxLines="1"/>
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
 
 </android.support.v7.widget.CardView>
