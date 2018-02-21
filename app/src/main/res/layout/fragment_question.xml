@@ -8,27 +8,35 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/question_layout">
+        android:id="@+id/question_layout"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/xunbaoimg"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ec_app_logo"
-            android:visibility="gone"/>
+            android:src="@drawable/ec_app_logo"/>
 
         <TextView
-            android:id="@+id/question"
+            android:id="@+id/stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/xunbaoimg"
             android:padding="20dp"
             android:textSize="18sp"
             android:text="OH YES BABY!"
-            android:textAlignment="center"
-            android:visibility="gone"/>
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/stage"
+            android:padding="20dp"
+            android:textSize="18sp"
+            android:text="OH YES BABY!"
+            android:textAlignment="center"/>
         <EditText
             android:id="@+id/answer"
             android:layout_width="300dp"
@@ -39,7 +47,6 @@
             android:layout_below="@+id/question"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
-            android:visibility="gone"
             />
         <Button
             android:id="@+id/submit"
@@ -48,20 +55,13 @@
             android:layout_below="@+id/answer"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:text="SUBMIT"
-            android:visibility="gone"/>
+            android:text="SUBMIT"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:id="@+id/progress_bar"/>
+        android:layout_height="match_parent"
+        >
         <TextView
             android:id="@+id/contest_ends"
             android:layout_width="wrap_content"

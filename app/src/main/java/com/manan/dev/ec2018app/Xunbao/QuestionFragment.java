@@ -1,6 +1,8 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
+import android.app.ProgressDialog;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,72 +36,78 @@ import java.util.HashMap;
 
 
 public class QuestionFragment extends Fragment {
-
+    TextView question,contestEnd,refreshText,stage;
+    ImageView xunbaoimg,refreshButton;
+    Button submit;
+    EditText ans;
+    String queURL,ansURL;
+    JsonArrayRequest jobReq;
+    RequestQueue queue;
+    RelativeLayout queLayout;
+    ProgressDialog progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
-        final ProgressBar progressBar=view.findViewById(R.id.progress_bar);
-        final String queURL = "https://xunbao-1.herokuapp.com/getq/";
 
-        final TextView question = view.findViewById(R.id.question);
-        final ImageView xunbaoimg=view.findViewById(R.id.xunbaoimg);
-        final EditText ans=view.findViewById(R.id.answer);
-        final Button submit=view.findViewById(R.id.submit);
-        final TextView contestEnd=view.findViewById(R.id.contest_ends);
-        final RelativeLayout questionLayout=view.findViewById(R.id.question_layout);
+        progressBar = new ProgressDialog(getActivity());
+        progressBar.setMessage("(Not you)");
+        progressBar.setTitle("Checking");
+        progressBar.setCanceledOnTouchOutside(false);
+        progressBar.show();
 
-        final ImageView refreshButton=view.findViewById(R.id.refresh_button);
-        final TextView refreshText=view.findViewById(R.id.refresh_text);
+        queURL = "https://xunbao-1.herokuapp.com/getq/";
+        ansURL="https://xunbao-1.herokuapp.com/checkans/";
+
+        queLayout=view.findViewById(R.id.question_layout);
+
+        stage =view.findViewById(R.id.stage);
+        question = view.findViewById(R.id.question);
+        xunbaoimg=view.findViewById(R.id.xunbaoimg);
+        ans=view.findViewById(R.id.answer);
+        submit=view.findViewById(R.id.submit);
+        contestEnd=view.findViewById(R.id.contest_ends);
+        refreshButton=view.findViewById(R.id.refresh_button);
+        refreshText=view.findViewById(R.id.refresh_text);
 
         JSONArray jsonArray =new JSONArray();
         JSONObject params =new JSONObject();
         try {
-            params.put("email", "gK");
+            params.put("email", "gKa");
             params.put("skey", "abbv");
             jsonArray.put(params);
         }catch (Exception e){
 
         }
 
-        final RequestQueue queue = Volley.newRequestQueue(getActivity());
-        final JsonArrayRequest jobReq = new JsonArrayRequest(Request.Method.POST, queURL, jsonArray,
+        queue = Volley.newRequestQueue(getActivity());
+        jobReq = new JsonArrayRequest(Request.Method.POST, queURL, jsonArray,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        JSONObject resp= null;
+                        JSONObject resp;
                         try{
-
-                            progressBar.setVisibility(View.GONE);
                             resp = response.getJSONObject(0);
-
                             try {
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
-                                if (end.equals("2"))
-                                    contestEnd.setText("LOOKS LIKE THE GAME ENDS!\n HOPE YOU HAD FUN, YOU CAN SEE THE WINNERS ON LEADERBOARD.\n IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY.");
-                                else
-                                    contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS. WE WILL ANNOUNCE THE WINNERS ON 31st March, 2018.IF YOU HAVE WIN, WE WILL CONTACT YOU SHORTLY");
+                                contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 31st March, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
+                                progressBar.dismiss();
 
                             } catch (Exception e){
-
-                                question.setVisibility(View.VISIBLE);
-                                submit.setVisibility(View.VISIBLE);
-                                ans.setVisibility(View.VISIBLE);
-                                xunbaoimg.setVisibility(View.VISIBLE);
+                                queLayout.setVisibility(View.VISIBLE);
                                 String imgUrl =resp.getString("image");
                                 String que=resp.getString("desc");
+                                Integer level =resp.getInt("pk");
                                 question.setText(que);
-                                Picasso.with(getActivity()).load(imgUrl).into(xunbaoimg);
-                                progressBar.setVisibility(View.GONE);
-
+                                stage.setText("STAGE - "+Integer.toString(level));
+                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com"+imgUrl).into(xunbaoimg);
+                                progressBar.dismiss();
                             }
                         } catch (JSONException e) {
-
-                            Log.v("hey","catch");
-                            progressBar.setVisibility(View.GONE);
+                            progressBar.dismiss();
                             refreshButton.setVisibility(View.VISIBLE);
                             refreshText.setVisibility(View.VISIBLE);
                             e.printStackTrace();
@@ -109,7 +118,7 @@ public class QuestionFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        progressBar.setVisibility(View.GONE);
+                        progressBar.dismiss();
                         refreshButton.setVisibility(View.VISIBLE);
                         refreshText.setVisibility(View.VISIBLE);
 
@@ -121,21 +130,79 @@ public class QuestionFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        question.setVisibility(View.GONE);
-                        submit.setVisibility(View.GONE);
-                        ans.setVisibility(View.GONE);
-                        xunbaoimg.setVisibility(View.GONE);
-                        contestEnd.setVisibility(View.GONE);
-                        refreshButton.setVisibility(View.GONE);
-                        refreshText.setVisibility(View.GONE);
-                        queue.add(jobReq);
+                        reload();
                     }
                 }
         );
 
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                progressBar.show();
+                JSONObject answer=new JSONObject();
+
+                try {
+                    answer.put("email","gKa");
+                    answer.put("skey","abbv");
+                    answer.put("ans",ans.getText());
+
+                    final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL,answer,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject resp) {
+                                    try{
+
+                                        progressBar.dismiss();
+
+                                        String end = resp.getString("response");
+                                        contestEnd.setVisibility(View.VISIBLE);
+                                        if (end.equals("0"))
+                                            Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
+                                        else {
+                                            Toast.makeText(getActivity(), "Congrats! Right answer!", Toast.LENGTH_SHORT).show();
+                                            reload();
+                                        }
+                                    } catch (JSONException e) {
+
+                                        Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                                        progressBar.dismiss();
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError volleyError) {
+                                    progressBar.dismiss();
+                                    Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                                    volleyError.printStackTrace();
+                                }
+                            });
+
+                            queue.add(answ);
+
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                    progressBar.dismiss();
+                }
+
+            }
+        });
+
         return view;
 
+    }
+
+    public void reload(){
+        progressBar.show();
+        queLayout.setVisibility(View.GONE);
+        contestEnd.setVisibility(View.GONE);
+        refreshButton.setVisibility(View.GONE);
+        refreshText.setVisibility(View.GONE);
+        queue.add(jobReq);
     }
 
 }
