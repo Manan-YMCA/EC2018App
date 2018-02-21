@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class EventDetails {
 
-    private String mName, mClubname, mCategory, mDesc, mRules, mVenue, mPhotoUrl, mEventId;
+    private String mName, mClubname, mCategory, mDesc, mRules, mVenue, mPhotoUrl, mEventId, mEventTeamSize;
     private long mStartTime, mEndTime, mFees;
     private ArrayList<Coordinators> mCoordinators;
     private ArrayList<String> mPrizes;
@@ -16,20 +16,21 @@ public class EventDetails {
     public EventDetails() {
     }
 
-    public EventDetails(String mName, String mClubname, String mCategory, String mDesc, String mRules, String mVenue, ArrayList<String> mPrizes, String mPhotoUrl, String mEventId, long mStartTime, long mEndTime, long mFees, ArrayList<Coordinators> mCoordinators) {
+    public EventDetails(String mName, String mClubname, String mCategory, String mDesc, String mRules, String mVenue, String mPhotoUrl, String mEventId, String mEventSize, long mStartTime, long mEndTime, long mFees, ArrayList<Coordinators> mCoordinators, ArrayList<String> mPrizes) {
         this.mName = mName;
         this.mClubname = mClubname;
         this.mCategory = mCategory;
         this.mDesc = mDesc;
         this.mRules = mRules;
         this.mVenue = mVenue;
-        this.mPrizes = mPrizes;
         this.mPhotoUrl = mPhotoUrl;
         this.mEventId = mEventId;
+        this.mEventTeamSize = mEventSize;
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mFees = mFees;
         this.mCoordinators = mCoordinators;
+        this.mPrizes = mPrizes;
     }
 
     public String getmName() {
@@ -134,5 +135,13 @@ public class EventDetails {
 
     public void setmCoordinators(ArrayList<Coordinators> mCoordinators) {
         this.mCoordinators = mCoordinators;
+    }
+
+    public String getmEventTeamSize() {
+        return mEventTeamSize;
+    }
+
+    public void setmEventTeamSize(String mEventSize) {
+        this.mEventTeamSize = mEventSize;
     }
 }

@@ -18,6 +18,7 @@ public class dbUtils {
             + Schema.DbEntry.EVENT_START_TIME_COLUMN_NAME + " NUMBER" + COMMA_SEP
             + Schema.DbEntry.EVENT_END_TIME_COLUMN_NAME + " NUMBER" + COMMA_SEP
             + Schema.DbEntry.EVENT_PHOTO + " TEXT" + COMMA_SEP
+            + Schema.DbEntry.EVENT_TEAM_SIZE + " TEXT" + COMMA_SEP
             + Schema.DbEntry.EVENT_PRIZES_1 + " TEXT" + COMMA_SEP
             + Schema.DbEntry.EVENT_PRIZES_2 + " TEXT" + COMMA_SEP
             + Schema.DbEntry.EVENT_PRIZES_3 + " TEXT" + COMMA_SEP

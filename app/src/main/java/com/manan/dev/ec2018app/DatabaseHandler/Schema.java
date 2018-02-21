@@ -31,5 +31,6 @@ public class Schema {
         public static final String EVENT_PRIZES_1 = "prize1";
         public static final String EVENT_PRIZES_2 = "prize2";
         public static final String EVENT_PRIZES_3 = "prize3";
+        public static final String EVENT_TEAM_SIZE = "teamSize";
     }
 }

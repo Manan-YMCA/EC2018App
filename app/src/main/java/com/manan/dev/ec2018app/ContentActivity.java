@@ -118,50 +118,74 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 @Override
                 public void onResponse(String response) {
                     try {
-
-                        //if no prizes, it stores string "null"
-                        //if no coordinator
-
                         JSONObject object = new JSONObject(response);
                         JSONArray eventArray = object.getJSONArray("data");
                         EventDetails event = new EventDetails();
                         for (int i = 0; i < eventArray.length(); i++) {
                             JSONObject currEvent = eventArray.getJSONObject(i);
-                            event.setmName(currEvent.getString("title"));
-                            event.setmFees(currEvent.getLong("fee"));
-                            JSONObject timing = currEvent.getJSONObject("timing");
-                            event.setmStartTime(timing.getLong("from"));
-                            event.setmEndTime(timing.getLong("to"));
-                            event.setmClubname(currEvent.getString("clubname"));
-                            event.setmCategory(currEvent.getString("category"));
-                            event.setmDesc(currEvent.getString("desc"));
-                            event.setmVenue(currEvent.getString("venue"));
-                            event.setmRules(currEvent.getString("rules"));
-                            event.setmPhotoUrl(currEvent.getString("photolink"));
-                            JSONArray coordinators = currEvent.getJSONArray("coordinators");
+                            if (currEvent.has("timing"))
+                                event.setmName(currEvent.getString("title"));
+                            if (currEvent.has("fee"))
+                                event.setmFees(currEvent.getLong("fee"));
+                            if (currEvent.has("timing")) {
+                                JSONObject timing = currEvent.getJSONObject("timing");
+                                if (timing.has("from"))
+                                    event.setmStartTime(timing.getLong("from"));
+                                if (timing.has("to"))
+                                    event.setmEndTime(timing.getLong("to"));
+                            }
+                            if (currEvent.has("clubname"))
+                                event.setmClubname(currEvent.getString("clubname"));
+                            if (currEvent.has("category"))
+                                event.setmCategory(currEvent.getString("category"));
+                            if (currEvent.has("desc"))
+                                event.setmDesc(currEvent.getString("desc"));
+                            if (currEvent.has("venue"))
+                                event.setmVenue(currEvent.getString("venue"));
+                            if (currEvent.has("rules"))
+                                event.setmRules(currEvent.getString("rules"));
+                            if (currEvent.has("photolink")) {
+                                event.setmPhotoUrl(currEvent.getString("photolink"));
+                            } else {
+                                event.setmPhotoUrl(null);
+                            }
                             event.setmCoordinators(new ArrayList<Coordinators>());
-                            for (int j = 0; j < coordinators.length(); j++) {
-                                JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
-                                Coordinators coord = new Coordinators();
-                                coord.setmCoordId(coordinatorsDetail.getString("_id"));
-                                coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
-                                coord.setmCoordName(coordinatorsDetail.getString("name"));
-                                event.getmCoordinators().add(coord);
+                            if (currEvent.has("coordinators")) {
+                                JSONArray coordinators = currEvent.getJSONArray("coordinators");
+                                for (int j = 0; j < coordinators.length(); j++) {
+                                    JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
+                                    Coordinators coord = new Coordinators();
+                                    if (coordinatorsDetail.has("_id"))
+                                        coord.setmCoordId(coordinatorsDetail.getString("_id"));
+                                    if (coordinatorsDetail.has("phone"))
+                                        coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
+                                    if (coordinatorsDetail.has("name"))
+                                        coord.setmCoordName(coordinatorsDetail.getString("name"));
+                                    event.getmCoordinators().add(coord);
+                                }
                             }
                             event.setmPrizes(new ArrayList<String>());
                             if (currEvent.has("prizes")) {
                                 JSONObject prize = currEvent.getJSONObject("prizes");
-                                event.getmPrizes().add(prize.getString("prize1"));
-                                event.getmPrizes().add(prize.getString("prize2"));
-                                event.getmPrizes().add(prize.getString("prize3"));
+                                if (prize.has("prize1"))
+                                    event.getmPrizes().add(prize.getString("prize1"));
+                                if (prize.has("prize2"))
+                                    event.getmPrizes().add(prize.getString("prize2"));
+                                if (prize.has("prize3"))
+                                    event.getmPrizes().add(prize.getString("prize3"));
                             } else {
                                 event.getmPrizes().add(null);
                                 event.getmPrizes().add(null);
                                 event.getmPrizes().add(null);
                             }
-                            event.setmEventId(currEvent.getString("_id"));
-
-                            Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
+                            if (currEvent.has("_id"))
+                                event.setmEventId(currEvent.getString("_id"));
+                            if (currEvent.has("eventtype")) {
+                                event.setmEventTeamSize(currEvent.getString("eventtype"));
+                                Log.d("DBChecker", currEvent.getString("eventtype") + " " + event.getmEventTeamSize());
+                                Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
+                            }
+                            //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
                             allEvents.add(event);
                             updateDatabase();
                         }
@@ -194,8 +218,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             }
         }
         Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
-        if (mDatabaseController.retreiveCategory("Manan").get(0).getmCoordinators().get(0).getmCoordName() != null)
-            Log.d("DBChecker", mDatabaseController.retreiveCategory("Manan").get(0).getmCoordinators().get(0).getmCoordName());
+        if (mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize() != null)
+            Log.d("DBChecker", mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize());
     }
 
     private void addData() {
@@ -335,8 +359,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(GravityCompat.START, true);
-        }
-        else {
+        } else {
             SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
             final String phoneNumber = prefs.getString("Phone", null);
             if (phoneNumber != null) {
