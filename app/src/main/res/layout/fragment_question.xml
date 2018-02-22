@@ -5,6 +5,7 @@
     tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment"
     android:fitsSystemWindows="true">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

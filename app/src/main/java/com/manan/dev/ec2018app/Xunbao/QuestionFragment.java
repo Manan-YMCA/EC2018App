@@ -1,7 +1,11 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +30,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.manan.dev.ec2018app.LoginActivity;
 import com.manan.dev.ec2018app.R;
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 
 public class QuestionFragment extends Fragment {
     TextView question,contestEnd,refreshText,stage;
@@ -46,6 +53,8 @@ public class QuestionFragment extends Fragment {
     String queURL,ansURL,statusURL;
     StringRequest stat;
     JsonArrayRequest jobReq;
+    JSONArray jsonArray;
+    JSONObject params;
     RequestQueue queue;
     RelativeLayout queLayout;
     ProgressDialog progressBar;
@@ -59,11 +68,34 @@ public class QuestionFragment extends Fragment {
 
 
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Login Required!");
+        builder.setMessage("To continue, you must login with facebook");
+
+        // add the buttons
+        builder.setPositiveButton("Continue", new Dialog.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getActivity().finish();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+        builder.setNegativeButton("Cancel", new Dialog.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getActivity().finish();
+            }
+        });
+
+        final AlertDialog dialog = builder.create();
+
 
         progressBar = new ProgressDialog(getActivity());
         progressBar.setMessage("(Not you)");
         progressBar.setTitle("Checking");
-        progressBar.setCanceledOnTouchOutside(false);
+        progressBar.setCancelable(false);
         progressBar.show();
 
         queURL = "https://good-people.herokuapp.com/getq/";
@@ -81,18 +113,15 @@ public class QuestionFragment extends Fragment {
         refreshButton=view.findViewById(R.id.refresh_button);
         refreshText=view.findViewById(R.id.refresh_text);
 
-        JSONArray jsonArray =new JSONArray();
-        JSONObject params =new JSONObject();
-        try {
-            params.put("email", "gKa");
-            params.put("skey", "abbv");
-            jsonArray.put(params);
-        }catch (Exception e){
 
-        }
 
         queue = Volley.newRequestQueue(getActivity());
 
+
+
+
+        jsonArray =new JSONArray();
+        params =new JSONObject();
 
 
 
@@ -101,13 +130,28 @@ public class QuestionFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         xstatus=Integer.parseInt(response);
-                        if(xstatus==1){
+
+                        if(xstatus==2){
                             progressBar.dismiss();
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
                             contestEnd.setVisibility(View.VISIBLE);
                         }
-                        else if(xstatus==2){
-                            queue.add(jobReq);
+                        else if(xstatus==1){
+                            if(true) {
+                                progressBar.dismiss();
+                                dialog.show();
+                            }
+                            else {
+                                try {
+                                    params.put("email", "gda");
+                                    params.put("skey", "abbv");
+                                    jsonArray.put(params);
+                                }catch (Exception e){
+
+                                }
+                                queue.add(jobReq);
+                            }
+
                         }
                         else if(xstatus==3){
                             progressBar.dismiss();
@@ -147,7 +191,7 @@ public class QuestionFragment extends Fragment {
                                 Integer level =resp.getInt("pk");
                                 question.setText(que);
                                 stage.setText("STAGE - "+Integer.toString(level));
-                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com"+imgUrl).into(xunbaoimg);
+                                Picasso.with(getActivity()).load("https://good-people.herokuapp.com"+imgUrl).into(xunbaoimg);
                                 progressBar.dismiss();
                             }
                         } catch (JSONException e) {
