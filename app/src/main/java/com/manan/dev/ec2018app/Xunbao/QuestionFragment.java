@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.R;
 import com.squareup.picasso.Picasso;
@@ -32,7 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class QuestionFragment extends Fragment {
@@ -40,16 +43,21 @@ public class QuestionFragment extends Fragment {
     ImageView xunbaoimg,refreshButton;
     Button submit;
     EditText ans;
-    String queURL,ansURL;
+    String queURL,ansURL,statusURL;
+    StringRequest stat;
     JsonArrayRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
     ProgressDialog progressBar;
+    int xstatus=2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_question, container, false);
+
+
+
 
 
         progressBar = new ProgressDialog(getActivity());
@@ -58,8 +66,9 @@ public class QuestionFragment extends Fragment {
         progressBar.setCanceledOnTouchOutside(false);
         progressBar.show();
 
-        queURL = "https://xunbao-1.herokuapp.com/getq/";
-        ansURL="https://xunbao-1.herokuapp.com/checkans/";
+        queURL = "https://good-people.herokuapp.com/getq/";
+        ansURL="https://good-people.herokuapp.com/checkans/";
+        statusURL="https://good-people.herokuapp.com/status/";
 
         queLayout=view.findViewById(R.id.question_layout);
 
@@ -83,6 +92,41 @@ public class QuestionFragment extends Fragment {
         }
 
         queue = Volley.newRequestQueue(getActivity());
+
+
+
+
+        stat = new StringRequest(Request.Method.GET, statusURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        xstatus=Integer.parseInt(response);
+                        if(xstatus==1){
+                            progressBar.dismiss();
+                            contestEnd.setText("KEEP CALM! CONTEST YET TO START");
+                            contestEnd.setVisibility(View.VISIBLE);
+                        }
+                        else if(xstatus==2){
+                            queue.add(jobReq);
+                        }
+                        else if(xstatus==3){
+                            progressBar.dismiss();
+                            contestEnd.setText("THE CONTEST IS OVER! THANKS FOR PLAYING. IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
+                            contestEnd.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.dismiss();
+                refreshButton.setVisibility(View.VISIBLE);
+                refreshText.setVisibility(View.VISIBLE);
+                Toast.makeText(getActivity(), "Problem loading!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         jobReq = new JsonArrayRequest(Request.Method.POST, queURL, jsonArray,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -125,7 +169,7 @@ public class QuestionFragment extends Fragment {
                         volleyError.printStackTrace();
                     }
                 });
-        queue.add(jobReq);
+        queue.add(stat);
         refreshButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -202,7 +246,7 @@ public class QuestionFragment extends Fragment {
         contestEnd.setVisibility(View.GONE);
         refreshButton.setVisibility(View.GONE);
         refreshText.setVisibility(View.GONE);
-        queue.add(jobReq);
+        queue.add(stat);
     }
 
 }
