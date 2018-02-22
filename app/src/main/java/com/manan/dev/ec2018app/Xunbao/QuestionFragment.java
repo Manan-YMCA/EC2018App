@@ -53,8 +53,6 @@ public class QuestionFragment extends Fragment {
     String queURL,ansURL,statusURL;
     StringRequest stat;
     JsonArrayRequest jobReq;
-    JSONArray jsonArray;
-    JSONObject params;
     RequestQueue queue;
     RelativeLayout queLayout;
     ProgressDialog progressBar;
@@ -120,8 +118,7 @@ public class QuestionFragment extends Fragment {
 
 
 
-        jsonArray =new JSONArray();
-        params =new JSONObject();
+
 
 
 
@@ -137,18 +134,11 @@ public class QuestionFragment extends Fragment {
                             contestEnd.setVisibility(View.VISIBLE);
                         }
                         else if(xstatus==1){
-                            if(true) {
+                            if(false) {
                                 progressBar.dismiss();
                                 dialog.show();
                             }
                             else {
-                                try {
-                                    params.put("email", "gda");
-                                    params.put("skey", "abbv");
-                                    jsonArray.put(params);
-                                }catch (Exception e){
-
-                                }
                                 queue.add(jobReq);
                             }
 
@@ -170,6 +160,16 @@ public class QuestionFragment extends Fragment {
         });
 
 
+
+        JSONArray jsonArray =new JSONArray();
+        JSONObject params =new JSONObject();
+        try {
+            params.put("email", "gda");
+            params.put("skey", "abbv");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        jsonArray.put(params);
 
         jobReq = new JsonArrayRequest(Request.Method.POST, queURL, jsonArray,
                 new Response.Listener<JSONArray>() {
