@@ -56,9 +56,12 @@ public class EventRegister extends AppCompatActivity {
                 count++;
                 nameText.add(name);
                 collegeText.add(college);
+
                 layout.addView(createNewTextView(count));
+
                 layout.addView(v);
             }
+
 
         });
         Button bt = (Button) findViewById(R.id.bt_reg_event);
