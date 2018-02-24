@@ -9,51 +9,39 @@
 
     tools:context="com.manan.dev.ec2018app.UserLoginActivity">
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
 
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="50dp"
+       android:layout_margin="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="50dp"
+        android:src="@drawable/logo_opacity"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true">
+
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:id="@+id/ll_below"
+       android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
-        <TextView
-            android:id="@+id/ECText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/futura"
-            android:text="Elements Culmyca"
-            android:textColor="@color/White"
-            android:textSize="25sp" />
-
-        <ImageView
-            android:id="@+id/EClogo"
-            android:layout_width="230sp"
-            android:layout_height="200sp"
-            android:layout_below="@id/ECText"
-            android:layout_centerHorizontal="true"
-
-
-            android:src="@drawable/logo_300" />
-
-        <com.victor.loading.newton.NewtonCradleLoading
-            android:id="@+id/newton_cradle_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@id/EClogo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="310dp"
-            android:layout_height="2.5dp"
-            android:layout_below="@id/newton_cradle_loading"
-            android:layout_centerHorizontal="true"
-            android:background="@color/White" />
 
         <TextView
             android:id="@+id/ReadyText"
@@ -61,38 +49,41 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/view"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/futura"
-            android:text="Ready to enjoy?"
+            android:textAlignment="center"
+            android:padding="15dp"
+            android:text="Explore the Extravagenza of Culture enriched \n with Technology"
             android:textColor="@color/White"
-            android:textSize="20sp" />
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/LoginButton"
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/ReadyText"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:background="@color/baseDark"
             android:fontFamily="@font/futura"
-            android:paddingBottom="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="20dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="15dp"
             android:text="Continue with Mobile"
             android:textColor="@color/White"
-            android:textSize="21sp"
+            android:textSize="15sp"
 
             tools:ignore="RtlSymmetry" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LoginButton"
+            android:layout_marginBottom="10dp"
             android:id="@+id/guest_user_ll"
+            android:padding="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/ContinueText"
@@ -101,28 +92,20 @@
                 android:fontFamily="@font/futura"
                 android:text="Continue as a  "
                 android:textColor="@color/White"
-                android:textSize="20sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/GuestText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/ContinueText"
-                android:layout_alignBottom="@+id/ContinueText"
-                android:layout_toEndOf="@+id/ContinueText"
-                android:layout_toRightOf="@+id/ContinueText"
+
                 android:fontFamily="@font/futura"
                 android:text="Guest?"
                 android:textColor="@color/baseDark"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
+
         </LinearLayout>
     </LinearLayout>
-    <ImageView
-        android:layout_width="280sp"
-        android:layout_height="380sp"
-        android:id="@+id/iv_background"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/topright_basic_vector" />
 
-
+</LinearLayout>
 </RelativeLayout>
