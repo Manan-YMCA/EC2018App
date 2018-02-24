@@ -39,7 +39,6 @@
             android:name=".Xunbao.XunbaoActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity android:name=".DevelopersActivity" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
