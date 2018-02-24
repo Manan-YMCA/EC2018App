@@ -14,17 +14,17 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         card_view:cardCornerRadius="2dp"
-        card_view:cardBackgroundColor="#292929">
+        card_view:cardBackgroundColor="#fff">
 
         <TextView
             android:id="@+id/Rank"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:text="9999."
+            android:text="RANK"
             android:textSize="15sp"
             android:padding="10dp"
             android:textAlignment="center"
-            android:textColor="#ffffff"
+            android:textColor="#000"
             />
         <TextView
             android:id="@+id/name"
@@ -35,7 +35,7 @@
             android:padding="10dp"
             android:textAlignment="center"
             android:layout_gravity="center"
-            android:textColor="#ffffff"
+            android:textColor="#000"
             />
         <TextView
             android:id="@+id/level"
@@ -46,7 +46,7 @@
             android:padding="10dp"
             android:layout_gravity="right"
             android:textAlignment="center"
-            android:textColor="#ffffff"/>
+            android:textColor="#000"/>
 
     </android.support.v7.widget.CardView>
 </RelativeLayout>

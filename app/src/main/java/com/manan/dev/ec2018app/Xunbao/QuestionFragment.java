@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static java.lang.Math.round;
 
 
 public class QuestionFragment extends Fragment {
@@ -55,6 +56,7 @@ public class QuestionFragment extends Fragment {
     JsonArrayRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
+    ImageView rect;
     ProgressDialog progressBar;
     int xstatus=2;
 
@@ -66,6 +68,7 @@ public class QuestionFragment extends Fragment {
 
 
 
+        rect=view.findViewById(R.id.rect);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Login Required!");
         builder.setMessage("To continue, you must login with facebook");
@@ -191,6 +194,11 @@ public class QuestionFragment extends Fragment {
                                 Integer level =resp.getInt("pk");
                                 question.setText(que);
                                 stage.setText("STAGE - "+Integer.toString(level));
+                                float density = getResources().getDisplayMetrics().density;
+                                float size=(question.getMeasuredHeight()+stage.getMeasuredHeight())/density+50;
+                                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rect.getLayoutParams();
+                                params.height = round(size);
+                                rect.setLayoutParams(params);
                                 Picasso.with(getActivity()).load("https://good-people.herokuapp.com"+imgUrl).into(xunbaoimg);
                                 progressBar.dismiss();
                             }

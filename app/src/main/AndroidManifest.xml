@@ -23,6 +23,7 @@
         <activity
             android:name=".UserLoginActivity"
             android:theme="@style/CodeFont">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +39,9 @@
             android:theme="@style/CodeFont" />
         <activity
             android:name=".Xunbao.XunbaoActivity"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+            android:theme="@style/Xunbao" >
+
+        </activity>
         <activity android:name=".DevelopersActivity" />
 
         <meta-data
