@@ -4,8 +4,10 @@
     android:layout_width="340dp"
     android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
-    app:cardBackgroundColor="@color/Black"
-    app:cardElevation="4dp">
+    app:cardBackgroundColor="@color/baseLight"
+    app:cardElevation="4dp"
+    android:layout_marginTop="8dp"
+    android:id="@+id/cv_event_card">
 
         <LinearLayout
             android:id="@+id/ll_single_event_all_details"
@@ -34,23 +36,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="0.25"
                     android:layout_height="wrap_content"
                     android:src="@drawable/vector_event"/>
-
-                <TextView
-                    android:layout_marginTop="2dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:layout_height="wrap_content"
-                    android:text="Date:"
-                    android:layout_marginLeft="4dp"
-                    android:textColor="@color/White"/>
 
                 <TextView
                     android:id="@+id/tv_cv_event_date"
@@ -63,27 +56,12 @@
                     android:layout_marginLeft="12dp"
                     android:textColor="@color/White"
                     android:maxLines="1"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="0.25"
                     android:layout_height="wrap_content"
                     android:src="@drawable/vector_time"/>
-
-                <TextView
-                    android:layout_marginTop="2dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:layout_height="wrap_content"
-                    android:text="Time:"
-                    android:textColor="@color/White"
-                    android:layout_marginLeft="4dp" />
 
                 <TextView
                     android:id="@+id/tv_cv_event_time"
@@ -99,23 +77,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="0.25"
                     android:layout_height="wrap_content"
                     android:src="@drawable/vector_money_inr"/>
-
-                <TextView
-                    android:layout_marginTop="2dp"
-                    android:layout_width="0dp"
-                    android:textAlignment="center"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Fees:"
-                    android:textColor="@color/White"
-                    android:layout_marginLeft="4dp"/>
 
                 <TextView
                     android:id="@+id/tv_cv_event_fees"
@@ -127,11 +96,6 @@
                     android:textColor="@color/White"
                     android:textAlignment="center"
                     android:layout_marginLeft="12dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_width="0dp"
@@ -144,7 +108,7 @@
                     android:id="@+id/tv_cv_event_venue"
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:text="Computer Labs"
