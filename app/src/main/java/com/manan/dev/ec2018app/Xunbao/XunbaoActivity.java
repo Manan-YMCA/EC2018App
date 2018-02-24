@@ -48,7 +48,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
         tv.setLayoutParams(lp);
 
         // Set text to display in TextView
-        tv.setText("Xunbao");
+        tv.setText("Xunbao Bumbao");
 
         tv.setTextSize(25);
         // Set the text color of TextView
