@@ -5,58 +5,91 @@
     tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/question_layout"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/xunbaoimg"
+        <RelativeLayout
+            android:id="@+id/question_layout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ec_app_logo"/>
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            >
 
-        <TextView
-            android:id="@+id/stage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/xunbaoimg"
-            android:padding="20dp"
-            android:textSize="18sp"
-            android:text="OH YES BABY!"
-            android:textAlignment="center"/>
-        <TextView
-            android:id="@+id/question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/stage"
-            android:padding="20dp"
-            android:textSize="18sp"
-            android:text="OH YES BABY!"
-            android:textAlignment="center"/>
-        <EditText
-            android:id="@+id/answer"
-            android:layout_width="300dp"
-            android:textSize="18sp"
-            android:hint="Write your answer here!"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/question"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            />
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/answer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:text="SUBMIT"/>
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/rect"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_below="@+id/xunbaoimg"
+                android:src="@drawable/shape_rectangle" />
+            <ImageView
+                android:id="@+id/xunbaoimg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ec_app_logo"
+                />
+
+            <TextView
+                android:id="@+id/stage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/xunbaoimg"
+                android:layout_marginTop="20dp"
+                android:text="STAGE-1"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/stage"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="It can put even the most powerful people on their backs.Essential, non negotiable, a necessity it is. What is it? Increasing length of the  question unnecessarily.........................................................................................................................................................................."
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/answer"
+                android:shadowColor="@color/xunbaotabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rect"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Write Your Answer Here!"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/submit"
+                android:shadowColor="@color/xunbaotabselected"
+                android:background="@color/xunbaotabselected"
+                android:textColor="@color/White"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/answer"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:text="SUBMIT" />
+        </RelativeLayout>
+
+
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -79,7 +112,7 @@
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ec_app_logo"
+            android:src="@drawable/reload"
             android:visibility="gone"/>
         <TextView
             android:id="@+id/refresh_text"
