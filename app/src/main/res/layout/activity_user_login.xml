@@ -9,36 +9,40 @@
 
     tools:context="com.manan.dev.ec2018app.UserLoginActivity">
 
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content" />
-    <ImageView
-        android:layout_width="50dp"
-       android:layout_margin="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_height="50dp"
-        android:src="@drawable/logo_opacity"/>
+
+
+
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_alignParentBottom="true">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="430dp"
+    />
     <LinearLayout
         android:id="@+id/layoutDots"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
+
         android:orientation="horizontal"></LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
         android:id="@+id/ll_below"
+
        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
@@ -46,45 +50,47 @@
         <TextView
             android:id="@+id/ReadyText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_below="@id/view"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/futura"
             android:textAlignment="center"
-            android:padding="15dp"
+android:padding="5dp"
+            android:layout_weight="1"
             android:text="Explore the Extravagenza of Culture enriched \n with Technology"
             android:textColor="@color/White"
-            android:textSize="13sp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/LoginButton"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
+            android:layout_width="340sp"
+
+            android:layout_height="60dp"
             android:layout_below="@id/ReadyText"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+
             android:background="@color/baseDark"
             android:fontFamily="@font/futura"
-            android:paddingBottom="15dp"
+            android:paddingBottom="8dp"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:paddingTop="15dp"
+android:layout_marginLeft="20dp"
+
+android:layout_marginRight="20dp"            android:paddingTop="8dp"
             android:text="Continue with Mobile"
             android:textColor="@color/White"
-            android:textSize="15sp"
+            android:textSize="15dp"
 
             tools:ignore="RtlSymmetry" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/guest_user_ll"
-            android:padding="10dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp">
-
+<LinearLayout
+    android:layout_height="0dp"
+    android:layout_width="wrap_content"
+    android:layout_weight="1"
+    android:id="@+id/guest_user_ll"
+    android:padding="20dp"
+    >
             <TextView
                 android:id="@+id/ContinueText"
                 android:layout_width="wrap_content"
@@ -92,7 +98,7 @@
                 android:fontFamily="@font/futura"
                 android:text="Continue as a  "
                 android:textColor="@color/White"
-                android:textSize="13sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/GuestText"
@@ -102,10 +108,16 @@
                 android:fontFamily="@font/futura"
                 android:text="Guest?"
                 android:textColor="@color/baseDark"
-                android:textSize="15sp" />
+                android:textSize="18dp" />
 
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_margin="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="50dp"
+        android:src="@drawable/logo_opacity"/>
 </RelativeLayout>

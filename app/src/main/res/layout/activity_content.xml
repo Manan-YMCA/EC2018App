@@ -38,7 +38,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
-                android:src="@drawable/ic_drag_handle_black_24dp" />
+                android:src="@drawable/vector_menu" />
 
             <ImageView
                 android:id="@+id/ds"
