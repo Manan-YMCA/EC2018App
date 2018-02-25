@@ -28,6 +28,9 @@ public class SingleEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
 
+        String eventId = getIntent().getStringExtra("eventId");
+        Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
+
         spb = (SmoothProgressBar) findViewById(R.id.progress_bar_google_now);
         spb.setVisibility(View.INVISIBLE);
 

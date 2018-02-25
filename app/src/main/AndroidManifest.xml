@@ -23,9 +23,9 @@
         <activity
             android:name=".UserLoginActivity"
             android:theme="@style/CodeFont">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -79,9 +79,10 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".LoginActivity">
-
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SplashScreen"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".EventRegister"></activity>
     </application>
 
 </manifest>
