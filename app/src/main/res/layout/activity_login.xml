@@ -1,29 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manan.dev.ec2018app.LoginActivity"
-    android:orientation="vertical"
-    android:id="@+id/llayout_login_activity">
+    android:background="@color/Black"
+    android:id="@+id/rl_main_view"
+    tools:context="com.manan.dev.ec2018app.LoginActivity">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/logo_300" />
 
-
-    <EditText
-        android:id="@+id/mobileNum"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="100dp"
-        android:hint="Mobile No." />
-    <Button
+    <View
+        android:id="@+id/view"
+        android:layout_width="180dp"
+        android:layout_height="3.5dp"
+        android:layout_below="@id/logo"
+        android:background="@color/dot_light_screen1" />
+    <TextView
+        android:id="@+id/txt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
+        android:layout_below="@+id/view"
+        android:layout_marginLeft="70dp"
+        android:fontFamily="@font/futura"
+        android:text="Login"
+        android:textColor="@color/White"
+        android:textSize="35sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_login"
+        android:id="@+id/tv1"
+        android:layout_marginTop="40dp"
+        android:text="Looks like you want to login,right?"
+        android:textColor="@color/White"
+        android:fontFamily="@font/futura"
+        android:textSize="20sp"
+        android:layout_marginLeft="30dp"
+
+        />
+<ImageView
+    android:layout_width="40dp"
+    android:layout_height="35dp"
+    android:src="@drawable/ic_local_phone"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="20dp"
+    android:id="@+id/img_phone"
+    />
+    <EditText
+        android:id="@+id/mobileNum"
+        android:layout_toRightOf="@+id/img_phone"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/futura"
+        android:hint="Phone Number"
+        android:padding="8dp"
+        android:shadowColor="@color/White"
+        android:textColor="@color/White"
+        android:textColorHint="@color/White"
+        android:textSize="25sp"
+        android:singleLine="true"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:id="@+id/login_mobileNum"
-        android:text="Login" />
+android:src="#f21"
+        android:background="@drawable/ic_arrow_forward_black_24dp"
+        android:layout_below="@+id/mobileNum"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
 
 
-</LinearLayout>
+</RelativeLayout>

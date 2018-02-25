@@ -183,7 +183,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                             if (currEvent.has("eventtype")) {
                                 event.setmEventTeamSize(currEvent.getString("eventtype"));
                                 Log.d("DBChecker", currEvent.getString("eventtype") + " " + event.getmEventTeamSize());
-                                Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
                             }
                             //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
                             allEvents.add(event);
@@ -218,8 +218,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             }
         }
         Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
-        if (mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize() != null)
-            Log.d("DBChecker", mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize());
+//        if (mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize() != null)
+//            Log.d("DBChecker", mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize());
     }
 
     private void addData() {

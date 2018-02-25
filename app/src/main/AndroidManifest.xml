@@ -50,7 +50,9 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ProfileActivity"
-            android:theme="@style/CodeFont" />
+            android:theme="@style/CodeFont" >
+
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/CodeFont" />
