@@ -44,6 +44,6 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.hannesdorfmann.smoothprogressbar:library:1.0.0'
     implementation 'com.facebook.android:facebook-login:4.30.0'
-
+    compile 'com.google.zxing:core:3.3.0'
 }
 apply plugin: 'com.google.gms.google-services'
