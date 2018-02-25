@@ -3,6 +3,8 @@ package com.manan.dev.ec2018app.Xunbao;
 import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -32,12 +34,14 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("Xunbao");
-        getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#001d54")));
 
+        setTheme(R.style.CustomActionbartab);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xunbao);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
+
 
 
         TextView tv = new TextView(getApplicationContext());
@@ -64,6 +68,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
 
         XAdapter = new XunbaoTabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(XAdapter);
+
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -71,6 +76,7 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(XunbaoActivity.this));
         }
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -94,6 +100,8 @@ public class XunbaoActivity extends FragmentActivity implements ActionBar.TabLis
         });
 
         viewPager.setCurrentItem(1);
+        ActionBar.Tab selectedTab = actionBar.getSelectedTab();
+        View tabView = selectedTab.getCustomView();
     }
 
     @Override

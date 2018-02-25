@@ -6,13 +6,12 @@ package com.manan.dev.ec2018app.Models;
 
 public class UserDetails {
 
-    private String mName, Email, mCollege, mFbId;
-    private long mPhone;
+    private String mName, Email, mCollege, mFbId, mPhone;
 
     public UserDetails() {
     }
 
-    public UserDetails(String mName, String email, String mCollege, String mFbId, long mPhone) {
+    public UserDetails(String mName, String email, String mCollege, String mFbId, String mPhone) {
         this.mName = mName;
         Email = email;
         this.mCollege = mCollege;
@@ -52,11 +51,11 @@ public class UserDetails {
         this.mFbId = mFbId;
     }
 
-    public long getmPhone() {
+    public String getmPhone() {
         return mPhone;
     }
 
-    public void setmPhone(long mPhone) {
+    public void setmPhone(String mPhone) {
         this.mPhone = mPhone;
     }
 }

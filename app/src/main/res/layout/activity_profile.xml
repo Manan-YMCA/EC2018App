@@ -52,7 +52,7 @@
             android:layout_height="120dp"
             android:id="@+id/profile_picture_layout"
             android:layout_below="@+id/tv2"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true">
 <ImageView
     android:layout_width="200dp"
@@ -63,13 +63,45 @@ android:id="@+id/profile_pic"
     />
         </RelativeLayout>
         <TextView
-            android:id="@+id/tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_picture_layout"
+            android:id="@+id/tv5"
+            android:text="We don't have your photo!"
+            android:textColor="@color/White"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/futura"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv5"
+            android:id="@+id/tv6"
+            android:text="To upload one,log in with facebook"
+            android:textColor="@color/White"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="18dp"
+            android:fontFamily="@font/futura"/>
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv6"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_button"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="18dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/futura"
             android:text="It seems that you are,"
             android:textColor="@color/White"
@@ -82,7 +114,7 @@ android:id="@+id/profile_pic"
             android:layout_below="@+id/tv3"
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
-            android:background="@layout/rounded_rectangle">
+            android:background="@drawable/edit_text_background">
 
 
             <ImageView
@@ -95,7 +127,7 @@ android:id="@+id/profile_pic"
                 android:src="@drawable/vector_pencil" />
 
             <TextView
-                android:id="@+id/tv4"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -106,10 +138,10 @@ android:id="@+id/profile_pic"
                 tools:text="Prerna Suneja" />
 
             <TextView
-                android:id="@+id/tv5"
+                android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv4"
+                android:layout_below="@id/tv_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/futura"
@@ -118,10 +150,10 @@ android:id="@+id/profile_pic"
                 tools:text="prernasuneja@gmail.com" />
 
             <TextView
-                android:id="@+id/tv6"
+                android:id="@+id/tv_college"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv5"
+                android:layout_below="@+id/tv_email"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/futura"
@@ -132,10 +164,10 @@ android:id="@+id/profile_pic"
                 />
 
             <TextView
-                android:id="@+id/tv7"
+                android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv6"
+                android:layout_below="@+id/tv_college"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"

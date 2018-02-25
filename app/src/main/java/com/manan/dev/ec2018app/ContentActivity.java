@@ -3,7 +3,10 @@ package com.manan.dev.ec2018app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,16 +18,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
+import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Models.Coordinators;
+import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,21 +50,21 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
     private ViewPager viewPager;
     private TextView[] dots;
-
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
-
+    private ArrayList<EventDetails> allEvents;
     TextView categoriesHeadingTextView;
     private DrawerLayout drawer;
     private NavigationView nav_view;
+    private DatabaseController mDatabaseController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-
+        allEvents = new ArrayList<>();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 ContentActivity.this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -56,7 +74,11 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         nav_view = (NavigationView) findViewById(R.id.nav_view);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
-
+        try {
+            mDatabaseController = new DatabaseController(getApplicationContext());
+        } catch (Exception e) {
+            Log.d("DBChecker", e.getMessage());
+        }
 
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
@@ -67,24 +89,16 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!drawer.isDrawerOpen(GravityCompat.START)){
+                if (!drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.openDrawer(GravityCompat.START);
                 }
             }
         });
 
-        categoriesHeadingTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ContentActivity.this , CategoryEventDisplayActivity.class));
-            }
-        });
-
-
         addBottomDots(0);
 
         addData();
-
+        retreiveEvents();
         RecyclerView categoryRecycleview = (RecyclerView) findViewById(R.id.category_recycler_view);
 
         categoryRecycleview.setHasFixedSize(true);
@@ -96,36 +110,203 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
     }
 
+    private void retreiveEvents() {
+        if (isNetworkAvailable()) {
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = getResources().getString(R.string.get_all_events_api);
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        JSONArray eventArray = object.getJSONArray("data");
+                        EventDetails event = new EventDetails();
+                        for (int i = 0; i < eventArray.length(); i++) {
+                            JSONObject currEvent = eventArray.getJSONObject(i);
+                            if (currEvent.has("timing"))
+                                event.setmName(currEvent.getString("title"));
+                            if (currEvent.has("fee"))
+                                event.setmFees(currEvent.getLong("fee"));
+                            if (currEvent.has("timing")) {
+                                JSONObject timing = currEvent.getJSONObject("timing");
+                                if (timing.has("from"))
+                                    event.setmStartTime(timing.getLong("from"));
+                                if (timing.has("to"))
+                                    event.setmEndTime(timing.getLong("to"));
+                            }
+                            if (currEvent.has("clubname"))
+                                event.setmClubname(currEvent.getString("clubname"));
+                            if (currEvent.has("category"))
+                                event.setmCategory(currEvent.getString("category"));
+                            if (currEvent.has("desc"))
+                                event.setmDesc(currEvent.getString("desc"));
+                            if (currEvent.has("venue"))
+                                event.setmVenue(currEvent.getString("venue"));
+                            if (currEvent.has("rules"))
+                                event.setmRules(currEvent.getString("rules"));
+                            if (currEvent.has("photolink")) {
+                                event.setmPhotoUrl(currEvent.getString("photolink"));
+                            } else {
+                                event.setmPhotoUrl(null);
+                            }
+                            event.setmCoordinators(new ArrayList<Coordinators>());
+                            if (currEvent.has("coordinators")) {
+                                JSONArray coordinators = currEvent.getJSONArray("coordinators");
+                                for (int j = 0; j < coordinators.length(); j++) {
+                                    JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
+                                    Coordinators coord = new Coordinators();
+                                    if (coordinatorsDetail.has("_id"))
+                                        coord.setmCoordId(coordinatorsDetail.getString("_id"));
+                                    if (coordinatorsDetail.has("phone"))
+                                        coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
+                                    if (coordinatorsDetail.has("name"))
+                                        coord.setmCoordName(coordinatorsDetail.getString("name"));
+                                    event.getmCoordinators().add(coord);
+                                }
+                            }
+                            event.setmPrizes(new ArrayList<String>());
+                            if (currEvent.has("prizes")) {
+                                JSONObject prize = currEvent.getJSONObject("prizes");
+                                if (prize.has("prize1"))
+                                    event.getmPrizes().add(prize.getString("prize1"));
+                                if (prize.has("prize2"))
+                                    event.getmPrizes().add(prize.getString("prize2"));
+                                if (prize.has("prize3"))
+                                    event.getmPrizes().add(prize.getString("prize3"));
+                            } else {
+                                event.getmPrizes().add(null);
+                                event.getmPrizes().add(null);
+                                event.getmPrizes().add(null);
+                            }
+                            if (currEvent.has("_id"))
+                                event.setmEventId(currEvent.getString("_id"));
+                            if (currEvent.has("eventtype")) {
+                                event.setmEventTeamSize(currEvent.getString("eventtype"));
+                                Log.d("DBChecker", currEvent.getString("eventtype") + " " + event.getmEventTeamSize());
+                                //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
+                            }
+                            //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
+                            allEvents.add(event);
+                            updateDatabase();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(ContentActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d("DBChecker", e.getMessage());
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            queue.add(stringRequest);
+        }
+
+    }
+
+    private void updateDatabase() {
+        if (allEvents.size() > mDatabaseController.getCount()) {
+            for (EventDetails eventDetails : allEvents) {
+                mDatabaseController.addEntryToDb(eventDetails);
+            }
+        } else {
+            for (EventDetails eventDetails : allEvents) {
+                mDatabaseController.updateDb(eventDetails);
+            }
+        }
+        Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
+//        if (mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize() != null)
+//            Log.d("DBChecker", mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize());
+    }
+
     private void addData() {
-        CategoryItemModel item1 = new CategoryItemModel();
-        item1.setName("Dance");
-        item1.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
-                R.drawable.ek));
 
-        allSampleData.add(item1);
+        CategoryItemModel manan = new CategoryItemModel();
+        manan.setClubName("Manan");
+        manan.setDisplayName("Coding");
+        manan.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.manan));
+        allSampleData.add(manan);
 
-        CategoryItemModel item3 = new CategoryItemModel();
-        item3.setName("Photography");
-        item3.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
-                R.drawable.jh));
-        allSampleData.add(item3);
-        CategoryItemModel item4 = new CategoryItemModel();
-        item4.setName("Debate");
-        item4.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
-                R.drawable.dk));
-        allSampleData.add(item4);
+        CategoryItemModel ananya = new CategoryItemModel();
+        ananya.setClubName("Ananya");
+        ananya.setDisplayName("Literature");
+        ananya.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.ananya));
+        allSampleData.add(ananya);
 
-        CategoryItemModel item5 = new CategoryItemModel();
-        item5.setName("Music");
-        item5.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
-                R.drawable.ek));
-        allSampleData.add(item5);
-        CategoryItemModel item6 = new CategoryItemModel();
-        item6.setName("Love");
+        CategoryItemModel vividha = new CategoryItemModel();
+        vividha.setClubName("Vividha");
+        vividha.setDisplayName("Drama");
+        vividha.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.vividha));
+        allSampleData.add(vividha);
 
-        item6.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(),
-                R.drawable.an));
-        allSampleData.add(item6);
+        CategoryItemModel jhalak = new CategoryItemModel();
+        jhalak.setClubName("Jhalak");
+        jhalak.setDisplayName("Photography & Designing");
+        jhalak.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.jhalak));
+        allSampleData.add(jhalak);
+
+        CategoryItemModel eklavya = new CategoryItemModel();
+        eklavya.setClubName("Eklavya");
+        eklavya.setDisplayName("Fun Events");
+        eklavya.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.eklavya));
+        allSampleData.add(eklavya);
+
+        CategoryItemModel ieee = new CategoryItemModel();
+        ieee.setClubName("IEEE");
+        ieee.setDisplayName("Techno Fun");
+        ieee.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.ieee));
+        allSampleData.add(ieee);
+
+        CategoryItemModel mechnext = new CategoryItemModel();
+        mechnext.setClubName("Mechnext");
+        mechnext.setDisplayName("Mechanical");
+        mechnext.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.mechnext));
+        allSampleData.add(mechnext);
+
+        CategoryItemModel microbird = new CategoryItemModel();
+        microbird.setClubName("Microbird");
+        microbird.setDisplayName("Electronics");
+        microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.micobird));
+        allSampleData.add(microbird);
+
+        CategoryItemModel natraja = new CategoryItemModel();
+        natraja.setClubName("Natraja");
+        natraja.setDisplayName("Dance");
+        natraja.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.natraja));
+        allSampleData.add(natraja);
+
+        CategoryItemModel sae = new CategoryItemModel();
+        sae.setClubName("SAE");
+        sae.setDisplayName("Automobiles");
+        sae.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.sae));
+        allSampleData.add(sae);
+
+        CategoryItemModel samarpan = new CategoryItemModel();
+        samarpan.setClubName("Samarpan");
+        samarpan.setDisplayName("Electrical");
+        samarpan.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.samarpan));
+        allSampleData.add(samarpan);
+
+        CategoryItemModel srijan = new CategoryItemModel();
+        srijan.setClubName("Srijan");
+        srijan.setDisplayName("Arts");
+        srijan.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.srijan));
+        allSampleData.add(srijan);
+
+        CategoryItemModel tarannum = new CategoryItemModel();
+        tarannum.setClubName("Tarannum");
+        tarannum.setDisplayName("Music");
+        tarannum.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.tarannum));
+        allSampleData.add(tarannum);
+
+        CategoryItemModel vivekanand = new CategoryItemModel();
+        vivekanand.setClubName("Vivekanand Manch");
+        vivekanand.setDisplayName("Vivekanand Manch");
+        vivekanand.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.vivekanand));
+        allSampleData.add(vivekanand);
     }
 
     private void addBottomDots(int currentPage) {
@@ -174,11 +355,27 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        //super.onBackPressed();
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(GravityCompat.START, true);
-        }
-        if(!drawer.isDrawerOpen(GravityCompat.START)){
-            super.onBackPressed();
+        } else {
+            SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+            final String phoneNumber = prefs.getString("Phone", null);
+            if (phoneNumber != null) {
+                startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
+                        .putExtra("closeApp", true)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+            } else {
+                startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
+                        .putExtra("logout", true)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+            }
+
         }
     }
 
@@ -188,16 +385,18 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         int id = item.getItemId();
         item.setChecked(false);
 
-        switch (id){
+        switch (id) {
             case R.id.nav_home:
                 //handle home case
                 break;
             case R.id.nav_profile:
-                //TODO
-                //check whether guest or logged in user
-                //if guest pass intent to reg activity
-                //if logged in pass intent to user profile activity
-                startActivity(new Intent(ContentActivity.this, ProfileActivity.class));
+                SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                String restoredText = prefs.getString("Phone", null);
+                if (restoredText == null) {
+                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                }
                 break;
             case R.id.nav_tickets:
                 //TODO
@@ -209,7 +408,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //pass intent to activity with tab layout with 2 tabs
                 //first for trending among all users using firebase analytics
                 //second for trending among facebook friends
-
                 //currently xunbao.. remove it later
                 startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
                 break;
@@ -218,8 +416,15 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //display about fest and college
                 break;
             case R.id.nav_logout:
-                //TODO
-                //log the user out
+                SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                AccessToken.setCurrentAccessToken(null);
+                startActivity(new Intent(getApplicationContext(), UserLoginActivity.class)
+                        .putExtra("logout", true)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
                 break;
             case R.id.nav_sponsors:
                 //TODO
@@ -244,4 +449,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }

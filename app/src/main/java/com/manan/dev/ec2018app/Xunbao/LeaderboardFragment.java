@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +39,11 @@ public class LeaderboardFragment extends Fragment {
     static LeaderboardAdapter leaderboardAdapter;
     static RecyclerView recyclerView;
     static Context c;
+    static ProgressDialog progressBar;
+    static TextView refreshText;
+    static ImageView refreshButton;
+    static RequestQueue queue;
+    static StringRequest stringRequest;
     public LeaderboardFragment() {
 
     }
@@ -46,7 +54,22 @@ public class LeaderboardFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         c=getActivity();
+        progressBar = new ProgressDialog(getActivity());
+        progressBar.setMessage("(Not you)");
+        progressBar.setTitle("Checking");
+        progressBar.setCanceledOnTouchOutside(false);
 
+        refreshButton=view.findViewById(R.id.refresh_button);
+        refreshText=view.findViewById(R.id.refresh_text);
+
+        refreshButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        reload();
+                    }
+                }
+        );
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,15 +83,17 @@ public class LeaderboardFragment extends Fragment {
     }
 
     public void setData(){
-        RequestQueue queue = Volley.newRequestQueue(c);
-        Log.d("HEYT","resumed");
+
+        progressBar.show();
+        queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.xunbao_leaderboard_api);
-        Toast.makeText(c, url, Toast.LENGTH_LONG).show();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        url="https://good-people.herokuapp.com/leaderboard_api";
+        stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     List<LeaderboardList> leaderboardList=new ArrayList<>();
                     @Override
                     public void onResponse(String response) {
+                        recyclerView.setVisibility(View.VISIBLE);
                         try {
                             JSONArray k = new JSONArray(response);
                             for (int i=0;i<k.length();i++) {
@@ -85,17 +110,34 @@ public class LeaderboardFragment extends Fragment {
                             leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
                             recyclerView.setAdapter(leaderboardAdapter);
 
+                        progressBar.hide();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                progressBar.dismiss();
                 List<LeaderboardList> leaderboardList=new ArrayList<>();
-                Log.d("hey", "Error: " + error);
+
+                Toast.makeText(c, "Problem Loading!", Toast.LENGTH_SHORT).show();
 
                     leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
                     recyclerView.setAdapter(leaderboardAdapter);
+                    refreshButton.setVisibility(View.VISIBLE);
+                    refreshText.setVisibility(View.VISIBLE);
             }
         });
         queue.add(stringRequest);
+
     }
+
+    public void reload(){
+        progressBar.show();
+        recyclerView.setVisibility(View.GONE);
+        refreshText.setVisibility(View.GONE);
+        refreshButton.setVisibility(View.GONE);
+        queue.add(stringRequest);
+    }
+
 }

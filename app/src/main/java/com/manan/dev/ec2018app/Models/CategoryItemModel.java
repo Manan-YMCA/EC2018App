@@ -9,18 +9,18 @@ import android.graphics.Bitmap;
 public class CategoryItemModel {
 
 
-    private String name;
+    private String displayName, clubName;
     private Bitmap image;
 
 
     public CategoryItemModel() {
     }
 
-    public CategoryItemModel(String name, Bitmap image) {
-        this.name = name;
+    public CategoryItemModel(String displayName, String clubName, Bitmap image) {
+        this.displayName = displayName;
+        this.clubName = clubName;
         this.image = image;
     }
-
 
     public Bitmap getImage() {
         return image;
@@ -30,13 +30,19 @@ public class CategoryItemModel {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
+    public String getClubName() {
+        return clubName;
+    }
 
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
 }

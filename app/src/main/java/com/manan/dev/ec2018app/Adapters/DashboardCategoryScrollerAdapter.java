@@ -5,6 +5,8 @@ package com.manan.dev.ec2018app.Adapters;
  */
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.manan.dev.ec2018app.CategoryEventDisplayActivity;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.R;
 
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 
@@ -42,12 +46,25 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
     @Override
     public void onBindViewHolder(SingleItemRowHolder holder, int i) {
 
-        CategoryItemModel singleItem = itemsList.get(i);
+        final CategoryItemModel singleItem = itemsList.get(i);
 
-        holder.tvTitle.setText(singleItem.getName());
+        holder.tvTitle.setText(singleItem.getDisplayName());
         Drawable drawable = new BitmapDrawable(mContext.getResources(), singleItem.getImage());
 
         holder.itemImage.setImageDrawable(drawable);
+        holder.itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100 ,stream);
+                byte[] byteArray = stream.toByteArray();
+                mContext.startActivity(new Intent(mContext, CategoryEventDisplayActivity.class)
+                        .putExtra("clubname", singleItem.getClubName())
+                        .putExtra("clubPhoto", byteArray)
+                        .putExtra("clubdisplay", singleItem.getDisplayName()));
+            }
+        });
     }
 
     @Override
@@ -67,18 +84,6 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
 
             this.tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             this.itemImage = (ImageView) view.findViewById(R.id.itemImage);
-
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-                    Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
 
         }
 

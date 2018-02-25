@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+    <EditText
+        android:id="@+id/inflate_reg_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/futura"
+        android:hint="Name"
+        android:padding="8dp"
+        android:shadowColor="@color/White"
+        android:textColor="@color/White"
+        android:textColorHint="@color/White"
+        android:textSize="15sp"
+        android:singleLine="true"/>
+
+    <EditText
+        android:id="@+id/inflate_reg_clg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inflate_reg_name"
+        android:layout_marginEnd="52dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/futura"
+        android:hint="College"
+        android:padding="8dp"
+        android:textColor="@color/White"
+        android:textColorHint="@color/White"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:singleLine="true"/>
+
+
+
+
+
+</LinearLayout>
