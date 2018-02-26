@@ -23,11 +23,7 @@
         <activity
             android:name=".UserLoginActivity"
             android:theme="@style/CodeFont">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SingleEventActivity"
@@ -50,7 +46,7 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ProfileActivity"
-            android:theme="@style/CodeFont"></activity>
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/CodeFont" />
@@ -76,10 +72,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashScreen" />
         <activity android:name=".EventRegister" />
-        <activity android:name=".QRCodeGenerator">
+        <activity android:name=".QRCodeGenerator"></activity>
+        <activity android:name=".SplashScreen"
+            android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
