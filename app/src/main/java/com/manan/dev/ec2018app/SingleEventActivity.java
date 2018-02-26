@@ -11,6 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
+import com.manan.dev.ec2018app.Models.EventDetails;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 public class SingleEventActivity extends AppCompatActivity {
@@ -18,11 +25,12 @@ public class SingleEventActivity extends AppCompatActivity {
     Button registerButton;
     TextView eventDateTextView, eventTimeTextView, locationTextView, locationFullTextView, hostClubTextView, feesTextView,
             typeOfEventTextView, firstPrizeTextView, secondPrizeTextView, thirdPrizeTextView, descriptionTextView,
-            rulesTextView;
+            rulesTextView,coordsHeading;
     RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, coordsRelativeLayout;
     LinearLayout coordsLinearLayout;
     SmoothProgressBar spb;
-
+    private DatabaseController getEventDetails;
+    private EventDetails eventDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +38,8 @@ public class SingleEventActivity extends AppCompatActivity {
 
         String eventId = getIntent().getStringExtra("eventId");
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
-
+        getEventDetails = new DatabaseController(SingleEventActivity.this);
+        eventDetails = new EventDetails();
         spb = (SmoothProgressBar) findViewById(R.id.progress_bar_google_now);
         spb.setVisibility(View.INVISIBLE);
 
@@ -39,7 +48,7 @@ public class SingleEventActivity extends AppCompatActivity {
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
         eventTimeTextView = (TextView) findViewById(R.id.tv_event_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
-        locationFullTextView = (TextView) findViewById(R.id.tv_event_location_full);
+
         hostClubTextView = (TextView) findViewById(R.id.tv_host);
         feesTextView = (TextView) findViewById(R.id.tv_fees);
         typeOfEventTextView = (TextView) findViewById(R.id.tv_type_of_event);
@@ -52,10 +61,28 @@ public class SingleEventActivity extends AppCompatActivity {
         dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
         locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
+        coordsHeading =(TextView)findViewById(R.id.tv_coords_heading);
+        eventDetails = getEventDetails.retreiveEventsByID(eventId);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("DD MM YY", Locale.ENGLISH);
 
+        locationTextView.setText(eventDetails.getmVenue());
+        hostClubTextView.setText(eventDetails.getmClubname());
+        Long fees = eventDetails.getmFees();
+        feesTextView.setText(Long.toString(fees));
+        typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
+        if(eventDetails.getmEventTeamSize().equals("NA")){
+            typeOfEventTextView.setVisibility(View.GONE);
+        }
+        if(eventDetails.getmCoordinators().equals("NULL")){
+            coordsLinearLayout.setVisibility(View.GONE);
+            coordsHeading.setVisibility(View.GONE);
+        }
+        descriptionTextView.setText(eventDetails.getmDesc());
+        rulesTextView.setText(eventDetails.getmRules());
         dateTimeRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 Toast.makeText(SingleEventActivity.this, "Calender pe reminder set karna hai!", Toast.LENGTH_SHORT).show();
             }
         });
