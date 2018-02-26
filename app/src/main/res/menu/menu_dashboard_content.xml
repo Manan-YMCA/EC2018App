@@ -5,42 +5,55 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:icon="@drawable/vector_home"
             android:id="@+id/nav_home"
             android:title="Home" />
         <item
+            android:icon="@drawable/vector_person"
             android:id="@+id/nav_profile"
             android:title="Profile" />
         <item
+            android:icon="@drawable/vector_tickets"
             android:id="@+id/nav_tickets"
             android:title="My Tickets" />
         <item
+            android:icon="@drawable/vector_trend"
             android:id="@+id/nav_trending"
             android:title="Trending Events" />
         <item
+            android:icon="@drawable/vector_info"
             android:id="@+id/nav_about"
             android:title="About" />
         <item
+            android:icon="@drawable/vector_location"
             android:id="@+id/nav_location"
             android:title="Location" />
         <item
+            android:icon="@drawable/vector_logout"
             android:id="@+id/nav_logout"
             android:title="Logout" />
         <item
+            android:icon="@drawable/vector_sponsors"
             android:id="@+id/nav_sponsors"
             android:title="Sponsors" />
     </group>
 
-    <item android:title="More About App">
+    <item android:title="More About App"
+        >
 
 
         <menu>
             <item
+
+                android:icon="@drawable/vector_share"
                 android:id="@+id/nav_share"
                 android:title="Share" />
             <item
+                android:icon="@drawable/vector_bug"
                 android:id="@+id/nav_bug"
                 android:title="Report a Bug" />
             <item
+                android:icon="@drawable/vector_developers"
                 android:id="@+id/nav_dev"
                 android:title="Developers" />
         </menu>
