@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -431,12 +432,14 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //add sponsors
                 break;
             case R.id.nav_share:
-                //TODO
-                //app share kardo
+                String msg = "Install the elements culmyca app to stay updated about the latest events. Follow the link: ";
+                shareTextMessage(msg);
                 break;
             case R.id.nav_bug:
-                //TODO
-                //report bugs
+                String to = "manantechnosurge@gmail.com";
+                String subject = "Bug Found";
+                String messg = "I found a bug!\n";
+                sendEmailBug(to, subject, messg);
                 break;
             case R.id.nav_dev:
                 //TODO
@@ -456,5 +459,22 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+    private void shareTextMessage(String msg) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, msg);
+        startActivity(i);
+    }
+    private void sendEmailBug(String to, String subject, String msg) {
+
+        Uri uri = Uri.parse("mailto:")
+                .buildUpon()
+                .appendQueryParameter("subject", subject)
+                .appendQueryParameter("body", msg)
+                .build();
+
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+        startActivity(Intent.createChooser(emailIntent, "Choose an Email client :")); }
 
 }
