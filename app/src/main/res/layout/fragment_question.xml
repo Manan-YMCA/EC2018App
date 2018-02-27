@@ -1,45 +1,50 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/xunbao_back"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <ImageView
+            android:src="@drawable/xunbao_logo"
             android:id="@+id/xunbao_heading"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/iv_xunbao_question_image"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/futura"
-            android:gravity="center"
-            android:text="XUNBAO HEADING"
-            android:textSize="24sp" />
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"/>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_arrow_forward_black_24dp"/>
 
         <ImageView
             android:id="@+id/iv_xunbao_question_image"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_above="@+id/tv_question_number"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_below="@+id/xunbao_heading"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/treasure_hunt_map" />
 
         <TextView
             android:id="@+id/tv_question_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/ll_question_text"
+            android:layout_below="@+id/iv_xunbao_question_image"
             android:fontFamily="@font/futura"
             android:gravity="center"
-            android:text="QUESTION NO."
+            android:layout_marginTop="10dp"
+            android:text="STAGE - 5"
             android:textColor="@color/Black"
             android:textSize="24sp" />
 
@@ -47,7 +52,7 @@
             android:id="@+id/ll_question_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/et_xunbao_answer"
+            android:layout_below="@+id/tv_question_number"
             android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
@@ -76,51 +81,44 @@
         </LinearLayout>
 
         <EditText
+            android:layout_alignParentRight="true"
             android:id="@+id/et_xunbao_answer"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/ll_submit"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/ll_question_text"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/xunbao_question_background"
             android:inputType="text"
             android:padding="8dp" />
 
         <LinearLayout
             android:id="@+id/ll_submit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="70dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_below="@+id/et_xunbao_answer"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/futura"
                 android:text="Hit Me in!"
-                android:textAlignment="center"
                 android:textColor="@color/White"
                 android:textSize="18sp" />
 
             <ImageView
-                android:layout_width="90dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="90dp"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:src="@drawable/vector_key" />
 
         </LinearLayout>
 
     </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</FrameLayout>
