@@ -10,115 +10,158 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:src="@drawable/xunbao_logo"
-            android:id="@+id/xunbao_heading"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"/>
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_arrow_forward_black_24dp"/>
-
-        <ImageView
-            android:id="@+id/iv_xunbao_question_image"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@+id/xunbao_heading"
-            android:layout_marginTop="20dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/treasure_hunt_map" />
-
-        <TextView
-            android:id="@+id/tv_question_number"
+        <RelativeLayout
+            android:id="@+id/question_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_xunbao_question_image"
-            android:fontFamily="@font/futura"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="STAGE - 5"
-            android:textColor="@color/Black"
-            android:textSize="24sp" />
-
-        <LinearLayout
-            android:id="@+id/ll_question_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_question_number"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:visibility="gone">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:background="@drawable/vector_map" />
+                android:id="@+id/xunbao_heading"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:src="@drawable/xunbao_logo" />
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+            <ImageView
+                android:id="@+id/iv_xunbao_question_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_below="@+id/xunbao_heading"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/treasure_hunt_map" />
 
             <TextView
-                android:id="@+id/tv_question_text"
+                android:id="@+id/tv_question_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10sp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_below="@+id/iv_xunbao_question_image"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/futura"
-                android:padding="4dp"
-                android:text="It can put even the most powerful on their back essential non negotiable a nests?"
-                android:textAlignment="center"
-                android:textColor="@color/White"
-                android:textSize="18sp" />
+                android:gravity="center"
+                android:text="STAGE - 5"
+                android:textColor="@color/Black"
+                android:textSize="24sp" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_question_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_question_number"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-        <EditText
-            android:layout_alignParentRight="true"
-            android:id="@+id/et_xunbao_answer"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_question_text"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/xunbao_question_background"
-            android:inputType="text"
-            android:padding="8dp" />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:background="@drawable/vector_map" />
 
-        <LinearLayout
-            android:id="@+id/ll_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/et_xunbao_answer"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_question_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/futura"
+                    android:padding="4dp"
+                    android:text="It can put even the most powerful on their back essential non negotiable a nests?"
+                    android:textAlignment="center"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_xunbao_answer"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/ll_question_text"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/xunbao_question_background"
+                android:inputType="text"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/et_xunbao_answer"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/futura"
+                    android:text="Hit Me in!"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/vector_key" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/contest_ends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/futura"
-                android:text="Hit Me in!"
-                android:textColor="@color/White"
-                android:textSize="18sp" />
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:visibility="gone" />
 
             <ImageView
+                android:id="@+id/refresh_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/reload"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/refresh_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/vector_key" />
+                android:layout_below="@+id/refresh_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Problem Loading!\nIf the problem continues, kindly report an error"
+                android:visibility="gone" />
 
-        </LinearLayout>
 
-    </RelativeLayout>
-    </ScrollView>
+        </RelativeLayout>
 </FrameLayout>
