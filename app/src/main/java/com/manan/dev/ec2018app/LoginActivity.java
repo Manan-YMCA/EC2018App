@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.Models.UserDetails;
+import com.manan.dev.ec2018app.Utilities.GifImageView;
 
 import org.json.JSONObject;
 

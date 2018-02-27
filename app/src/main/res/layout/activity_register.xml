@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/logo_300" />
 
     <View
@@ -26,17 +26,28 @@
         android:id="@+id/txt_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:layout_marginLeft="40dp"
+        android:paddingRight="12dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/futura"
         android:text="Registration"
+        android:layout_alignParentRight="true"
         android:textColor="@color/White"
-        android:textSize="30sp" />
-
+        android:textSize="32sp" />
+<LinearLayout
+    android:layout_below="@id/view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2">
     <TextView
         android:id="@+id/txt_wel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+      android:layout_height="wrap_content"
         android:layout_below="@+id/txt_reg"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -48,65 +59,62 @@
     <TextView
         android:id="@+id/txt_ec"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+android:layout_height="wrap_content"
         android:layout_below="@+id/txt_wel"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/futura"
         android:text="Elements Culmyca 2K18!"
         android:textColor="@color/White"
-        android:textSize="20dp" />
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/txt_fill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_ec"
+
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/futura"
-        android:text="Fill up the following details to REGISTER in EC-2K18"
+        android:text="Fill up the following details to Register"
         android:textColor="@color/White"
         android:textSize="15dp" />
-
+    </LinearLayout>
 
     <EditText
         android:id="@+id/et_reg_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_fill"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="1"
+android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/futura"
         android:hint="Name"
-        android:padding="8dp"
+        android:padding="12dp"
         android:shadowColor="@color/White"
+        android:singleLine="true"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="25sp"
-        android:singleLine="true"/>
+        android:textSize="13sp" />
 
 
     <EditText
         android:id="@+id/et_reg_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_below="@id/et_reg_name"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/futura"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:padding="8dp"
+        android:padding="12dp"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="25sp"
+        android:textSize="13sp"
         android:maxLines="1"
         android:singleLine="true"/>
 
@@ -114,20 +122,19 @@
     <EditText
         android:id="@+id/et_reg_clg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_below="@id/et_reg_email"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/futura"
         android:hint="College"
-        android:padding="8dp"
+        android:padding="12dp"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="25sp"
+        android:textSize="13sp"
         android:maxLines="1"
         android:singleLine="true"/>
 
@@ -135,38 +142,37 @@
     <EditText
         android:id="@+id/et_reg_mob"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_below="@id/et_reg_clg"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/futura"
         android:hint="Mobile No."
         android:inputType="phone"
-        android:padding="8dp"
+        android:padding="12dp"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="25sp"
+        android:textSize="13sp"
         android:maxLines="1"
         android:singleLine="true"/>
 
 
     <RelativeLayout
         android:id="@+id/hint_set"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_below="@+id/et_reg_mob"
         android:layout_centerInParent="true"
-        android:layout_marginEnd="70dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/edit_text_background"
+        android:layout_gravity="center"
+android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+       android:layout_marginTop="30dp"
         android:backgroundTint="@color/baseDark"
+        android:background="@drawable/edit_text_background"
         tools:targetApi="lollipop">
 
 
@@ -180,7 +186,7 @@
             android:padding="5dp"
             android:text="All set to fire?"
             android:textColor="@color/White"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -188,16 +194,18 @@
     <TextView
         android:id="@+id/tv_log_in"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:textColor="@color/White"
         android:layout_below="@id/hint_set"
         android:layout_marginTop="20dp"
         android:textAlignment="center"
-        android:text="Already a User!! LOG IN"
-        android:textSize="24sp"
+        android:fontFamily="@font/futura"
+        android:text="Already a User? Login"
+        android:textSize="16sp"
         />
 
-
+</LinearLayout>
 </RelativeLayout>
 
 

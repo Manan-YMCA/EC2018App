@@ -65,7 +65,7 @@ public class SingleEventActivity extends AppCompatActivity {
         coordsHeading =(TextView)findViewById(R.id.tv_coords_heading);
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("DD MM YY", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("DD MM yy", Locale.ENGLISH);
 
         locationTextView.setText(eventDetails.getmVenue());
         hostClubTextView.setText(eventDetails.getmClubname());

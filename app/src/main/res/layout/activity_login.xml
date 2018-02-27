@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/logo_300" />
 
     <View
@@ -19,13 +19,13 @@
         android:layout_width="180dp"
         android:layout_height="3.5dp"
         android:layout_below="@id/logo"
-        android:background="@color/dot_light_screen1" />
+        android:background="@color/baseDark" />
     <TextView
         android:id="@+id/txt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view"
-        android:layout_marginLeft="70dp"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/futura"
         android:text="Login"
         android:textColor="@color/White"
@@ -36,48 +36,95 @@
         android:layout_below="@id/txt_login"
         android:id="@+id/tv1"
         android:layout_marginTop="40dp"
-        android:text="Looks like you want to login,right?"
+        android:text="Enter Your phone number\nFor Logging In"
         android:textColor="@color/White"
         android:fontFamily="@font/futura"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_marginLeft="30dp"
 
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv1"
+        android:layout_marginTop="40dp"
+        android:id="@+id/ll_1"
+        android:orientation="horizontal">
 <ImageView
     android:layout_width="40dp"
     android:layout_height="35dp"
+
+    android:layout_marginTop="15dp"
     android:src="@drawable/ic_local_phone"
-    android:layout_centerVertical="true"
     android:layout_marginLeft="20dp"
     android:id="@+id/img_phone"
     />
     <EditText
         android:id="@+id/mobileNum"
-        android:layout_toRightOf="@+id/img_phone"
-        android:layout_centerVertical="true"
+       android:layout_below="@id/tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/futura"
         android:hint="Phone Number"
-        android:padding="8dp"
+        android:padding="16dp"
         android:shadowColor="@color/White"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:singleLine="true"
+         />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_1"
+        android:id="@+id/td"
+        android:layout_marginTop="50dp"
+android:text="Your number will be verified with \n an One-Time-Password."
+        android:textColor="@color/White"
+        android:fontFamily="@font/futura"
+        android:textSize="16sp"
+        android:layout_marginLeft="30dp"
+
         />
+
+
     <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Submit"
         android:id="@+id/login_mobileNum"
-android:src="#f21"
-        android:background="@drawable/ic_arrow_forward_black_24dp"
-        android:layout_below="@+id/mobileNum"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"/>
 
+        android:textColor="@color/White"
+        android:fontFamily="@font/futura"
+        android:textSize="16sp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/baseDark"
+        android:layout_below="@id/td"
+        android:background="@drawable/edit_text_background"/>
 
+    <com.manan.dev.ec2018app.Utilities.GifImageView
+        android:layout_width="50dp"
+
+        android:id="@+id/arrow"
+        android:layout_centerInParent="true"
+        android:layout_height="50dp"
+        android:layout_below="@id/login_mobileNum"
+        android:background="@drawable/arrow_" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Need Help?"
+        android:textColor="@color/White"
+        android:fontFamily="@font/futura"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
