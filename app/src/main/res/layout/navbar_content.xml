@@ -21,6 +21,8 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_dashboard_content"
         android:background="#2b2b2b"
-        app:itemTextColor="@color/White" />
+        app:itemTextColor="@color/nav_bar_dashboard_selector"
+        android:theme="@style/XunbaoTheme"
+        app:itemIconTint="@color/nav_bar_dashboard_selector"/>
 
 </android.support.v4.widget.DrawerLayout>

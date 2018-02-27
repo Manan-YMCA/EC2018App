@@ -46,9 +46,18 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
     @Override
     public void onBindViewHolder(SingleItemRowHolder holder, int i) {
 
+
         final CategoryItemModel singleItem = itemsList.get(i);
 
-        holder.tvTitle.setText(singleItem.getDisplayName());
+        if (singleItem.getDisplayName().length() <= 12) {
+            String displayName = singleItem.getDisplayName();
+            holder.tvTitle.setText(displayName);
+        } else if (singleItem.getDisplayName().length() > 12) {
+            String displayName = singleItem.getDisplayName().substring(0, 9);
+            displayName += "..";
+            holder.tvTitle.setText(displayName);
+        } else
+            holder.tvTitle.setText(singleItem.getDisplayName());
         Drawable drawable = new BitmapDrawable(mContext.getResources(), singleItem.getImage());
 
         holder.itemImage.setImageDrawable(drawable);
@@ -57,7 +66,7 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
             public void onClick(View v) {
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100 ,stream);
+                singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 mContext.startActivity(new Intent(mContext, CategoryEventDisplayActivity.class)
                         .putExtra("clubname", singleItem.getClubName())

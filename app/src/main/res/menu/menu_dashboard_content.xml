@@ -5,56 +5,59 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:icon="@drawable/vector_home"
             android:id="@+id/nav_home"
+            android:icon="@drawable/vector_home"
             android:title="Home" />
         <item
-            android:icon="@drawable/vector_person"
             android:id="@+id/nav_profile"
+            android:icon="@drawable/vector_person"
             android:title="Profile" />
         <item
-            android:icon="@drawable/vector_tickets"
             android:id="@+id/nav_tickets"
+            android:icon="@drawable/vector_tickets"
             android:title="My Tickets" />
         <item
-            android:icon="@drawable/vector_trend"
-            android:id="@+id/nav_trending"
-            android:title="Trending Events" />
+            android:id="@+id/nav_xunbao"
+            android:title="Xunbao"
+            android:icon="@drawable/vector_xunbao"/>
         <item
-            android:icon="@drawable/vector_info"
+            android:id="@+id/nav_culmyca"
+            android:title="Culmyca Times"
+            android:icon="@drawable/vector_cul_times"/>
+        <item
             android:id="@+id/nav_about"
+            android:icon="@drawable/vector_info"
             android:title="About" />
         <item
-            android:icon="@drawable/vector_location"
             android:id="@+id/nav_location"
+            android:icon="@drawable/vector_location"
             android:title="Location" />
         <item
-            android:icon="@drawable/vector_logout"
             android:id="@+id/nav_logout"
+            android:icon="@drawable/vector_logout"
             android:title="Logout" />
         <item
-            android:icon="@drawable/vector_sponsors"
             android:id="@+id/nav_sponsors"
+            android:icon="@drawable/vector_sponsors"
             android:title="Sponsors" />
     </group>
 
-    <item android:title="More About App"
-        >
+    <item android:title="More About App">
 
 
         <menu>
             <item
 
-                android:icon="@drawable/vector_share"
                 android:id="@+id/nav_share"
+                android:icon="@drawable/vector_share"
                 android:title="Share" />
             <item
-                android:icon="@drawable/vector_bug"
                 android:id="@+id/nav_bug"
+                android:icon="@drawable/vector_bug"
                 android:title="Report a Bug" />
             <item
-                android:icon="@drawable/vector_developers"
                 android:id="@+id/nav_dev"
+                android:icon="@drawable/vector_developers"
                 android:title="Developers" />
         </menu>
     </item>

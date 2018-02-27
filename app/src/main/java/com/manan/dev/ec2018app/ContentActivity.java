@@ -280,7 +280,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         allSampleData.add(natraja);
 
         CategoryItemModel sae = new CategoryItemModel();
-        sae.setClubName("SAE");
+        sae.setClubName("SAE/BAJA");
         sae.setDisplayName("Automobiles");
         sae.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.sae));
         allSampleData.add(sae);
@@ -298,7 +298,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         allSampleData.add(srijan);
 
         CategoryItemModel tarannum = new CategoryItemModel();
-        tarannum.setClubName("Tarannum");
+        tarannum.setClubName("Taranuum");
         tarannum.setDisplayName("Music");
         tarannum.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.tarannum));
         allSampleData.add(tarannum);
@@ -404,13 +404,17 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //if logged in show users tickets
                 //if guest user pass intent to reg activity
                 break;
-            case R.id.nav_trending:
+            case R.id.nav_xunbao:
                 //TODO
                 //pass intent to activity with tab layout with 2 tabs
                 //first for trending among all users using firebase analytics
                 //second for trending among facebook friends
                 //currently xunbao.. remove it later
                 startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
+                break;
+            case R.id.nav_culmyca:
+                //TODO
+                //Culmyca times here
                 break;
             case R.id.nav_about:
                 //TODO

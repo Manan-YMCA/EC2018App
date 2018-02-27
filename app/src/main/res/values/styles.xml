@@ -19,14 +19,18 @@
         <item name="android:windowActionBar">false</item>>
 
     </style>
-<style name="Splash" parent="Theme.AppCompat.DayNight.NoActionBar">
 
-    <item name="windowActionBar">false</item>
+    <style name="Splash" parent="Theme.AppCompat.DayNight.NoActionBar" />
 
-</style>
-    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.AppBarOverlay"/>
+    <style name="XunbaoTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textColorSecondary">@color/White</item>
+        <item name="actionMenuTextColor">@color/White</item>
+        <item name="windowActionBar">false</item>
 
-    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.PopupOverlay"/>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
     <style name="MainMenu" parent="Theme.AppCompat.NoActionBar">
@@ -48,24 +52,7 @@
     </style>
 
 
-
-
-
-    <style name="Xunbao" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-    </style>
-
-    <style name="Custom.ActionBar.TabView.Empty" parent="@android:style/Widget.ActionBar.TabView">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-        <item name="android:background">@drawable/xunbao_tab_color_selector</item>
-    </style>
-
-    <style name="CustomActionbartab" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="actionBarTabStyle">@style/Custom.ActionBar.TabView.Empty</item>
-        <item name="android:actionBarTabStyle">@style/Custom.ActionBar.TabView.Empty</item>
-    </style>
-
-
+    <style name="Xunbao" parent="@android:style/Theme.Holo.Light.DarkActionBar"></style>
 
 
 </resources>

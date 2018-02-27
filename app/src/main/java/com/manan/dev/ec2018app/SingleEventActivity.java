@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -99,6 +100,7 @@ public class SingleEventActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(SingleEventActivity.this, "Mujhe Event pe Register karna hai", Toast.LENGTH_SHORT).show();
                 spb.setVisibility(View.VISIBLE);
+                startActivity(new Intent(SingleEventActivity.this, EventRegister.class));
             }
         });
 

@@ -4,16 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.manan.dev.ec2018app.Xunbao.XunbaoActivity">
 
-
-    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/xunbao_nav_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#b3c3e2"
-        >
-    </android.support.v4.view.ViewPager>
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/xunbao_bottom_nav_menu"
+        android:background="#290101"
+        android:theme="@style/XunbaoTheme"
+        app:itemTextColor="@color/xunbao_nav_bar_selector"
+        app:itemIconTint="@color/xunbao_nav_bar_selector"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/xunbao_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/xunbao_nav_bar"/>
 
 </RelativeLayout>
