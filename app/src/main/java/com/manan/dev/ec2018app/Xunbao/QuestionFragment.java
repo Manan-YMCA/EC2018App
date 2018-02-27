@@ -6,18 +6,15 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -38,13 +34,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
-import static java.lang.Math.round;
 
 
 public class QuestionFragment extends Fragment {
@@ -94,9 +83,9 @@ public class QuestionFragment extends Fragment {
                 progressBar.show();
 
 
-        queURL = "https:good-people.herokuapp.com/getq/";
-        ansURL="https:good-people.herokuapp.com/checkans/";
-        statusURL="https:good-people.herokuapp.com/status/";
+        queURL = "https://good-people.herokuapp.com/getq/";
+        ansURL="https://good-people.herokuapp.com/checkans/";
+        statusURL="https://good-people.herokuapp.com/status/";
         queLayout=view.findViewById(R.id.question_layout);
         stage =view.findViewById(R.id.tv_question_number);
         question = view.findViewById(R.id.tv_question_text);
@@ -109,14 +98,12 @@ public class QuestionFragment extends Fragment {
              queue = Volley.newRequestQueue(getActivity());
 
 
-
-
         stat = new StringRequest(Request.Method.GET, statusURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         xstatus=Integer.parseInt(response);
-
+                        Log.d("hey",""+xstatus);
                         if(xstatus==2){
                             progressBar.dismiss();
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
@@ -141,6 +128,7 @@ public class QuestionFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("hey",""+error);
                 progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
                 refreshText.setVisibility(View.VISIBLE);
