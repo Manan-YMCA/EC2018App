@@ -23,7 +23,6 @@
         <activity
             android:name=".UserLoginActivity"
             android:theme="@style/CodeFont">
-
         </activity>
         <activity
             android:name=".SingleEventActivity"
@@ -72,7 +71,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".EventRegister" />
+        <activity android:name=".EventRegister">
+
+        </activity>
+        <activity android:name=".QRCode"></activity>
         <activity android:name=".QRCodeGenerator"></activity>
         <activity android:name=".SplashScreen"
             android:theme="@style/Splash">

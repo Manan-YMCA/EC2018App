@@ -35,16 +35,7 @@
         android:text="EventName"
         android:textColor="@color/White"
         android:textSize="30sp" />
-        <TextView
-            android:id="@+id/person_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:fontFamily="@font/futura"
-            android:layout_marginTop="30dp"
-            android:text="Person 1"
-            android:textColor="@color/White"
-            android:textSize="15sp" />
+
         <EditText
             android:id="@+id/event_reg_main_email"
             android:layout_width="match_parent"
@@ -54,7 +45,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="52dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/edit_text_background"
             android:fontFamily="@font/futura"
             android:hint="Email"
@@ -90,25 +81,36 @@
             android:textSize="15sp"
             android:maxLines="1"
             android:singleLine="true"/>
+        <TextView
+            android:id="@+id/person_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="@font/futura"
+            android:layout_marginTop="20dp"
+            android:text="Person 1"
+            android:textColor="@color/White"
+            android:visibility="gone"
+            android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/event_reg_main_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/futura"
-        android:hint="Name"
-        android:padding="8dp"
-        android:shadowColor="@color/White"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
-        android:textSize="15sp"
-        android:singleLine="true"/>
+        <EditText
+            android:id="@+id/event_reg_main_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="52dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="52dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/futura"
+            android:hint="Name"
+            android:padding="8dp"
+            android:shadowColor="@color/White"
+            android:textColor="@color/White"
+            android:textColorHint="@color/White"
+            android:textSize="15sp"
+            android:singleLine="true"/>
         <EditText
             android:id="@+id/event_reg_main_clg"
             android:layout_width="match_parent"
