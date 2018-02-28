@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/ticket_layout">
 
         <ImageView
             android:id="@+id/ticket_qr_iv"
