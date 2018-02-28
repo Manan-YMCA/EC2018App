@@ -2,12 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment">
+    tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment"
+    android:background="@drawable/xunbao_back">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="About"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="140dp"
+        android:layout_marginStart="70dp"
+        android:background="@drawable/xunbao_about"/>
+
 
 </RelativeLayout>

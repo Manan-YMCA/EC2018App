@@ -5,7 +5,10 @@ package com.manan.dev.ec2018app.Xunbao;
  */
 
 public class LeaderboardList {
-    public String name1, rank, level;
+    private String name1, rank, level;
+
+    public LeaderboardList() {
+    }
 
     public LeaderboardList(String name1, String rank, String level) {
         this.name1 = name1;

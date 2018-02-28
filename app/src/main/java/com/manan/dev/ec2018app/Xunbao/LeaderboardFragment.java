@@ -39,9 +39,6 @@ public class LeaderboardFragment extends Fragment {
     static LeaderboardAdapter leaderboardAdapter;
     static RecyclerView recyclerView;
     static Context c;
-    static ProgressDialog progressBar;
-    static TextView refreshText;
-    static ImageView refreshButton;
     static RequestQueue queue;
     static StringRequest stringRequest;
     public LeaderboardFragment() {
@@ -54,22 +51,8 @@ public class LeaderboardFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         c=getActivity();
-        progressBar = new ProgressDialog(getActivity());
-        progressBar.setMessage("(Not you)");
-        progressBar.setTitle("Checking");
-        progressBar.setCanceledOnTouchOutside(false);
+        setData();
 
-        refreshButton=view.findViewById(R.id.refresh_button);
-        refreshText=view.findViewById(R.id.refresh_text);
-
-        refreshButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        reload();
-                    }
-                }
-        );
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -84,7 +67,6 @@ public class LeaderboardFragment extends Fragment {
 
     public void setData(){
 
-        progressBar.show();
         queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.xunbao_leaderboard_api);
         url="https://good-people.herokuapp.com/leaderboard_api";
@@ -110,22 +92,18 @@ public class LeaderboardFragment extends Fragment {
                             leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
                             recyclerView.setAdapter(leaderboardAdapter);
 
-                        progressBar.hide();
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                progressBar.dismiss();
                 List<LeaderboardList> leaderboardList=new ArrayList<>();
 
                 Toast.makeText(c, "Problem Loading!", Toast.LENGTH_SHORT).show();
 
                     leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
                     recyclerView.setAdapter(leaderboardAdapter);
-                    refreshButton.setVisibility(View.VISIBLE);
-                    refreshText.setVisibility(View.VISIBLE);
             }
         });
         queue.add(stringRequest);
@@ -133,10 +111,7 @@ public class LeaderboardFragment extends Fragment {
     }
 
     public void reload(){
-        progressBar.show();
         recyclerView.setVisibility(View.GONE);
-        refreshText.setVisibility(View.GONE);
-        refreshButton.setVisibility(View.GONE);
         queue.add(stringRequest);
     }
 

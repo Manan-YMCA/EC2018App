@@ -6,17 +6,15 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -38,25 +35,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
-import static java.lang.Math.round;
-
 
 public class QuestionFragment extends Fragment {
     TextView question,contestEnd,refreshText,stage;
     ImageView xunbaoimg,refreshButton;
-    Button submit;
+    LinearLayout submit;
     EditText ans;
     String queURL,ansURL,statusURL;
     StringRequest stat;
     JsonArrayRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
-    ImageView rect;
     ProgressDialog progressBar;
     int xstatus=2;
 
@@ -66,63 +55,47 @@ public class QuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
 
-
-
-        rect=view.findViewById(R.id.rect);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Login Required!");
         builder.setMessage("To continue, you must login with facebook");
-
-        // add the buttons
         builder.setPositiveButton("Continue", new Dialog.OnClickListener(){
-
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().finish();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-            }
+             @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                                                getActivity().finish();
+                                                startActivity(new Intent(getActivity(), LoginActivity.class));
+                                            }
         });
-        builder.setNegativeButton("Cancel", new Dialog.OnClickListener(){
+                builder.setNegativeButton("Cancel", new Dialog.OnClickListener(){
 
-            @Override
+                    @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().finish();
-            }
+                                getActivity().finish();
+                            }
         });
 
-        final AlertDialog dialog = builder.create();
+                        final AlertDialog dialog = builder.create();
 
 
-        progressBar = new ProgressDialog(getActivity());
-        progressBar.setMessage("(Not you)");
-        progressBar.setTitle("Checking");
-        progressBar.setCancelable(false);
-        progressBar.show();
+                                progressBar = new ProgressDialog(getActivity());
+                progressBar.setMessage("(Not you)");
+                progressBar.setTitle("Checking");
+                progressBar.setCancelable(false);
+                progressBar.show();
+
 
         queURL = "https://good-people.herokuapp.com/getq/";
         ansURL="https://good-people.herokuapp.com/checkans/";
         statusURL="https://good-people.herokuapp.com/status/";
-
         queLayout=view.findViewById(R.id.question_layout);
-
-        stage =view.findViewById(R.id.stage);
-        question = view.findViewById(R.id.question);
-        xunbaoimg=view.findViewById(R.id.xunbaoimg);
-        ans=view.findViewById(R.id.answer);
-        submit=view.findViewById(R.id.submit);
-        contestEnd=view.findViewById(R.id.contest_ends);
-        refreshButton=view.findViewById(R.id.refresh_button);
-        refreshText=view.findViewById(R.id.refresh_text);
-
-
-
-        queue = Volley.newRequestQueue(getActivity());
-
-
-
-
-
-
+        stage =view.findViewById(R.id.tv_question_number);
+        question = view.findViewById(R.id.tv_question_text);
+        xunbaoimg=view.findViewById(R.id.iv_xunbao_question_image);
+                ans=view.findViewById(R.id.et_xunbao_answer);
+                submit=view.findViewById(R.id.ll_submit);
+                contestEnd=view.findViewById(R.id.contest_ends);
+                refreshButton=view.findViewById(R.id.refresh_button);
+                refreshText=view.findViewById(R.id.refresh_text);
+             queue = Volley.newRequestQueue(getActivity());
 
 
         stat = new StringRequest(Request.Method.GET, statusURL,
@@ -130,7 +103,7 @@ public class QuestionFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         xstatus=Integer.parseInt(response);
-
+                        Log.d("hey",""+xstatus);
                         if(xstatus==2){
                             progressBar.dismiss();
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
@@ -155,6 +128,7 @@ public class QuestionFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("hey",""+error);
                 progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
                 refreshText.setVisibility(View.VISIBLE);
@@ -167,7 +141,7 @@ public class QuestionFragment extends Fragment {
         JSONArray jsonArray =new JSONArray();
         JSONObject params =new JSONObject();
         try {
-            params.put("email", "gda");
+            params.put("email", "gla");
             params.put("skey", "abbv");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -196,10 +170,7 @@ public class QuestionFragment extends Fragment {
                                 stage.setText("STAGE - "+Integer.toString(level));
                                 float density = getResources().getDisplayMetrics().density;
                                 float size=(question.getMeasuredHeight()+stage.getMeasuredHeight())/density+50;
-                                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rect.getLayoutParams();
-                                params.height = round(size);
-                                rect.setLayoutParams(params);
-                                Picasso.with(getActivity()).load("https://good-people.herokuapp.com"+imgUrl).into(xunbaoimg);
+                                Picasso.with(getActivity()).load("https:good-people.herokuapp.com"+imgUrl).into(xunbaoimg);
                                 progressBar.dismiss();
                             }
                         } catch (JSONException e) {
@@ -240,7 +211,7 @@ public class QuestionFragment extends Fragment {
                 JSONObject answer=new JSONObject();
 
                 try {
-                    answer.put("email","gKa");
+                    answer.put("email","gla");
                     answer.put("skey","abbv");
                     answer.put("ans",ans.getText());
 
