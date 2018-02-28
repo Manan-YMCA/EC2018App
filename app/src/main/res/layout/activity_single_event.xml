@@ -10,12 +10,7 @@
         android:layout_height="wrap_content"
         tools:context="com.manan.dev.ec2018app.SingleEventActivity">
 
-        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-            android:id="@+id/progress_bar_google_now"
-            style="@style/GNowProgressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="true" />
+
 
         <TextView
             android:id="@+id/tv_event_name"
@@ -89,18 +84,42 @@
                 android:textSize="15sp"
                 android:textStyle="italic" />
 
-            <TextView
-                android:id="@+id/tv_event_time"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv_event_date"
                 android:layout_alignStart="@id/tv_event_date"
-                android:layout_below="@id/tv_event_date"
-                android:fontFamily="@font/futura"
-                android:text="10:00 to 16:30"
-                android:textColor="#333"
-                android:textSize="13sp"
-                android:textStyle="normal" />
+                android:layout_below="@id/tv_event_date">
+
+                <TextView
+                    android:id="@+id/tv_event_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/futura"
+                    android:text="10:00"
+                    android:textColor="#333"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/futura"
+                    android:textColor="#333"
+                    android:text=" To "
+                    android:textStyle="normal"/>
+
+                <TextView
+                    android:id="@+id/tv_event_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/futura"
+                    android:text="16:00"
+                    android:textColor="#333"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -132,21 +151,12 @@
                 android:fontFamily="@font/futura"
                 android:text="Lal Chowk"
                 android:textColor="#111"
+                android:padding="5dp"
                 android:textSize="15sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:layout_alignBaseline="@id/iv_vector_location"/>
 
-            <TextView
-                android:id="@+id/tv_event_location_full"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/iv_vector_location"
-                android:layout_alignStart="@id/tv_event_location"
-                android:layout_below="@id/tv_event_location"
-                android:fontFamily="@font/futura"
-                android:text="Lal Chowk, YMCA UST, Sector-6, Faridabad"
-                android:textColor="#333"
-                android:textSize="13sp"
-                android:textStyle="normal" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -214,9 +224,9 @@
                     android:layout_toRightOf="@+id/iv_money"
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
-                    android:textSize="15sp"
                     android:text="Fees : Rs. 10"
                     android:textColor="#111"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
             </LinearLayout>
 
@@ -321,12 +331,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_coords_heading"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DUMMY DATA!"/>
 
 
 
@@ -463,11 +469,19 @@
 
         </RelativeLayout>
 
+        <View
+            android:id="@+id/line7"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/rl_description"
+            android:layout_margin="10dp"
+            android:background="#222" />
+
         <RelativeLayout
             android:id="@+id/rl_rules"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_description"
+            android:layout_below="@+id/line7"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -509,13 +523,6 @@
 
         </RelativeLayout>
 
-        <View
-            android:id="@+id/line7"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/rl_rules"
-            android:layout_margin="10dp"
-            android:background="#222" />
 
     </RelativeLayout>
 </ScrollView>
