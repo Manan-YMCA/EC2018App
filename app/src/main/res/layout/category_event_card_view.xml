@@ -1,37 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="340dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp"
-    app:cardBackgroundColor="@color/baseLight"
-    app:cardElevation="4dp"
+    android:background="@drawable/edit_text_white"
     android:layout_marginTop="8dp"
     android:id="@+id/cv_event_card">
 
         <LinearLayout
             android:id="@+id/ll_single_event_all_details"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
+
+
 
             <TextView
                 android:id="@+id/tv_cv_event_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CODE GOLF"
-                android:textSize="20sp"
-                android:textColor="@color/baseDark"/>
+                android:textSize="22sp"
+                android:fontFamily="@font/futura"
+                android:textColor="@color/Black"/>
 
-            <View
+
+
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/White"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                />
+                android:layout_height="wrap_content"
+                android:text="@string/content_head"
+                android:fontFamily="@font/futura"
+android:paddingLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/Black"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/Black"
+                    android:src="@drawable/vector_developers"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="Single-Event"
+                    android:fontFamily="@font/futura"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,8 +67,9 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="0.25"
+                 android:backgroundTint="@color/baseDark"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/vector_event"/>
+                    android:src="@drawable/vector_menu"/>
 
                 <TextView
                     android:id="@+id/tv_cv_event_date"
@@ -53,13 +79,15 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="March 22"
+                    android:fontFamily="@font/futura"
                     android:layout_marginLeft="12dp"
-                    android:textColor="@color/White"
+                    android:textColor="@color/Black"
                     android:maxLines="1"/>
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="0.25"
+                    android:backgroundTint="@color/baseDark"
                     android:layout_height="wrap_content"
                     android:src="@drawable/vector_time"/>
 
@@ -67,11 +95,13 @@
                     android:id="@+id/tv_cv_event_time"
                     android:layout_marginTop="2dp"
                     android:layout_weight="1"
+
                     android:textAlignment="center"
                     android:layout_width="0dp"
-                    android:textColor="@color/White"
+                    android:textColor="@color/Black"
                     android:layout_height="wrap_content"
                     android:text="2pm"
+                    android:fontFamily="@font/futura"
                     android:layout_marginLeft="12dp"/>
             </LinearLayout>
 
@@ -83,6 +113,7 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="0.25"
+                    android:backgroundTint="@color/baseDark"
                     android:layout_height="wrap_content"
                     android:src="@drawable/vector_money_inr"/>
 
@@ -93,8 +124,9 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="50"
-                    android:textColor="@color/White"
+                    android:textColor="@color/Black"
                     android:textAlignment="center"
+                    android:fontFamily="@font/futura"
                     android:layout_marginLeft="12dp"/>
 
                 <ImageView
@@ -109,15 +141,30 @@
                     android:layout_marginTop="2dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/baseDark"
+                    android:fontFamily="@font/futura"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:text="Computer Labs"
-                    android:textColor="@color/White"
+                    android:textColor="@color/Black"
                     android:layout_marginLeft="12dp"
                     android:maxLines="1"/>
             </LinearLayout>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/iv_button_viewmore"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:backgroundTint="@color/baseDark"
+                android:text="View More"
+                android:fontFamily="@font/futura"
+                android:textColor="@color/White"/>
+
+
         </LinearLayout>
 
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>

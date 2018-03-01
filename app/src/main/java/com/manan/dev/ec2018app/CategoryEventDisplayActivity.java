@@ -8,17 +8,20 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.EventDetails;
+
 import java.util.ArrayList;
 
 public class CategoryEventDisplayActivity extends AppCompatActivity {
@@ -47,9 +50,12 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 
         clubImage = (ImageView) findViewById(R.id.iv_category_image);
         clubDisplayName = (TextView) findViewById(R.id.tv_category_name_heading);
-
-        clubDisplayName.setText(displayName);
-
+if(clubName.equals("Jhalak")) {
+    clubDisplayName.setText("Photography");
+}
+else {
+    clubDisplayName.setText(displayName);
+}
         Drawable drawable = new BitmapDrawable(this.getResources(), clubphoto);
         clubImage.setImageDrawable(drawable);
 
@@ -86,7 +92,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
             holder.time.setText(String.valueOf(eventDetails.getmStartTime()));
             holder.fees.setText(String.valueOf(eventDetails.getmFees()));
             holder.venue.setText(eventDetails.getmVenue());
-            holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            holder.viewmore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(CategoryEventDisplayActivity.this, SingleEventActivity.class)
@@ -103,7 +109,8 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView photo;
             public TextView name, date, time, fees, venue;
-            public CardView mCardView;
+            public RelativeLayout mCardView;
+            public Button viewmore;
 
             public MyViewHolder(View itemLayoutView) {
                 super(itemLayoutView);
@@ -112,7 +119,8 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
                 time = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_time);
                 fees = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_fees);
                 venue = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_venue);
-                mCardView = (CardView) itemLayoutView.findViewById(R.id.cv_event_card);
+                viewmore = (Button)itemLayoutView.findViewById(R.id.iv_button_viewmore);
+                mCardView = (RelativeLayout) itemLayoutView.findViewById(R.id.cv_event_card);
             }
         }
 

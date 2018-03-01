@@ -145,7 +145,6 @@
 
         android:layout_marginTop="20dp"
 
-        android:background="@drawable/edit_text_white"
         android:layout_height="wrap_content">
 
         <ImageView

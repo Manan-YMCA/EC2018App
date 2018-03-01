@@ -23,6 +23,7 @@ public class EventRegister extends AppCompatActivity {
     EditText name,mainPhone,mainName;
     EditText college,mainmail,mainClg;
     TextView personNo;
+    ArrayList<TextView> memberno;
     ArrayList<Integer> indexer;
     ArrayList<EditText> nameText, collegeText;
     String intentMail= "";
@@ -42,6 +43,7 @@ public class EventRegister extends AppCompatActivity {
         Button Add=(Button)findViewById(R.id.add_mem_button);
         personNo=(TextView)findViewById(R.id.current_team_mem);
         layPar=personNo.getLayoutParams();
+        memberno =new ArrayList<>();
         nameText = new ArrayList<>();
         collegeText = new ArrayList<>();
         final LinearLayout layout=findViewById(R.id.layout_infater);
@@ -56,17 +58,22 @@ public class EventRegister extends AppCompatActivity {
                 name = (EditText) v.findViewById(R.id.inflate_reg_name);
                 college  = (EditText) v.findViewById(R.id.inflate_reg_clg);
                 ImageView remove = (ImageView) v.findViewById(R.id.bt_remove);
-
+                 final TextView tv_1= (TextView) v.findViewById(R.id.member_no);
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ViewGroup p1 = (ViewGroup) v.getParent();
                         ViewGroup p2 = (ViewGroup) p1.getParent();
                         ViewGroup p3 = (ViewGroup) p2.getParent();
-                        p2.removeView(p1);
+                      memberno.remove(tv_1);
+                        update();
+                        p3.removeView(p2);
+                        count--;
                     }
                 });
                 count++;
+                tv_1.setText("Member :"+count);
+                memberno.add(tv_1);
                 nameText.add(name);
                 collegeText.add(college);
 
@@ -104,6 +111,16 @@ public class EventRegister extends AppCompatActivity {
             }
         });
     }
+
+    private void update() {
+        for (int i=0; i<memberno.size();i++)
+        {
+            memberno.get(i).setText("Member :"+(i+2));
+        }
+
+
+    }
+
     private TextView createNewTextView(int count) {
         text=new TextView(this);
         text.setText("Person "+ count);

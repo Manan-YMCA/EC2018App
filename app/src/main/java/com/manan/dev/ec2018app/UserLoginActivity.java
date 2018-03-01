@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import com.victor.loading.newton.NewtonCradleLoading;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class UserLoginActivity extends AppCompatActivity {
     TextView ECText, ContinueText, GuestText, ReadyText;
     Button LoginButton;
@@ -37,6 +40,7 @@ public class UserLoginActivity extends AppCompatActivity {
     private int[] layouts;
     private TextView[] dots;
     private MyViewPagerAdapter myViewPagerAdapter;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 R.layout.start_slide,
                 R.layout.start_slide2,
                 R.layout.start_slide3,
-                };
+        };
         addBottomDots(0);
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -83,7 +87,7 @@ public class UserLoginActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
             finish();
         } else if (getIntent().getBooleanExtra("logout", false)) {
-           // postAnimation();
+            // postAnimation();
         } else {
 
         }
@@ -102,7 +106,53 @@ public class UserLoginActivity extends AppCompatActivity {
             }
         });
 
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                int current=getItem(+1);
+                if (current == layouts.length) {
+                    current = 0;
+                }
+                viewPager.setCurrentItem(current++, true);
+            }
+        };
+
+        timer = new Timer(); // This will create a new Thread
+        timer .schedule(new TimerTask() { // task to be scheduled
+
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 5000, 5000);
+
+
+
     }
+
+
+void changeslide()
+{
+    new Handler().postDelayed(new Runnable() {
+
+
+        @Override
+        public void run() {
+            int current = getItem(+1);
+
+            if (current < layouts.length)
+
+            {
+                // move to next screen
+                viewPager.setCurrentItem(current);
+            }
+            if (current == layouts.length) {
+                current = getItem(+1);
+            }
+
+        }
+    }, 5000);
+}
 
 //    private void postAnimation() {
 //
