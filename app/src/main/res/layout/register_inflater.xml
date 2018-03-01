@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#000000">
+    android:background="@drawable/edit_text_white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/per_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="27dp"
+            android:src="@drawable/vector_person"
+            android:tint="@color/baseLight" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Member: "
+            android:layout_marginTop="20dp"
+            android:id="@+id/member_no"
+            android:layout_toRightOf="@id/per_img"
+            android:fontFamily="@font/futura"/>
+        <ImageView
+            android:id="@+id/bt_remove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+         android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/vector_remove"
+            android:tint="@color/baseLight" />
+
     <EditText
         android:id="@+id/inflate_reg_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edit_text_background"
+android:layout_toRightOf="@id/per_img"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/member_no"
+        android:background="@drawable/edit_text_white"
         android:fontFamily="@font/futura"
         android:hint="Name"
-        android:padding="8dp"
-        android:shadowColor="@color/White"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
+        android:padding="18dp"
+android:layout_marginRight="20dp"
+        android:textColor="@color/Black"
+        android:textColorHint="@color/Black"
         android:textSize="15sp"
         android:singleLine="true"/>
 
@@ -27,24 +59,23 @@
         android:id="@+id/inflate_reg_clg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/per_img"
         android:layout_below="@id/inflate_reg_name"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/edit_text_background"
+       android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_white"
         android:fontFamily="@font/futura"
         android:hint="College"
-        android:padding="8dp"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
+        android:padding="18dp"
+        android:textColor="@color/Black"
+        android:textColorHint="@color/Black"
         android:textSize="15sp"
         android:maxLines="1"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="20dp"
         android:singleLine="true"/>
 
 
 
-
+</RelativeLayout>
 
 </LinearLayout>

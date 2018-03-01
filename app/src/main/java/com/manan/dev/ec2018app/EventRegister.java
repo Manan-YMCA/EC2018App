@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,21 +33,21 @@ public class EventRegister extends AppCompatActivity {
     TextView text;
     ViewGroup.LayoutParams layPar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_register);
 
-        Button Add=(Button)findViewById(R.id.add_member);
-        personNo=(TextView)findViewById(R.id.person_no);
+        Button Add=(Button)findViewById(R.id.add_mem_button);
+        personNo=(TextView)findViewById(R.id.current_team_mem);
         layPar=personNo.getLayoutParams();
         nameText = new ArrayList<>();
         collegeText = new ArrayList<>();
-        final LinearLayout layout=findViewById(R.id.inflate_layout);
+        final LinearLayout layout=findViewById(R.id.layout_infater);
         text=new TextView(this);
 
-
-        Add.setOnClickListener(new View.OnClickListener() {
+    Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -53,6 +55,17 @@ public class EventRegister extends AppCompatActivity {
                 final View v=Inflat.from(EventRegister.this).inflate(R.layout.register_inflater,layout,false);
                 name = (EditText) v.findViewById(R.id.inflate_reg_name);
                 college  = (EditText) v.findViewById(R.id.inflate_reg_clg);
+                ImageView remove = (ImageView) v.findViewById(R.id.bt_remove);
+
+                remove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ViewGroup p1 = (ViewGroup) v.getParent();
+                        ViewGroup p2 = (ViewGroup) p1.getParent();
+                        ViewGroup p3 = (ViewGroup) p2.getParent();
+                        p2.removeView(p1);
+                    }
+                });
                 count++;
                 nameText.add(name);
                 collegeText.add(college);
@@ -64,17 +77,21 @@ public class EventRegister extends AppCompatActivity {
 
 
         });
-        Button bt = (Button) findViewById(R.id.bt_reg_event);
+
+
+
+
+        Button bt = (Button) findViewById(R.id.register_button);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainName=(EditText)findViewById(R.id.event_reg_main_name);
+                mainName=(EditText)findViewById(R.id.ld_reg_name);
                 intentName+=mainName.getText().toString()+",";
-                mainClg=(EditText)findViewById(R.id.event_reg_main_clg);
+                mainClg=(EditText)findViewById(R.id.ld_reg_clg);
                 intentClg+=mainClg.getText().toString()+",";
-                mainPhone=(EditText)findViewById(R.id.event_reg_main_mob);
+                mainPhone=(EditText)findViewById(R.id.ld_mobile);
                 intentPhone+=mainPhone.getText().toString()+",";
-                mainmail=(EditText)findViewById(R.id.event_reg_main_email);
+                mainmail=(EditText)findViewById(R.id.ld_email);
                 intentMail+=mainmail.getText().toString()+",";
                 for(int i = 0; i < nameText.size(); i++){
                     intentName += nameText.get(i).getText().toString()+",";

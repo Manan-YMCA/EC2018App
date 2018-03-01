@@ -71,7 +71,7 @@
         android:fontFamily="@font/futura"
         android:hint="Phone Number"
         android:padding="16dp"
-        android:shadowColor="@color/White"
+        android:shadowColor="@color/baseDark"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
         android:textSize="15sp"
