@@ -20,6 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +35,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
@@ -59,11 +65,14 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private DatabaseController mDatabaseController;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         allEvents = new ArrayList<>();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,9 +81,19 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+
+
         nav_view = (NavigationView) findViewById(R.id.nav_view);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
+
+        if (phoneNumber == null) {
+            Menu menu = nav_view.getMenu();
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_tickets).setVisible(false);
+        }
         try {
             mDatabaseController = new DatabaseController(getApplicationContext());
         } catch (Exception e) {
@@ -361,8 +380,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(GravityCompat.START, true);
         } else {
-            SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-            final String phoneNumber = prefs.getString("Phone", null);
             if (phoneNumber != null) {
                 startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
                         .putExtra("closeApp", true)
@@ -425,7 +442,20 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
-                AccessToken.setCurrentAccessToken(null);
+                if (AccessToken.getCurrentAccessToken() != null) {
+
+
+                    new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                            .Callback() {
+                        @Override
+                        public void onCompleted(GraphResponse graphResponse) {
+
+                            LoginManager.getInstance().logOut();
+                            Toast.makeText(getApplicationContext(), "fb logout ho gya", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }).executeAsync();
+                }
                 startActivity(new Intent(getApplicationContext(), UserLoginActivity.class)
                         .putExtra("logout", true)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -463,12 +493,14 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
     private void shareTextMessage(String msg) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
         i.putExtra(Intent.EXTRA_TEXT, msg);
         startActivity(i);
     }
+
     private void sendEmailBug(String to, String subject, String msg) {
 
         Uri uri = Uri.parse("mailto:")
@@ -479,6 +511,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
-        startActivity(Intent.createChooser(emailIntent, "Choose an Email client :")); }
+        startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
+    }
 
 }

@@ -52,7 +52,7 @@ public class EventRegister extends AppCompatActivity {
     Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                personNo.setVisibility(View.VISIBLE);
                 LayoutInflater Inflat=getLayoutInflater();
                 final View v=Inflat.from(EventRegister.this).inflate(R.layout.register_inflater,layout,false);
                 name = (EditText) v.findViewById(R.id.inflate_reg_name);

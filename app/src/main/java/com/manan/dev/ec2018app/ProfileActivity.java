@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.manan.dev.ec2018app.Models.UserDetails;
@@ -75,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
                 userDetails.setmFbId(loginResult.getAccessToken().getUserId());
                 registerUser(userDetails);
                 loginButton.setVisibility(View.GONE);
+                Log.d("hogya", "hogya");
             }
 
             @Override
@@ -84,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(ProfileActivity.this, "Fb login error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         mProgress = new ProgressDialog(this);
@@ -210,8 +212,9 @@ public class ProfileActivity extends AppCompatActivity {
                             userDetails.setEmail(obj.getString("email"));
                             userDetails.setmCollege(obj.getString("college"));
                             userDetails.setmPhone(phone);
-                            if (obj.getString("fb") != null) {
+                            if (!obj.getString("fb").equals("null")) {
                                 userDetails.setmFbId(obj.getString("fb"));
+                                loginButton.setVisibility(View.GONE);
                                 addPhoto(userDetails);
                             } else {
                                 userDetails.setmFbId(null);
@@ -291,5 +294,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
