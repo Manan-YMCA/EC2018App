@@ -73,7 +73,6 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".EventRegister"></activity>
-        <activity android:name=".QRCodeGenerator" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Splash">

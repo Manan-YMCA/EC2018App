@@ -1,74 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="#8caed4">
+
+    <ImageView
+        android:id="@+id/fblogin"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/facebook_icon" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_rectangle_fbdialogbox"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="5dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/facebook_icon"
-            android:id="@+id/fblogin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/White"
-            android:fontFamily="@font/futura"
-            android:text="Integrate With Facebook "
-            android:textSize="22sp"
-            android:layout_below="@id/fblogin"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tv1"/>
-        <TextView
+        android:layout_below="@id/fblogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/futura"
+        android:text="Integrate With Facebook "
+        android:textColor="@color/White"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv1"
-        android:id="@+id/tv2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:textColor="@color/White"
         android:fontFamily="@font/futura"
-        android:textSize="15sp"
-        android:text="Get your photo featured with"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv2"
-            android:id="@+id/tv3"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/White"
-            android:fontFamily="@font/futura"
-            android:textSize="15sp"
-            android:text="Element Culmyca photo frame"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv3"
-            android:id="@+id/tv4"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/White"
-            android:fontFamily="@font/futura"
-            android:textSize="15sp"
-            android:text="Share with your friends and much more!"/>
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_marginLeft="80dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv4"
-            android:layout_marginTop="25dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            />
-    </RelativeLayout>
+        android:text="Get your photo featured with"
+        android:textColor="@color/White"
+        android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv2"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/futura"
+        android:text="Element Culmyca photo frame"
+        android:textColor="@color/White"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv3"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/futura"
+        android:text="Share with your friends and much more!"
+        android:textColor="@color/White"
+        android:textSize="15sp" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="25dp"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_skip_fb_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_button"
+        android:layout_marginBottom="8dp"
+        android:text="@string/skip"
+        android:textAlignment="center"
+        android:textColor="@color/White"
+        android:textSize="15sp" />
 </RelativeLayout>

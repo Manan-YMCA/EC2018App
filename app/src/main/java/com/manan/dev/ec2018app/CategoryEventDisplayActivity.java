@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +23,10 @@ import android.widget.Toast;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.EventDetails;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class CategoryEventDisplayActivity extends AppCompatActivity {
 
@@ -46,16 +50,15 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         byte[] byteArray = getIntent().getByteArrayExtra("clubPhoto");
         Bitmap clubphoto = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
-        String displayName= getIntent().getStringExtra("clubdisplay");
+        String displayName = getIntent().getStringExtra("clubdisplay");
 
         clubImage = (ImageView) findViewById(R.id.iv_category_image);
         clubDisplayName = (TextView) findViewById(R.id.tv_category_name_heading);
-if(clubName.equals("Jhalak")) {
-    clubDisplayName.setText("Photography");
-}
-else {
-    clubDisplayName.setText(displayName);
-}
+        if (clubName.equals("Jhalak")) {
+            clubDisplayName.setText("Photography");
+        } else {
+            clubDisplayName.setText(displayName);
+        }
         Drawable drawable = new BitmapDrawable(this.getResources(), clubphoto);
         clubImage.setImageDrawable(drawable);
 
@@ -87,10 +90,25 @@ else {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             final EventDetails eventDetails = eventList.get(position);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(eventDetails.getmStartTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+            String formattedDate = sdf.format(cal.getTime());
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
+            String formattedTime = sdf1.format(cal.getTime());
+
+
             holder.name.setText(eventDetails.getmName());
-            holder.date.setText(eventDetails.getmName());
-            holder.time.setText(String.valueOf(eventDetails.getmStartTime()));
-            holder.fees.setText(String.valueOf(eventDetails.getmFees()));
+            holder.date.setText(formattedDate);
+            holder.time.setText(formattedTime);
+            holder.eventType.setText(eventDetails.getmEventTeamSize());
+
+            if (eventDetails.getmFees() == 0) {
+                holder.fees.setText("NA");
+            } else
+                holder.fees.setText(String.valueOf(eventDetails.getmFees()));
             holder.venue.setText(eventDetails.getmVenue());
             holder.viewmore.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -108,19 +126,20 @@ else {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView photo;
-            public TextView name, date, time, fees, venue;
-            public RelativeLayout mCardView;
+            public TextView name, date, time, fees, venue, eventType;
+            public CardView mCardView;
             public Button viewmore;
 
             public MyViewHolder(View itemLayoutView) {
                 super(itemLayoutView);
-                name = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_name);
-                date = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_date);
-                time = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_time);
-                fees = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_fees);
-                venue = (TextView)itemLayoutView.findViewById(R.id.tv_cv_event_venue);
-                viewmore = (Button)itemLayoutView.findViewById(R.id.iv_button_viewmore);
-                mCardView = (RelativeLayout) itemLayoutView.findViewById(R.id.cv_event_card);
+                name = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_name);
+                date = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_date);
+                time = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_time);
+                fees = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_fees);
+                venue = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_venue);
+                viewmore = (Button) itemLayoutView.findViewById(R.id.iv_button_viewmore);
+                eventType = (TextView) itemLayoutView.findViewById(R.id.tv_event_type);
+                mCardView = (CardView) itemLayoutView.findViewById(R.id.cv_event_card);
             }
         }
 

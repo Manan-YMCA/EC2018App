@@ -5,9 +5,9 @@ package com.manan.dev.ec2018app.Models;
  */
 
 public class QRTicketModel {
-    int paymentStatus,arrivalStatus;
-    String QRcode,eventID;
-    Long timeStamp;
+    private int paymentStatus,arrivalStatus;
+    private String QRcode,eventID;
+    private Long timeStamp;
 
     public QRTicketModel() {
     }

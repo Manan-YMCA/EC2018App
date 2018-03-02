@@ -10,6 +10,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">564937600532605</string>
     <string name="fb_login_protocol_scheme">fb564937600532605</string>
-    <string name="content_head">Its Latin root literature/literature (derived itself from litter-a: letter or handwriting) was used to refer to all written accounts, </string>>
+    <string name="content_head">Its Latin root literature/literature (derived itself from litter-a: letter or handwriting) was used to refer to all written accounts, </string>
+    <string name="click_here_to_continue"><u>Click Here to Continue!!</u></string>
+    <string name="skip">SKIP!!</string>>
 
 </resources>

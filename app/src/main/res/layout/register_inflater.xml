@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
 
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,63 +19,78 @@
             android:layout_marginTop="27dp"
             android:src="@drawable/vector_person"
             android:tint="@color/baseLight" />
+
         <TextView
+            android:id="@+id/member_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Member: "
             android:layout_marginTop="20dp"
-            android:id="@+id/member_no"
+            android:layout_toEndOf="@id/per_img"
             android:layout_toRightOf="@id/per_img"
-            android:fontFamily="@font/futura"/>
+            android:fontFamily="@font/futura"
+            android:text="Member: " />
+
+        <TextView
+            android:id="@+id/member_no_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/member_no"
+            android:layout_toRightOf="@id/member_no"
+            android:fontFamily="@font/futura"
+            android:text="1" />
+
+
         <ImageView
             android:id="@+id/bt_remove"
             android:layout_width="30dp"
             android:layout_height="30dp"
-         android:layout_alignParentRight="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/vector_remove"
             android:tint="@color/baseLight" />
 
-    <EditText
-        android:id="@+id/inflate_reg_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-android:layout_toRightOf="@id/per_img"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/member_no"
-        android:background="@drawable/edit_text_white"
-        android:fontFamily="@font/futura"
-        android:hint="Name"
-        android:padding="18dp"
-android:layout_marginRight="20dp"
-        android:textColor="@color/Black"
-        android:textColorHint="@color/Black"
-        android:textSize="15sp"
-        android:singleLine="true"/>
+        <EditText
+            android:id="@+id/inflate_reg_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/member_no"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/per_img"
+            android:background="@drawable/edit_text_white"
+            android:fontFamily="@font/futura"
+            android:hint="Name"
+            android:padding="18dp"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/Black"
+            android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/inflate_reg_clg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/per_img"
-        android:layout_below="@id/inflate_reg_name"
-       android:layout_marginTop="10dp"
-        android:background="@drawable/edit_text_white"
-        android:fontFamily="@font/futura"
-        android:hint="College"
-        android:padding="18dp"
-        android:textColor="@color/Black"
-        android:textColorHint="@color/Black"
-        android:textSize="15sp"
-        android:maxLines="1"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="20dp"
-        android:singleLine="true"/>
+        <EditText
+            android:id="@+id/inflate_reg_clg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inflate_reg_name"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/per_img"
+            android:background="@drawable/edit_text_white"
+            android:fontFamily="@font/futura"
+            android:hint="College"
+            android:maxLines="1"
+            android:padding="18dp"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/Black"
+            android:textSize="15sp" />
 
 
-
-</RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -8,37 +8,40 @@
     tools:context="com.manan.dev.ec2018app.CategoryEventDisplayActivity">
 
     <ImageView
+        android:id="@+id/ec_logo"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="8dp"
-        android:id="@+id/ec_logo"
-        android:src="@drawable/logo_black"/>
+        android:src="@drawable/logo_black" />
+
     <TextView
         android:id="@+id/tv_category_name_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="Photography"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/futura"
+        android:text="Photography"
         android:textAlignment="center"
-android:layout_marginTop="10dp"
-android:layout_marginRight="8dp"
         android:textAllCaps="true"
         android:textColor="#000"
         android:textSize="22sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="Category "
         android:layout_below="@id/tv_category_name_heading"
-        android:fontFamily="@font/futura"
-        android:textAlignment="center"
-
         android:layout_marginRight="8dp"
+        android:fontFamily="@font/futura"
+        android:text="Category "
+
+        android:textAlignment="center"
 
         android:textColor="#000"
         android:textSize="16sp" />
+
     <LinearLayout
         android:id="@+id/ll_event_category_photo_name"
         android:layout_width="match_parent"
@@ -52,51 +55,53 @@ android:layout_marginRight="8dp"
         <ImageView
             android:id="@+id/iv_category_image"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="150dp"
+            android:layout_weight="0.7"
             android:src="@drawable/jh"
-            android:tint="#333131"/>
+            android:tint="#333131" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/content_head"
-    android:paddingLeft="20dp"
-    android:fontFamily="@font/futura"
-    android:textSize="12sp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futura"
+                android:paddingLeft="20dp"
+                android:text="@string/content_head"
+                android:textSize="12sp" />
 
 
         </LinearLayout>
 
 
     </LinearLayout>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="1.5dp"
-    android:background="@color/Black"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_below="@id/ll_event_category_photo_name"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/ll_event_category_photo_name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/Black" />
+
     <LinearLayout
         android:id="@+id/ll_single_event_card"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_event_category_photo_name"
-        android:orientation="vertical"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_centerHorizontal="true">
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/events_list"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

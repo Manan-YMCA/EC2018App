@@ -77,12 +77,12 @@ public class SingleEventActivity extends AppCompatActivity {
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(eventDetails.getmStartTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM DD, YYYY", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
 
         String formattedDate = sdf.format(cal.getTime());
         eventDateTextView.setText(formattedDate);
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:MM", Locale.US);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
         Calendar endTimeMilis = Calendar.getInstance();
         endTimeMilis.setTimeInMillis(eventDetails.getmEndTime());
 
@@ -100,7 +100,7 @@ public class SingleEventActivity extends AppCompatActivity {
         if (fees == 0) {
             feesTextView.setText("NA");
         } else {
-            feesTextView.setText(Long.toString(fees));
+            feesTextView.setText(String.valueOf(fees));
         }
         typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
         if (eventDetails.getmEventTeamSize().equals("NA")) {
@@ -114,7 +114,7 @@ public class SingleEventActivity extends AppCompatActivity {
                 TextView coordPhoneView = (TextView) view.findViewById(R.id.tv_coords_phone_no);
 
                 coordNameView.setText(coord.getmCoordName());
-                coordPhoneView.setText(Long.toString(coord.getmCoordPhone()));
+                coordPhoneView.setText(String.valueOf(coord.getmCoordPhone()));
                 coordCount++;
                 coordsLinearLayout.addView(view);
             }
@@ -133,17 +133,17 @@ public class SingleEventActivity extends AppCompatActivity {
         line3.setVisibility(View.GONE);
 
         for (String prizes : eventDetails.getmPrizes()) {
-            if (!prizes.equals("null") && prizeCount == 0) {
+            if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 0) {
                 line3.setVisibility(View.VISIBLE);
                 firstPrizeTextView.setVisibility(View.VISIBLE);
                 firstPrizeTextView.setText(prizes);
                 prizesRelativeLayout.setVisibility(View.VISIBLE);
                 prizeCount++;
-            } else if (!prizes.equals("null") && prizeCount == 1) {
+            } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 1) {
                 secondPrizeTextView.setVisibility(View.VISIBLE);
                 secondPrizeTextView.setText(prizes);
                 prizeCount++;
-            } else if (!prizes.equals("null") && prizeCount == 2) {
+            } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 2) {
                 thirdPrizeTextView.setVisibility(View.VISIBLE);
                 thirdPrizeTextView.setText(prizes);
                 prizeCount++;
@@ -168,10 +168,10 @@ public class SingleEventActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SingleEventActivity.this, "Mujhe Event pe Register karna hai", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                         .putExtra("eventName", eventDetails.getmName())
-                        .putExtra("eventId", eventDetails.getmEventId()));
+                        .putExtra("eventId", eventDetails.getmEventId())
+                        .putExtra("eventType", eventDetails.getmEventTeamSize()));
             }
         });
     }

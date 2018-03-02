@@ -109,7 +109,7 @@ public class UserLoginActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                int current=getItem(+1);
+                int current = getItem(+1);
                 if (current == layouts.length) {
                     current = 0;
                 }
@@ -118,41 +118,39 @@ public class UserLoginActivity extends AppCompatActivity {
         };
 
         timer = new Timer(); // This will create a new Thread
-        timer .schedule(new TimerTask() { // task to be scheduled
+        timer.schedule(new TimerTask() { // task to be scheduled
 
             @Override
             public void run() {
                 handler.post(Update);
             }
-        }, 5000, 5000);
-
+        }, 2000, 2000);
 
 
     }
 
 
-void changeslide()
-{
-    new Handler().postDelayed(new Runnable() {
+    void changeslide() {
+        new Handler().postDelayed(new Runnable() {
 
 
-        @Override
-        public void run() {
-            int current = getItem(+1);
+            @Override
+            public void run() {
+                int current = getItem(+1);
 
-            if (current < layouts.length)
+                if (current < layouts.length)
 
-            {
-                // move to next screen
-                viewPager.setCurrentItem(current);
+                {
+                    // move to next screen
+                    viewPager.setCurrentItem(current);
+                }
+                if (current == layouts.length) {
+                    current = getItem(+1);
+                }
+
             }
-            if (current == layouts.length) {
-                current = getItem(+1);
-            }
-
-        }
-    }, 5000);
-}
+        }, 5000);
+    }
 
 //    private void postAnimation() {
 //
@@ -197,12 +195,13 @@ void changeslide()
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
     }
+
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
-            
+
         }
 
         @Override

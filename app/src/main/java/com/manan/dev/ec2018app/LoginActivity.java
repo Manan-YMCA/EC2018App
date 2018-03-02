@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app;
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
+import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
+import com.manan.dev.ec2018app.Fragments.FragmentOtpChecker;
 import com.manan.dev.ec2018app.Models.UserDetails;
 import com.manan.dev.ec2018app.Utilities.GifImageView;
 
@@ -33,7 +37,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
     EditText mobileNum;
   Button loginMobileNum;
     private UserDetails userDetails;
@@ -76,14 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void checkOTP(String mobileNum) {
-        boolean check = true;
-        if(isNetworkAvailable()) {
-            if (check) {
-                getDetails(userDetails, mobileNum);
-            }
-        } else {
-            Snackbar.make(RelativeView, "CONNECT TO A HOTSPOT", Snackbar.LENGTH_LONG).show();
-        }
+        FragmentManager fm = getFragmentManager();
+        FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+        otpChecker.show(fm, "otpCheckerFragment");
     }
 
     private void getDetails(final UserDetails userDetails, final String phone) {
@@ -101,10 +100,14 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
                                 editor.putString("Phone", userDetails.getmPhone());
                                 editor.apply();
-                                startActivity(new Intent(LoginActivity.this, ContentActivity.class)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                                finish();
+                                AccessToken token = AccessToken.getCurrentAccessToken();
+                                if(token != null){
+                                    startSession();
+                                } else {
+                                    FragmentManager fm = getFragmentManager();
+                                    FragmentFbLogin fbLogin = new FragmentFbLogin();
+                                    fbLogin.show(fm, "fbLoginFragment");
+                                }
                             }
                             else {
                                 Snackbar.make(RelativeView, "USER DOES NOT EXIST", Snackbar.LENGTH_LONG).show();
@@ -131,7 +134,34 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(obreq);
     }
 
+
+    @Override
+    public void updateResult(boolean status) {
+        if(status){
+            getDetails(userDetails, mobileNum.getText().toString());
+        }
+    }
+
+    @Override
+    public void fbStatus(Boolean status, String userId) {
+        if(status){
+            userDetails.setmFbId(userId);
+            getDetails(userDetails, mobileNum.getText().toString());
+        } else {
+            startSession();
+        }
+    }
+
+    private void startSession() {
+        startActivity(new Intent(LoginActivity.this, ContentActivity.class));
+        finish();
+    }
+
     private Boolean validateCredentials() {
+        if(!isNetworkAvailable()){
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (mobileNum.getText().toString().equals("")) {
             mobileNum.setError("Enter a Phone Number");
             return false;

@@ -72,7 +72,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         allEvents = new ArrayList<>();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -417,9 +416,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }
                 break;
             case R.id.nav_tickets:
-                //TODO
-                //if logged in show users tickets
-                //if guest user pass intent to reg activity
+                startActivity(new Intent(ContentActivity.this, Tickets.class));
                 break;
             case R.id.nav_xunbao:
                 //TODO
@@ -514,4 +511,19 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(nav_view != null){
+            nav_view.setCheckedItem(R.id.nav_home);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(nav_view != null){
+            nav_view.setCheckedItem(R.id.nav_home);
+        }
+    }
 }

@@ -28,27 +28,29 @@ import static android.graphics.Color.WHITE;
  */
 
 public class TicketsGenerator {
-    Context context;
-    public ImageView GenerateClick(View view,ImageView imageViewBitmap,String editText) {
+    private Context context;
+    private Bitmap userTicket;
+
+    public Bitmap GenerateClick(View view, ImageView imageViewBitmap, String qrCodeData, Context mContext) {
+        context = mContext;
         try {
             //setting size of qr code
-            int width = imageViewBitmap.getWidth();
-            int height = imageViewBitmap.getHeight();
+            int width = (int) mContext.getResources().getDimension(R.dimen.onefifty);
+            int height = (int) mContext.getResources().getDimension(R.dimen.onefifty);
             int smallestDimension = width < height ? width : height;
-            String qrCodeData = editText;
             //setting parameters for qr code
             String charset = "UTF-8";
             Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-            CreateQRCode(qrCodeData, charset, hintMap, smallestDimension, smallestDimension,imageViewBitmap);
+            userTicket =  CreateQRCode(qrCodeData, charset, hintMap, smallestDimension, smallestDimension);
 
         } catch (Exception ex) {
-            Log.e("QrGenerate", ex.getMessage());
+            Log.e("Tickets", ex.getMessage());
         }
-        return imageViewBitmap;
+        return userTicket;
     }
 
-    public void CreateQRCode(String qrCodeData, String charset, Map hintMap, int qrCodeheight, int qrCodewidth,ImageView imageViewBitmap) {
+    private Bitmap CreateQRCode(String qrCodeData, String charset, Map hintMap, int qrCodeheight, int qrCodewidth) {
 
 
         try {
@@ -74,17 +76,18 @@ public class TicketsGenerator {
             bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
             //setting bitmap to image view
 
-            Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_300);
-            Bitmap overlay = Bitmap.createScaledBitmap(b, 70, 70, false);
-            imageViewBitmap.setImageBitmap(mergeBitmaps(overlay, bitmap));
+            Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.qr_logo);
+            Bitmap overlay = Bitmap.createScaledBitmap(b, 80, 80, false);
+            return mergeBitmaps(overlay, bitmap);
 
         } catch (Exception er) {
-            Log.e("QrGenerate", er.getMessage());
+            Log.e("Tickets", er.getMessage());
+            return null;
         }
     }
 
 
-    public Bitmap mergeBitmaps(Bitmap overlay, Bitmap bitmap) {
+    private Bitmap mergeBitmaps(Bitmap overlay, Bitmap bitmap) {
 
         int height = bitmap.getHeight();
         int width = bitmap.getWidth();

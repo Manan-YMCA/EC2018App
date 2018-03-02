@@ -1,250 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manan.dev.ec2018app.EventRegister"
     android:background="@color/White"
-    >
-<ImageView
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:src="@drawable/logo_black"
-    android:layout_margin="8dp"
-    android:id="@+id/logo_left"/>
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Event Name"
-    android:textColor="@color/Black"
-    android:fontFamily="@font/futura"
-    android:layout_alignParentRight="true"
-   android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
+    tools:context="com.manan.dev.ec2018app.EventRegister">
 
-    android:id="@+id/tv_event_name"
-    android:textSize="22dp"/>
+    <ImageView
+        android:id="@+id/logo_left"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/logo_black" />
+
     <TextView
+        android:id="@+id/tv_event_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_event_name"
         android:layout_alignParentRight="true"
         android:layout_marginRight="8dp"
-        android:text="Registration"
-        android:fontFamily="@font/futura"/>
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/futura"
+        android:text="Event Name"
 
-   <View
-       android:layout_width="match_parent"
-       android:layout_margin="8dp"
-       android:layout_height="1.5dp"
-       android:background="@color/Black"
-       android:id="@+id/view_1"
-       android:layout_below="@id/logo_left"/>
-    <Button
-        android:layout_height="55dp"
+        android:textColor="@color/Black"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_event_name"
+        android:layout_marginRight="8dp"
+        android:fontFamily="@font/futura"
+        android:text="Registration" />
+
+    <View
+        android:id="@+id/view_1"
         android:layout_width="match_parent"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:text="REGISTER"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/logo_left"
+        android:layout_margin="8dp"
+        android:background="@color/Black" />
+
+    <Button
         android:id="@+id/register_button"
-        android:textColor="@color/White"
-        android:fontFamily="@font/futura"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/view_1"
+        android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
         android:background="@color/Black"
-        android:layout_below="@id/view_1"/>
+        android:fontFamily="@font/futura"
+        android:text="REGISTER"
+        android:textColor="@color/White" />
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:id="@+id/ll_curr_mem"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
-    android:layout_below="@id/register_button">
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_curr_mem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Team :"
-        android:fontFamily="@font/futura"
-        android:textColor="@color/Black"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2"
-        android:id="@+id/current_team_mem"
-        android:fontFamily="@font/futura"
-        android:textColor="@color/Black"/>
+        android:layout_below="@id/register_button"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura"
+            android:text="Your Team :"
+            android:textColor="@color/Black" />
+
+        <TextView
+            android:id="@+id/current_team_mem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura"
+            android:text="1"
+            android:textColor="@color/Black" />
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+
+        android:layout_below="@id/register_button"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_below="@id/register_button">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Max. Members: "
             android:fontFamily="@font/futura"
-            android:textColor="@color/Black"/>
+            android:text="Event Type: "
+            android:textColor="@color/Black" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
             android:id="@+id/max_team_mem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/futura"
-            android:textColor="@color/Black"/>
+            android:text="4"
+            android:textColor="@color/Black" />
 
     </LinearLayout>
+
     <Button
-        android:layout_height="40dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:text="ADD MEMBER"
         android:id="@+id/add_mem_button"
-        android:textColor="@color/White"
-        android:fontFamily="@font/futura"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/ll_curr_mem"
+        android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
         android:background="@color/baseDark"
-        android:layout_below="@id/ll_curr_mem"/>
+        android:fontFamily="@font/futura"
+        android:text="ADD MEMBER"
+        android:textColor="@color/White" />
 
     <TextView
+        android:id="@+id/fill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/add_mem_button"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
-        android:id="@+id/fill"
         android:fontFamily="@font/futura"
-        android:text="Fill up the details for each member"/>
+        android:text="Fill up the details for each member" />
 
-<ScrollView
-    android:layout_below="@id/fill"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/layout_infater">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fill">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-
-        android:layout_marginTop="20dp"
-
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/person_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="27dp"
-            android:src="@drawable/vector_person"
-            android:tint="@color/baseLight" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Member: 1"
-            android:layout_marginTop="20dp"
-            android:id="@+id/memberr_no"
-            android:layout_toRightOf="@id/person_img"
-            android:fontFamily="@font/futura"/>
-
-
-        <EditText
-            android:id="@+id/ld_reg_name"
+        <LinearLayout
+            android:id="@+id/layout_infater"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/person_img"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/memberr_no"
-            android:background="@drawable/edit_text_white"
-            android:fontFamily="@font/futura"
-            android:hint="Name"
-            android:padding="18dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/Black"
-            android:textColorHint="@color/Black"
-            android:textSize="15sp"
-            android:singleLine="true"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/ld_reg_clg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/person_img"
-            android:layout_below="@id/ld_reg_name"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_white"
-            android:fontFamily="@font/futura"
-            android:hint="College"
-            android:padding="18dp"
-            android:textColor="@color/Black"
-            android:textColorHint="@color/Black"
-            android:textSize="15sp"
-            android:maxLines="1"
+            <RelativeLayout
+                android:layout_width="match_parent"
 
-            android:layout_marginRight="20dp"
-            android:singleLine="true"/>
-        <EditText
-            android:id="@+id/ld_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/person_img"
-            android:layout_below="@id/ld_reg_clg"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_white"
-            android:fontFamily="@font/futura"
-            android:hint="Email"
-            android:padding="18dp"
-            android:textColor="@color/Black"
-            android:textColorHint="@color/Black"
-            android:textSize="15sp"
-            android:maxLines="1"
+                android:layout_height="wrap_content"
 
-            android:layout_marginRight="20dp"
-            android:singleLine="true"/>
-        <EditText
-            android:id="@+id/ld_mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/person_img"
-            android:layout_below="@id/ld_email"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_white"
-            android:fontFamily="@font/futura"
-            android:hint="Mobile"
-            android:padding="18dp"
-            android:textColor="@color/Black"
-            android:textColorHint="@color/Black"
-            android:textSize="15sp"
-            android:maxLines="1"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="20dp"
-            android:singleLine="true"/>
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/person_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="27dp"
+                    android:src="@drawable/vector_person"
+                    android:tint="@color/baseLight" />
+
+                <TextView
+                    android:id="@+id/memberr_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/person_img"
+                    android:fontFamily="@font/futura"
+                    android:text="Member: 1" />
 
 
+                <EditText
+                    android:id="@+id/ld_reg_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/memberr_no"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/person_img"
+                    android:background="@drawable/edit_text_white"
+                    android:fontFamily="@font/futura"
+                    android:hint="Name"
+                    android:padding="18dp"
+                    android:singleLine="true"
+                    android:textColor="@color/Black"
+                    android:textColorHint="@color/Black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/ld_reg_clg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ld_reg_name"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@id/person_img"
+                    android:layout_toRightOf="@id/person_img"
+                    android:background="@drawable/edit_text_white"
+                    android:fontFamily="@font/futura"
+                    android:hint="College"
+                    android:maxLines="1"
+                    android:padding="18dp"
+
+                    android:singleLine="true"
+                    android:textColor="@color/Black"
+                    android:textColorHint="@color/Black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/ld_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ld_reg_clg"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@id/person_img"
+                    android:layout_toRightOf="@id/person_img"
+                    android:background="@drawable/edit_text_white"
+                    android:fontFamily="@font/futura"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:padding="18dp"
+                    android:singleLine="true"
+                    android:textColor="@color/Black"
+                    android:textColorHint="@color/Black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/ld_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ld_email"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@id/person_img"
+                    android:layout_toRightOf="@id/person_img"
+                    android:background="@drawable/edit_text_white"
+                    android:fontFamily="@font/futura"
+                    android:hint="Mobile"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="18dp"
+                    android:singleLine="true"
+                    android:textColor="@color/Black"
+                    android:textColorHint="@color/Black"
+                    android:textSize="15sp" />
 
 
-
-    </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
