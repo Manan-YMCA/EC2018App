@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -38,10 +39,14 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.manan.dev.ec2018app.Models.UserDetails;
 import com.manan.dev.ec2018app.Utilities.GetRoundedImage;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -53,8 +58,11 @@ public class ProfileActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private ProgressDialog ProgressDialog;
-    private RelativeLayout profilePicture;
-
+    private RelativeLayout profilePictureFrame;
+    private ImageView profilePicture;
+    AccessToken token;
+    private TextView textView1;
+    private TextView textView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +73,14 @@ public class ProfileActivity extends AppCompatActivity {
         ProgressDialog.setMessage("I am working");
         ProgressDialog.setTitle("Registering again");
         ProgressDialog.setCanceledOnTouchOutside(false);
-
+        textView1 = (TextView)findViewById(R.id.tv5);
+        textView2 = (TextView)findViewById(R.id.tv6);
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        profilePicture = (RelativeLayout) findViewById(R.id.profile_picture_layout);
+        profilePictureFrame = (RelativeLayout) findViewById(R.id.profile_picture_layout);
+        profilePicture = (ImageView)findViewById(R.id.profile_pic);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
+
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -77,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 userDetails.setmFbId(loginResult.getAccessToken().getUserId());
                 registerUser(userDetails);
-                loginButton.setVisibility(View.GONE);
+                checkStatus();
                 Log.d("hogya", "hogya");
             }
 
@@ -101,6 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (phoneNumber == null) {
             Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
         }
+        checkStatus();
         userDetails = new UserDetails();
         getDetails(phoneNumber);
 //        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dashboard_image);
@@ -214,13 +226,13 @@ public class ProfileActivity extends AppCompatActivity {
                             userDetails.setEmail(obj.getString("email"));
                             userDetails.setmCollege(obj.getString("college"));
                             userDetails.setmPhone(phone);
-                            if (!obj.getString("fb").equals("null")) {
-                                userDetails.setmFbId(obj.getString("fb"));
-                                loginButton.setVisibility(View.GONE);
-                                addPhoto(userDetails);
-                            } else {
-                                userDetails.setmFbId(null);
-                            }
+//                            if (!obj.getString("fb").equals("null")) {
+//                                userDetails.setmFbId(obj.getString("fb"));
+//                                loginButton.setVisibility(View.GONE);
+//                                addPhoto(userDetails);
+//                            } else {
+//                                userDetails.setmFbId(null);
+//                            }
                         }
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
@@ -280,21 +292,50 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    public void addPhoto(UserDetails userDetails) {
-        URL imageURL = null;
+    public void addPhoto() {
         try {
-            imageURL = new URL("https://graph.facebook.com/" + userDetails.getmFbId() + "/picture?type=large");
-            Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
-            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
-            GetRoundedImage getRoundedImage = new GetRoundedImage();
-            Bitmap conv_bm = getRoundedImage.getRoundedShape(resized);
-            BitmapDrawable background = new BitmapDrawable(conv_bm);
-            profilePicture.setBackground(background);
+            Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(800,800))
+                    .into(new Target(){
+                        @Override
+                        public void onBitmapLoaded(final Bitmap bitmap,Picasso.LoadedFrom from){
+                            GetRoundedImage getRoundedImage = new GetRoundedImage();
+                            Bitmap conv_bm = getRoundedImage.getRoundedShape(bitmap);
+                            BitmapDrawable background = new BitmapDrawable(conv_bm);
+                            profilePicture.setBackground(background);
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable){
+
+                        }
+
+
+                    });
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+    }
+    private void checkStatus(){
+        token = AccessToken.getCurrentAccessToken();
+
+        if (token == null) {
+            profilePicture.setBackgroundResource(R.drawable.an);
+        }
+        else{
+            loginButton.setVisibility(View.GONE);
+            textView1.setVisibility(View.GONE);
+            textView2.setVisibility(View.GONE);
+            addPhoto();
+        //    Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(200,200));
+        }
 
     }
 

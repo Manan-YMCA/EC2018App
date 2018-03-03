@@ -23,7 +23,13 @@
             android:theme="@style/CodeFont" />
         <activity
             android:name=".UserLoginActivity"
-            android:theme="@style/CodeFont"></activity>
+            android:theme="@style/CodeFont">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SingleEventActivity"
             android:label="[Event Name]"
@@ -46,7 +52,18 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ProfileActivity"
-            android:theme="@style/CodeFont" />
+            android:theme="@style/CodeFont" >
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data
+                android:host="www.this-so-does-not-exist.com"
+                android:scheme="http" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/CodeFont" />
@@ -76,11 +93,7 @@
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Tickets"></activity>
     </application>
