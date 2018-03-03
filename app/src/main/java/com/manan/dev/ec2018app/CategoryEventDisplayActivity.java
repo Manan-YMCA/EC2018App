@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,6 +103,9 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
             holder.date.setText(formattedDate);
             holder.time.setText(formattedTime);
             holder.eventType.setText(eventDetails.getmEventTeamSize());
+            holder.desc.setText(eventDetails.getmDesc().substring(0, Math.min(eventDetails.getmDesc().length(), 100)));
+            if(eventDetails.getmDesc().length()>100)
+                holder.desc.append("...");
 
             if (eventDetails.getmFees() == 0) {
                 holder.fees.setText("NA");
@@ -126,13 +128,14 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView photo;
-            public TextView name, date, time, fees, venue, eventType;
+            public TextView name, date, time, fees, venue, eventType,desc;
             public CardView mCardView;
             public Button viewmore;
 
             public MyViewHolder(View itemLayoutView) {
                 super(itemLayoutView);
                 name = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_name);
+                desc = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_desc);
                 date = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_date);
                 time = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_time);
                 fees = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_fees);
