@@ -116,7 +116,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
                             // If an error occurs, this prints the error to the log
-//                            Toast.makeText(FBLoginActivity.this, "Error aagya1", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }

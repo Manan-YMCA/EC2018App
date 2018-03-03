@@ -95,8 +95,6 @@ public class Tickets extends AppCompatActivity {
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
-                    // If an error occurs, this prints the error to the log
-//                            Toast.makeText(FBLoginActivity.this, "Error aagya1", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                     Log.d("Tickets", e.getMessage());
                 }

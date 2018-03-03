@@ -60,11 +60,11 @@ android:padding="5dp"
             android:layout_weight="1"
             android:text="Explore the Extravagenza of Culture enriched \n with Technology"
             android:textColor="@color/White"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/LoginButton"
-            android:layout_width="340sp"
+            android:layout_width="340dp"
 
             android:layout_height="60dp"
             android:layout_below="@id/ReadyText"

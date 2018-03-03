@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:layout_below="@id/xunbao_heading"
         android:textColor="@color/Black"
         android:text="Leaderboard"

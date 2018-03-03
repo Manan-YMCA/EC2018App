@@ -26,7 +26,7 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#000"
-        android:textSize="22sp" />
+        android:textSize="22dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:textAlignment="center"
 
         android:textColor="#000"
-        android:textSize="16sp" />
+        android:textSize="16dp" />
 
     <LinearLayout
         android:id="@+id/ll_event_category_photo_name"
@@ -72,7 +72,7 @@
                 android:fontFamily="@font/futura"
                 android:paddingLeft="20dp"
                 android:text="@string/content_head"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
 
         </LinearLayout>
@@ -91,7 +91,7 @@
     <LinearLayout
         android:id="@+id/ll_single_event_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/ll_event_category_photo_name"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
@@ -102,6 +102,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/events_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 </RelativeLayout>

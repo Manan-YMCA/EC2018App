@@ -11,72 +11,54 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:largeHeap="true"
-        android:allowBackup="true"
+        android:name=".Utilities.PicassoPersistence"
         android:icon="@drawable/ec_app_logo"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ContentActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
         <activity
             android:name=".UserLoginActivity"
-            android:theme="@style/CodeFont">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".SingleEventActivity"
             android:label="[Event Name]"
-            android:parentActivityName=".CategoryEventDisplayActivity" />
+            android:parentActivityName=".CategoryEventDisplayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont"/>
         <activity
             android:name=".CategoryEventDisplayActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
         <activity
             android:name=".Xunbao.XunbaoActivity"
-            android:parentActivityName=".ContentActivity"/>
+            android:parentActivityName=".ContentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/xunbao_main_theme"/>
 
-        <activity android:name=".DevelopersActivity" />
+        <activity
+            android:name=".DevelopersActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
+            android:theme="@style/CodeFont"
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProfileActivity"
-            android:theme="@style/CodeFont" >
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-
-            <data
-                android:host="www.this-so-does-not-exist.com"
-                android:scheme="http" />
-        </intent-filter>
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:theme="@style/CodeFont" />
-
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-        <activity android:name=".FBLoginActivity">
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -88,14 +70,39 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".EventRegister"></activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/CodeFont"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont"/>
+        <activity android:name=".EventRegister"
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont"/>
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Splash">
+            android:theme="@style/Splash"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".Tickets"></activity>
+        <activity android:name=".Tickets"
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont"/>
     </application>
 
 </manifest>

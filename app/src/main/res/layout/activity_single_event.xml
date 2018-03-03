@@ -21,7 +21,7 @@
             android:gravity="center"
             android:text="Event name"
             android:textColor="#000"
-            android:textSize="32sp" />
+            android:textSize="32dp" />
 
         <View
             android:id="@+id/line1"
@@ -54,7 +54,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_time_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/line2"
             android:layout_marginBottom="10dp"
@@ -81,11 +81,11 @@
                 android:fontFamily="@font/futura"
                 android:text="Sunday, 18 March 2018"
                 android:textColor="#111"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textStyle="italic" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv_event_date"
                 android:layout_alignStart="@id/tv_event_date"
@@ -98,13 +98,13 @@
                     android:fontFamily="@font/futura"
                     android:text="10:00"
                     android:textColor="#333"
-                    android:textSize="13sp"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textSize="13dp"
                     android:fontFamily="@font/futura"
                     android:textColor="#333"
                     android:text=" To "
@@ -117,20 +117,24 @@
                     android:fontFamily="@font/futura"
                     android:text="16:00"
                     android:textColor="#333"
-                    android:textSize="13sp"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
             </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_location"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rl_time_date"
+            android:layout_below="@id/line2"
+            android:layout_toRightOf="@id/rl_time_date"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/rl_time_date"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp">
 
             <ImageView
                 android:id="@+id/iv_vector_location"
@@ -152,7 +156,7 @@
                 android:text="Lal Chowk"
                 android:textColor="#111"
                 android:padding="5dp"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textStyle="italic"
                 android:layout_alignBaseline="@id/iv_vector_location"/>
 
@@ -161,7 +165,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_host"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_location"
             android:layout_marginBottom="10dp"
@@ -187,7 +191,7 @@
                 android:padding="5dp"
                 android:text="Hosted by [Club Name]"
                 android:textColor="#111"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textStyle="italic" />
 
         </RelativeLayout>
@@ -226,7 +230,7 @@
                     android:padding="5dp"
                     android:text="Fees : Rs. 10"
                     android:textColor="#111"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
@@ -253,7 +257,7 @@
                     android:padding="5dp"
                     android:text="Single/Team Event"
                     android:textColor="#111"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="normal" />
 
             </LinearLayout>
@@ -285,7 +289,7 @@
                 android:text="People Going:"
                 android:textAllCaps="true"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -294,7 +298,7 @@
                 android:paddingTop="5dp"
                 android:text="[Number] are going."
                 android:textColor="#333"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
         </LinearLayout>
 
@@ -324,7 +328,7 @@
                 android:text="Event Co-ordinators:"
                 android:textAllCaps="true"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="15dp" />
 
             <LinearLayout
                 android:id="@+id/ll_coordinators"
@@ -375,7 +379,7 @@
                 android:fontFamily="@font/futura"
                 android:text="Prizes:"
                 android:textColor="#111"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textStyle="italic" />
 
             <LinearLayout
@@ -392,7 +396,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
                     android:text="First Prize: Rs.2000 "
-                    android:textSize="13sp"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -401,7 +405,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
                     android:text="Second Prize: Rs.1000 "
-                    android:textSize="13sp"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -410,7 +414,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
                     android:text="Third Prize: Rs.500 "
-                    android:textSize="13sp"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
             </LinearLayout>
         </RelativeLayout>
@@ -452,7 +456,7 @@
                 android:fontFamily="@font/futura"
                 android:text="Description:"
                 android:textColor="#111"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textStyle="italic" />
 
             <TextView
@@ -464,7 +468,7 @@
                 android:layout_below="@+id/tv_description_heading"
                 android:text="This exceeding trifling witling, considering ranting criticizing concerning adopting fitting wording being exhibiting transcending learning, was displaying, notwithstanding ridiculing, surpassing boasting swelling reasoning, respecting correcting erring writing, and touching detecting deceiving arguing during debating."
                 android:textColor="#333"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 android:textStyle="normal" />
 
         </RelativeLayout>
@@ -506,7 +510,7 @@
                 android:fontFamily="@font/futura"
                 android:text="Rules:"
                 android:textColor="#111"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textStyle="italic" />
 
             <TextView
@@ -518,7 +522,7 @@
                 android:layout_below="@+id/tv_rules_heading"
                 android:text=" 1. Mah Life, My Rulz! \n 2. Android is Lyf! \n 3. I set ma own rulz! \n 4. My lyf is kewl!"
                 android:textColor="#333"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 android:textStyle="normal" />
 
         </RelativeLayout>

@@ -98,14 +98,17 @@ public class SingleEventActivity extends AppCompatActivity {
         hostClubTextView.setText(eventDetails.getmClubname());
         Long fees = eventDetails.getmFees();
         if (fees == 0) {
-            feesTextView.setText("NA");
+            feesTextView.setText("Free");
         } else {
             feesTextView.setText(String.valueOf(fees));
         }
-        typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
+
         if (eventDetails.getmEventTeamSize().equals("NA")) {
             registerButton.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
+            typeOfEventTextView.setText("Presentation Event");
+        } else {
+            typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
         }
         for (Coordinators coord : eventDetails.getmCoordinators()) {
             if (!coord.getmCoordName().equals("")) {

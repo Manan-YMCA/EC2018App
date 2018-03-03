@@ -22,7 +22,7 @@
             android:fontFamily="@font/futura"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="28sp"
+            android:textSize="28dp"
             />
 
 

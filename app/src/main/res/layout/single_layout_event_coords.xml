@@ -16,7 +16,7 @@
             android:layout_marginLeft="10dp"
             android:text="[Full Name]"
             android:textColor="#000"
-            android:textSize="18sp"/>
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tv_coords_phone_no"

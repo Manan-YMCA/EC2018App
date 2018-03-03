@@ -68,6 +68,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         callbackManager = CallbackManager.Factory.create();
+        userDetails = new UserDetails();
+        userDetails.setmFbId("null");
         final String EMAIL = "email";
         ProgressDialog = new ProgressDialog(this);
         ProgressDialog.setMessage("I am working");
@@ -113,7 +115,6 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
         }
         checkStatus();
-        userDetails = new UserDetails();
         getDetails(phoneNumber);
 //        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dashboard_image);
 //        Bitmap resized = Bitmap.createScaledBitmap(largeIcon, 100, 100, true);
@@ -122,7 +123,6 @@ public class ProfileActivity extends AppCompatActivity {
 //        BitmapDrawable background = new BitmapDrawable(conv_bm);
 //        profilePicture.setBackground(background);
         LayoutInflater factory = LayoutInflater.from(this);
-        final View textEntryView = factory.inflate(R.layout.text_entry, null);
         ImageView editButton = (ImageView) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,7 +237,6 @@ public class ProfileActivity extends AppCompatActivity {
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
                             // If an error occurs, this prints the error to the log
-//                            Toast.makeText(FBLoginActivity.this, "Error aagya1", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Embrace the Stuff "
             android:textColor="@android:color/white"
-            android:textSize="28sp"
+            android:textSize="28dp"
             android:textAlignment="center"
             android:fontFamily="@font/futura"
              />

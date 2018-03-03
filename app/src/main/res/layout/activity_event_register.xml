@@ -192,7 +192,7 @@
                     android:singleLine="true"
                     android:textColor="@color/Black"
                     android:textColorHint="@color/Black"
-                    android:textSize="15sp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/ld_reg_clg"
@@ -213,7 +213,7 @@
                     android:singleLine="true"
                     android:textColor="@color/Black"
                     android:textColorHint="@color/Black"
-                    android:textSize="15sp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/ld_email"
@@ -234,7 +234,7 @@
                     android:singleLine="true"
                     android:textColor="@color/Black"
                     android:textColorHint="@color/Black"
-                    android:textSize="15sp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/ld_mobile"
@@ -256,7 +256,7 @@
                     android:singleLine="true"
                     android:textColor="@color/Black"
                     android:textColorHint="@color/Black"
-                    android:textSize="15sp" />
+                    android:textSize="15dp" />
 
 
             </RelativeLayout>

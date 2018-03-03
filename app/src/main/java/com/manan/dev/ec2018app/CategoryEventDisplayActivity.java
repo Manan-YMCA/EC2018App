@@ -108,7 +108,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
                 holder.desc.append("...");
 
             if (eventDetails.getmFees() == 0) {
-                holder.fees.setText("NA");
+                holder.fees.setText("Free");
             } else
                 holder.fees.setText(String.valueOf(eventDetails.getmFees()));
             holder.venue.setText(eventDetails.getmVenue());

@@ -60,11 +60,9 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DashboardSlideAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private ArrayList<CategoryItemModel> allSampleData = new ArrayList<CategoryItemModel>();
-    private ArrayList<EventDetails> allEvents;
     TextView categoriesHeadingTextView;
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private DatabaseController mDatabaseController;
     private String phoneNumber;
 
     @Override
@@ -73,7 +71,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.navbar_content);
 
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        allEvents = new ArrayList<>();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 ContentActivity.this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -92,11 +89,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_tickets).setVisible(false);
-        }
-        try {
-            mDatabaseController = new DatabaseController(getApplicationContext());
-        } catch (Exception e) {
-            Log.d("DBChecker", e.getMessage());
         }
 
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
@@ -117,7 +109,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         addBottomDots(0);
 
         addData();
-        retreiveEvents();
         RecyclerView categoryRecycleview = (RecyclerView) findViewById(R.id.category_recycler_view);
 
         categoryRecycleview.setHasFixedSize(true);
@@ -127,118 +118,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         categoryRecycleview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         categoryRecycleview.setAdapter(adapter);
 
-    }
-
-    private void retreiveEvents() {
-        if (isNetworkAvailable()) {
-            RequestQueue queue = Volley.newRequestQueue(this);
-            String url = getResources().getString(R.string.get_all_events_api);
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        JSONArray eventArray = object.getJSONArray("data");
-                        EventDetails event = new EventDetails();
-                        for (int i = 0; i < eventArray.length(); i++) {
-                            JSONObject currEvent = eventArray.getJSONObject(i);
-                            if (currEvent.has("timing"))
-                                event.setmName(currEvent.getString("title"));
-                            if (currEvent.has("fee"))
-                                event.setmFees(currEvent.getLong("fee"));
-                            if (currEvent.has("timing")) {
-                                JSONObject timing = currEvent.getJSONObject("timing");
-                                if (timing.has("from"))
-                                    event.setmStartTime(timing.getLong("from"));
-                                if (timing.has("to"))
-                                    event.setmEndTime(timing.getLong("to"));
-                            }
-                            if (currEvent.has("clubname"))
-                                event.setmClubname(currEvent.getString("clubname"));
-                            if (currEvent.has("category"))
-                                event.setmCategory(currEvent.getString("category"));
-                            if (currEvent.has("desc"))
-                                event.setmDesc(currEvent.getString("desc"));
-                            if (currEvent.has("venue"))
-                                event.setmVenue(currEvent.getString("venue"));
-                            if (currEvent.has("rules"))
-                                event.setmRules(currEvent.getString("rules"));
-                            if (currEvent.has("photolink")) {
-                                event.setmPhotoUrl(currEvent.getString("photolink"));
-                            } else {
-                                event.setmPhotoUrl(null);
-                            }
-                            event.setmCoordinators(new ArrayList<Coordinators>());
-                            if (currEvent.has("coordinators")) {
-                                JSONArray coordinators = currEvent.getJSONArray("coordinators");
-                                for (int j = 0; j < coordinators.length(); j++) {
-                                    JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
-                                    Coordinators coord = new Coordinators();
-                                    if (coordinatorsDetail.has("_id"))
-                                        coord.setmCoordId(coordinatorsDetail.getString("_id"));
-                                    if (coordinatorsDetail.has("phone"))
-                                        coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
-                                    if (coordinatorsDetail.has("name"))
-                                        coord.setmCoordName(coordinatorsDetail.getString("name"));
-                                    event.getmCoordinators().add(coord);
-                                }
-                            }
-                            event.setmPrizes(new ArrayList<String>());
-                            if (currEvent.has("prizes")) {
-                                JSONObject prize = currEvent.getJSONObject("prizes");
-                                if (prize.has("prize1"))
-                                    event.getmPrizes().add(prize.getString("prize1"));
-                                if (prize.has("prize2"))
-                                    event.getmPrizes().add(prize.getString("prize2"));
-                                if (prize.has("prize3"))
-                                    event.getmPrizes().add(prize.getString("prize3"));
-                            } else {
-                                event.getmPrizes().add(null);
-                                event.getmPrizes().add(null);
-                                event.getmPrizes().add(null);
-                            }
-                            if (currEvent.has("_id"))
-                                event.setmEventId(currEvent.getString("_id"));
-                            if (currEvent.has("eventtype")) {
-                                event.setmEventTeamSize(currEvent.getString("eventtype"));
-                                Log.d("DBChecker", currEvent.getString("eventtype") + " " + event.getmEventTeamSize());
-                                //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
-                            }
-                            //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
-                            allEvents.add(event);
-                            updateDatabase();
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(ContentActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("DBChecker", e.getMessage());
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-            queue.add(stringRequest);
-        }
-
-    }
-
-    private void updateDatabase() {
-        if (allEvents.size() > mDatabaseController.getCount()) {
-            for (EventDetails eventDetails : allEvents) {
-                mDatabaseController.addEntryToDb(eventDetails);
-            }
-        } else {
-            for (EventDetails eventDetails : allEvents) {
-                mDatabaseController.updateDb(eventDetails);
-            }
-        }
-        Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
-//        if (mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize() != null)
-//            Log.d("DBChecker", mDatabaseController.retreiveCategory("Vividha").get(0).getmEventTeamSize());
     }
 
     private void addData() {
@@ -482,13 +361,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void shareTextMessage(String msg) {

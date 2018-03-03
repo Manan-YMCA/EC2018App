@@ -33,7 +33,7 @@
         android:text="Registration"
         android:layout_alignParentRight="true"
         android:textColor="@color/White"
-        android:textSize="32sp" />
+        android:textSize="32dp" />
 <LinearLayout
     android:layout_below="@id/view"
     android:layout_width="match_parent"
@@ -95,7 +95,7 @@ android:layout_marginTop="20dp"
         android:singleLine="true"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="13sp" />
+        android:textSize="13dp" />
 
 
     <EditText
@@ -114,7 +114,7 @@ android:layout_marginTop="20dp"
         android:padding="12dp"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="13sp"
+        android:textSize="13dp"
         android:maxLines="1"
         android:singleLine="true"/>
 
@@ -134,7 +134,7 @@ android:layout_marginTop="20dp"
         android:padding="12dp"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="13sp"
+        android:textSize="13dp"
         android:maxLines="1"
         android:singleLine="true"/>
 
@@ -155,7 +155,7 @@ android:layout_marginTop="20dp"
         android:padding="12dp"
         android:textColor="@color/White"
         android:textColorHint="@color/White"
-        android:textSize="13sp"
+        android:textSize="13dp"
         android:maxLines="1"
         android:singleLine="true"/>
 
@@ -186,7 +186,7 @@ android:layout_marginLeft="30dp"
             android:padding="5dp"
             android:text="All set to fire?"
             android:textColor="@color/White"
-            android:textSize="18sp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -202,7 +202,7 @@ android:layout_marginLeft="30dp"
         android:textAlignment="center"
         android:fontFamily="@font/futura"
         android:text="Already a User? Login"
-        android:textSize="16sp"
+        android:textSize="16dp"
         />
 
 </LinearLayout>

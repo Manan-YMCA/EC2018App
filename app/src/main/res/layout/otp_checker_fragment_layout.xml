@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="290dp"
+    android:layout_height="wrap_content"
     android:background="#878686">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_phone"
@@ -24,7 +27,7 @@
         android:text="Phone Authentication"
         android:textAlignment="center"
         android:textColor="@color/Black"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -54,7 +57,7 @@
                 android:nextFocusDown="@+id/et_otp_dig_2"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="26dp" />
 
             <EditText
                 android:id="@+id/et_otp_dig_2"
@@ -69,7 +72,7 @@
                 android:nextFocusDown="@+id/et_otp_dig_3"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="26dp" />
 
             <EditText
                 android:id="@+id/et_otp_dig_3"
@@ -84,7 +87,7 @@
                 android:nextFocusDown="@+id/et_otp_dig_4"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="26dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,7 +108,7 @@
                 android:nextFocusDown="@+id/et_otp_dig_5"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="26dp" />
 
             <EditText
                 android:id="@+id/et_otp_dig_5"
@@ -120,7 +123,7 @@
                 android:nextFocusDown="@+id/et_otp_dig_6"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="26dp" />
 
             <EditText
                 android:id="@+id/et_otp_dig_6"
@@ -134,7 +137,7 @@
                 android:maxLength="1"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="26dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -146,9 +149,10 @@
         android:layout_marginTop="4dp"
         android:text="@string/click_here_to_continue"
 
+        android:padding="6dp"
         android:textAlignment="center"
         android:textColor="@color/White"
-        android:textSize="12sp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/tv_display_text"
@@ -164,7 +168,7 @@
         android:text="A message with a verification code has been sent to your device. Please enter and Continue!!"
         android:textAlignment="center"
         android:textColor="@color/White"
-        android:textSize="12sp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/tv_otp_resend"
@@ -173,10 +177,12 @@
         android:layout_below="@id/tv_display_text"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/futura"
-        android:padding="4dp"
+        android:padding="6dp"
         android:text="Didn't get a verification code?"
         android:textAlignment="center"
         android:textColor="@color/White"
-        android:textSize="12sp" />
+        android:textSize="12dp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

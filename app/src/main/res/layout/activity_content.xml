@@ -68,7 +68,7 @@
                 android:fontFamily="@font/futura"
                 android:text="Categories"
                 android:textColor="@color/White"
-                android:textSize="32sp" />
+                android:textSize="32dp" />
 
 
             <View

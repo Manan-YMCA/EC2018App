@@ -112,7 +112,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 if(s.toString().length() == 1){
                     et3.requestFocus();
                 }
-                if(s.toString().length() == 0){
+                else if(s.toString().length() == 0){
                     et2.requestFocus();
                 }
             }
@@ -144,7 +144,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 if(s.toString().length() == 1){
                     et4.requestFocus();
                 }
-                if(s.toString().length() == 0){
+                else if(s.toString().length() == 0){
                     et3.requestFocus();
                 }
             }
@@ -176,7 +176,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 if(s.toString().length() == 1){
                     et5.requestFocus();
                 }
-                if(s.toString().length() == 0){
+                else if(s.toString().length() == 0){
                     et4.requestFocus();
                 }
             }
@@ -208,7 +208,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 if(s.toString().length() == 1){
                     et6.requestFocus();
                 }
-                if(s.toString().length() == 0){
+                else if(s.toString().length() == 0){
                     et5.requestFocus();
                 }
             }
@@ -240,7 +240,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 if(s.toString().length() == 0){
                     et6.requestFocus();
                 }
-                if(s.toString().length() == 1){
+                else if(s.toString().length() == 1){
                     retrieveEnteredText();
                     otpCheckStatus activity = (otpCheckStatus) getActivity();
                     if(otp.equals("123456")){

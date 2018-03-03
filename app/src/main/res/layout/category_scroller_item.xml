@@ -36,7 +36,7 @@
             android:maxLines="1"
             android:maxLength="12"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="18dp" />
 
 
     </LinearLayout>
