@@ -22,8 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.victor.loading.newton.NewtonCradleLoading;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,7 +32,6 @@ public class UserLoginActivity extends AppCompatActivity {
     View lineView;
     LinearLayout guestLogin;
 
-    private NewtonCradleLoading newtonCradleLoading;
     private ViewPager viewPager;
     private LinearLayout dotsLayout;
     private int[] layouts;

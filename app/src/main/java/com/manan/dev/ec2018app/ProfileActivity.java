@@ -326,7 +326,7 @@ public class ProfileActivity extends AppCompatActivity {
         token = AccessToken.getCurrentAccessToken();
 
         if (token == null) {
-            profilePicture.setBackgroundResource(R.drawable.an);
+            profilePicture.setBackgroundResource(R.drawable.facebook_icon);
         }
         else{
             loginButton.setVisibility(View.GONE);

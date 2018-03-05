@@ -31,7 +31,7 @@ public class TicketsGenerator {
     private Context context;
     private Bitmap userTicket;
 
-    public Bitmap GenerateClick(View view, ImageView imageViewBitmap, String qrCodeData, Context mContext) {
+    public Bitmap GenerateClick(String qrCodeData, Context mContext) {
         context = mContext;
         try {
             //setting size of qr code

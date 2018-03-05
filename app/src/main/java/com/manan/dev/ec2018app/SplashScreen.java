@@ -43,7 +43,6 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         allEvents = new ArrayList<>();
 
-        retreiveEvents();
         try {
             mDatabaseController = new DatabaseController(getApplicationContext());
         } catch (Exception e) {
@@ -66,14 +65,12 @@ public class SplashScreen extends AppCompatActivity {
                 // Start your app main activity
 //                Intent i = new Intent(SplashScreen.this, UserLoginActivity.class);
 //                startActivity(i);
-                Intent myIntent = new Intent(SplashScreen.this, UserLoginActivity.class);
-                ActivityOptions options =
-                        ActivityOptions.makeCustomAnimation(SplashScreen.this, R.anim.fade_in, R.anim.fade_out);
-                SplashScreen.this.startActivity(myIntent, options.toBundle());
+                retreiveEvents();
+                startActivity(new Intent(SplashScreen.this, UserLoginActivity.class));
                 // close this activity
                 finish();
             }
-        }, 5000);
+        }, 1000);
     }
 
 

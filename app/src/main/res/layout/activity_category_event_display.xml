@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="0.7"
-            android:src="@drawable/jh"
+            android:src="@drawable/facebook_icon"
             android:tint="#333131" />
 
         <LinearLayout

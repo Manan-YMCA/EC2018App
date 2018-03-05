@@ -85,7 +85,7 @@ public class TicketLayoutAdapter extends BaseAdapter {
         Log.d("Tickets", singleItem.getQRcode());
         feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
         TicketsGenerator generate = new TicketsGenerator();
-        Bitmap currTicket = generate.GenerateClick(v, itemImage, singleItem.getQRcode(), mContext);
+        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext);
         itemImage.setImageBitmap(currTicket);
         eventName.setText(currEvent.getmName());
         eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));

@@ -121,9 +121,9 @@ public class FragmentOtpChecker extends DialogFragment {
         et2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(et2.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
-                    et1.requestFocus();
-                }
+//                if(et2.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
+//                    et1.requestFocus();
+//                }
                 return false;
             }
         });
@@ -153,9 +153,9 @@ public class FragmentOtpChecker extends DialogFragment {
         et3.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(et3.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
-                    et2.requestFocus();
-                }
+//                if(et3.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
+//                    et2.requestFocus();
+//                }
                 return false;
             }
         });
@@ -185,9 +185,9 @@ public class FragmentOtpChecker extends DialogFragment {
         et4.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(et4.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
+/*                if(et4.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
                     et3.requestFocus();
-                }
+                }*/
                 return false;
             }
         });
@@ -217,9 +217,9 @@ public class FragmentOtpChecker extends DialogFragment {
         et5.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(et5.getText().toString().length() == 0 &&keyCode == KeyEvent.KEYCODE_DEL){
-                    et4.requestFocus();
-                }
+//                if(et5.getText().toString().length() == 0 &&keyCode == KeyEvent.KEYCODE_DEL){
+//                    et4.requestFocus();
+//                }
                 return false;
             }
         });
@@ -257,9 +257,9 @@ public class FragmentOtpChecker extends DialogFragment {
         et6.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(et6.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
-                    et5.requestFocus();
-                }
+//                if(et6.getText().toString().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL){
+//                    et5.requestFocus();
+//                }
                 return false;
             }
         });

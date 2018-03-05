@@ -9,7 +9,7 @@
 
     <com.manan.dev.ec2018app.Utilities.GifImageView
         android:id="@+id/GifImageView"
-        android:background="@drawable/original"
+        android:background="@drawable/tzuki"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
