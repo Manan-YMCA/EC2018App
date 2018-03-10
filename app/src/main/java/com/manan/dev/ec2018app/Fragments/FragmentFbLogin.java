@@ -53,7 +53,6 @@ public class FragmentFbLogin extends DialogFragment {
             }
         });
 
-        final fbLoginButton activity = (fbLoginButton) getActivity();
 
         final String EMAIL = "email";
 

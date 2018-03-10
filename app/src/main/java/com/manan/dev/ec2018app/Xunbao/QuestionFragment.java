@@ -3,11 +3,17 @@ package com.manan.dev.ec2018app.Xunbao;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +33,24 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.LoginActivity;
+import com.manan.dev.ec2018app.ProfileActivity;
 import com.manan.dev.ec2018app.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class QuestionFragment extends Fragment {
@@ -59,11 +76,21 @@ public class QuestionFragment extends Fragment {
         builder.setTitle("Login Required!");
         builder.setMessage("To continue, you must login with facebook");
         builder.setPositiveButton("Continue", new Dialog.OnClickListener(){
+             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
              @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                                                getActivity().finish();
-                                                startActivity(new Intent(getActivity(), LoginActivity.class));
-                                            }
+
+                 SharedPreferences preferences = getActivity().getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
+                 final String phoneNumber = preferences.getString("Phone", null);
+                 if (phoneNumber == null) {
+                     getActivity().finish();
+                     startActivity(new Intent(getActivity(), LoginActivity.class));
+                 }
+                 else{
+                     getActivity().finish();
+                     startActivity(new Intent(getActivity(), ProfileActivity.class));
+                 }
+             }
         });
                 builder.setNegativeButton("Cancel", new Dialog.OnClickListener(){
 
@@ -77,15 +104,14 @@ public class QuestionFragment extends Fragment {
 
 
                                 progressBar = new ProgressDialog(getActivity());
-                progressBar.setMessage("(Not you)");
-                progressBar.setTitle("Checking");
-                progressBar.setCancelable(false);
+                progressBar.setMessage("Loading Question!");
+                progressBar.setCanceledOnTouchOutside(false);
                 progressBar.show();
 
 
-        queURL = "https://good-people.herokuapp.com/getq/";
-        ansURL="https://good-people.herokuapp.com/checkans/";
-        statusURL="https://good-people.herokuapp.com/status/";
+        queURL = getActivity().getString(R.string.xunbao_get_question_api);
+        ansURL=getActivity().getResources().getString(R.string.xunbao_check_answer_api);
+        statusURL=getActivity().getResources().getString(R.string.xunbao_status);
         queLayout=view.findViewById(R.id.question_layout);
         stage =view.findViewById(R.id.tv_question_number);
         question = view.findViewById(R.id.tv_question_text);
@@ -110,7 +136,8 @@ public class QuestionFragment extends Fragment {
                             contestEnd.setVisibility(View.VISIBLE);
                         }
                         else if(xstatus==1){
-                            if(false) {
+                            AccessToken token=AccessToken.getCurrentAccessToken();
+                            if(token==null) {
                                 progressBar.dismiss();
                                 dialog.show();
                             }
@@ -141,7 +168,8 @@ public class QuestionFragment extends Fragment {
         JSONArray jsonArray =new JSONArray();
         JSONObject params =new JSONObject();
         try {
-            params.put("email", "gla");
+            if(Profile.getCurrentProfile()!=null)
+            params.put("email", Profile.getCurrentProfile().getId());
             params.put("skey", "abbv");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -170,7 +198,7 @@ public class QuestionFragment extends Fragment {
                                 stage.setText("STAGE - "+Integer.toString(level));
                                 float density = getResources().getDisplayMetrics().density;
                                 float size=(question.getMeasuredHeight()+stage.getMeasuredHeight())/density+50;
-                                Picasso.with(getActivity()).load("https:good-people.herokuapp.com"+imgUrl).into(xunbaoimg);
+                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com"+imgUrl).into(xunbaoimg);
                                 progressBar.dismiss();
                             }
                         } catch (JSONException e) {
@@ -211,7 +239,9 @@ public class QuestionFragment extends Fragment {
                 JSONObject answer=new JSONObject();
 
                 try {
-                    answer.put("email","gla");
+                    AccessToken accessToken=AccessToken.getCurrentAccessToken();
+                    Profile.getCurrentProfile().getId();
+                    answer.put("email",Profile.getCurrentProfile().getId());
                     answer.put("skey","abbv");
                     answer.put("ans",ans.getText());
 

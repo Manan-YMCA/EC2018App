@@ -41,6 +41,7 @@ public class LeaderboardFragment extends Fragment {
     static Context c;
     static RequestQueue queue;
     static StringRequest stringRequest;
+    ProgressDialog progressBar;
     public LeaderboardFragment() {
 
     }
@@ -52,6 +53,10 @@ public class LeaderboardFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         c=getActivity();
         setData();
+        progressBar = new ProgressDialog(getActivity());
+        progressBar.setMessage("Loading");
+        progressBar.setCanceledOnTouchOutside(false);
+        progressBar.show();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c);
@@ -69,13 +74,13 @@ public class LeaderboardFragment extends Fragment {
 
         queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.xunbao_leaderboard_api);
-        url="https://good-people.herokuapp.com/leaderboard_api";
         stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     List<LeaderboardList> leaderboardList=new ArrayList<>();
                     @Override
                     public void onResponse(String response) {
                         recyclerView.setVisibility(View.VISIBLE);
+                        progressBar.dismiss();
                         try {
                             JSONArray k = new JSONArray(response);
                             for (int i=0;i<k.length();i++) {
@@ -98,6 +103,7 @@ public class LeaderboardFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                progressBar.dismiss();
                 List<LeaderboardList> leaderboardList=new ArrayList<>();
 
                 Toast.makeText(c, "Problem Loading!", Toast.LENGTH_SHORT).show();

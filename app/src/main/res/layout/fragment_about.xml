@@ -5,16 +5,15 @@
     tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment"
     android:background="@drawable/xunbao_back">
 
-    <RelativeLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="140dp"
-        android:layout_marginStart="70dp"
-        android:background="@drawable/xunbao_about"/>
+        android:padding="50dp"
+        android:textSize="18dp"
+        android:text="Welcome to Xunbao. Play and get a chance to win exciting prizes.\n Prizes:\n1st prize: Bluetooth Speaker\n2nd Prize: VR Headset\n3rd Prize: Pencil"/>
 
-
+    </ScrollView>
 </RelativeLayout>
