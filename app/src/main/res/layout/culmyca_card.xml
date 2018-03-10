@@ -100,7 +100,7 @@
                 android:layout_width="32dp"
                 android:layout_margin="4dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ctc_star"
+                android:src="@android:drawable/btn_star_big_off"
                 android:layout_toLeftOf="@+id/ctc_commentbtn" />
         </RelativeLayout>
 

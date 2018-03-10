@@ -105,7 +105,7 @@
             android:name=".Tickets"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
-        <activity android:name=".Fragments.CulmycaTimesActivity"></activity>
+        <activity android:name=".CulmycaTimesActivity"></activity>
     </application>
 
 </manifest>
