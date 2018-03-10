@@ -7,17 +7,24 @@
     android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.SplashScreen">
 
-    <com.manan.dev.ec2018app.Utilities.GifImageView
-        android:id="@+id/GifImageView"
-        android:background="@drawable/tzuki"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/background_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/background"
+            android:scaleType="matrix"/>
+
+    </FrameLayout>
 
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_opacity"/>
+        android:src="@drawable/logo_300"/>
 
 </RelativeLayout>

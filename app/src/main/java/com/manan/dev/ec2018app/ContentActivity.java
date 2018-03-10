@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -281,29 +282,45 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         int id = item.getItemId();
         item.setChecked(false);
 
+        drawer.closeDrawer(GravityCompat.START);
+
+        Handler handler = new Handler();
+
         switch (id) {
             case R.id.nav_home:
                 //handle home case
                 break;
             case R.id.nav_profile:
-                SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-                String restoredText = prefs.getString("Phone", null);
-                if (restoredText == null) {
-                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                }
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                        String restoredText = prefs.getString("Phone", null);
+                        if (restoredText == null) {
+                            startActivity(new Intent(getApplicationContext(), RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        } else {
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        }
+                    }
+                }, 130);
+
                 break;
             case R.id.nav_tickets:
-                startActivity(new Intent(ContentActivity.this, Tickets.class));
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
             case R.id.nav_xunbao:
-                //TODO
-                //pass intent to activity with tab layout with 2 tabs
-                //first for trending among all users using firebase analytics
-                //second for trending among facebook friends
-                //currently xunbao.. remove it later
-                startActivity(new Intent(ContentActivity.this, XunbaoActivity.class));
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, XunbaoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
             case R.id.nav_culmyca:
                 //TODO
@@ -356,10 +373,14 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 //show developers
                 break;
             case R.id.nav_location:
-                startActivity(new Intent(ContentActivity.this, MapsActivity.class));
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, MapsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
         }
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

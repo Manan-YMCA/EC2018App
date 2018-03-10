@@ -1,16 +1,24 @@
 package com.manan.dev.ec2018app;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,12 +35,21 @@ import com.manan.dev.ec2018app.Utilities.GifImageView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class SplashScreen extends AppCompatActivity {
 
     private DatabaseController mDatabaseController;
     private ArrayList<EventDetails> allEvents;
+    private static final int DURATION = 5000;
+    private ValueAnimator mCurrentAnimator;
+    private final Matrix mMatrix = new Matrix();
+    private ImageView mImageView;
+    private float mScaleFactor;
+    private int mDirection = 1;
+    private RectF mDisplayRect = new RectF();
+    private IncomingHandler incomingHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,42 +58,88 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+        incomingHandler = new IncomingHandler(SplashScreen.this);
         allEvents = new ArrayList<>();
 
-        try {
-            mDatabaseController = new DatabaseController(getApplicationContext());
-        } catch (Exception e) {
-            Log.d("DBChecker", e.getMessage());
-        }
+//        new Handler().postDelayed(new Runnable() {
+//
+//            /*
+//             * Showing splash screen with a timer. This will be useful when you
+//             * want to show case your app logo / company
+//*/
+//            GifImageView gifImageView = (GifImageView) findViewById(R.id.GifImageView);
+//
+//            //    gifImageView.setGifImageResource(R.drawable.tenor);
+//            @Override
+//            public void run() {
+//                // This method will be executed once the timer is over
+//                // Start your app main activity
+////                Intent i = new Intent(SplashScreen.this, UserLoginActivity.class);
+////                startActivity(i);
+//                retreiveEvents();
+//                startActivity(new Intent(SplashScreen.this, UserLoginActivity.class));
+//                // close this activity
+//                finish();
+//            }
+//        }, 1000);
 
-
-        new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-*/
-            GifImageView gifImageView = (GifImageView) findViewById(R.id.GifImageView);
-
-            //    gifImageView.setGifImageResource(R.drawable.tenor);
+        mImageView = (ImageView) findViewById(R.id.background_one);
+        mImageView.post(new Runnable() {
             @Override
             public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-//                Intent i = new Intent(SplashScreen.this, UserLoginActivity.class);
-//                startActivity(i);
+                mScaleFactor = (float) mImageView.getHeight() / (float) mImageView.getDrawable().getIntrinsicHeight();
+                mMatrix.postScale(mScaleFactor, mScaleFactor);
+                mImageView.setImageMatrix(mMatrix);
+                animate();
+            }
+        });
+
+    }
+
+    private void animate() {
+        updateDisplayRect();
+        if (mDirection == 1) {
+            animate(mDisplayRect.left, mDisplayRect.left - (mDisplayRect.right - mImageView.getWidth()));
+        }
+    }
+
+    private void animate(float from, float to) {
+        mCurrentAnimator = ValueAnimator.ofFloat(from, to);
+        mCurrentAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (Float) animation.getAnimatedValue();
+
+                mMatrix.reset();
+                mMatrix.postScale(mScaleFactor, mScaleFactor);
+                mMatrix.postTranslate(value, 0);
+
+                mImageView.setImageMatrix(mMatrix);
+
+            }
+        });
+        mCurrentAnimator.setDuration(DURATION);
+        mCurrentAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
                 retreiveEvents();
                 startActivity(new Intent(SplashScreen.this, UserLoginActivity.class));
-                // close this activity
+                overridePendingTransition(R.anim.right_to_left_anim, R.anim.end_activity_anim);
                 finish();
             }
-        }, 1000);
+        });
+        mCurrentAnimator.start();
+    }
+
+    private void updateDisplayRect() {
+        mDisplayRect.set(0, 0, mImageView.getDrawable().getIntrinsicWidth(), mImageView.getDrawable().getIntrinsicHeight());
+        mMatrix.mapRect(mDisplayRect);
     }
 
 
     private void retreiveEvents() {
         if (isNetworkAvailable()) {
-            RequestQueue queue = Volley.newRequestQueue(this);
+            RequestQueue queue = Volley.newRequestQueue(SplashScreen.this);
             String url = getResources().getString(R.string.get_all_events_api);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
@@ -84,8 +147,8 @@ public class SplashScreen extends AppCompatActivity {
                     try {
                         JSONObject object = new JSONObject(response);
                         JSONArray eventArray = object.getJSONArray("data");
-                        EventDetails event = new EventDetails();
                         for (int i = 0; i < eventArray.length(); i++) {
+                            EventDetails event = new EventDetails();
                             JSONObject currEvent = eventArray.getJSONObject(i);
                             if (currEvent.has("timing"))
                                 event.setmName(currEvent.getString("title"));
@@ -151,8 +214,8 @@ public class SplashScreen extends AppCompatActivity {
                             }
                             //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
                             allEvents.add(event);
-                            updateDatabase();
                         }
+                        incomingHandler.sendEmptyMessage(0);
                     } catch (Exception e) {
                         Toast.makeText(SplashScreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.d("DBChecker", e.getMessage());
@@ -171,19 +234,6 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
-    private void updateDatabase() {
-        if (allEvents.size() > mDatabaseController.getCount()) {
-            for (EventDetails eventDetails : allEvents) {
-                mDatabaseController.addEntryToDb(eventDetails);
-            }
-        } else {
-            for (EventDetails eventDetails : allEvents) {
-                mDatabaseController.updateDb(eventDetails);
-            }
-        }
-        Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
-    }
-
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -191,5 +241,45 @@ public class SplashScreen extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+    public class IncomingHandler extends Handler {
+        private WeakReference<SplashScreen> yourActivityWeakReference;
+
+        IncomingHandler(SplashScreen yourActivity) {
+            yourActivityWeakReference = new WeakReference<>(yourActivity);
+            mDatabaseController = new DatabaseController(getApplicationContext());
+        }
+
+        @Override
+        public void handleMessage(Message message) {
+            if (yourActivityWeakReference != null) {
+                SplashScreen yourActivity = yourActivityWeakReference.get();
+
+                switch (message.what) {
+                    case 0:
+                        updateDatabase();
+                        break;
+                }
+            }
+        }
+
+        private void updateDatabase() {
+            Log.d("DBChecker", String.valueOf(allEvents.size()));
+            if (allEvents.size() > mDatabaseController.getCount()) {
+                for (EventDetails eventDetails : allEvents) {
+                    Log.d("DBC", eventDetails.getmEventId());
+                    mDatabaseController.addEntryToDb(eventDetails);
+                }
+            } else {
+                for (EventDetails eventDetails : allEvents) {
+                    mDatabaseController.updateDb(eventDetails);
+                    Log.d("DBC", "hi");
+                }
+            }
+
+            Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
+        }
+    }
+
 }
 

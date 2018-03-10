@@ -41,6 +41,7 @@ public class DatabaseController extends SQLiteOpenHelper {
     public void addEntryToDb(EventDetails event) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        Log.d("DBC", "aa gye");
         if (!checkIfValueExists(event.getmEventId())) {
             values.put(Schema.DbEntry.EVENT_ID_COLUMN_NAME, event.getmEventId());
             values.put(Schema.DbEntry.EVENT_NAME_COLUMN_NAME, event.getmName());
@@ -66,6 +67,7 @@ public class DatabaseController extends SQLiteOpenHelper {
                 values.put(Schema.DbEntry.EVENT_COORDINATOR_PHONE_2, event.getmCoordinators().get(1).getmCoordPhone());
             }
             db.insert(Schema.DbEntry.EVENT_LIST_TABLE_NAME, null, values);
+            Log.d("DBC", "ho gya");
         }
         db.close();
     }

@@ -259,6 +259,12 @@ public class UserLoginActivity extends AppCompatActivity {
             container.removeView(view);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        UserLoginActivity.this.finish();
+        System.exit(0);
+    }
 }
 
 

@@ -179,4 +179,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(target));
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
