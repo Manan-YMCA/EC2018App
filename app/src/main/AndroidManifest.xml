@@ -31,7 +31,7 @@
             android:label="[Event Name]"
             android:parentActivityName=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont"/>
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
@@ -40,8 +40,7 @@
             android:name=".Xunbao.XunbaoActivity"
             android:parentActivityName=".ContentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/xunbao_main_theme"/>
-
+            android:theme="@style/xunbao_main_theme" />
         <activity
             android:name=".DevelopersActivity"
             android:screenOrientation="portrait" />
@@ -51,10 +50,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:theme="@style/CodeFont"
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".ProfileActivity"
             android:screenOrientation="portrait"
@@ -72,8 +71,8 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/CodeFont"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -83,26 +82,30 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont"/>
-        <activity android:name=".EventRegister"
+            android:theme="@style/CodeFont" />
+        <activity
+            android:name=".EventRegister"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont"/>
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Splash"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tickets"
+        <activity
+            android:name=".Tickets"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont"/>
+            android:theme="@style/CodeFont" />
+        <activity android:name=".Fragments.CulmycaTimesActivity"></activity>
     </application>
 
 </manifest>
