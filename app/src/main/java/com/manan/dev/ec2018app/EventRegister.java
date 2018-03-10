@@ -1,6 +1,9 @@
 package com.manan.dev.ec2018app;
 
+
+import android.app.Notification;
 import android.content.Context;
+import android.media.RingtoneManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +36,9 @@ public class EventRegister extends AppCompatActivity {
     int count = 1;
     TextView text;
     ViewGroup.LayoutParams layPar;
+    private String eventName;
+    private String eventId;
+    private String eventType;
 
 
     @Override
@@ -40,9 +46,9 @@ public class EventRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_register);
 
-        String eventName = getIntent().getStringExtra("eventName");
-        String eventId = getIntent().getStringExtra("eventId");
-        String eventType = getIntent().getStringExtra("eventType");
+        eventName = getIntent().getStringExtra("eventName");
+        eventId = getIntent().getStringExtra("eventId");
+        eventType = getIntent().getStringExtra("eventType");
 
         Button Add = (Button) findViewById(R.id.add_mem_button);
         personNo = (TextView) findViewById(R.id.current_team_mem);
@@ -136,5 +142,14 @@ public class EventRegister extends AppCompatActivity {
 
 
     }
+
+//    public void sendNotification(){
+//        Notification.Builder noti = new Notification.Builder(getApplicationContext())
+//                .setContentTitle(eventName)
+//                .setContentText("")
+//                .setSmallIcon(R.drawable.ec_app_logo)
+//                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+//
+//    }
 
 }

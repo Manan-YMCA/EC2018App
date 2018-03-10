@@ -118,6 +118,16 @@ public class DatabaseController extends SQLiteOpenHelper {
         return ev;
     }
 
+    public String retrieveEventsByName(String eventName){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] projection = {Schema.DbEntry.EVENT_ID_COLUMN_NAME};
+        Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " = ?", new String[]{eventName}, null, null, null);
+        readCursor.moveToFirst();
+        String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
+        readCursor.close();
+        return eventId;
+    }
+
     private EventDetails retriveEvents(Cursor readCursor) {
         String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
         String eventName = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_NAME_COLUMN_NAME));
