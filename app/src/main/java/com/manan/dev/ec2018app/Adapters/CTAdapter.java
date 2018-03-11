@@ -205,8 +205,18 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String msg = "Check out this post by "+topic.getClubName()+". Follow the link:";
+                shareTextMessage(msg);
             }
         });
+
+    }
+    private void shareTextMessage(String msg) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, msg);
+        i.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        context.getApplicationContext().startActivity(i);
     }
 
     @Override
