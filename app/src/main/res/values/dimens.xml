@@ -3,5 +3,6 @@
 
     <dimen name="onefifty">150dp</dimen>
     <dimen name="four">4dp</dimen>
-
+    <dimen name="threefifty">350dp</dimen>
+    <dimen name="twoforty">240dp</dimen>
 </resources>

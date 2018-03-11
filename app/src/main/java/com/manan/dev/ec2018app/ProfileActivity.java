@@ -275,7 +275,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.i("My error", "" + error);
                 mProgress.dismiss();
             }
-        }) {
+        })
+        {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 

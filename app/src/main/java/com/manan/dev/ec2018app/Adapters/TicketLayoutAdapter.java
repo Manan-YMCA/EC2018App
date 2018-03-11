@@ -82,10 +82,11 @@ public class TicketLayoutAdapter extends BaseAdapter {
         TextView eventFee = (TextView) v.findViewById(R.id.tv_event_fees);
         TextView eventName = (TextView) v.findViewById(R.id.tv_event_name);
 
+
         Log.d("Tickets", singleItem.getQRcode());
         feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
         TicketsGenerator generate = new TicketsGenerator();
-        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext);
+        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext,(int) mContext.getResources().getDimension(R.dimen.onefifty),(int) mContext.getResources().getDimension(R.dimen.onefifty));
         itemImage.setImageBitmap(currTicket);
         eventName.setText(currEvent.getmName());
         eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));
