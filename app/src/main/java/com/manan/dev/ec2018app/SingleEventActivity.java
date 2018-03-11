@@ -246,6 +246,7 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
                     Bundle bundle = new Bundle();
                     bundle.putString("qrcodestring", TicketModel.getQRcode());
                     bundle.putString("eventid",eventId);
+                    bundle.putInt("activity", 1);
 
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);

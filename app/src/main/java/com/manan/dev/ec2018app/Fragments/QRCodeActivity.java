@@ -39,12 +39,14 @@ public class QRCodeActivity extends DialogFragment {
     private String eventId;
     private EventDetails eventDetails;
     private DatabaseController getEventDetails;
+    private int activity;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.qrcode_dialog_box, container, false);
         String qrcodestring = getArguments().getString("qrcodestring");
         eventId = getArguments().getString("eventid");
+        activity = getArguments().getInt("activity");
         qrTicketImage = (ImageView)rootView.findViewById(R.id.qr_ticket);
         eventName = (TextView)rootView.findViewById(R.id.tv_event_name);
         eventDate = (TextView)rootView.findViewById(R.id.tv_event_date);
@@ -72,8 +74,10 @@ public class QRCodeActivity extends DialogFragment {
 
     @Override
     public void onDestroyView() {
-        startActivity(new Intent(getActivity(), SingleEventActivity.class).putExtra("eventId", eventId));
-        getActivity().finish();
+        if(activity == 1) {
+            startActivity(new Intent(getActivity(), SingleEventActivity.class).putExtra("eventId", eventId));
+            getActivity().finish();
+        }
         super.onDestroyView();
     }
 }

@@ -191,6 +191,7 @@ public class EventRegister extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString("qrcodestring", qrCodeString);
                     bundle.putString("eventid",eventId);
+                    bundle.putInt("activity", 1);
 // set Fragmentclass Arguments
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
