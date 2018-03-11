@@ -11,12 +11,21 @@ public class EventDetails {
     private String mName, mClubname, mCategory, mDesc, mRules, mVenue, mPhotoUrl, mEventId, mEventTeamSize;
     private long mStartTime, mEndTime, mFees;
     private ArrayList<Coordinators> mCoordinators;
+    private int mUniqueKey;
     private ArrayList<String> mPrizes;
 
     public EventDetails() {
     }
 
-    public EventDetails(String mName, String mClubname, String mCategory, String mDesc, String mRules, String mVenue, String mPhotoUrl, String mEventId, String mEventSize, long mStartTime, long mEndTime, long mFees, ArrayList<Coordinators> mCoordinators, ArrayList<String> mPrizes) {
+    public int getmUniqueKey() {
+        return mUniqueKey;
+    }
+
+    public void setmUniqueKey(int mUniqueKey) {
+        this.mUniqueKey = mUniqueKey;
+    }
+
+    public EventDetails(String mName, String mClubname, String mCategory, String mDesc, String mRules, String mVenue, String mPhotoUrl, String mEventId, String mEventSize, long mStartTime, long mEndTime, long mFees, ArrayList<Coordinators> mCoordinators, ArrayList<String> mPrizes, int mUniqueKey) {
         this.mName = mName;
         this.mClubname = mClubname;
         this.mCategory = mCategory;
@@ -31,6 +40,8 @@ public class EventDetails {
         this.mFees = mFees;
         this.mCoordinators = mCoordinators;
         this.mPrizes = mPrizes;
+        this.mUniqueKey = mUniqueKey;
+
     }
 
     public String getmName() {

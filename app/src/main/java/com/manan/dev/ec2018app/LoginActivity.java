@@ -46,12 +46,24 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     private UserDetails userDetails;
     private ProgressDialog mProgress;
     private RelativeLayout RelativeView;
+    private String parent;
+    private String eventName;
+    private String eventId;
+    private String eventType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         setContentView(R.layout.activity_login);
+
+        parent = getIntent().getStringExtra("parent");
+
+        if(parent.equals("event")){
+            eventId = getIntent().getStringExtra("eventId");
+            eventName = getIntent().getStringExtra("eventName");
+            eventType = getIntent().getStringExtra("eventType");
+        }
         userDetails = new UserDetails();
         mobileNum = (EditText) findViewById(R.id.mobileNum);
         loginMobileNum = (Button) findViewById(R.id.login_mobileNum);
@@ -84,13 +96,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                 }
             }
         });
-
-        //TODO
-        //add an edit text to enter a mobile number
-        // a button to login.
-        // when login button is clicked hit get_user_api.
-        //if user exists the send otp to user
-        // if otp is verified save the number in shared preferences and open content activity.
 
     }
 
@@ -168,8 +173,16 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     }
 
     private void startSession() {
-        startActivity(new Intent(LoginActivity.this, ContentActivity.class));
-        finish();
+        if(parent.equals("normal")) {
+            startActivity(new Intent(LoginActivity.this, ContentActivity.class));
+            finish();
+        } else if(parent.equals("event")){
+            startActivity(new Intent(LoginActivity.this, EventRegister.class)
+                    .putExtra("eventName", eventName)
+                    .putExtra("eventId", eventId)
+                    .putExtra("eventType", eventType));
+            finish();
+        }
     }
 
     private Boolean validateCredentials() {

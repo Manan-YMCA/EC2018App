@@ -10,11 +10,13 @@ import java.util.List;
 
 public class postsModel{
 
-        public String title,photoid,clubName;
+
+        public String title,photoid,clubName,postid;
         public boolean approval;
         public int likes;
         public long time;
         public List<commentsModel> comments;
+        public List<likesModel> likefids;
         public postsModel(){
 
         }

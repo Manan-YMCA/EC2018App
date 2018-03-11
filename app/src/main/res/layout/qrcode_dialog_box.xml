@@ -17,7 +17,7 @@
         android:textSize="30sp"
         android:layout_below="@+id/qr_ticket"
         android:layout_marginTop="20dp"
-        android:id="@+id/tv_event_name"/>
+        android:id="@+id/tv_event_name"/>+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

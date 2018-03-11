@@ -47,11 +47,23 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     private ProgressDialog mProgress;
     private TextView LoginText;
     private UserDetails userDetails;
+    private String parent;
+    private String eventType;
+    private String eventName;
+    private String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        parent = getIntent().getStringExtra("parent");
+
+        if(parent.equals("event")){
+            eventType = getIntent().getStringExtra("eventType");
+            eventId = getIntent().getStringExtra("eventId");
+            eventName = getIntent().getStringExtra("eventName");
+        }
 
         userName = (EditText) findViewById(R.id.et_reg_name);
         userEmail = (EditText) findViewById(R.id.et_reg_email);
@@ -85,7 +97,16 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         LoginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                if(parent.equals("event")) {
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
+                            .putExtra("parent", "event")
+                            .putExtra("eventName", eventName)
+                            .putExtra("eventId", eventId)
+                            .putExtra("eventType", eventType));
+                } else {
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
+                            .putExtra("parent", "normal"));
+                }
             }
         });
 
@@ -206,8 +227,16 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     }
 
     private void startSession() {
-        startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
-        finish();
+        if(parent.equals("normal")) {
+            startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
+            finish();
+        } else if(parent.equals("event")){
+            startActivity(new Intent(RegisterActivity.this, EventRegister.class)
+                    .putExtra("eventName", eventName)
+                    .putExtra("eventId", eventId)
+                    .putExtra("eventType", eventType));
+            finish();
+        }
     }
 }
 

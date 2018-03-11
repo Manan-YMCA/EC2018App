@@ -39,6 +39,9 @@ public class UserLoginActivity extends AppCompatActivity {
     private MyViewPagerAdapter myViewPagerAdapter;
     private Timer timer;
 
+    private Runnable Update;
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,32 +82,52 @@ public class UserLoginActivity extends AppCompatActivity {
 
         if (getIntent().getBooleanExtra("closeApp", false)) {
             finish();
-            Toast.makeText(UserLoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         } else if (restoredText != null) {
             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
             finish();
-        } else if (getIntent().getBooleanExtra("logout", false)) {
-            // postAnimation();
-        } else {
-
         }
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class));
+
+                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class)
+                        .putExtra("parent", "normal"));
             }
         });
 
         guestLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(UserLoginActivity.this, ContentActivity.class));
             }
         });
 
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
+//changeslide();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        timer.cancel();
+        handler.removeCallbacks(Update);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        changeslide();
+    }
+
+
+    void changeslide() {
+        // Toast.makeText(UserLoginActivity.this,"Timer Started",Toast.LENGTH_SHORT).show();
+        handler = new Handler();
+        Update = new Runnable() {
             public void run() {
                 int current = getItem(+1);
                 if (current == layouts.length) {
@@ -121,54 +144,12 @@ public class UserLoginActivity extends AppCompatActivity {
             public void run() {
                 handler.post(Update);
             }
-        }, 2000, 2000);
+
+
+        }, 5000, 5000);
 
 
     }
-
-
-    void changeslide() {
-        new Handler().postDelayed(new Runnable() {
-
-
-            @Override
-            public void run() {
-                int current = getItem(+1);
-
-                if (current < layouts.length)
-
-                {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                }
-                if (current == layouts.length) {
-                    current = getItem(+1);
-                }
-
-            }
-        }, 5000);
-    }
-
-//    private void postAnimation() {
-//
-//        backImage.setVisibility(View.VISIBLE);
-//        backImage.setAlpha(1.0f);
-//        lineView.setVisibility(View.VISIBLE);
-//        lineView.setAlpha(1.0f);
-//        ECText.setVisibility(View.VISIBLE);
-//        ECText.setAlpha(1.0f);
-//        ContinueText.setVisibility(View.VISIBLE);
-//        ContinueText.setAlpha(1.0f);
-//        GuestText.setVisibility(View.VISIBLE);
-//        GuestText.setAlpha(1.0f);
-//        ReadyText.setVisibility(View.VISIBLE);
-//        ReadyText.setAlpha(1.0f);
-//        LoginButton.setVisibility(View.VISIBLE);
-//        LoginButton.setAlpha(1.0f);
-//        ECLogo.setVisibility(View.VISIBLE);
-//        ECLogo.setAlpha(1.0f);
-//
-//    }
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
@@ -199,10 +180,17 @@ public class UserLoginActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
+            // Toast.makeText(UserLoginActivity.this,"Timer Ended",Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
+            timer.cancel();
+            handler.removeCallbacks(Update);
+
+            changeslide();
+
 
         }
 
@@ -210,22 +198,10 @@ public class UserLoginActivity extends AppCompatActivity {
         public void onPageScrollStateChanged(int arg0) {
 
         }
+
     };
 
-    /**
-     * Making notification bar transparent
-     */
-    private void changeStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
-    }
 
-    /**
-     * View pager adapter
-     */
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 

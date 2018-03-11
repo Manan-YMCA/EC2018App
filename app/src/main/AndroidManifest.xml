@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.manan.dev.ec2018app">
 
     <!--
@@ -28,10 +29,33 @@
             android:theme="@style/CodeFont" />
         <activity
             android:name=".SingleEventActivity"
-            android:label="[Event Name]"
+            android:label="Culmyca 2018"
             android:parentActivityName=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont" />
+            android:theme="@style/CodeFont">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="elementsculmyca.com"
+                    android:pathPrefix="/event/" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.elementsculmyca.com"
+                    android:pathPrefix="/event/" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
@@ -43,7 +67,9 @@
             android:theme="@style/xunbao_main_theme" />
         <activity
             android:name=".DevelopersActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -57,18 +83,7 @@
         <activity
             android:name=".ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.this-so-does-not-exist.com"
-                    android:scheme="http" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/CodeFont"></activity>
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait"
@@ -105,7 +120,13 @@
             android:name=".Tickets"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
-        <activity android:name=".CulmycaTimesActivity"></activity>
+        <activity android:name=".CulmycaTimesActivity"
+            android:parentActivityName=".ContentActivity"/>
+
+        <activity android:name=".AboutActivity" android:theme="@style/CodeFont"/>
+        <service android:name=".MyNotificationService"
+            android:enabled="true"/>
+        <receiver android:name=".MyNotificationResponse"/>
     </application>
 
 </manifest>

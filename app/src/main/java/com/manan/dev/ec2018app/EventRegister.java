@@ -1,14 +1,16 @@
 package com.manan.dev.ec2018app;
 
 
-import android.app.FragmentManager;
-import android.app.Notification;
-import android.content.Context;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.support.v7.app.AppCompatActivity;
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,18 +29,25 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.qrcode.encoder.QRCode;
+import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
+import com.manan.dev.ec2018app.Models.UserDetails;
+import com.manan.dev.ec2018app.Models.EventDetails;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class EventRegister extends AppCompatActivity {
 
     EditText name, mainPhone, mainName;
+    AlarmManager alarmManager;
+    PendingIntent pending_intent;
     EditText college, mainmail, mainClg;
     TextView personNo, eventTypeView, eventNameView;
     ArrayList<TextView> memberno;
@@ -48,6 +56,7 @@ public class EventRegister extends AppCompatActivity {
     String intentPhone;
     String intentClg;
     String intentName;
+    UserDetails userDetails;
     int count = 1;
     TextView text;
     ViewGroup.LayoutParams layPar;
@@ -56,6 +65,7 @@ public class EventRegister extends AppCompatActivity {
     private String eventType;
 
     private String qrCodeString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +74,9 @@ public class EventRegister extends AppCompatActivity {
         eventName = getIntent().getStringExtra("eventName");
         eventId = getIntent().getStringExtra("eventId");
         eventType = getIntent().getStringExtra("eventType");
+        userDetails = new UserDetails();
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         Button Add = (Button) findViewById(R.id.add_mem_button);
         personNo = (TextView) findViewById(R.id.current_team_mem);
@@ -80,14 +93,21 @@ public class EventRegister extends AppCompatActivity {
         mainClg = (EditText) findViewById(R.id.ld_reg_clg);
         mainPhone = (EditText) findViewById(R.id.ld_mobile);
         mainmail = (EditText) findViewById(R.id.ld_email);
-
         nameText.add(mainName);
         collegeText.add(mainClg);
 
         final LinearLayout layout = findViewById(R.id.layout_infater);
         text = new TextView(this);
-        if(eventType.equals("solo"))
-        Add.setVisibility(View.GONE);
+        if (eventType.equals("solo"))
+            Add.setVisibility(View.GONE);
+        if (eventType.equals("solo"))
+            Add.setVisibility(View.GONE);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        final String phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber == null) {
+            Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
+        }
+        getDetails(phoneNumber);
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,8 +125,8 @@ public class EventRegister extends AppCompatActivity {
                         ViewGroup p3 = (ViewGroup) p2.getParent();
                         Integer remove_member = Integer.parseInt(tv_2.getText().toString());
                         Log.d("counter", String.valueOf(remove_member));
-                        nameText.remove(remove_member-1);
-                        collegeText.remove(remove_member-1);
+                        nameText.remove(remove_member - 1);
+                        collegeText.remove(remove_member - 1);
                         Log.d("counter", String.valueOf(nameText.size()));
                         memberno.remove(tv_2);
                         update();
@@ -137,22 +157,25 @@ public class EventRegister extends AppCompatActivity {
                 intentClg = "";
                 intentMail = "";
                 intentPhone = "";
-                intentPhone += mainPhone.getText().toString() ;
-                intentMail += mainmail.getText().toString() ;
+                intentPhone += mainPhone.getText().toString();
+                intentMail += mainmail.getText().toString();
                 for (int i = 0; i < nameText.size(); i++) {
                     intentName += nameText.get(i).getText().toString() + ",";
                 }
-                intentName = intentName.substring(0, intentName.length()-1);
+                intentName = intentName.substring(0, intentName.length() - 1);
 
                 for (int i = 0; i < collegeText.size(); i++) {
                     intentClg += collegeText.get(i).getText().toString() + ",";
                 }
-                intentClg = intentClg.substring( 0 , intentClg.length()-1);
-                Log.d("RegisterEvent","intentname" + intentName + "intentclg " + intentClg + "intentphone" +
-                        intentPhone +"intentmail" + intentMail);
+                intentClg = intentClg.substring(0, intentClg.length() - 1);
+                Log.d("RegisterEvent", "intentname" + intentName + "intentclg " + intentClg + "intentphone" +
+                        intentPhone + "intentmail" + intentMail);
 //                Toast.makeText(EventRegister.this, "intentname" + intentName + "intentclg " + intentClg
 //                        + "intentphone" + intentPhone +"intentmail" + intentMail, Toast.LENGTH_SHORT).show();
-                registerEvent();
+                Boolean checker = validateCredentials();
+                if (checker) {
+                    registerEvent();
+                }
 
             }
         });
@@ -162,10 +185,11 @@ public class EventRegister extends AppCompatActivity {
 
     private void update() {
         for (int i = 0; i < memberno.size(); i++) {
-            memberno.get(i).setText(String.valueOf(i+2));
+            memberno.get(i).setText(String.valueOf(i + 2));
         }
     }
-    private void registerEvent(){
+
+    private void registerEvent() {
         String url = getResources().getString(R.string.event_register_api);
         Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -178,14 +202,17 @@ public class EventRegister extends AppCompatActivity {
                     Toast.makeText(EventRegister.this, obj.getString("qrcode"), Toast.LENGTH_LONG).show();
                     qrCodeString = (obj.getString("qrcode"));
 
+                    sendNotification();
                     FragmentManager fm = getFragmentManager();
                     Bundle bundle = new Bundle();
                     bundle.putString("qrcodestring", qrCodeString);
-                    bundle.putString("eventid",eventId);
+                    bundle.putString("eventid", eventId);
+                    bundle.putInt("activity", 1);
+                    bundle.putString("eventid", eventId);
 // set Fragmentclass Arguments
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
-                    fragobj.show(fm,"drff");
+                    fragobj.show(fm, "drff");
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
@@ -201,8 +228,7 @@ public class EventRegister extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
                 Log.i("My error", "" + error);
             }
-        })
-        {
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
@@ -211,28 +237,119 @@ public class EventRegister extends AppCompatActivity {
                 map.put("phone", intentPhone);
                 map.put("email", intentMail);
                 map.put("college", intentClg);
-                map.put("eventid", eventId );
+                map.put("eventid", eventId);
                 return map;
             }
         };
         queue.add(request);
     }
 
-//    public void sendNotification(){
-//        Notification.Builder noti = new Notification.Builder(getApplicationContext())
-//                .setContentTitle(eventName)
-//                .setContentText("")
-//                .setSmallIcon(R.drawable.ec_app_logo)
-//                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-//
-//    }
+    public void sendNotification() {
 
+        Intent my_intent = new Intent(EventRegister.this, MyNotificationResponse.class);
+        my_intent.putExtra("eventId", eventId);
+        my_intent.putExtra("eventName", eventName);
+
+        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis(Calendar.getInstance().getTimeInMillis());
+//        calendar.add(Calendar.SECOND, 10);
+
+        DatabaseController db = new DatabaseController(getApplicationContext());
+        EventDetails currEvent = new EventDetails();
+        currEvent = db.retreiveEventsByID(eventId);
+        Long eventStartTime = currEvent.getmStartTime();
+        calendar.setTimeInMillis(eventStartTime);
+        calendar.add(Calendar.HOUR, -1);
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+
+        Log.d("values", sdf1.format(calendar.getTime()) + " " + sdf.format(calendar.getTime()));
+        my_intent.putExtra("uniqueId", currEvent.getmUniqueKey());
+
+        pending_intent = PendingIntent.getBroadcast(EventRegister.this, currEvent.getmUniqueKey(), my_intent, PendingIntent.FLAG_ONE_SHOT);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
+
+    }
+
+
+    private Boolean validateCredentials() {
+        for(EditText nameTextView : nameText){
+            if(nameTextView.getText().toString().equals("")){
+                nameTextView.setError("Enter a User Name");
+                return false;
+            }
+        }
+        for(EditText collegeTextView : collegeText){
+            if(collegeTextView.getText().toString().equals("")){
+                collegeTextView.setError("Enter a College Name");
+                return false;
+            }
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(mainmail.getText().toString()).matches()) {
+            mainmail.setError("Enter a Valid Email Address");
+            return false;
+        }
+        if (mainPhone.getText().toString().equals("")) {
+            mainPhone.setError("Enter a Phone Number");
+            return false;
+        }
+        if (!Patterns.PHONE.matcher(mainPhone.getText().toString()).matches()) {
+            mainPhone.setError("Enter a valid Phone Number");
+            return false;
+        }
+        if (mainPhone.getText().toString().length() != 10) {
+            mainPhone.setError("Enter a valid Phone Number");
+            return false;
+        }
+        return true;
+    }
+
+    private void getDetails(final String phone) {
+        Log.i("tg", "bgg");
+        String url = getResources().getString(R.string.get_user_details_api) + phone;
+        Toast.makeText(this, "URL: " + url, Toast.LENGTH_LONG).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest obreq = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj1 = new JSONObject(response);
+                            JSONObject obj = obj1.getJSONObject("data");
+                            Toast.makeText(EventRegister.this, obj.getString("name"), Toast.LENGTH_LONG).show();
+                            mainName.setText(obj.getString("name"));
+                            mainmail.setText(obj.getString("email"));
+                            mainClg.setText(obj.getString("college"));
+                            mainPhone.setText(phone);
+                            userDetails.setmName(obj.getString("name"));
+                            userDetails.setEmail(obj.getString("email"));
+                            userDetails.setmCollege(obj.getString("college"));
+                            userDetails.setmPhone(phone);
+                        }
+                        // Try and catch are included to handle any errors due to JSON
+                        catch (Exception e) {
+                            // If an error occurs, this prints the error to the log
+                            e.printStackTrace();
+                            Toast.makeText(EventRegister.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    // Handles errors that occur due to Volley
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(EventRegister.this, "Error aagya2", Toast.LENGTH_SHORT).show();
+                        Log.e("Volley", "Error");
+                    }
+                }
+        );
+        queue.add(obreq);
+    }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(EventRegister.this,SingleEventActivity.class)
-        .putExtra("eventId",eventId).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
         finish();
-        return;
     }
 }

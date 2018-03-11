@@ -3,6 +3,9 @@ package com.manan.dev.ec2018app;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,12 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,11 +34,13 @@ import com.manan.dev.ec2018app.Models.QRTicketModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class SingleEventActivity extends AppCompatActivity {
 
@@ -50,30 +55,55 @@ public class SingleEventActivity extends AppCompatActivity {
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
-    private String eventId;
+    private LinearLayout eventImageLinearLayout;
+    private ImageView backbutton;
     private QRTicketModel TicketModel;
 
+    private String eventId;
+    private DatabaseController databaseController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
-
-        eventId = getIntent().getStringExtra("eventId");
+        databaseController = new DatabaseController(this);
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
+        Log.v("deeplink", appLinkData + "");
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+            String revStr = new StringBuilder(appLinkData.toString()).reverse().toString();
+            int i;
+            for (i = 0; revStr.charAt(i) != 35; i++) {
+            }
+            revStr = revStr.substring(0, i);
+            String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
+            eventName = eventName.replace("%20", " ");
+            Log.v("deeplink", eventName);
+            Toast.makeText(this, "deeplink:" + eventName, Toast.LENGTH_SHORT).show();
+            eventId = databaseController.retrieveEventIdByName(eventName);
+            if (eventId.equals("wrong")) {
+                Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(new Intent(this, SplashScreen.class));
+            }
+        } else {
+            Toast.makeText(this, "nodeeplink:", Toast.LENGTH_SHORT).show();
+            Log.v("nodeeplink", appLinkData + "");
+            eventId = getIntent().getStringExtra("eventId");
+        }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName) ,MODE_PRIVATE);
-        phoneNumber = prefs.getString("Phone", null);
-        if(phoneNumber!=null)
-        displayTickets(phoneNumber);
+
         registerButton = (Button) findViewById(R.id.btn_register);
 
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
         eventStartTimeTextView = (TextView) findViewById(R.id.tv_event_start_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
         eventEndTimeTextView = (TextView) findViewById(R.id.tv_event_end_time);
-        hostClubTextView = (TextView) findViewById(R.id.tv_host);
+        // hostClubTextView = (TextView) findViewById(R.id.tv_host);
         feesTextView = (TextView) findViewById(R.id.tv_fees);
         typeOfEventTextView = (TextView) findViewById(R.id.tv_type_of_event);
         firstPrizeTextView = (TextView) findViewById(R.id.tv_prize_first);
@@ -83,19 +113,28 @@ public class SingleEventActivity extends AppCompatActivity {
         rulesTextView = (TextView) findViewById(R.id.tv_rules);
         eventNameView = (TextView) findViewById(R.id.tv_event_name);
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
-        goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
+        // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
+
+        eventImageLinearLayout = (LinearLayout) findViewById(R.id.ll_btn_register);
+
         line1 = (View) findViewById(R.id.line1);
-        line2 = (View) findViewById(R.id.line4);
+        // line2 = (View) findViewById(R.id.line4);
         line3 = (View) findViewById(R.id.line5);
         line4 = (View) findViewById(R.id.line3);
         line4.setVisibility(View.GONE);
-        goingLinearLayout.setVisibility(View.GONE);
+        //  goingLinearLayout.setVisibility(View.GONE);
 
+        Uri imageuri = Uri.parse("https://ocul.in/7er");
+        new LoadBackground("https://ocul.in/manan_apple",
+                "androidfigure").execute();
         dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
         locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
+        backbutton = (ImageView) findViewById(R.id.tv_back_button);
+
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
+
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(eventDetails.getmStartTime());
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
@@ -112,11 +151,17 @@ public class SingleEventActivity extends AppCompatActivity {
 
         eventStartTimeTextView.setText(startTime);
         eventEndTimeTextView.setText(endTime);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         eventNameView.setText(eventDetails.getmName());
 
         locationTextView.setText(eventDetails.getmVenue());
-        hostClubTextView.setText(eventDetails.getmClubname());
+        // hostClubTextView.setText(eventDetails.getmClubname());
         Long fees = eventDetails.getmFees();
         if (fees == 0) {
             feesTextView.setText("Free");
@@ -126,7 +171,7 @@ public class SingleEventActivity extends AppCompatActivity {
 
         if (eventDetails.getmEventTeamSize().equals("NA")) {
             registerButton.setVisibility(View.GONE);
-            line1.setVisibility(View.GONE);
+            //  line1.setVisibility(View.GONE);
             typeOfEventTextView.setText("Presentation Event");
         } else {
             typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
@@ -146,7 +191,7 @@ public class SingleEventActivity extends AppCompatActivity {
         if (coordCount == 0) {
             coordsLinearLayout.setVisibility(View.GONE);
             coordsHeading.setVisibility(View.GONE);
-            line2.setVisibility(View.GONE);
+            //  line2.setVisibility(View.GONE);
         }
 
 
@@ -192,27 +237,29 @@ public class SingleEventActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(registerButton.getText().toString().equals("View Ticket")){
+                if (registerButton.getText().toString().equals("View Ticket")) {
 
                     FragmentManager fm = getFragmentManager();
                     Bundle bundle = new Bundle();
                     bundle.putString("qrcodestring", TicketModel.getQRcode());
-                    bundle.putString("eventid",eventId);
+                    bundle.putString("eventid", eventId);
+                    bundle.putInt("activity", 0);
 
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
-                    fragobj.show(fm,"drff");
-                }
-                else {
-                    if (phoneNumber!=null) {
+                    fragobj.show(fm, "drff");
+                } else {
+                    if (phoneNumber != null) {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                                 .putExtra("eventName", eventDetails.getmName())
                                 .putExtra("eventId", eventDetails.getmEventId())
                                 .putExtra("eventType", eventDetails.getmEventTeamSize()));
-                        finish();
-                    }
-                    else
-                         startActivity(new Intent(SingleEventActivity.this,RegisterActivity.class));
+                    } else
+                        startActivity(new Intent(SingleEventActivity.this, RegisterActivity.class)
+                                .putExtra("parent", "event")
+                                .putExtra("eventName", eventDetails.getmName())
+                                .putExtra("eventId", eventDetails.getmEventId())
+                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
                 }
             }
         });
@@ -241,6 +288,49 @@ public class SingleEventActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
+
+        private String imageUrl, imageName;
+
+        public LoadBackground(String url, String file_name) {
+            this.imageUrl = url;
+            this.imageName = file_name;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Drawable doInBackground(String... urls) {
+
+            try {
+                InputStream is = (InputStream) this.fetch(this.imageUrl);
+                Drawable d = Drawable.createFromStream(is, this.imageName);
+                return d;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        private Object fetch(String address) throws MalformedURLException, IOException {
+            URL url = new URL(address);
+            Object content = url.getContent();
+            return content;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable result) {
+            super.onPostExecute(result);
+            eventImageLinearLayout.setBackground(result);
+        }
+    }
+
     private void displayTickets(String phoneNumber) {
 
         String url = getResources().getString(R.string.get_events_qr_code);
@@ -256,7 +346,7 @@ public class SingleEventActivity extends AppCompatActivity {
                     JSONArray ticketDetails = obj1.getJSONArray("data");
                     for (int i = 0; i < ticketDetails.length(); i++) {
                         JSONObject obj2 = ticketDetails.getJSONObject(i);
-                        if(obj2.getString("eventid").equals(eventId)) {
+                        if (obj2.getString("eventid").equals(eventId)) {
                             TicketModel = new QRTicketModel();
 
                             TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
@@ -287,4 +377,12 @@ public class SingleEventActivity extends AppCompatActivity {
         queue.add(request);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber != null)
+            displayTickets(phoneNumber);
+    }
 }

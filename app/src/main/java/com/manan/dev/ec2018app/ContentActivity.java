@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,28 +27,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
-import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
-import com.manan.dev.ec2018app.Models.Coordinators;
-import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -71,6 +57,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
 
+        try {
+            Log.d("auth", FirebaseAuth.getInstance().getUid());
+        } catch (Exception e) {
+            Log.d("auth", e.getMessage());
+        }
+
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -78,20 +70,10 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName) ,MODE_PRIVATE);
-        phoneNumber = prefs.getString("Phone", null);
-
-
         nav_view = (NavigationView) findViewById(R.id.nav_view);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
 
-        if (phoneNumber == null) {
-            Toast.makeText(this, "why", Toast.LENGTH_SHORT).show();
-            Menu menu = nav_view.getMenu();
-            menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_tickets).setVisible(false);
-        }
 
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
@@ -260,19 +242,11 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(GravityCompat.START, true);
         } else {
-            if (phoneNumber != null) {
-                startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
-                        .putExtra("closeApp", true)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
-            } else {
-                startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
-                        .putExtra("logout", true)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
-            }
+            startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
+                    .putExtra("closeApp", true)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            finish();
 
         }
     }
@@ -299,7 +273,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
                         String restoredText = prefs.getString("Phone", null);
                         if (restoredText == null) {
-                            startActivity(new Intent(getApplicationContext(), RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            startActivity(new Intent(getApplicationContext(), RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    .putExtra("parent", "normal"));
                         } else {
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         }
@@ -332,14 +307,19 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }, 130);
                 break;
             case R.id.nav_about:
-                //TODO
-                //display about fest and college
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, AboutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
             case R.id.nav_logout:
                 SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
+                FirebaseAuth.getInstance().signOut();
                 if (AccessToken.getCurrentAccessToken() != null) {
 
 
@@ -412,7 +392,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onPause() {
         super.onPause();
-        if(nav_view != null){
+        if (nav_view != null) {
             nav_view.setCheckedItem(R.id.nav_home);
         }
     }
@@ -420,7 +400,15 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onResume() {
         super.onResume();
-        if(nav_view != null){
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber == null) {
+            Menu menu = nav_view.getMenu();
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_tickets).setVisible(false);
+            menu.findItem(R.id.nav_profile).setTitle("Log In");
+        }
+        if (nav_view != null) {
             nav_view.setCheckedItem(R.id.nav_home);
         }
     }
