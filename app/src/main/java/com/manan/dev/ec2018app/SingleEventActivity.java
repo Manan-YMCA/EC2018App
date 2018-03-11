@@ -48,7 +48,6 @@ public class SingleEventActivity extends AppCompatActivity {
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
-    private String eventId;
     private QRTicketModel TicketModel;
 
     private String eventId;
