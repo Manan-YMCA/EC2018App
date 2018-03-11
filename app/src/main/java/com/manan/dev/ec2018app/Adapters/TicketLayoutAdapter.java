@@ -1,11 +1,16 @@
 package com.manan.dev.ec2018app.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +25,7 @@ import android.widget.TextView;
 
 import com.manan.dev.ec2018app.CategoryEventDisplayActivity;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
+import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
@@ -40,12 +46,13 @@ public class TicketLayoutAdapter extends BaseAdapter {
     private ArrayList<QRTicketModel> itemsList;
     private Context mContext;
     private View v;
+    private int activity;
 
 
     public TicketLayoutAdapter(Context context, ArrayList<QRTicketModel> itemsList) {
         Log.d("Tickets", "view builder");
         this.itemsList = itemsList;
-        this.mContext = context;
+        mContext = context;
     }
 
     @Override
@@ -68,7 +75,7 @@ public class TicketLayoutAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         v = LayoutInflater.from(mContext).inflate(R.layout.qr_ticket_layout, null);
 
-        QRTicketModel singleItem = itemsList.get(position);
+        final QRTicketModel singleItem = itemsList.get(position);
         EventDetails currEvent = new EventDetails();
         DatabaseController mDatabaseController = new DatabaseController(mContext);
 
@@ -81,7 +88,7 @@ public class TicketLayoutAdapter extends BaseAdapter {
         TextView eventTime = (TextView) v.findViewById(R.id.tv_event_time);
         TextView eventFee = (TextView) v.findViewById(R.id.tv_event_fees);
         TextView eventName = (TextView) v.findViewById(R.id.tv_event_name);
-
+        CardView cardView=(CardView)v.findViewById(R.id.cv_qr_ticket);
 
         Log.d("Tickets", singleItem.getQRcode());
         feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
@@ -101,6 +108,23 @@ public class TicketLayoutAdapter extends BaseAdapter {
         String formattedTime = sdf1.format(cal.getTime());
         eventTime.setText(formattedTime);
         Log.d("Tickets", "data setSuccessfully");
+
+        final EventDetails finalCurrEvent = currEvent;
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.app.FragmentManager fm = ((Activity) mContext).getFragmentManager();
+                Bundle bundle = new Bundle();
+                bundle.putString("qrcodestring", singleItem.getQRcode());
+                bundle.putString("eventid", finalCurrEvent.getmEventId());
+                bundle.putInt("activity", 0);
+// set Fragmentclass Arguments
+                QRCodeActivity fragobj = new QRCodeActivity();
+                fragobj.setArguments(bundle);
+                fragobj.show(fm,"drff");
+
+            }
+        });
 
         return v;
     }

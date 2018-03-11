@@ -67,7 +67,9 @@
             android:theme="@style/xunbao_main_theme" />
         <activity
             android:name=".DevelopersActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

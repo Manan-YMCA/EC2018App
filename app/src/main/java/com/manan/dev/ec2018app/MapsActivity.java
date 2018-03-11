@@ -104,7 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e("TAG", "Can't find style. Error: ", e);
         }
         LatLng ymca = new LatLng(28.3674761, 77.3169494);
-        CameraPosition target = CameraPosition.builder().target(ymca).zoom((float) 17.6).bearing(82).tilt(30).build();
+        CameraPosition target = CameraPosition.builder().target(ymca).zoom((float) 17.6).bearing(85).tilt(30).build();
 
         MarkerOptions defaultMarker = new MarkerOptions().position(ymca).title("YMCA University of Science and Technology").snippet("Elements Culmyca'17").icon(BitmapDescriptorFactory.fromResource(R.drawable.locationicon));
         mMap.addMarker(defaultMarker).showInfoWindow();
@@ -160,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .add(new LatLng(28.368196, 77.315378))
                 .color(R.color.colorPrimary));
 
-        mMap.addPolyline(new PolylineOptions().geodesic(true)
+    /*    mMap.addPolyline(new PolylineOptions().geodesic(true)
                 .add(new LatLng(28.842884, 77.104147))
                 .add(new LatLng(28.842788, 77.104222))
                 .add(new LatLng(28.842628, 77.104598))
@@ -174,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .add(new LatLng(28.842618, 77.104177))
                 .add(new LatLng(28.842797, 77.104008))
                 .add(new LatLng(28.842884, 77.104147))
-                .color(R.color.colorPrimary));
+                .color(R.color.colorPrimary));*/
 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(target));
     }

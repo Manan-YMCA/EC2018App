@@ -51,7 +51,7 @@ public class Tickets extends AppCompatActivity {
         GridView userTicketsView = (GridView) findViewById(R.id.gl_user_tickets);
         userTickets = new ArrayList<>();
 
-        mAdapter = new TicketLayoutAdapter(getApplicationContext(), userTickets);
+        mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
         Log.d("Tickets", phoneNumber);
         Log.d("Tickets", Integer.toString(userTickets.size()));
         userTicketsView.setAdapter(mAdapter);
