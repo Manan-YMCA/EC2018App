@@ -3,7 +3,7 @@ package com.manan.dev.ec2018app.DatabaseHandler;
 /**
  * Created by nisha on 2/16/2018.
  */
-
+//2604
 public class dbUtils {
     private static final String COMMA_SEP = ",";
     public static final String CREATE_TABLE = "CREATE TABLE " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + "( "

@@ -3,7 +3,9 @@ package com.manan.dev.ec2018app;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,6 +34,10 @@ import com.manan.dev.ec2018app.Models.QRTicketModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -48,6 +55,8 @@ public class SingleEventActivity extends AppCompatActivity {
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
+    private LinearLayout eventImageLinearLayout;
+    private ImageView backbutton;
     private QRTicketModel TicketModel;
 
     private String eventId;
@@ -97,7 +106,7 @@ public class SingleEventActivity extends AppCompatActivity {
         eventStartTimeTextView = (TextView) findViewById(R.id.tv_event_start_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
         eventEndTimeTextView = (TextView) findViewById(R.id.tv_event_end_time);
-        hostClubTextView = (TextView) findViewById(R.id.tv_host);
+       // hostClubTextView = (TextView) findViewById(R.id.tv_host);
         feesTextView = (TextView) findViewById(R.id.tv_fees);
         typeOfEventTextView = (TextView) findViewById(R.id.tv_type_of_event);
         firstPrizeTextView = (TextView) findViewById(R.id.tv_prize_first);
@@ -107,19 +116,28 @@ public class SingleEventActivity extends AppCompatActivity {
         rulesTextView = (TextView) findViewById(R.id.tv_rules);
         eventNameView = (TextView) findViewById(R.id.tv_event_name);
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
-        goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
+      // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
+
+        eventImageLinearLayout =(LinearLayout)findViewById(R.id.ll_btn_register);
+
         line1 = (View) findViewById(R.id.line1);
-        line2 = (View) findViewById(R.id.line4);
+       // line2 = (View) findViewById(R.id.line4);
         line3 = (View) findViewById(R.id.line5);
         line4 = (View) findViewById(R.id.line3);
         line4.setVisibility(View.GONE);
-        goingLinearLayout.setVisibility(View.GONE);
+      //  goingLinearLayout.setVisibility(View.GONE);
 
+        Uri imageuri= Uri.parse("https://ocul.in/7er");
+        new LoadBackground("https://ocul.in/manan_apple",
+                "androidfigure").execute();
         dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
         locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
+backbutton =(ImageView) findViewById(R.id.tv_back_button);
+
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
+
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(eventDetails.getmStartTime());
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
@@ -136,11 +154,17 @@ public class SingleEventActivity extends AppCompatActivity {
 
         eventStartTimeTextView.setText(startTime);
         eventEndTimeTextView.setText(endTime);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         eventNameView.setText(eventDetails.getmName());
 
         locationTextView.setText(eventDetails.getmVenue());
-        hostClubTextView.setText(eventDetails.getmClubname());
+       // hostClubTextView.setText(eventDetails.getmClubname());
         Long fees = eventDetails.getmFees();
         if (fees == 0) {
             feesTextView.setText("Free");
@@ -150,7 +174,7 @@ public class SingleEventActivity extends AppCompatActivity {
 
         if (eventDetails.getmEventTeamSize().equals("NA")) {
             registerButton.setVisibility(View.GONE);
-            line1.setVisibility(View.GONE);
+          //  line1.setVisibility(View.GONE);
             typeOfEventTextView.setText("Presentation Event");
         } else {
             typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
@@ -170,7 +194,7 @@ public class SingleEventActivity extends AppCompatActivity {
         if (coordCount == 0) {
             coordsLinearLayout.setVisibility(View.GONE);
             coordsHeading.setVisibility(View.GONE);
-            line2.setVisibility(View.GONE);
+          //  line2.setVisibility(View.GONE);
         }
 
 
@@ -240,7 +264,6 @@ public class SingleEventActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override
@@ -265,6 +288,52 @@ public class SingleEventActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
+
+        private String imageUrl , imageName;
+
+        public LoadBackground(String url, String file_name) {
+            this.imageUrl = url;
+            this.imageName = file_name;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Drawable doInBackground(String... urls) {
+
+            try {
+                InputStream is = (InputStream) this.fetch(this.imageUrl);
+                Drawable d = Drawable.createFromStream(is, this.imageName);
+                return d;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        private Object fetch(String address) throws MalformedURLException,IOException {
+            URL url = new URL(address);
+            Object content = url.getContent();
+            return content;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable result) {
+            super.onPostExecute(result);
+            eventImageLinearLayout.setBackground(result);
+        }
+    }
+
+
+
+
+
 
     private void displayTickets(String phoneNumber) {
 

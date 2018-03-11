@@ -39,6 +39,9 @@ public class UserLoginActivity extends AppCompatActivity {
     private MyViewPagerAdapter myViewPagerAdapter;
     private Timer timer;
 
+    private Runnable Update;
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +95,7 @@ public class UserLoginActivity extends AppCompatActivity {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class));
             }
         });
@@ -99,55 +103,60 @@ public class UserLoginActivity extends AppCompatActivity {
         guestLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(UserLoginActivity.this, ContentActivity.class));
             }
         });
 
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                int current = getItem(+1);
-                if (current == layouts.length) {
-                    current = 0;
-                }
-                viewPager.setCurrentItem(current++, true);
-            }
-        };
-
-        timer = new Timer(); // This will create a new Thread
-        timer.schedule(new TimerTask() { // task to be scheduled
-
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 2000, 2000);
-
+//changeslide();
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    void changeslide() {
-        new Handler().postDelayed(new Runnable() {
+        timer.cancel();
+        handler.removeCallbacks(Update);
 
-
-            @Override
-            public void run() {
-                int current = getItem(+1);
-
-                if (current < layouts.length)
-
-                {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                }
-                if (current == layouts.length) {
-                    current = getItem(+1);
-                }
-
-            }
-        }, 5000);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        changeslide();
+    }
+
+
+    void changeslide()
+{
+  // Toast.makeText(UserLoginActivity.this,"Timer Started",Toast.LENGTH_SHORT).show();
+    handler = new Handler();
+    Update = new Runnable() {
+        public void run() {
+            int current=getItem(+1);
+            if (current == layouts.length) {
+                current = 0;
+            }
+            viewPager.setCurrentItem(current++, true);
+        }
+    };
+
+    timer = new Timer(); // This will create a new Thread
+    timer .schedule(new TimerTask() { // task to be scheduled
+
+        @Override
+        public void run() {
+            handler.post(Update);
+        }
+        
+        
+        
+        
+    }, 5000, 5000);
+
+
+}
 
 //    private void postAnimation() {
 //
@@ -192,17 +201,23 @@ public class UserLoginActivity extends AppCompatActivity {
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
     }
-
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
 
+           // Toast.makeText(UserLoginActivity.this,"Timer Ended",Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
+            timer.cancel();
+            handler.removeCallbacks(Update);
+
+            changeslide();
+
 
         }
 
@@ -210,9 +225,18 @@ public class UserLoginActivity extends AppCompatActivity {
         public void onPageScrollStateChanged(int arg0) {
 
         }
-    };
 
-    /**
+    }
+    ;
+
+//    ViewPager.OnScrollChangeListener listerner = new View.OnScrollChangeListener() {
+//        @Override
+//        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//
+//        }
+//    };
+
+      /**
      * Making notification bar transparent
      */
     private void changeStatusBarColor() {

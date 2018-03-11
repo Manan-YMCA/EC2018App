@@ -27,7 +27,8 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/slliderview_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" />
+                    android:layout_height="400dp" />
+
 
                 <ImageView
                     android:id="@+id/ddss"
@@ -53,16 +54,28 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="8dp"
                     android:src="@drawable/logo_300" />
-
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:id="@+id/rl_pager"/>
                 <LinearLayout
                     android:id="@+id/layoutDots"
+                    android:layout_below="@id/rl_pager"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginTop="30dp"
+
                     android:gravity="center"
                     android:orientation="horizontal" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_below="@id/layoutDots"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent">
+
+
 
                 <TextView
                     android:id="@+id/text_viewcategories"
@@ -71,27 +84,62 @@
                     android:layout_above="@+id/categories_underline_view"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
+
                     android:fontFamily="@font/futura"
                     android:text="Categories"
                     android:textColor="@color/White"
                     android:textSize="32dp" />
 
 
+
                 <View
-                    android:id="@+id/categories_underline_view"
+                    android:id="@+id/boo"
                     android:layout_width="200dp"
                     android:layout_height="2dp"
-                    android:layout_above="@+id/category_recycler_view"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+
                     android:background="@color/baseLight" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/category_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="20dp"
-                    android:scrollbars="none" />
+                    android:foregroundGravity="center_vertical"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
 
+                    android:scrollbars="none" />
+    </RelativeLayout>  <View
+        android:id="@+id/categories_underline_view"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="right"
+        android:layout_above="@+id/category_recycler_view"
+        android:background="@color/baseLight" />
+    <TextView
+        android:layout_width="wrap_content"
+android:paddingBottom="5dp"
+        android:id="@+id/culmyca_times"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/futura"
+        android:textColor="@color/White"
+
+        android:gravity="right"
+       android:layout_gravity="right"
+        android:textSize="16dp"
+        android:text="Culmyca Times running live! Click here!"/>
+
+</LinearLayout>>
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:layout_margin="20dp"
     android:background="#8caed4">
 
     <ImageView
@@ -65,12 +66,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv4"
+        android:padding="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="25dp"
-        android:scaleY="1.5"/>
+      android:layout_marginLeft="30dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="30dp"
+    />
 
     <TextView
         android:id="@+id/tv_skip_fb_login"

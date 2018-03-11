@@ -2,29 +2,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment1">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="320dp"
+        android:layout_marginTop="50dp"
         android:background="#000">
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
-            android:id="@+id/btt"
-            android:src="@drawable/ic_apps_black_24dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btt"
-            android:fontFamily="@font/futura"
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:layout_centerHorizontal="true"
-            android:text="Kal party Hogi"
-            android:textColor="#fff" />
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:background="@drawable/vector_circle" >
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Whats New?"
+           android:layout_gravity="center_vertical"
+           android:layout_marginTop="50dp"
+           android:textSize="30dp"
+           android:fontFamily="@font/futura"
+           android:textColor="@color/White"
+          android:gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:fontFamily="@font/futura"
+                android:textSize="18dp"
+                android:maxLines="6"
+                android:textColor="@color/White"
+                android:text="You can view the event bookmark them view single events, dynaically open events and lots more \nthings "/>
+
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

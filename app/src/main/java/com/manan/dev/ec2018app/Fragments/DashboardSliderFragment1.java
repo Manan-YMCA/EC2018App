@@ -1,7 +1,5 @@
 package com.manan.dev.ec2018app.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +16,11 @@ public class DashboardSliderFragment1 extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment1, container, false);
+
+
+
+
+
         return rootView;
     }
 
