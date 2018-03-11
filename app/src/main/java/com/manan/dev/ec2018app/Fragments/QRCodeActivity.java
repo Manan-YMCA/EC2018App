@@ -73,6 +73,7 @@ public class QRCodeActivity extends DialogFragment {
     @Override
     public void onDestroyView() {
         startActivity(new Intent(getActivity(), SingleEventActivity.class).putExtra("eventId", eventId));
+        getActivity().finish();
         super.onDestroyView();
     }
 }

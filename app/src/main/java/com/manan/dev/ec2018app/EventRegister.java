@@ -4,6 +4,7 @@ package com.manan.dev.ec2018app;
 import android.app.FragmentManager;
 import android.app.Notification;
 import android.content.Context;
+import android.content.Intent;
 import android.media.RingtoneManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -226,4 +227,12 @@ public class EventRegister extends AppCompatActivity {
 //
 //    }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EventRegister.this,SingleEventActivity.class)
+        .putExtra("eventId",eventId).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        finish();
+        return;
+    }
 }
