@@ -17,10 +17,10 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        ProgressDialog progressBar;
+        /*ProgressDialog progressBar;
         progressBar = new ProgressDialog(getActivity());
         progressBar.setMessage("Loading!");
-        progressBar.setCanceledOnTouchOutside(false);
+        progressBar.setCanceledOnTouchOutside(false);*/
         return inflater.inflate(R.layout.fragment_about, container, false);
     }
 

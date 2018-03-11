@@ -323,8 +323,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }, 130);
                 break;
             case R.id.nav_culmyca:
-                //TODO
-                //Culmyca times here
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, CulmycaTimesActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
             case R.id.nav_about:
                 //TODO
