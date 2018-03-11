@@ -127,6 +127,7 @@
         android:background="@drawable/arrow_" />
 
     <TextView
+        android:id="@+id/need_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
