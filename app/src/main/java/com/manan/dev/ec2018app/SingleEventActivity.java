@@ -1,8 +1,10 @@
 package com.manan.dev.ec2018app;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,13 +35,40 @@ public class SingleEventActivity extends AppCompatActivity {
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
+    private String eventId;
+    private DatabaseController databaseController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
-
-        String eventId = getIntent().getStringExtra("eventId");
+        databaseController = new DatabaseController(this);
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
+        Log.v("deeplink", appLinkData + "");
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+            String revStr = new StringBuilder(appLinkData.toString()).reverse().toString();
+            int i;
+            for(i=0;revStr.charAt(i)!=35;i++){
+            }
+            revStr = revStr.substring(0,i);
+            String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
+            eventName = eventName.replace("%20"," ");
+            Log.v("deeplink", eventName);
+            Toast.makeText(this,"deeplink:"+eventName,Toast.LENGTH_SHORT).show();
+            eventId = databaseController.retrieveEventIdByName(eventName);
+            if(eventId.equals("wrong")){
+                Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(new Intent(this,SplashScreen.class));
+            }
+        } else {
+            Toast.makeText(this,"nodeeplink:",Toast.LENGTH_SHORT).show();
+            Log.v("nodeeplink", appLinkData + "");
+            eventId = getIntent().getStringExtra("eventId");
+        }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
@@ -177,6 +206,7 @@ public class SingleEventActivity extends AppCompatActivity {
                         .putExtra("eventType", eventDetails.getmEventTeamSize()));
             }
         });
+
     }
 
     @Override

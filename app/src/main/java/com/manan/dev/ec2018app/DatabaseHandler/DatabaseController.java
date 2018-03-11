@@ -90,7 +90,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         while (totalEvents > 0) {
             totalEvents--;
             EventDetails event = new EventDetails();
-            event = retriveEvents(readCursor);
+            event = retrieveEvents(readCursor);
             eventList.add(event);
             readCursor.moveToNext();
 
@@ -113,22 +113,26 @@ public class DatabaseController extends SQLiteOpenHelper {
                 , Schema.DbEntry.EVENT_PRIZES_3, Schema.DbEntry.EVENT_TEAM_SIZE};
         Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_ID_COLUMN_NAME + " = ?", new String[]{EventId}, null, null, null);
         readCursor.moveToFirst();
-        ev = retriveEvents(readCursor);
+        ev = retrieveEvents(readCursor);
         readCursor.close();
         return ev;
     }
 
-    public String retrieveEventsByName(String eventName){
+    public String retrieveEventIdByName(String eventName){
         SQLiteDatabase db = getReadableDatabase();
-        String[] projection = {Schema.DbEntry.EVENT_ID_COLUMN_NAME};
-        Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " = ?", new String[]{eventName}, null, null, null);
-        readCursor.moveToFirst();
-        String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
-        readCursor.close();
-        return eventId;
+        if(checkIfValueByNameExists(eventName)) {
+            String[] projection = {Schema.DbEntry.EVENT_ID_COLUMN_NAME};
+            Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " = ?", new String[]{eventName}, null, null, null);
+            readCursor.moveToFirst();
+            String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
+            readCursor.close();
+            return eventId;
+        }
+        else
+            return "wrong";
     }
 
-    private EventDetails retriveEvents(Cursor readCursor) {
+    private EventDetails retrieveEvents(Cursor readCursor) {
         String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
         String eventName = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_NAME_COLUMN_NAME));
         String category = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_CATEGORY_COLUMN_NAME));
@@ -213,6 +217,18 @@ public class DatabaseController extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_ID_COLUMN_NAME + " =?";
         Cursor cs = db.rawQuery(query, new String[]{eventId});
+        if (cs.getCount() <= 0) {
+            cs.close();
+            return false;
+        }
+        cs.close();
+        return true;
+    }
+
+    private Boolean checkIfValueByNameExists(String eventName) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " =?";
+        Cursor cs = db.rawQuery(query, new String[]{eventName});
         if (cs.getCount() <= 0) {
             cs.close();
             return false;
