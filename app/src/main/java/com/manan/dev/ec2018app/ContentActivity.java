@@ -62,7 +62,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName) ,MODE_PRIVATE);
         phoneNumber = prefs.getString("Phone", null);
 
 
@@ -71,6 +71,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         nav_view.setCheckedItem(R.id.nav_home);
 
         if (phoneNumber == null) {
+            Toast.makeText(this, "why", Toast.LENGTH_SHORT).show();
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_tickets).setVisible(false);
@@ -307,8 +308,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }, 130);
                 break;
             case R.id.nav_culmyca:
-                //TODO
-                //Culmyca times here
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, CulmycaTimesActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
             case R.id.nav_about:
                 startActivity(new Intent(ContentActivity.this, AboutActivity.class));

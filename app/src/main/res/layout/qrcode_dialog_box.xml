@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+<ImageView
+    android:layout_width="350dp"
+    android:layout_height="240dp"
+    android:id="@+id/qr_ticket"
+    android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        tools:text="CODE GOLF"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_below="@+id/qr_ticket"
+        android:layout_marginTop="20dp"
+        android:id="@+id/tv_event_name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="March 22,2018"
+        android:layout_below="@+id/tv_event_name"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_event_date"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2 PM"
+        android:layout_below="@+id/tv_event_date"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_event_time"
+        />
+
+</RelativeLayout>

@@ -1,6 +1,8 @@
 package com.manan.dev.ec2018app;
 
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +16,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
+import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,10 +44,13 @@ public class SingleEventActivity extends AppCompatActivity {
     RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, prizesRelativeLayout;
     LinearLayout coordsLinearLayout, goingLinearLayout;
     View line1, line2, line3, line4;
-
+    private String phoneNumber;
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
+    private String eventId;
+    private QRTicketModel TicketModel;
+
     private String eventId;
     private DatabaseController databaseController;
 
@@ -72,7 +88,10 @@ public class SingleEventActivity extends AppCompatActivity {
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
-
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName) ,MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if(phoneNumber!=null)
+        displayTickets(phoneNumber);
         registerButton = (Button) findViewById(R.id.btn_register);
 
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
@@ -101,9 +120,7 @@ public class SingleEventActivity extends AppCompatActivity {
         locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
-
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
-
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(eventDetails.getmStartTime());
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
@@ -200,10 +217,28 @@ public class SingleEventActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
-                        .putExtra("eventName", eventDetails.getmName())
-                        .putExtra("eventId", eventDetails.getmEventId())
-                        .putExtra("eventType", eventDetails.getmEventTeamSize()));
+                if(registerButton.getText().toString().equals("View Ticket")){
+
+                    FragmentManager fm = getFragmentManager();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("qrcodestring", TicketModel.getQRcode());
+                    bundle.putString("eventid",eventId);
+
+                    QRCodeActivity fragobj = new QRCodeActivity();
+                    fragobj.setArguments(bundle);
+                    fragobj.show(fm,"drff");
+                }
+                else {
+                    if (phoneNumber!=null) {
+                        startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
+                                .putExtra("eventName", eventDetails.getmName())
+                                .putExtra("eventId", eventDetails.getmEventId())
+                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
+                        finish();
+                    }
+                    else
+                         startActivity(new Intent(SingleEventActivity.this,RegisterActivity.class));
+                }
             }
         });
 
@@ -231,4 +266,51 @@ public class SingleEventActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void displayTickets(String phoneNumber) {
+
+        String url = getResources().getString(R.string.get_events_qr_code);
+        url += phoneNumber;
+        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("My success", "" + response);
+                try {
+                    JSONObject obj1 = new JSONObject(response);
+                    JSONArray ticketDetails = obj1.getJSONArray("data");
+                    for (int i = 0; i < ticketDetails.length(); i++) {
+                        JSONObject obj2 = ticketDetails.getJSONObject(i);
+                        if(obj2.getString("eventid").equals(eventId)) {
+                            TicketModel = new QRTicketModel();
+
+                            TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
+                            TicketModel.setArrivalStatus(obj2.getInt("arrived"));
+                            TicketModel.setQRcode(obj2.getString("qrcode"));
+                            TicketModel.setEventID(obj2.getString("eventid"));
+                            TicketModel.setTimeStamp(obj2.getLong("timestamp"));
+                            registerButton.setText("View Ticket");
+                        }
+
+                    }
+                }
+                // Try and catch are included to handle any errors due to JSON
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("Tickets", e.getMessage());
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("Tickets", "" + error);
+            }
+        });
+        queue.add(request);
+    }
+
 }

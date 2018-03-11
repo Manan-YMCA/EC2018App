@@ -1,8 +1,10 @@
 package com.manan.dev.ec2018app;
 
 
+import android.app.FragmentManager;
 import android.app.Notification;
 import android.content.Context;
+import android.content.Intent;
 import android.media.RingtoneManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +20,22 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.zxing.qrcode.encoder.QRCode;
+import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
+
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EventRegister extends AppCompatActivity {
 
@@ -40,7 +55,7 @@ public class EventRegister extends AppCompatActivity {
     private String eventId;
     private String eventType;
 
-
+    private String qrCodeString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +86,8 @@ public class EventRegister extends AppCompatActivity {
 
         final LinearLayout layout = findViewById(R.id.layout_infater);
         text = new TextView(this);
-
+        if(eventType.equals("solo"))
+        Add.setVisibility(View.GONE);
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,26 +137,85 @@ public class EventRegister extends AppCompatActivity {
                 intentClg = "";
                 intentMail = "";
                 intentPhone = "";
-                intentPhone += mainPhone.getText().toString() + ",";
-                intentMail += mainmail.getText().toString() + ",";
+                intentPhone += mainPhone.getText().toString() ;
+                intentMail += mainmail.getText().toString() ;
                 for (int i = 0; i < nameText.size(); i++) {
                     intentName += nameText.get(i).getText().toString() + ",";
                 }
+                intentName = intentName.substring(0, intentName.length()-1);
+
                 for (int i = 0; i < collegeText.size(); i++) {
                     intentClg += collegeText.get(i).getText().toString() + ",";
                 }
-                Toast.makeText(EventRegister.this, intentName, Toast.LENGTH_SHORT).show();
+                intentClg = intentClg.substring( 0 , intentClg.length()-1);
+                Log.d("RegisterEvent","intentname" + intentName + "intentclg " + intentClg + "intentphone" +
+                        intentPhone +"intentmail" + intentMail);
+//                Toast.makeText(EventRegister.this, "intentname" + intentName + "intentclg " + intentClg
+//                        + "intentphone" + intentPhone +"intentmail" + intentMail, Toast.LENGTH_SHORT).show();
+                registerEvent();
 
             }
         });
+
+
     }
 
     private void update() {
         for (int i = 0; i < memberno.size(); i++) {
             memberno.get(i).setText(String.valueOf(i+2));
         }
+    }
+    private void registerEvent(){
+        String url = getResources().getString(R.string.event_register_api);
+        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    Toast.makeText(EventRegister.this, obj.getString("qrcode"), Toast.LENGTH_LONG).show();
+                    qrCodeString = (obj.getString("qrcode"));
 
+                    FragmentManager fm = getFragmentManager();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("qrcodestring", qrCodeString);
+                    bundle.putString("eventid",eventId);
+// set Fragmentclass Arguments
+                    QRCodeActivity fragobj = new QRCodeActivity();
+                    fragobj.setArguments(bundle);
+                    fragobj.show(fm,"drff");
+                }
+                // Try and catch are included to handle any errors due to JSON
+                catch (Exception e) {
+                    // If an error occurs, this prints the error to the log
+                    e.printStackTrace();
+                    Toast.makeText(EventRegister.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
+                Log.i("My error", "" + error);
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", intentName);
+                map.put("phone", intentPhone);
+                map.put("email", intentMail);
+                map.put("college", intentClg);
+                map.put("eventid", eventId );
+                return map;
+            }
+        };
+        queue.add(request);
     }
 
 //    public void sendNotification(){
@@ -152,4 +227,12 @@ public class EventRegister extends AppCompatActivity {
 //
 //    }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EventRegister.this,SingleEventActivity.class)
+        .putExtra("eventId",eventId).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        finish();
+        return;
+    }
 }

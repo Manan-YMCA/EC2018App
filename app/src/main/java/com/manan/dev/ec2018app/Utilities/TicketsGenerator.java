@@ -31,12 +31,10 @@ public class TicketsGenerator {
     private Context context;
     private Bitmap userTicket;
 
-    public Bitmap GenerateClick(String qrCodeData, Context mContext) {
+    public Bitmap GenerateClick(String qrCodeData, Context mContext,int width , int height) {
         context = mContext;
         try {
-            //setting size of qr code
-            int width = (int) mContext.getResources().getDimension(R.dimen.onefifty);
-            int height = (int) mContext.getResources().getDimension(R.dimen.onefifty);
+
             int smallestDimension = width < height ? width : height;
             //setting parameters for qr code
             String charset = "UTF-8";
