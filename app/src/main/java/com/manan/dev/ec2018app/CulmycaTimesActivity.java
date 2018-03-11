@@ -90,12 +90,12 @@ public class CulmycaTimesActivity extends AppCompatActivity {
 
 
 
-        postReference.addValueEventListener(new ValueEventListener() {
+        postReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                allposts=new ArrayList<postsModel>();
                 for(DataSnapshot club:dataSnapshot.getChildren()){
                     String clubName=club.getKey();
-                    Log.v("hey",clubName);
                     for(DataSnapshot posts:club.getChildren()){
 
                         postsModel post=posts.getValue(postsModel.class);
@@ -103,22 +103,19 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                         post.postid=posts.getKey();
                         List<commentsModel> allcomments=new ArrayList<commentsModel>();
                         for(DataSnapshot comments: posts.child("comments").getChildren()) {
-                            Log.v("hey",comments.toString());
                             commentsModel comment = comments.getValue(commentsModel.class);
-                            Log.v("hey",comment.username);
                             allcomments.add(comment);
                         }
 
                         post.comments=allcomments;
 
                         List<likesModel> alllikes=new ArrayList<likesModel>();
-                        for(DataSnapshot mlikes: posts.child("likesfid").getChildren()) {
+                        for(DataSnapshot mlikes: posts.child("likefids").getChildren()) {
                             likesModel l = mlikes.getValue(likesModel.class);
                             alllikes.add(l);
                         }
 
                         post.likefids=alllikes;
-                        Log.v("hey",allcomments.toString());
                         allposts.add(post);
                     }
                 }

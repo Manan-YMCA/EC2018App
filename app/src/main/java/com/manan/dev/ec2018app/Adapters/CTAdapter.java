@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 import com.manan.dev.ec2018app.Models.likesModel;
 import com.manan.dev.ec2018app.Models.postsModel;
 import com.manan.dev.ec2018app.R;
@@ -72,7 +73,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final postsModel topic = postsList.get(position);
         holder.caption.setText(topic.title);
         holder.postTime.setText(Long.toString(topic.time));
@@ -80,6 +81,37 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
         holder.clubName.setText(topic.clubName);
         holder.likes.setText(Integer.toString(topic.likes)+" likes");
         holder.comments.setText(Integer.toString(topic.comments.size())+" comments");
+        DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
+        postRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int flg=0;
+                postsModel m=dataSnapshot.getValue(postsModel.class);
+
+                holder.likes.setText(Integer.toString(m.likes)+" likes");
+                for(DataSnapshot mlikes: dataSnapshot.child("likefids").getChildren()) {
+                    likesModel l = mlikes.getValue(likesModel.class);
+
+                    if(l.fid.equals(Profile.getCurrentProfile().getId())){
+                        flg=1;
+                        break;
+                    }
+                }
+                if(flg==1){
+                    holder.like.setImageResource(R.drawable.xunbao_back);
+                }
+                else{
+                    holder.like.setImageResource(R.drawable.xunbao_about);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,34 +123,72 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
                 }
                 else {
 
-                    DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("likes").child(topic.clubName).child(topic.postid);
+                    DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
 
                     postRef.runTransaction(new Transaction.Handler() {
 
                         @Override
                         public Transaction.Result doTransaction(MutableData mutableData) {
                             postsModel p = mutableData.getValue(postsModel.class);
+
                             if (p == null) {
                                 return Transaction.success(mutableData);
+
+                            }
+                            Log.v("heyt","1");
+                            List<likesModel> alllikes=new ArrayList<likesModel>();
+                            for(MutableData mlikes: mutableData.child("likefids").getChildren()) {
+                                likesModel l = mlikes.getValue(likesModel.class);
+                                Log.v("heyt",l.fid);
+                                alllikes.add(l);
                             }
 
-                            if (p.likefids.contains(new likesModel(Profile.getCurrentProfile().getId()))) {
-                                // Unstar the post and remove self from stars
+
+                            Log.v("heyt","2");
+                            p.likefids=alllikes;
+                            int flag=0;
+
+
+                            Log.v("heyt","3");
+                            for(likesModel l:p.likefids){
+                                Log.v("heyt",l.fid+Profile.getCurrentProfile().getId());
+                                if(l.fid.equals(Profile.getCurrentProfile().getId())){
+                                    flag=1;
+                                    break;
+                                }
+                            }
+
+                            Log.v("heyt","4");
+
+                            if (flag==1) {
                                 p.likes = p.likes - 1;
-                                p.likefids.remove(new likesModel(Profile.getCurrentProfile().getId()));
+                                int i=0;
+
+                                Log.v("heyt","10");
+                                for(likesModel l: p.likefids){
+                                    if(l.fid.equals(Profile.getCurrentProfile().getId())){
+                                        p.likefids.remove(i);
+                                        Log.v("i value",Integer.toString(p.likefids.size()));
+                                        break;
+                                    }
+                                    i++;
+                                }
                             } else {
-                                // Star the post and add self to stars
+
+                                Log.d("added",Integer.toString(p.likes));
                                 p.likes = p.likes + 1;
                                 p.likefids.add(new likesModel(Profile.getCurrentProfile().getId()));
                             }
-
                             mutableData.setValue(p);
+
+                            Log.v("heyt","5");
                             return Transaction.success(mutableData);
                         }
 
                         @Override
                         public void onComplete(DatabaseError databaseError, boolean b,
                                                DataSnapshot dataSnapshot) {
+                            Log.v("hey","completed");
                             // Transaction completed
                         }
                     });
