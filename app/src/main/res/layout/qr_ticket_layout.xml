@@ -19,6 +19,7 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="true"
+
             android:src="@drawable/qr_logo" />
 
         <View

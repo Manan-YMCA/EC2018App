@@ -2,13 +2,12 @@ package com.manan.dev.ec2018app;
 
 
 import android.app.FragmentManager;
-import android.app.Notification;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.zxing.qrcode.encoder.QRCode;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
+import com.manan.dev.ec2018app.Models.UserDetails;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +45,7 @@ public class EventRegister extends AppCompatActivity {
     String intentPhone;
     String intentClg;
     String intentName;
+    UserDetails userDetails;
     int count = 1;
     TextView text;
     ViewGroup.LayoutParams layPar;
@@ -64,7 +62,7 @@ public class EventRegister extends AppCompatActivity {
         eventName = getIntent().getStringExtra("eventName");
         eventId = getIntent().getStringExtra("eventId");
         eventType = getIntent().getStringExtra("eventType");
-
+        userDetails = new UserDetails();
         Button Add = (Button) findViewById(R.id.add_mem_button);
         personNo = (TextView) findViewById(R.id.current_team_mem);
         layPar = personNo.getLayoutParams();
@@ -80,7 +78,6 @@ public class EventRegister extends AppCompatActivity {
         mainClg = (EditText) findViewById(R.id.ld_reg_clg);
         mainPhone = (EditText) findViewById(R.id.ld_mobile);
         mainmail = (EditText) findViewById(R.id.ld_email);
-
         nameText.add(mainName);
         collegeText.add(mainClg);
 
@@ -88,6 +85,12 @@ public class EventRegister extends AppCompatActivity {
         text = new TextView(this);
         if(eventType.equals("solo"))
         Add.setVisibility(View.GONE);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        final String phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber == null) {
+            Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
+        }
+        getDetails(phoneNumber);
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +155,13 @@ public class EventRegister extends AppCompatActivity {
                         intentPhone +"intentmail" + intentMail);
 //                Toast.makeText(EventRegister.this, "intentname" + intentName + "intentclg " + intentClg
 //                        + "intentphone" + intentPhone +"intentmail" + intentMail, Toast.LENGTH_SHORT).show();
-                registerEvent();
+                Boolean checker = validateCredentials();
+                if(checker) {
+                    registerEvent();
+                }
+                else{
+
+                }
 
             }
         });
@@ -226,6 +235,86 @@ public class EventRegister extends AppCompatActivity {
 //                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 //
 //    }
+private Boolean validateCredentials() {
+    if(mainName.getText().toString().equals("")){
+        mainName.setError("Enter a User Name");
+        return false;
+    }
+    if(name.getText().toString().equals("")){
+        name.setError("Enter a User Name");
+        return false;
+    }
+    if(college.getText().toString().equals("")){
+        college.setError("Enter a User Name");
+        return false;
+    }
+    if(mainmail.getText().toString().equals("")){
+        mainmail.setError("Enter an Email Address");
+        return false;
+    }
+    if(!Patterns.EMAIL_ADDRESS.matcher(mainmail.getText().toString()).matches()){
+        mainmail.setError("Enter a Valid Email Address");
+        return false;
+    }
+    if(mainPhone.getText().toString().equals("")){
+        mainPhone.setError("Enter a Phone Number");
+        return false;
+    }
+    if(!Patterns.PHONE.matcher(mainPhone.getText().toString()).matches()){
+        mainPhone.setError("Enter a valid Phone Number");
+        return false;
+    }
+    if(mainPhone.getText().toString().length() != 10){
+        mainPhone.setError("Enter a valid Phone Number");
+        return false;
+    }
+    if(mainClg.getText().toString().equals("")){
+        mainClg.setError("Enter a College Name");
+        return false;
+    }
+    return true;
+}
+    private void getDetails(final String phone) {
+        Log.i("tg", "bgg");
+        String url = getResources().getString(R.string.get_user_details_api) + phone;
+        Toast.makeText(this, "URL: " + url, Toast.LENGTH_LONG).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest obreq = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj1 = new JSONObject(response);
+                            JSONObject obj = obj1.getJSONObject("data");
+                            Toast.makeText(EventRegister.this, obj.getString("name"), Toast.LENGTH_LONG).show();
+                            mainName.setText(obj.getString("name"));
+                            mainmail.setText(obj.getString("email"));
+                            mainClg.setText(obj.getString("college"));
+                            mainPhone.setText(phone);
+                            userDetails.setmName(obj.getString("name"));
+                            userDetails.setEmail(obj.getString("email"));
+                            userDetails.setmCollege(obj.getString("college"));
+                            userDetails.setmPhone(phone);
+                        }
+                        // Try and catch are included to handle any errors due to JSON
+                        catch (Exception e) {
+                            // If an error occurs, this prints the error to the log
+                            e.printStackTrace();
+                            Toast.makeText(EventRegister.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    // Handles errors that occur due to Volley
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(EventRegister.this, "Error aagya2", Toast.LENGTH_SHORT).show();
+                        Log.e("Volley", "Error");
+                    }
+                }
+        );
+        queue.add(obreq);
+    }
 
 
     @Override
