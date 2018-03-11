@@ -3,7 +3,9 @@ package com.manan.dev.ec2018app.Fragments;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,17 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.R;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 /**
  * Created by yatindhingra on 02/03/18.
@@ -33,6 +43,7 @@ public class FragmentFbLogin extends DialogFragment {
     TextView skipLogin;
     LoginButton loginButton;
     private CallbackManager callbackManager;
+    private FirebaseAuth mAuth;
 
 
     @Nullable
@@ -43,6 +54,8 @@ public class FragmentFbLogin extends DialogFragment {
         loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
         FacebookSdk.sdkInitialize(getActivity());
         callbackManager = CallbackManager.Factory.create();
+
+        mAuth = FirebaseAuth.getInstance();
 
         skipLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +79,7 @@ public class FragmentFbLogin extends DialogFragment {
             public void onSuccess(LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
                 fbLoginButton activity = (fbLoginButton) getActivity();
+                handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
                 dismiss();
                 Toast.makeText(getActivity(), "fbLoginHo gya", Toast.LENGTH_SHORT).show();
@@ -86,7 +100,28 @@ public class FragmentFbLogin extends DialogFragment {
         return rootView;
     }
 
-    public interface fbLoginButton{
+    private void handleFacebookAccessToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("loginStatus", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("loginStatus", "signInWithCredential:failure", task.getException());
+                            Toast.makeText(getActivity(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
+    public interface fbLoginButton {
         void fbStatus(Boolean status, String userId);
     }
 

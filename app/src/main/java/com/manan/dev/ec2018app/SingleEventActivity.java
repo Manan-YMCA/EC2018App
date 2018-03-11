@@ -75,38 +75,35 @@ public class SingleEventActivity extends AppCompatActivity {
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
             String revStr = new StringBuilder(appLinkData.toString()).reverse().toString();
             int i;
-            for(i=0;revStr.charAt(i)!=35;i++){
+            for (i = 0; revStr.charAt(i) != 35; i++) {
             }
-            revStr = revStr.substring(0,i);
+            revStr = revStr.substring(0, i);
             String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
-            eventName = eventName.replace("%20"," ");
+            eventName = eventName.replace("%20", " ");
             Log.v("deeplink", eventName);
-            Toast.makeText(this,"deeplink:"+eventName,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "deeplink:" + eventName, Toast.LENGTH_SHORT).show();
             eventId = databaseController.retrieveEventIdByName(eventName);
-            if(eventId.equals("wrong")){
+            if (eventId.equals("wrong")) {
                 Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
                 finish();
-                startActivity(new Intent(this,SplashScreen.class));
+                startActivity(new Intent(this, SplashScreen.class));
             }
         } else {
-            Toast.makeText(this,"nodeeplink:",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "nodeeplink:", Toast.LENGTH_SHORT).show();
             Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName) ,MODE_PRIVATE);
-        phoneNumber = prefs.getString("Phone", null);
-        if(phoneNumber!=null)
-        displayTickets(phoneNumber);
+
         registerButton = (Button) findViewById(R.id.btn_register);
 
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
         eventStartTimeTextView = (TextView) findViewById(R.id.tv_event_start_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
         eventEndTimeTextView = (TextView) findViewById(R.id.tv_event_end_time);
-       // hostClubTextView = (TextView) findViewById(R.id.tv_host);
+        // hostClubTextView = (TextView) findViewById(R.id.tv_host);
         feesTextView = (TextView) findViewById(R.id.tv_fees);
         typeOfEventTextView = (TextView) findViewById(R.id.tv_type_of_event);
         firstPrizeTextView = (TextView) findViewById(R.id.tv_prize_first);
@@ -116,25 +113,25 @@ public class SingleEventActivity extends AppCompatActivity {
         rulesTextView = (TextView) findViewById(R.id.tv_rules);
         eventNameView = (TextView) findViewById(R.id.tv_event_name);
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
-      // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
+        // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
 
-        eventImageLinearLayout =(LinearLayout)findViewById(R.id.ll_btn_register);
+        eventImageLinearLayout = (LinearLayout) findViewById(R.id.ll_btn_register);
 
         line1 = (View) findViewById(R.id.line1);
-       // line2 = (View) findViewById(R.id.line4);
+        // line2 = (View) findViewById(R.id.line4);
         line3 = (View) findViewById(R.id.line5);
         line4 = (View) findViewById(R.id.line3);
         line4.setVisibility(View.GONE);
-      //  goingLinearLayout.setVisibility(View.GONE);
+        //  goingLinearLayout.setVisibility(View.GONE);
 
-        Uri imageuri= Uri.parse("https://ocul.in/7er");
+        Uri imageuri = Uri.parse("https://ocul.in/7er");
         new LoadBackground("https://ocul.in/manan_apple",
                 "androidfigure").execute();
         dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
         locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
-backbutton =(ImageView) findViewById(R.id.tv_back_button);
+        backbutton = (ImageView) findViewById(R.id.tv_back_button);
 
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
 
@@ -164,7 +161,7 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
         eventNameView.setText(eventDetails.getmName());
 
         locationTextView.setText(eventDetails.getmVenue());
-       // hostClubTextView.setText(eventDetails.getmClubname());
+        // hostClubTextView.setText(eventDetails.getmClubname());
         Long fees = eventDetails.getmFees();
         if (fees == 0) {
             feesTextView.setText("Free");
@@ -174,7 +171,7 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
 
         if (eventDetails.getmEventTeamSize().equals("NA")) {
             registerButton.setVisibility(View.GONE);
-          //  line1.setVisibility(View.GONE);
+            //  line1.setVisibility(View.GONE);
             typeOfEventTextView.setText("Presentation Event");
         } else {
             typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
@@ -194,7 +191,7 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
         if (coordCount == 0) {
             coordsLinearLayout.setVisibility(View.GONE);
             coordsHeading.setVisibility(View.GONE);
-          //  line2.setVisibility(View.GONE);
+            //  line2.setVisibility(View.GONE);
         }
 
 
@@ -240,28 +237,29 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(registerButton.getText().toString().equals("View Ticket")){
+                if (registerButton.getText().toString().equals("View Ticket")) {
 
                     FragmentManager fm = getFragmentManager();
                     Bundle bundle = new Bundle();
                     bundle.putString("qrcodestring", TicketModel.getQRcode());
-                    bundle.putString("eventid",eventId);
-                    bundle.putInt("activity", 1);
+                    bundle.putString("eventid", eventId);
+                    bundle.putInt("activity", 0);
 
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
-                    fragobj.show(fm,"drff");
-                }
-                else {
-                    if (phoneNumber!=null) {
+                    fragobj.show(fm, "drff");
+                } else {
+                    if (phoneNumber != null) {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                                 .putExtra("eventName", eventDetails.getmName())
                                 .putExtra("eventId", eventDetails.getmEventId())
                                 .putExtra("eventType", eventDetails.getmEventTeamSize()));
-                        finish();
-                    }
-                    else
-                         startActivity(new Intent(SingleEventActivity.this,RegisterActivity.class));
+                    } else
+                        startActivity(new Intent(SingleEventActivity.this, RegisterActivity.class)
+                                .putExtra("parent", "event")
+                                .putExtra("eventName", eventDetails.getmName())
+                                .putExtra("eventId", eventDetails.getmEventId())
+                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
                 }
             }
         });
@@ -289,9 +287,10 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
         }
         return super.onOptionsItemSelected(item);
     }
+
     private class LoadBackground extends AsyncTask<String, Void, Drawable> {
 
-        private String imageUrl , imageName;
+        private String imageUrl, imageName;
 
         public LoadBackground(String url, String file_name) {
             this.imageUrl = url;
@@ -318,7 +317,8 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
                 return null;
             }
         }
-        private Object fetch(String address) throws MalformedURLException,IOException {
+
+        private Object fetch(String address) throws MalformedURLException, IOException {
             URL url = new URL(address);
             Object content = url.getContent();
             return content;
@@ -330,11 +330,6 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
             eventImageLinearLayout.setBackground(result);
         }
     }
-
-
-
-
-
 
     private void displayTickets(String phoneNumber) {
 
@@ -351,7 +346,7 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
                     JSONArray ticketDetails = obj1.getJSONArray("data");
                     for (int i = 0; i < ticketDetails.length(); i++) {
                         JSONObject obj2 = ticketDetails.getJSONObject(i);
-                        if(obj2.getString("eventid").equals(eventId)) {
+                        if (obj2.getString("eventid").equals(eventId)) {
                             TicketModel = new QRTicketModel();
 
                             TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
@@ -382,4 +377,12 @@ backbutton =(ImageView) findViewById(R.id.tv_back_button);
         queue.add(request);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber != null)
+            displayTickets(phoneNumber);
+    }
 }

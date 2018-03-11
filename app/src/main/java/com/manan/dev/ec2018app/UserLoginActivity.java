@@ -82,21 +82,17 @@ public class UserLoginActivity extends AppCompatActivity {
 
         if (getIntent().getBooleanExtra("closeApp", false)) {
             finish();
-            Toast.makeText(UserLoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         } else if (restoredText != null) {
             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
             finish();
-        } else if (getIntent().getBooleanExtra("logout", false)) {
-            // postAnimation();
-        } else {
-
         }
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(UserLoginActivity.this, RegisterActivity.class)
+                        .putExtra("parent", "normal"));
             }
         });
 
@@ -128,56 +124,32 @@ public class UserLoginActivity extends AppCompatActivity {
     }
 
 
-    void changeslide()
-{
-  // Toast.makeText(UserLoginActivity.this,"Timer Started",Toast.LENGTH_SHORT).show();
-    handler = new Handler();
-    Update = new Runnable() {
-        public void run() {
-            int current=getItem(+1);
-            if (current == layouts.length) {
-                current = 0;
+    void changeslide() {
+        // Toast.makeText(UserLoginActivity.this,"Timer Started",Toast.LENGTH_SHORT).show();
+        handler = new Handler();
+        Update = new Runnable() {
+            public void run() {
+                int current = getItem(+1);
+                if (current == layouts.length) {
+                    current = 0;
+                }
+                viewPager.setCurrentItem(current++, true);
             }
-            viewPager.setCurrentItem(current++, true);
-        }
-    };
+        };
 
-    timer = new Timer(); // This will create a new Thread
-    timer .schedule(new TimerTask() { // task to be scheduled
+        timer = new Timer(); // This will create a new Thread
+        timer.schedule(new TimerTask() { // task to be scheduled
 
-        @Override
-        public void run() {
-            handler.post(Update);
-        }
-        
-        
-        
-        
-    }, 5000, 5000);
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
 
 
-}
+        }, 5000, 5000);
 
-//    private void postAnimation() {
-//
-//        backImage.setVisibility(View.VISIBLE);
-//        backImage.setAlpha(1.0f);
-//        lineView.setVisibility(View.VISIBLE);
-//        lineView.setAlpha(1.0f);
-//        ECText.setVisibility(View.VISIBLE);
-//        ECText.setAlpha(1.0f);
-//        ContinueText.setVisibility(View.VISIBLE);
-//        ContinueText.setAlpha(1.0f);
-//        GuestText.setVisibility(View.VISIBLE);
-//        GuestText.setAlpha(1.0f);
-//        ReadyText.setVisibility(View.VISIBLE);
-//        ReadyText.setAlpha(1.0f);
-//        LoginButton.setVisibility(View.VISIBLE);
-//        LoginButton.setAlpha(1.0f);
-//        ECLogo.setVisibility(View.VISIBLE);
-//        ECLogo.setAlpha(1.0f);
-//
-//    }
+
+    }
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
@@ -201,13 +173,14 @@ public class UserLoginActivity extends AppCompatActivity {
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
     }
+
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
 
-           // Toast.makeText(UserLoginActivity.this,"Timer Ended",Toast.LENGTH_SHORT).show();
+            // Toast.makeText(UserLoginActivity.this,"Timer Ended",Toast.LENGTH_SHORT).show();
 
         }
 
@@ -226,30 +199,9 @@ public class UserLoginActivity extends AppCompatActivity {
 
         }
 
-    }
-    ;
+    };
 
-//    ViewPager.OnScrollChangeListener listerner = new View.OnScrollChangeListener() {
-//        @Override
-//        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//
-//        }
-//    };
 
-      /**
-     * Making notification bar transparent
-     */
-    private void changeStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
-    }
-
-    /**
-     * View pager adapter
-     */
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 

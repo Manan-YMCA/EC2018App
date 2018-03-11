@@ -120,7 +120,13 @@
             android:name=".Tickets"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
-        <activity android:name=".CulmycaTimesActivity"></activity>
+        <activity android:name=".CulmycaTimesActivity"
+            android:parentActivityName=".ContentActivity"/>
+
+        <activity android:name=".AboutActivity" android:theme="@style/CodeFont"/>
+        <service android:name=".MyNotificationService"
+            android:enabled="true"/>
+        <receiver android:name=".MyNotificationResponse"/>
     </application>
 
 </manifest>

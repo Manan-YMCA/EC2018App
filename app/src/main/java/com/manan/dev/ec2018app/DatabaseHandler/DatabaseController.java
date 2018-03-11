@@ -41,9 +41,9 @@ public class DatabaseController extends SQLiteOpenHelper {
     public void addEntryToDb(EventDetails event) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        Log.d("DBC", "aa gye");
         if (!checkIfValueExists(event.getmEventId())) {
             values.put(Schema.DbEntry.EVENT_ID_COLUMN_NAME, event.getmEventId());
+            values.put(Schema.DbEntry.EVENT_UNIQUE_ID, event.getmUniqueKey());
             values.put(Schema.DbEntry.EVENT_NAME_COLUMN_NAME, event.getmName());
             values.put(Schema.DbEntry.EVENT_CLUB_COLUMN_NAME, event.getmClubname());
             values.put(Schema.DbEntry.EVENT_CATEGORY_COLUMN_NAME, event.getmCategory());
@@ -67,7 +67,6 @@ public class DatabaseController extends SQLiteOpenHelper {
                 values.put(Schema.DbEntry.EVENT_COORDINATOR_PHONE_2, event.getmCoordinators().get(1).getmCoordPhone());
             }
             db.insert(Schema.DbEntry.EVENT_LIST_TABLE_NAME, null, values);
-            Log.d("DBC", "ho gya");
         }
         db.close();
     }
@@ -83,7 +82,7 @@ public class DatabaseController extends SQLiteOpenHelper {
                 , Schema.DbEntry.EVENT_COORDINATOR_ID_1, Schema.DbEntry.EVENT_COORDINATOR_NAME_2, Schema.DbEntry.EVENT_COORDINATOR_PHONE_2
                 , Schema.DbEntry.EVENT_COORDINATOR_ID_2, Schema.DbEntry.EVENT_START_TIME_COLUMN_NAME
                 , Schema.DbEntry.EVENT_END_TIME_COLUMN_NAME, Schema.DbEntry.EVENT_PRIZES_1, Schema.DbEntry.EVENT_PRIZES_2
-                , Schema.DbEntry.EVENT_PRIZES_3, Schema.DbEntry.EVENT_TEAM_SIZE};
+                , Schema.DbEntry.EVENT_PRIZES_3, Schema.DbEntry.EVENT_TEAM_SIZE, Schema.DbEntry.EVENT_UNIQUE_ID};
         Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_CLUB_COLUMN_NAME + " = ?", new String[]{clubName}, null, null, null);
         readCursor.moveToFirst();
         int totalEvents = readCursor.getCount();
@@ -110,7 +109,7 @@ public class DatabaseController extends SQLiteOpenHelper {
                 , Schema.DbEntry.EVENT_COORDINATOR_ID_1, Schema.DbEntry.EVENT_COORDINATOR_NAME_2, Schema.DbEntry.EVENT_COORDINATOR_PHONE_2
                 , Schema.DbEntry.EVENT_COORDINATOR_ID_2, Schema.DbEntry.EVENT_START_TIME_COLUMN_NAME
                 , Schema.DbEntry.EVENT_END_TIME_COLUMN_NAME, Schema.DbEntry.EVENT_PRIZES_1, Schema.DbEntry.EVENT_PRIZES_2
-                , Schema.DbEntry.EVENT_PRIZES_3, Schema.DbEntry.EVENT_TEAM_SIZE};
+                , Schema.DbEntry.EVENT_PRIZES_3, Schema.DbEntry.EVENT_TEAM_SIZE, Schema.DbEntry.EVENT_UNIQUE_ID};
         Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_ID_COLUMN_NAME + " = ?", new String[]{EventId}, null, null, null);
         readCursor.moveToFirst();
         ev = retrieveEvents(readCursor);
@@ -140,6 +139,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         String rules = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_RULES_COLUMN_NAME));
         String venue = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_VENUE_COLUMN_NAME));
         Long fee = readCursor.getLong(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_FEE_COLUMN_NAME));
+        Integer uniqueKey = readCursor.getInt(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_UNIQUE_ID));
 
         String prize1 = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_PRIZES_1));
         String prize2 = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_PRIZES_2));
@@ -167,7 +167,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         coords.add(new Coordinators(coordName2, coordId2, coordPhone2));
 
 
-        return new EventDetails(eventName, clubName, category, description, rules, venue, photourl, eventId, eventTeamSize, startTime, endTime, fee, coords, prizes);
+        return new EventDetails(eventName, clubName, category, description, rules, venue, photourl, eventId, eventTeamSize, startTime, endTime, fee, coords, prizes, uniqueKey);
     }
 
     public void updateDb(EventDetails event) {
@@ -175,6 +175,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(Schema.DbEntry.EVENT_CATEGORY_COLUMN_NAME, event.getmCategory());
+        values.put(Schema.DbEntry.EVENT_UNIQUE_ID, event.getmUniqueKey());
         values.put(Schema.DbEntry.EVENT_DESCRIPTION_COLUMN_NAME, event.getmDesc());
         values.put(Schema.DbEntry.EVENT_RULES_COLUMN_NAME, event.getmRules());
         values.put(Schema.DbEntry.EVENT_VENUE_COLUMN_NAME, event.getmVenue());

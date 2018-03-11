@@ -150,6 +150,7 @@ public class SplashScreen extends AppCompatActivity {
                         for (int i = 0; i < eventArray.length(); i++) {
                             EventDetails event = new EventDetails();
                             JSONObject currEvent = eventArray.getJSONObject(i);
+                            event.setmUniqueKey(i);
                             if (currEvent.has("timing"))
                                 event.setmName(currEvent.getString("title"));
                             if (currEvent.has("fee"))
@@ -209,7 +210,6 @@ public class SplashScreen extends AppCompatActivity {
                                 event.setmEventId(currEvent.getString("_id"));
                             if (currEvent.has("eventtype")) {
                                 event.setmEventTeamSize(currEvent.getString("eventtype"));
-                                Log.d("DBChecker", currEvent.getString("eventtype") + " " + event.getmEventTeamSize());
                                 //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
                             }
                             //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
@@ -264,20 +264,15 @@ public class SplashScreen extends AppCompatActivity {
         }
 
         private void updateDatabase() {
-            Log.d("DBChecker", String.valueOf(allEvents.size()));
             if (allEvents.size() > mDatabaseController.getCount()) {
                 for (EventDetails eventDetails : allEvents) {
-                    Log.d("DBC", eventDetails.getmEventId());
                     mDatabaseController.addEntryToDb(eventDetails);
                 }
             } else {
                 for (EventDetails eventDetails : allEvents) {
                     mDatabaseController.updateDb(eventDetails);
-                    Log.d("DBC", "hi");
                 }
             }
-
-            Log.d("DBChecker", Integer.toString(mDatabaseController.getCount()));
         }
     }
 
