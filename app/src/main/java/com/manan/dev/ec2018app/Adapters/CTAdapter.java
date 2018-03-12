@@ -82,35 +82,40 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
         holder.likes.setText(Integer.toString(topic.likes)+" likes");
         holder.comments.setText(Integer.toString(topic.comments.size())+" comments");
         DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
-        postRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int flg=0;
-                postsModel m=dataSnapshot.getValue(postsModel.class);
 
-                holder.likes.setText(Integer.toString(m.likes)+" likes");
-                for(DataSnapshot mlikes: dataSnapshot.child("likefids").getChildren()) {
-                    likesModel l = mlikes.getValue(likesModel.class);
+        AccessToken token=AccessToken.getCurrentAccessToken();
+        if(token!=null) {
 
-                    if(l.fid.equals(Profile.getCurrentProfile().getId())){
-                        flg=1;
-                        break;
+            postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int flg = 0;
+                    postsModel m = dataSnapshot.getValue(postsModel.class);
+
+                    holder.likes.setText(Integer.toString(m.likes) + " likes");
+                    for (DataSnapshot mlikes : dataSnapshot.child("likefids").getChildren()) {
+                        likesModel l = mlikes.getValue(likesModel.class);
+
+                        if (l.fid.equals(Profile.getCurrentProfile().getId())) {
+                            flg = 1;
+                            break;
+                        }
+                    }
+                    if (flg == 1) {
+                        holder.like.setImageResource(R.drawable.xunbao_back);
+                    } else {
+                        holder.like.setImageResource(R.drawable.xunbao_about);
+
                     }
                 }
-                if(flg==1){
-                    holder.like.setImageResource(R.drawable.xunbao_back);
-                }
-                else{
-                    holder.like.setImageResource(R.drawable.xunbao_about);
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
                 }
-            }
+            });
+        }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         holder.like.setOnClickListener(new View.OnClickListener() {
@@ -189,6 +194,37 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
                         public void onComplete(DatabaseError databaseError, boolean b,
                                                DataSnapshot dataSnapshot) {
                             Log.v("hey","completed");
+                            DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
+                            postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    int flg=0;
+                                    postsModel m=dataSnapshot.getValue(postsModel.class);
+
+                                    if(m!=null) {
+                                        holder.likes.setText(Integer.toString(m.likes) + " likes");
+                                        for (DataSnapshot mlikes : dataSnapshot.child("likefids").getChildren()) {
+                                            likesModel l = mlikes.getValue(likesModel.class);
+
+                                            if (l.fid.equals(Profile.getCurrentProfile().getId())) {
+                                                flg = 1;
+                                                break;
+                                            }
+                                        }
+                                        if (flg == 1) {
+                                            holder.like.setImageResource(R.drawable.xunbao_back);
+                                        } else {
+                                            holder.like.setImageResource(R.drawable.xunbao_about);
+
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                             // Transaction completed
                         }
                     });

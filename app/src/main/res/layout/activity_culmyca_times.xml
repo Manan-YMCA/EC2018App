@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.manan.dev.ec2018app.CulmycaTimesActivity">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ctc_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:padding="4dp"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
