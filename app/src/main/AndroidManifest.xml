@@ -33,16 +33,16 @@
             android:parentActivityName=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
                     android:host="elementsculmyca.com"
-                    android:pathPrefix="/event/" />
+                    android:pathPrefix="/event/"
+                    android:scheme="http" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -51,9 +51,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
                     android:host="www.elementsculmyca.com"
-                    android:pathPrefix="/event/" />
+                    android:pathPrefix="/event/"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity
@@ -67,9 +67,7 @@
             android:theme="@style/xunbao_main_theme" />
         <activity
             android:name=".DevelopersActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -83,7 +81,7 @@
         <activity
             android:name=".ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont"></activity>
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait"
@@ -110,16 +108,23 @@
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
+
+        </activity>
+        <activity
+            android:name=".Tickets"
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont" />
+
+        <activity android:name=".CommentActivity"
+            android:theme="@style/CodeFont1"
+            android:label="Comments"
+            android:parentActivityName=".CulmycaTimesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Tickets"
-            android:screenOrientation="portrait"
-            android:theme="@style/CodeFont" />
         <activity android:name=".CulmycaTimesActivity"
             android:parentActivityName=".ContentActivity"/>
 

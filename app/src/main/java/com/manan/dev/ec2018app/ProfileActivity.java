@@ -301,7 +301,8 @@ public class ProfileActivity extends AppCompatActivity {
                             GetRoundedImage getRoundedImage = new GetRoundedImage();
                             Bitmap conv_bm = getRoundedImage.getRoundedShape(bitmap);
                             BitmapDrawable background = new BitmapDrawable(conv_bm);
-                            profilePicture.setBackground(background);
+                            profilePictureFrame.setBackground(background);
+                            profilePicture.setImageResource(R.drawable.frame_profile_2);
                         }
 
                         @Override
@@ -327,7 +328,7 @@ public class ProfileActivity extends AppCompatActivity {
         token = AccessToken.getCurrentAccessToken();
 
         if (token == null) {
-            profilePicture.setBackgroundResource(R.drawable.facebook_icon);
+            profilePicture.setBackgroundResource(R.drawable.profile_frame);
         }
         else{
             loginButton.setVisibility(View.GONE);
