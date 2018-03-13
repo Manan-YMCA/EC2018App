@@ -67,6 +67,7 @@
             android:theme="@style/xunbao_main_theme" />
         <activity
             android:name=".DevelopersActivity"
+            android:theme="@style/CodeFont"
             android:screenOrientation="portrait" >
 
         </activity>

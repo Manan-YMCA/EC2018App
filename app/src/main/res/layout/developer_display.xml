@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/White"
+    android:layout_marginLeft="15dp"
+android:layout_marginTop="15dp"
+android:layout_marginRight="15dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:id="@+id/dev_photo"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_image"
+        android:layout_height="180dp"/>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.6"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:layout_height="150dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shubham Sharma"
+            android:textSize="22dp"
+            android:textColor="@color/Black"
+            android:id="@+id/dev_name"
+            android:fontFamily="@font/futura"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_below="@id/dev_name"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight=".25"
+                android:layout_height="70dp"
+                android:id="@+id/dev_linkdin"
+                android:src="@drawable/linkedinlogo"/>
+            <ImageView
+                android:layout_height="70dp"
+                android:layout_width="0dp"
+                android:layout_weight=".25"
+
+                android:src="@drawable/crea"
+                android:id="@+id/dev_star"
+                android:tint="#ffd167"/>
+            <TextView
+                android:layout_weight=".50"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dev_more"
+                android:fontFamily="@font/futura"
+                android:textAlignment="center"
+                android:text="Core App Developer"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
+
+</RelativeLayout>

@@ -41,6 +41,7 @@
                 android:fontFamily="@font/futura"
                 android:textSize="18dp"
                 android:maxLines="6"
+                android:id="@+id/content_whatnew"
                 android:textColor="@color/White"
                 android:text="You can view the event bookmark them view single events, dynaically open events and lots more \nthings "/>
 

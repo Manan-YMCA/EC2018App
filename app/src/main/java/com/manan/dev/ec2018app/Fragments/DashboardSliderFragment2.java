@@ -1,8 +1,11 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +29,20 @@ public class DashboardSliderFragment2 extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment2, container, false);
 
-time=rootView.findViewById(R.id.timer);
-                new CountDownTimer(2110000000, 1000) { // adjust the milli seconds here
+        SharedPreferences preferences = this.getActivity().getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+
+
+
+          long fest_day=1522866600;
+          long curr =System.currentTimeMillis()/1000;
+          long diff=fest_day-curr;
+          Log.e("CurrentTime",String.valueOf(curr));
+
+            time=rootView.findViewById(R.id.timer);
+
+                new CountDownTimer((diff*1000), 1000) { // adjust the milli seconds here
 
             public void onTick(long millisUntilFinished) {
 
@@ -42,7 +57,7 @@ time=rootView.findViewById(R.id.timer);
             }
 
             public void onFinish() {
-                time.setText("done!");
+                time.setText("Fest is Live");
             }
         }.start();
 
@@ -59,6 +74,8 @@ time=rootView.findViewById(R.id.timer);
 
 
     }
+
+
 
 }
 

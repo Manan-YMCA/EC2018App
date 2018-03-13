@@ -355,6 +355,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_dev:
                 //TODO
+                startActivity(new Intent(ContentActivity.this, DevelopersActivity.class));
                 //show developers
                 break;
             case R.id.nav_location:
@@ -401,6 +402,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     protected void onResume() {
         super.onResume();
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
             Menu menu = nav_view.getMenu();
