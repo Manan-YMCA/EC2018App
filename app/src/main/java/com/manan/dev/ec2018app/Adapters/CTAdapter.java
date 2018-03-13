@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.manan.dev.ec2018app.CommentActivity;
 import com.manan.dev.ec2018app.Models.likesModel;
 import com.manan.dev.ec2018app.Models.postsModel;
 import com.manan.dev.ec2018app.R;
@@ -36,7 +37,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
 
     private List<postsModel> postsList;
     private Context context;
-
+    private postsModel topic;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +75,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        final postsModel topic = postsList.get(position);
+        topic = postsList.get(position);
         holder.caption.setText(topic.title);
         holder.postTime.setText(Long.toString(topic.time));
         holder.caption.setText(topic.title);
@@ -83,7 +84,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
         holder.comments.setText(Integer.toString(topic.comments.size())+" comments");
         DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
 
-        AccessToken token=AccessToken.getCurrentAccessToken();
+        final AccessToken token=AccessToken.getCurrentAccessToken();
         if(token!=null) {
 
             postRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -141,7 +142,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
 
                             }
                             Log.v("heyt","1");
-                            List<likesModel> alllikes=new ArrayList<likesModel>();
+                            ArrayList<likesModel> alllikes=new ArrayList<likesModel>();
                             for(MutableData mlikes: mutableData.child("likefids").getChildren()) {
                                 likesModel l = mlikes.getValue(likesModel.class);
                                 Log.v("heyt",l.fid);
@@ -235,6 +236,10 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                context.startActivity(new Intent(context, CommentActivity.class)
+                        .putExtra("clubName", topic.getClubName())
+                        .putExtra("eventId", topic.getPostid()));
             }
         });
 

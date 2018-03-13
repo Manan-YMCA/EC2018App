@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app.Models;
 
 import com.manan.dev.ec2018app.Models.commentsModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,16 +12,88 @@ import java.util.List;
 public class postsModel{
 
 
-        public String title,photoid,clubName,postid;
+        public String title;
+    public String photoid;
+    public String clubName;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPhotoid() {
+        return photoid;
+    }
+
+    public void setPhotoid(String photoid) {
+        this.photoid = photoid;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
+    }
+
+    public boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(boolean approval) {
+        this.approval = approval;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public ArrayList<likesModel> getLikefids() {
+        return likefids;
+    }
+
+    public void setLikefids(ArrayList<likesModel> likefids) {
+        this.likefids = likefids;
+    }
+
+    public String postid;
         public boolean approval;
         public int likes;
         public long time;
-        public List<commentsModel> comments;
-        public List<likesModel> likefids;
+        public ArrayList<Comment> comments;
+        public ArrayList<likesModel> likefids;
         public postsModel(){
 
         }
-        public postsModel(String title,long time,String photoid, String clubName,boolean approval, int likes, List<commentsModel> comments) {
+        public postsModel(String title,long time,String photoid, String clubName,boolean approval, int likes, ArrayList<Comment> comments) {
             this.title = title;
             this.time=time;
             this.photoid=photoid;
@@ -41,7 +114,7 @@ public class postsModel{
     public long gettime(){
         return time;
     }
-    public List<commentsModel> getcomments(){
+    public ArrayList<Comment> getcomments(){
         return comments;
     }
 
