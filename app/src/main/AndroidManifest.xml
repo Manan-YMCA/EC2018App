@@ -70,10 +70,7 @@
         <activity
             android:name=".DevelopersActivity"
             android:theme="@style/CodeFont"
-            android:screenOrientation="portrait" >
-
-        </activity>
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -143,5 +140,4 @@
             android:enabled="true"/>
         <receiver android:name=".MyNotificationResponse"/>
     </application>
-
 </manifest>

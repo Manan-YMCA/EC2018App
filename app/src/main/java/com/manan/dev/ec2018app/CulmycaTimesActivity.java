@@ -8,12 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.manan.dev.ec2018app.Adapters.CTAdapter;
-import com.manan.dev.ec2018app.Models.commentsModel;
+import com.manan.dev.ec2018app.Models.Comment;
 import com.manan.dev.ec2018app.Models.likesModel;
 import com.manan.dev.ec2018app.Models.postsModel;
 
@@ -107,16 +108,20 @@ public class CulmycaTimesActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 allposts=new ArrayList<postsModel>();
-                for(DataSnapshot club:dataSnapshot.getChildren()){
-                    String clubName=club.getKey();
+                for(DataSnapshot club : dataSnapshot.getChildren()){
+                    String clubName = club.getKey();
+                    Log.e("Club Name Key", "onDataChange: " + clubName );
+
                     for(DataSnapshot posts:club.getChildren()){
 
-                        postsModel post=posts.getValue(postsModel.class);
-                        post.clubName=clubName;
+                        postsModel post = posts.getValue(postsModel.class);
+
+                        post.clubName = clubName;
                         post.postid=posts.getKey();
-                        ArrayList<commentsModel> allcomments=new ArrayList<commentsModel>();
+
+                        ArrayList<Comment> allcomments=new ArrayList<Comment>();
                         for(DataSnapshot comments: posts.child("comments").getChildren()) {
-                            commentsModel comment = comments.getValue(commentsModel.class);
+                            Comment comment = comments.getValue(Comment.class);
                             allcomments.add(comment);
                         }
 
@@ -168,9 +173,9 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                         postsModel post=posts.getValue(postsModel.class);
                         post.clubName=clubName;
                         post.postid=posts.getKey();
-                        ArrayList<commentsModel> allcomments=new ArrayList<commentsModel>();
+                        ArrayList<Comment> allcomments=new ArrayList<Comment>();
                         for(DataSnapshot comments: posts.child("comments").getChildren()) {
-                            commentsModel comment = comments.getValue(commentsModel.class);
+                            Comment comment = comments.getValue(Comment.class);
                             allcomments.add(comment);
                         }
 

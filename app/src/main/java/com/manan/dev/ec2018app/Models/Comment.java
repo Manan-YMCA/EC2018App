@@ -23,7 +23,7 @@ public class Comment {
         return uname;
     }
 
-    public void setTitle(String uname) {
+    public void setUname(String uname) {
         this.uname = uname;
     }
 
@@ -31,20 +31,8 @@ public class Comment {
         return comment;
     }
 
-    public void setComment(String year) {
+    public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public int getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(int imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
     }
 
     public long getTime() {
@@ -53,5 +41,13 @@ public class Comment {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public int getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(int imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
