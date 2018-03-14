@@ -40,13 +40,6 @@ public class postsModel {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getPhotoid() {
-        return photoid;
-    }
-
-    public void setPhotoid(String photoid) {
         this.photoid = photoid;
     }
 
@@ -105,4 +98,15 @@ public class postsModel {
     public void setLikefids(ArrayList<likesModel> likefids) {
         this.likefids = likefids;
     }
+
+
+
+    public String getPhotoid() {
+        return photoid;
+    }
+
+    public void setPhotoid(String photoid) {
+        this.photoid = photoid;
+    }
+
 }
