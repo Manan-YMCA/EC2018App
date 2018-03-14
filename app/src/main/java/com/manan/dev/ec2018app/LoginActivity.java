@@ -42,33 +42,26 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
     EditText mobileNum;
     TextView NeedHelp;
-  Button loginMobileNum;
+    Button loginMobileNum;
+    private TextView registerView;
     private UserDetails userDetails;
     private ProgressDialog mProgress;
     private RelativeLayout RelativeView;
-    private String parent;
-    private String eventName;
-    private String eventId;
-    private String eventType;
+    String parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         setContentView(R.layout.activity_login);
 
         parent = getIntent().getStringExtra("parent");
 
-        if(parent.equals("event")){
-            eventId = getIntent().getStringExtra("eventId");
-            eventName = getIntent().getStringExtra("eventName");
-            eventType = getIntent().getStringExtra("eventType");
-        }
         userDetails = new UserDetails();
         mobileNum = (EditText) findViewById(R.id.mobileNum);
         loginMobileNum = (Button) findViewById(R.id.login_mobileNum);
         RelativeView = (RelativeLayout) findViewById(R.id.rl_main_view);
         NeedHelp = (TextView) findViewById(R.id.need_help);
+        registerView = (TextView) findViewById(R.id.tv_register_option);
         NeedHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +72,18 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
             }
         });
 
+        registerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parent.equals("xunbao") || parent.equals("ct")) {
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class)
+                            .putExtra("parent", "xunbao"));
+                    finish();
+                } else {
+                    finish();
+                }
+            }
+        });
 
 
         mProgress = new ProgressDialog(this);
@@ -117,20 +122,19 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                         try {
                             JSONObject obj1 = new JSONObject(response);
                             Long success = obj1.getLong("success");
-                            if(success == 1) {
+                            if (success == 1) {
                                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
                                 editor.putString("Phone", userDetails.getmPhone());
                                 editor.apply();
                                 AccessToken token = AccessToken.getCurrentAccessToken();
-                                if(token != null){
+                                if (token != null) {
                                     startSession();
                                 } else {
                                     FragmentManager fm = getFragmentManager();
                                     FragmentFbLogin fbLogin = new FragmentFbLogin();
                                     fbLogin.show(fm, "fbLoginFragment");
                                 }
-                            }
-                            else {
+                            } else {
                                 Snackbar.make(RelativeView, "USER DOES NOT EXIST", Snackbar.LENGTH_LONG).show();
                             }
                         }
@@ -157,14 +161,14 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
     @Override
     public void updateResult(boolean status) {
-        if(status){
+        if (status) {
             getDetails(userDetails, mobileNum.getText().toString());
         }
     }
 
     @Override
     public void fbStatus(Boolean status, String userId) {
-        if(status){
+        if (status) {
             userDetails.setmFbId(userId);
             getDetails(userDetails, mobileNum.getText().toString());
         } else {
@@ -173,20 +177,16 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     }
 
     private void startSession() {
-        if(parent.equals("normal")) {
-            startActivity(new Intent(LoginActivity.this, ContentActivity.class));
+        if(parent.equals("xunbao") || parent.equals("ct")){
             finish();
-        } else if(parent.equals("event")){
-            startActivity(new Intent(LoginActivity.this, EventRegister.class)
-                    .putExtra("eventName", eventName)
-                    .putExtra("eventId", eventId)
-                    .putExtra("eventType", eventType));
+        } else {
+            startActivity(new Intent(LoginActivity.this, ContentActivity.class));
             finish();
         }
     }
 
     private Boolean validateCredentials() {
-        if(!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -211,6 +211,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
     private void sendEmailBug(String to, String subject, String msg) {
 
         Uri uri = Uri.parse("mailto:")

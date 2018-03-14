@@ -54,17 +54,17 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class QuestionFragment extends Fragment {
-    TextView question,contestEnd,refreshText,stage;
-    ImageView xunbaoimg,refreshButton;
+    TextView question, contestEnd, refreshText, stage;
+    ImageView xunbaoimg, refreshButton;
     LinearLayout submit;
     EditText ans;
-    String queURL,ansURL,statusURL;
+    String queURL, ansURL, statusURL;
     StringRequest stat;
     JsonArrayRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
-    ProgressDialog progressBar;
-    int xstatus=2;
+    //ProgressDialog progressBar;
+    int xstatus = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -72,82 +72,42 @@ public class QuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Login Required!");
-        builder.setMessage("To continue, you must login with facebook");
-        builder.setPositiveButton("Continue", new Dialog.OnClickListener(){
-             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-             @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                 SharedPreferences preferences = getActivity().getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
-                 final String phoneNumber = preferences.getString("Phone", null);
-                 if (phoneNumber == null) {
-                     getActivity().finish();
-                     startActivity(new Intent(getActivity(), LoginActivity.class));
-                 }
-                 else{
-                     getActivity().finish();
-                     startActivity(new Intent(getActivity(), ProfileActivity.class));
-                 }
-             }
-        });
-                builder.setNegativeButton("Cancel", new Dialog.OnClickListener(){
-
-                    @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                                getActivity().finish();
-                            }
-        });
-
-                        final AlertDialog dialog = builder.create();
-
-
-                                progressBar = new ProgressDialog(getActivity());
-                progressBar.setMessage("Loading Question!");
-                progressBar.setCanceledOnTouchOutside(false);
-                progressBar.show();
+//        progressBar = new ProgressDialog(getActivity());
+//        progressBar.setMessage("Loading Question!");
+//        progressBar.setCanceledOnTouchOutside(false);
+//        progressBar.show();
 
 
         queURL = getActivity().getString(R.string.xunbao_get_question_api);
-        ansURL=getActivity().getResources().getString(R.string.xunbao_check_answer_api);
-        statusURL=getActivity().getResources().getString(R.string.xunbao_status);
-        queLayout=view.findViewById(R.id.question_layout);
-        stage =view.findViewById(R.id.tv_question_number);
+        ansURL = getActivity().getResources().getString(R.string.xunbao_check_answer_api);
+        statusURL = getActivity().getResources().getString(R.string.xunbao_status);
+        queLayout = view.findViewById(R.id.question_layout);
+        stage = view.findViewById(R.id.tv_question_number);
         question = view.findViewById(R.id.tv_question_text);
-        xunbaoimg=view.findViewById(R.id.iv_xunbao_question_image);
-                ans=view.findViewById(R.id.et_xunbao_answer);
-                submit=view.findViewById(R.id.ll_submit);
-                contestEnd=view.findViewById(R.id.contest_ends);
-                refreshButton=view.findViewById(R.id.refresh_button);
-                refreshText=view.findViewById(R.id.refresh_text);
-             queue = Volley.newRequestQueue(getActivity());
+        xunbaoimg = view.findViewById(R.id.iv_xunbao_question_image);
+        ans = view.findViewById(R.id.et_xunbao_answer);
+        submit = view.findViewById(R.id.ll_submit);
+        contestEnd = view.findViewById(R.id.contest_ends);
+        refreshButton = view.findViewById(R.id.refresh_button);
+        refreshText = view.findViewById(R.id.refresh_text);
+        queue = Volley.newRequestQueue(getActivity());
 
 
         stat = new StringRequest(Request.Method.GET, statusURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        xstatus=Integer.parseInt(response);
-                        Log.d("hey",""+xstatus);
-                        if(xstatus==2){
-                            progressBar.dismiss();
+                        xstatus = Integer.parseInt(response);
+                        Log.d("hey", "" + xstatus);
+                        if (xstatus == 2) {
+                            //progressBar.dismiss();
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
                             contestEnd.setVisibility(View.VISIBLE);
-                        }
-                        else if(xstatus==1){
-                            AccessToken token=AccessToken.getCurrentAccessToken();
-                            if(token==null) {
-                                progressBar.dismiss();
-                                dialog.show();
-                            }
-                            else {
-                                queue.add(jobReq);
-                            }
+                        } else if (xstatus == 1) {
+                            queue.add(jobReq);
 
-                        }
-                        else if(xstatus==3){
-                            progressBar.dismiss();
+                        } else if (xstatus == 3) {
+                            //progressBar.dismiss();
                             contestEnd.setText("THE CONTEST IS OVER! THANKS FOR PLAYING. IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
                             contestEnd.setVisibility(View.VISIBLE);
                         }
@@ -155,8 +115,8 @@ public class QuestionFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("hey",""+error);
-                progressBar.dismiss();
+                Log.d("hey", "" + error);
+                //progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
                 refreshText.setVisibility(View.VISIBLE);
                 Toast.makeText(getActivity(), "Problem loading!", Toast.LENGTH_SHORT).show();
@@ -164,12 +124,11 @@ public class QuestionFragment extends Fragment {
         });
 
 
-
-        JSONArray jsonArray =new JSONArray();
-        JSONObject params =new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        JSONObject params = new JSONObject();
         try {
-            if(Profile.getCurrentProfile()!=null)
-            params.put("email", Profile.getCurrentProfile().getId());
+            if (Profile.getCurrentProfile() != null)
+                params.put("email", Profile.getCurrentProfile().getId());
             params.put("skey", "abbv");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -181,28 +140,28 @@ public class QuestionFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         JSONObject resp;
-                        try{
+                        try {
                             resp = response.getJSONObject(0);
                             try {
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
                                 contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 31st March, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
-                                progressBar.dismiss();
+                                //progressBar.dismiss();
 
-                            } catch (Exception e){
+                            } catch (Exception e) {
                                 queLayout.setVisibility(View.VISIBLE);
-                                String imgUrl =resp.getString("image");
-                                String que=resp.getString("desc");
-                                Integer level =resp.getInt("pk");
+                                String imgUrl = resp.getString("image");
+                                String que = resp.getString("desc");
+                                Integer level = resp.getInt("pk");
                                 question.setText(que);
-                                stage.setText("STAGE - "+Integer.toString(level));
+                                stage.setText("STAGE - " + Integer.toString(level));
                                 float density = getResources().getDisplayMetrics().density;
-                                float size=(question.getMeasuredHeight()+stage.getMeasuredHeight())/density+50;
-                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com"+imgUrl).into(xunbaoimg);
-                                progressBar.dismiss();
+                                float size = (question.getMeasuredHeight() + stage.getMeasuredHeight()) / density + 50;
+                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg);
+                                //progressBar.dismiss();
                             }
                         } catch (JSONException e) {
-                            progressBar.dismiss();
+                            //progressBar.dismiss();
                             refreshButton.setVisibility(View.VISIBLE);
                             refreshText.setVisibility(View.VISIBLE);
                             e.printStackTrace();
@@ -213,7 +172,7 @@ public class QuestionFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        progressBar.dismiss();
+                        //progressBar.dismiss();
                         refreshButton.setVisibility(View.VISIBLE);
                         refreshText.setVisibility(View.VISIBLE);
 
@@ -235,23 +194,23 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                progressBar.show();
-                JSONObject answer=new JSONObject();
+                //progressBar.show();
+                JSONObject answer = new JSONObject();
 
                 try {
-                    AccessToken accessToken=AccessToken.getCurrentAccessToken();
+                    AccessToken accessToken = AccessToken.getCurrentAccessToken();
                     Profile.getCurrentProfile().getId();
-                    answer.put("email",Profile.getCurrentProfile().getId());
-                    answer.put("skey","abbv");
-                    answer.put("ans",ans.getText());
+                    answer.put("email", Profile.getCurrentProfile().getId());
+                    answer.put("skey", "abbv");
+                    answer.put("ans", ans.getText());
 
-                    final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL,answer,
+                    final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL, answer,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject resp) {
-                                    try{
+                                    try {
 
-                                        progressBar.dismiss();
+                                        //progressBar.dismiss();
 
                                         String end = resp.getString("response");
                                         contestEnd.setVisibility(View.VISIBLE);
@@ -264,7 +223,7 @@ public class QuestionFragment extends Fragment {
                                     } catch (JSONException e) {
 
                                         Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
-                                        progressBar.dismiss();
+                                        //progressBar.dismiss();
                                         e.printStackTrace();
                                     }
 
@@ -273,17 +232,17 @@ public class QuestionFragment extends Fragment {
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError volleyError) {
-                                    progressBar.dismiss();
+                                    //progressBar.dismiss();
                                     Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
                                     volleyError.printStackTrace();
                                 }
                             });
 
-                            queue.add(answ);
+                    queue.add(answ);
 
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
-                    progressBar.dismiss();
+                    //progressBar.dismiss();
                 }
 
             }
@@ -293,8 +252,8 @@ public class QuestionFragment extends Fragment {
 
     }
 
-    public void reload(){
-        progressBar.show();
+    public void reload() {
+        //progressBar.show();
         queLayout.setVisibility(View.GONE);
         contestEnd.setVisibility(View.GONE);
         refreshButton.setVisibility(View.GONE);

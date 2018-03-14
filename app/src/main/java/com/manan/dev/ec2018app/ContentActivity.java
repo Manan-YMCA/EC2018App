@@ -33,6 +33,7 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
@@ -409,6 +410,11 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_tickets).setVisible(false);
             menu.findItem(R.id.nav_profile).setTitle("Log In");
+        } else {
+            Menu menu = nav_view.getMenu();
+            menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_tickets).setVisible(true);
+            menu.findItem(R.id.nav_profile).setTitle("Profile");
         }
         if (nav_view != null) {
             nav_view.setCheckedItem(R.id.nav_home);

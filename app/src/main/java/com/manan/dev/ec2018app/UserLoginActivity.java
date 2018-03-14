@@ -22,14 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class UserLoginActivity extends AppCompatActivity {
-    TextView ECText, ContinueText, GuestText, ReadyText;
+    TextView ContinueText, GuestText, ReadyText;
     Button LoginButton;
-    ImageView ECLogo, backImage;
-    View lineView;
     LinearLayout guestLogin;
 
     private ViewPager viewPager;
@@ -41,10 +41,12 @@ public class UserLoginActivity extends AppCompatActivity {
 
     private Runnable Update;
     private Handler handler;
+    private static boolean offline = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (Build.VERSION.SDK_INT >= 21) {

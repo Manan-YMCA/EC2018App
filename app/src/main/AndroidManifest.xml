@@ -33,19 +33,6 @@
             android:parentActivityName=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont">
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:scheme="http"
-                    android:host="elementsculmyca.com"
-                    android:pathPrefix="/event/"
-                     />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -70,10 +57,8 @@
         <activity
             android:name=".DevelopersActivity"
             android:theme="@style/CodeFont"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" />
 
-        </activity>
-            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -128,13 +113,7 @@
         <activity android:name=".CommentActivity"
             android:theme="@style/CodeFont1"
             android:label="Comments"
-            android:parentActivityName=".CulmycaTimesActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:parentActivityName=".CulmycaTimesActivity"/>
         <activity android:name=".CulmycaTimesActivity"
             android:parentActivityName=".ContentActivity"/>
 

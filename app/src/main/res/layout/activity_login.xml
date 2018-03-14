@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv1"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -117,14 +117,17 @@
         android:textColor="@color/White"
         android:textSize="16dp" />
 
-    <com.manan.dev.ec2018app.Utilities.GifImageView
-        android:id="@+id/arrow"
-
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <TextView
+        android:id="@+id/tv_register_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/login_mobileNum"
-        android:layout_centerInParent="true"
-        android:background="@drawable/arrow_" />
+        android:layout_marginTop="24dp"
+        android:textSize="15dp"
+        android:textColor="@color/White"
+        android:text="Already a User, Register!"
+        android:textAlignment="center"
+        android:fontFamily="@font/futura"/>
 
     <TextView
         android:id="@+id/need_help"

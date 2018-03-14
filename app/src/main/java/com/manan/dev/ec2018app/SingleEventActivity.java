@@ -249,17 +249,10 @@ public class SingleEventActivity extends AppCompatActivity {
                     fragobj.setArguments(bundle);
                     fragobj.show(fm, "drff");
                 } else {
-                    if (phoneNumber != null) {
-                        startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
-                                .putExtra("eventName", eventDetails.getmName())
-                                .putExtra("eventId", eventDetails.getmEventId())
-                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
-                    } else
-                        startActivity(new Intent(SingleEventActivity.this, RegisterActivity.class)
-                                .putExtra("parent", "event")
-                                .putExtra("eventName", eventDetails.getmName())
-                                .putExtra("eventId", eventDetails.getmEventId())
-                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
+                    startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
+                            .putExtra("eventName", eventDetails.getmName())
+                            .putExtra("eventId", eventDetails.getmEventId())
+                            .putExtra("eventType", eventDetails.getmEventTeamSize()));
                 }
             }
         });

@@ -38,6 +38,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
     private List<postsModel> postsList;
     private Context context;
     private postsModel topic;
+    int liked=0;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -169,6 +170,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
                             if (flag==1) {
                                 p.likes = p.likes - 1;
                                 int i=0;
+                                liked=0;
 
                                 Log.v("heyt","10");
                                 for(likesModel l: p.likefids){
@@ -181,6 +183,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
                                 }
                             } else {
 
+                                liked=1;
                                 Log.d("added",Integer.toString(p.likes));
                                 p.likes = p.likes + 1;
                                 p.likefids.add(new likesModel(Profile.getCurrentProfile().getId()));
@@ -194,38 +197,15 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
                         @Override
                         public void onComplete(DatabaseError databaseError, boolean b,
                                                DataSnapshot dataSnapshot) {
-                            Log.v("hey","completed");
-                            DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
-                            postRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    int flg=0;
-                                    postsModel m=dataSnapshot.getValue(postsModel.class);
+                            if(liked==0){
+                                topic.likes--;
+                                holder.likes.setText(topic.likes+"");
+                            }
+                            else{
+                                topic.likes++;
+                                holder.likes.setText(topic.likes+"");
 
-                                    if(m!=null) {
-                                        holder.likes.setText(Integer.toString(m.likes) + " likes");
-                                        for (DataSnapshot mlikes : dataSnapshot.child("likefids").getChildren()) {
-                                            likesModel l = mlikes.getValue(likesModel.class);
-
-                                            if (l.fid.equals(Profile.getCurrentProfile().getId())) {
-                                                flg = 1;
-                                                break;
-                                            }
-                                        }
-                                        if (flg == 1) {
-                                            holder.like.setImageResource(R.drawable.xunbao_back);
-                                        } else {
-                                            holder.like.setImageResource(R.drawable.xunbao_about);
-
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
+                            }
                             // Transaction completed
                         }
                     });

@@ -3,21 +3,19 @@ package com.manan.dev.ec2018app;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,10 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.FirebaseDatabase;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
-import com.manan.dev.ec2018app.Utilities.GifImageView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,38 +48,23 @@ public class SplashScreen extends AppCompatActivity {
     private int mDirection = 1;
     private RectF mDisplayRect = new RectF();
     private IncomingHandler incomingHandler;
+    private static boolean offline = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (offline) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            offline = false;
+        }
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
         incomingHandler = new IncomingHandler(SplashScreen.this);
         allEvents = new ArrayList<>();
-
-//        new Handler().postDelayed(new Runnable() {
-//
-//            /*
-//             * Showing splash screen with a timer. This will be useful when you
-//             * want to show case your app logo / company
-//*/
-//            GifImageView gifImageView = (GifImageView) findViewById(R.id.GifImageView);
-//
-//            //    gifImageView.setGifImageResource(R.drawable.tenor);
-//            @Override
-//            public void run() {
-//                // This method will be executed once the timer is over
-//                // Start your app main activity
-////                Intent i = new Intent(SplashScreen.this, UserLoginActivity.class);
-////                startActivity(i);
-//                retreiveEvents();
-//                startActivity(new Intent(SplashScreen.this, UserLoginActivity.class));
-//                // close this activity
-//                finish();
-//            }
-//        }, 1000);
 
         mImageView = (ImageView) findViewById(R.id.background_one);
         mImageView.post(new Runnable() {
@@ -276,5 +259,16 @@ public class SplashScreen extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mCurrentAnimator.removeAllUpdateListeners();
+    }
+
+    @Override
+    public void onBackPressed() {
+        mCurrentAnimator.removeAllUpdateListeners();
+        super.onBackPressed();
+    }
 }
 

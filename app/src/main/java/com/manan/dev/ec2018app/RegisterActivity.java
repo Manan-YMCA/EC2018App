@@ -48,9 +48,6 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     private TextView LoginText;
     private UserDetails userDetails;
     private String parent;
-    private String eventType;
-    private String eventName;
-    private String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +55,6 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         setContentView(R.layout.activity_register);
 
         parent = getIntent().getStringExtra("parent");
-
-        if(parent.equals("event")){
-            eventType = getIntent().getStringExtra("eventType");
-            eventId = getIntent().getStringExtra("eventId");
-            eventName = getIntent().getStringExtra("eventName");
-        }
 
         userName = (EditText) findViewById(R.id.et_reg_name);
         userEmail = (EditText) findViewById(R.id.et_reg_email);
@@ -83,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             @Override
             public void onClick(View view) {
                 Boolean checker = validateCredentials();
-                if(checker) {
+                if (checker) {
                     userDetails.setEmail(userEmail.getText().toString());
                     userDetails.setmName(userName.getText().toString());
                     userDetails.setmCollege(userCollege.getText().toString());
@@ -97,16 +88,12 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         LoginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(parent.equals("event")) {
+                if(parent.equals("xunbao") || parent.equals("ct")){
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
-                            .putExtra("parent", "event")
-                            .putExtra("eventName", eventName)
-                            .putExtra("eventId", eventId)
-                            .putExtra("eventType", eventType));
-                } else {
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
-                            .putExtra("parent", "normal"));
+                            .putExtra("parent", "xunbao"));
                 }
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
+                        .putExtra("parent", "normal"));
             }
         });
 
@@ -128,13 +115,13 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             public void onResponse(String response) {
 
                 Toast.makeText(getApplicationContext(), "registered", Toast.LENGTH_SHORT).show();
-                Log.i("My success",""+response);
+                Log.i("My success", "" + response);
                 mProgress.dismiss();
                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
                 editor.putString("Phone", userDetails.getmPhone());
                 editor.apply();
                 AccessToken token = AccessToken.getCurrentAccessToken();
-                if(token != null){
+                if (token != null) {
                     startSession();
                 } else {
                     FragmentManager fm = getFragmentManager();
@@ -146,18 +133,18 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getApplicationContext(), "my error :"+error, Toast.LENGTH_LONG).show();
-                Log.i("My error",""+error);
+                Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
+                Log.i("My error", "" + error);
                 mProgress.dismiss();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                Map<String,String> map = new HashMap<String, String>();
-                map.put("name",userDetails.getmName());
-                map.put("email",userDetails.getEmail());
-                map.put("phone",userDetails.getmPhone());
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", userDetails.getmName());
+                map.put("email", userDetails.getEmail());
+                map.put("phone", userDetails.getmPhone());
                 map.put("college", userDetails.getmCollege());
                 map.put("fb", userDetails.getmFbId());
                 return map;
@@ -167,35 +154,35 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     }
 
     private Boolean validateCredentials() {
-        if(!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             Snackbar.make(view, "Check your Internet Connection", Snackbar.LENGTH_SHORT).show();
             return false;
         }
-        if(userName.getText().toString().equals("")){
+        if (userName.getText().toString().equals("")) {
             userName.setError("Enter a User Name");
             return false;
         }
-        if(userEmail.getText().toString().equals("")){
+        if (userEmail.getText().toString().equals("")) {
             userEmail.setError("Enter an Email Address");
             return false;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(userEmail.getText().toString()).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(userEmail.getText().toString()).matches()) {
             userEmail.setError("Enter a Valid Email Address");
             return false;
         }
-        if(userPhone.getText().toString().equals("")){
+        if (userPhone.getText().toString().equals("")) {
             userPhone.setError("Enter a Phone Number");
             return false;
         }
-        if(!Patterns.PHONE.matcher(userPhone.getText().toString()).matches()){
+        if (!Patterns.PHONE.matcher(userPhone.getText().toString()).matches()) {
             userPhone.setError("Enter a valid Phone Number");
             return false;
         }
-        if(userPhone.getText().toString().length() != 10){
+        if (userPhone.getText().toString().length() != 10) {
             userPhone.setError("Enter a valid Phone Number");
             return false;
         }
-        if(userCollege.getText().toString().equals("")){
+        if (userCollege.getText().toString().equals("")) {
             userCollege.setError("Enter a College Name");
             return false;
         }
@@ -211,14 +198,14 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
 
     @Override
     public void updateResult(boolean status) {
-        if(status){
+        if (status) {
             registerUser(userDetails);
         }
     }
 
     @Override
     public void fbStatus(Boolean status, String userId) {
-        if(status){
+        if (status) {
             userDetails.setmFbId(userId);
             registerUser(userDetails);
         } else {
@@ -227,14 +214,10 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     }
 
     private void startSession() {
-        if(parent.equals("normal")) {
-            startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
+        if(parent.equals("xunbao") || parent.equals("ct")){
             finish();
-        } else if(parent.equals("event")){
-            startActivity(new Intent(RegisterActivity.this, EventRegister.class)
-                    .putExtra("eventName", eventName)
-                    .putExtra("eventId", eventId)
-                    .putExtra("eventType", eventType));
+        } else {
+            startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
             finish();
         }
     }
