@@ -2,18 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment"
-    android:background="@drawable/xunbao_leaderboard_back">
+    tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment">
 
 
-    <TextView
-        android:id="@+id/xunbao_heading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="XUNBAO HEADING"
-        android:fontFamily="@font/futura"
-        android:layout_marginTop="16dp"/>  android:textSize="24dp"
-        android:gravity="center"
+
 
 
     <TextView
@@ -22,11 +14,10 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:layout_below="@id/xunbao_heading"
         android:textColor="@color/Black"
         android:text="Leaderboard"
         android:fontFamily="@font/futura"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="130dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

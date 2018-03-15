@@ -1,11 +1,9 @@
 package com.manan.dev.ec2018app.Xunbao;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,14 +15,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.LoginActivity;
-import com.manan.dev.ec2018app.ProfileActivity;
 import com.manan.dev.ec2018app.R;
 
 public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.fbLoginButton {
@@ -33,6 +30,9 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     ViewPager viewPagerXunbao;
     private String phoneNumber;
     private FragmentFbLogin fbLogin;
+    private XunbaoTabsPagerAdapter adapter;
+    private String userFbId;
+    private boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,15 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
                 item.setChecked(true);
                 Toast.makeText(XunbaoActivity.this, Integer.toString(item.getOrder()), Toast.LENGTH_SHORT).show();
                 viewPagerXunbao.setCurrentItem(item.getOrder() - 1);
+                if(viewPagerXunbao.getAdapter().getPageTitle(item.getOrder() - 1).toString().equals("QUESTIONS")) {
+                    loadQuestionFragment fragment = (loadQuestionFragment) adapter.instantiateItem(viewPagerXunbao, item.getOrder() - 1);
+                    if (AccessToken.getCurrentAccessToken() != null) {
+
+                        fragment.makeQuestionVisible(userFbId);
+                    } else {
+                        fragment.makeQuestionVisible("notLoggedIn");
+                    }
+                }
                 return false;
             }
         });
@@ -63,6 +72,14 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
             @Override
             public void onPageSelected(int position) {
                 navBar.getMenu().getItem(position).setChecked(true);
+                if(viewPagerXunbao.getAdapter().getPageTitle(position).toString().equals("QUESTIONS")){
+                    loadQuestionFragment fragment = (loadQuestionFragment) adapter.instantiateItem(viewPagerXunbao, position);
+                    if(AccessToken.getCurrentAccessToken() != null){
+                        fragment.makeQuestionVisible(userFbId);
+                    } else {
+                        fragment.makeQuestionVisible("notLoggedIn");
+                    }
+                }
             }
 
             @Override
@@ -73,16 +90,26 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     }
 
     private void setUpViewPager() {
-        XunbaoTabsPagerAdapter adapter = new XunbaoTabsPagerAdapter(getSupportFragmentManager());
+        adapter = new XunbaoTabsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AboutFragment(), "ABOUT");
         adapter.addFragment(new QuestionFragment(), "QUESTIONS");
         adapter.addFragment(new LeaderboardFragment(), "LEADERBOARD");
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            viewPagerXunbao.setCurrentItem(0);
+        if (AccessToken.getCurrentAccessToken() == null) {
+            viewPagerXunbao.post(new Runnable() {
+                @Override
+                public void run() {
+                    viewPagerXunbao.setCurrentItem(0);
+                }
+            });
             navBar.getMenu().getItem(0).setChecked(true);
         } else {
-            viewPagerXunbao.setCurrentItem(1);
+            viewPagerXunbao.post(new Runnable() {
+                @Override
+                public void run() {
+                    viewPagerXunbao.setCurrentItem(1);
+                }
+            });
             navBar.getMenu().getItem(1).setChecked(true);
         }
         viewPagerXunbao.setAdapter(adapter);
@@ -96,6 +123,12 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     @Override
     protected void onResume() {
         super.onResume();
+        if(AccessToken.getCurrentAccessToken() != null) {
+            userFbId = AccessToken.getCurrentAccessToken().getUserId();
+        } else {
+            userFbId = "notLoggedIn";
+        }
+        setUpViewPager();
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
@@ -108,6 +141,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                     Intent in = new Intent(XunbaoActivity.this, LoginActivity.class);
+                    flag = true;
                     in.putExtra("parent", "xunbao");
                     startActivity(in);
 
@@ -126,27 +160,37 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
 
         } else {
 
-            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                //Toast.makeText(this, "shit just happened again", Toast.LENGTH_SHORT).show();
-                FragmentManager fm = getFragmentManager();
-                fbLogin = new FragmentFbLogin();
-                fbLogin.show(fm, "fbLoginFragment");
-
+            if (!flag) {
+                if (AccessToken.getCurrentAccessToken() == null) {
+                    FragmentManager fm = getFragmentManager();
+                    fbLogin = new FragmentFbLogin();
+                    fbLogin.show(fm, "fbLoginFragment");
+                }
             }
-        }
 
-        setUpViewPager();
+        }
 
     }
 
     @Override
     protected void onPause() {
-        Log.d("pauser", "activity paused");
+        Log.d("pauser",  String.valueOf(adapter.getCount()));
         super.onPause();
+        adapter.removeFragment(0);
+        adapter.removeFragment(0);
+        adapter.removeFragment(0);
+        adapter.notifyDataSetChanged();
+        Log.d("pauser",  String.valueOf(adapter.getCount()));
     }
 
     @Override
     public void fbStatus(final Boolean status, String userId) {
+        if(status){
+            userFbId = userId;
+        }
+    }
 
+    public interface loadQuestionFragment{
+        void makeQuestionVisible(String fbId);
     }
 }

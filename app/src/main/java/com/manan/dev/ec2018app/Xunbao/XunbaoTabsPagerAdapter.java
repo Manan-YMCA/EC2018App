@@ -38,9 +38,14 @@ public class XunbaoTabsPagerAdapter extends FragmentPagerAdapter {
         mFragmentTitleList.add(title);
     }
 
+    public void removeFragment(int index){
+        mFragmentList.remove(index);
+        mFragmentTitleList.remove(index);
+    }
+
     @Override
     public int getCount() {
-        return 3;
+        return mFragmentList.size();
     }
 
     @Override

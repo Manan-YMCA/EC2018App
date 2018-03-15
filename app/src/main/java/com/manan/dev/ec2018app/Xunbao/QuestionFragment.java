@@ -1,19 +1,8 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +23,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
-import com.manan.dev.ec2018app.LoginActivity;
-import com.manan.dev.ec2018app.ProfileActivity;
 import com.manan.dev.ec2018app.R;
 import com.squareup.picasso.Picasso;
 
@@ -49,11 +30,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.content.Context.MODE_PRIVATE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
-
-public class QuestionFragment extends Fragment {
+public class QuestionFragment extends Fragment implements XunbaoActivity.loadQuestionFragment {
     TextView question, contestEnd, refreshText, stage;
     ImageView xunbaoimg, refreshButton;
     LinearLayout submit;
@@ -65,6 +43,7 @@ public class QuestionFragment extends Fragment {
     RelativeLayout queLayout;
     //ProgressDialog progressBar;
     int xstatus = 2;
+    private String currFbid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +57,7 @@ public class QuestionFragment extends Fragment {
 //        progressBar.show();
 
 
-        queURL = getActivity().getString(R.string.xunbao_get_question_api);
+        queURL = getActivity().getResources().getString(R.string.xunbao_get_question_api);
         ansURL = getActivity().getResources().getString(R.string.xunbao_check_answer_api);
         statusURL = getActivity().getResources().getString(R.string.xunbao_status);
         queLayout = view.findViewById(R.id.question_layout);
@@ -92,7 +71,91 @@ public class QuestionFragment extends Fragment {
         refreshText = view.findViewById(R.id.refresh_text);
         queue = Volley.newRequestQueue(getActivity());
 
+        refreshButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        reload();
+                    }
+                }
+        );
 
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //progressBar.show();
+                submitAnswer();
+            }
+        });
+
+        return view;
+
+    }
+
+    private void submitAnswer() {
+        JSONObject answer = new JSONObject();
+
+        try {
+            AccessToken accessToken = AccessToken.getCurrentAccessToken();
+            answer.put("email", currFbid);
+            answer.put("skey", "abbv");
+            answer.put("ans", ans.getText());
+
+            final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL, answer,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject resp) {
+                            try {
+
+                                //progressBar.dismiss();
+
+                                String end = resp.getString("response");
+                                contestEnd.setVisibility(View.VISIBLE);
+                                if (end.equals("0"))
+                                    Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
+                                else {
+                                    Toast.makeText(getActivity(), "Congrats! Right answer!", Toast.LENGTH_SHORT).show();
+                                    reload();
+                                }
+                            } catch (JSONException e) {
+
+                                Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                                //progressBar.dismiss();
+                                e.printStackTrace();
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            //progressBar.dismiss();
+                            Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                            volleyError.printStackTrace();
+                        }
+                    });
+
+            queue.add(answ);
+
+        } catch (JSONException e) {
+            Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+            //progressBar.dismiss();
+        }
+
+    }
+
+    public void reload() {
+        //progressBar.show();
+        queLayout.setVisibility(View.GONE);
+        contestEnd.setVisibility(View.GONE);
+        refreshButton.setVisibility(View.GONE);
+        refreshText.setVisibility(View.GONE);
+        queue.add(stat);
+    }
+
+    public void checkStatus() {
         stat = new StringRequest(Request.Method.GET, statusURL,
                 new Response.Listener<String>() {
                     @Override
@@ -104,7 +167,10 @@ public class QuestionFragment extends Fragment {
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
                             contestEnd.setVisibility(View.VISIBLE);
                         } else if (xstatus == 1) {
-                            queue.add(jobReq);
+                            if(!currFbid.equals("notLoggedIn")) {
+                                queue.add(jobReq);
+                                refreshText.setVisibility(View.GONE);
+                            }
 
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
@@ -122,13 +188,15 @@ public class QuestionFragment extends Fragment {
                 Toast.makeText(getActivity(), "Problem loading!", Toast.LENGTH_SHORT).show();
             }
         });
+        queue.add(stat);
+    }
 
-
+    public void getQuestion() {
         JSONArray jsonArray = new JSONArray();
         JSONObject params = new JSONObject();
         try {
-            if (Profile.getCurrentProfile() != null)
-                params.put("email", Profile.getCurrentProfile().getId());
+//            if (!currFbid.equals("notLoggedIn"))
+                params.put("email", currFbid);
             params.put("skey", "abbv");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -180,85 +248,15 @@ public class QuestionFragment extends Fragment {
                     }
                 });
         queue.add(stat);
-        refreshButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        reload();
-                    }
-                }
-        );
-
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //progressBar.show();
-                JSONObject answer = new JSONObject();
-
-                try {
-                    AccessToken accessToken = AccessToken.getCurrentAccessToken();
-                    Profile.getCurrentProfile().getId();
-                    answer.put("email", Profile.getCurrentProfile().getId());
-                    answer.put("skey", "abbv");
-                    answer.put("ans", ans.getText());
-
-                    final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL, answer,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject resp) {
-                                    try {
-
-                                        //progressBar.dismiss();
-
-                                        String end = resp.getString("response");
-                                        contestEnd.setVisibility(View.VISIBLE);
-                                        if (end.equals("0"))
-                                            Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
-                                        else {
-                                            Toast.makeText(getActivity(), "Congrats! Right answer!", Toast.LENGTH_SHORT).show();
-                                            reload();
-                                        }
-                                    } catch (JSONException e) {
-
-                                        Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
-                                        //progressBar.dismiss();
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError volleyError) {
-                                    //progressBar.dismiss();
-                                    Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
-                                    volleyError.printStackTrace();
-                                }
-                            });
-
-                    queue.add(answ);
-
-                } catch (JSONException e) {
-                    Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
-                    //progressBar.dismiss();
-                }
-
-            }
-        });
-
-        return view;
 
     }
 
-    public void reload() {
-        //progressBar.show();
-        queLayout.setVisibility(View.GONE);
-        contestEnd.setVisibility(View.GONE);
-        refreshButton.setVisibility(View.GONE);
-        refreshText.setVisibility(View.GONE);
-        queue.add(stat);
-    }
 
+    @Override
+    public void makeQuestionVisible(String fbId) {
+        currFbid = fbId;
+        Log.d("xunbao", currFbid);
+        checkStatus();
+        getQuestion();
+    }
 }

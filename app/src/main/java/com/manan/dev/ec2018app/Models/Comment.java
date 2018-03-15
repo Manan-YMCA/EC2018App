@@ -7,7 +7,7 @@ package com.manan.dev.ec2018app.Models;
 public class Comment {
     private String uname, comment;
     private long time;
-    private String imageUrl;
+    private String  imageUrl;
 
     public Comment() {
     }
@@ -42,7 +42,6 @@ public class Comment {
     public void setTime(long time) {
         this.time = time;
     }
-
 
     public String getImageUrl() {
         return imageUrl;
