@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.manan.dev.ec2018app.Xunbao.XunbaoActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/xunbao_back"
+        android:layout_marginBottom="56dp">
+        <ImageView
+            android:id="@+id/xunbao_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:gravity=""
+            android:src="@drawable/xunbao_logo" />
+    </RelativeLayout>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/xunbao_nav_bar"
         android:layout_width="match_parent"

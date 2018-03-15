@@ -49,7 +49,7 @@ public class CommentActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter);
-       //     commentList.add(new Comment("Jayati Bhayana","Cool!",12345678,R.drawable.vector_rules));
+            //commentList.add(new Comment("Jayati Bhayana","Cool!",12345678,R.drawable.vector_rules));
 //            mDatabase= FirebaseDatabase.getInstance().getReference().child("posts").child(clubName).child(postId);
 
             postButton.setOnClickListener(new View.OnClickListener() {

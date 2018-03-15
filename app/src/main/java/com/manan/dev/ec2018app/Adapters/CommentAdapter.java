@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.manan.dev.ec2018app.Models.Comment;
 import com.manan.dev.ec2018app.R;
 
+
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder> {
@@ -47,6 +48,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         holder.uname.setText(comment.getUname());
         holder.comment.setText(comment.getComment());
       //  Picasso.with(c)
+        //holder.profilePic.setImageResource(comment.getImageUrl());
     }
 
     @Override

@@ -40,7 +40,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private DatabaseController mDatabaseController;
     private ArrayList<EventDetails> allEvents;
-    private static final int DURATION = 5000;
+    private static final int DURATION = 3000;
     private ValueAnimator mCurrentAnimator;
     private final Matrix mMatrix = new Matrix();
     private ImageView mImageView;
@@ -262,12 +262,11 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mCurrentAnimator.removeAllUpdateListeners();
     }
 
     @Override
     public void onBackPressed() {
-        mCurrentAnimator.removeAllUpdateListeners();
+        mCurrentAnimator.removeAllListeners();
         super.onBackPressed();
     }
 }
