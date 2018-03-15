@@ -6,7 +6,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,7 +33,6 @@
             android:parentActivityName=".CategoryEventDisplayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -41,10 +40,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
                     android:host="elementsculmyca.com"
                     android:pathPrefix="/event/"
-                     />
+                    android:scheme="http" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -53,9 +51,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
                     android:host="www.elementsculmyca.com"
-                    android:pathPrefix="/event/" />
+                    android:pathPrefix="/event/"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity
@@ -69,9 +67,8 @@
             android:theme="@style/xunbao_main_theme" />
         <activity
             android:name=".DevelopersActivity"
-            android:theme="@style/CodeFont"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -122,17 +119,24 @@
             android:name=".Tickets"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
-
-        <activity android:name=".CommentActivity"
-            android:theme="@style/CodeFont1"
+        <activity
+            android:name=".CommentActivity"
             android:label="Comments"
-            android:parentActivityName=".CulmycaTimesActivity"/>
-        <activity android:name=".CulmycaTimesActivity"
-            android:parentActivityName=".ContentActivity"/>
+            android:parentActivityName=".CulmycaTimesActivity"
+            android:theme="@style/CodeFont1" />
+        <activity
+            android:name=".CulmycaTimesActivity"
+            android:parentActivityName=".ContentActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/CodeFont" />
 
-        <activity android:name=".AboutActivity" android:theme="@style/CodeFont"/>
-        <service android:name=".MyNotificationService"
-            android:enabled="true"/>
-        <receiver android:name=".MyNotificationResponse"/>
+        <service
+            android:name=".MyNotificationService"
+            android:enabled="true" />
+
+        <receiver android:name=".MyNotificationResponse" />
+
     </application>
+
 </manifest>

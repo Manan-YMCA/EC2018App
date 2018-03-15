@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.manan.dev.ec2018app.Models.Comment;
 import com.manan.dev.ec2018app.R;
-
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         Comment comment = commentList.get(position);
         holder.uname.setText(comment.getUname());
         holder.comment.setText(comment.getComment());
-        holder.profilePic.setImageResource(comment.getImageUrl());
+      //  Picasso.with(c)
     }
 
     @Override

@@ -3,7 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#878686">
+    android:background="#fdd1d1d1"
+    android:elevation="4dp"
+
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,6 +59,7 @@
                 android:maxLength="1"
                 android:nextFocusDown="@+id/et_otp_dig_2"
                 android:padding="4dp"
+
                 android:textAlignment="center"
                 android:textSize="26dp" />
 
@@ -71,6 +75,7 @@
                 android:maxLength="1"
                 android:nextFocusDown="@+id/et_otp_dig_3"
                 android:padding="4dp"
+
                 android:textAlignment="center"
                 android:textSize="26dp" />
 
@@ -84,6 +89,7 @@
                 android:background="@drawable/otp_edit_text_background"
                 android:inputType="number"
                 android:maxLength="1"
+
                 android:nextFocusDown="@+id/et_otp_dig_4"
                 android:padding="4dp"
                 android:textAlignment="center"
@@ -105,6 +111,7 @@
                 android:background="@drawable/otp_edit_text_background"
                 android:inputType="number"
                 android:maxLength="1"
+
                 android:nextFocusDown="@+id/et_otp_dig_5"
                 android:padding="4dp"
                 android:textAlignment="center"
@@ -117,6 +124,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
+
                 android:background="@drawable/otp_edit_text_background"
                 android:inputType="number"
                 android:maxLength="1"
@@ -128,6 +136,7 @@
             <EditText
                 android:id="@+id/et_otp_dig_6"
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
@@ -151,7 +160,7 @@
 
         android:padding="6dp"
         android:textAlignment="center"
-        android:textColor="@color/White"
+        android:textColor="@color/Black"
         android:textSize="12dp" />
 
     <TextView
@@ -167,7 +176,7 @@
         android:fontFamily="@font/futura"
         android:text="A message with a verification code has been sent to your device. Please enter and Continue!!"
         android:textAlignment="center"
-        android:textColor="@color/White"
+        android:textColor="@color/Black"
         android:textSize="12dp" />
 
     <TextView
@@ -180,7 +189,7 @@
         android:padding="6dp"
         android:text="Didn't get a verification code?"
         android:textAlignment="center"
-        android:textColor="@color/White"
+        android:textColor="@color/Black"
         android:textSize="12dp" />
 
     </RelativeLayout>

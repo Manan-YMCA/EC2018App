@@ -7,12 +7,12 @@ package com.manan.dev.ec2018app.Models;
 public class Comment {
     private String uname, comment;
     private long time;
-    private int imageUrl;
+    private String imageUrl;
 
     public Comment() {
     }
 
-    public Comment(String uname, String comment, long time, int imageUrl) {
+    public Comment(String uname, String comment, long time, String imageUrl) {
         this.uname = uname;
         this.comment = comment;
         this.time = time;
@@ -43,11 +43,12 @@ public class Comment {
         this.time = time;
     }
 
-    public int getImageUrl() {
+
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(int imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 }

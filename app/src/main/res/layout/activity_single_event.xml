@@ -9,37 +9,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context="com.manan.dev.ec2018app.SingleEventActivity">
-<ImageView
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:src="@drawable/arrow_"
-    android:rotation="180"
-    android:layout_alignParentLeft="true"
-    android:id="@+id/tv_back_button"
-    android:tint="@color/Black"/>
+
+        <ImageView
+            android:id="@+id/tv_back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/vector_arrow"
+            android:tint="@color/Black" />
 
 
         <TextView
             android:id="@+id/tv_event_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/futura"
-           android:layout_alignParentRight="true"
             android:text="Event name"
-            android:layout_marginRight="10dp"
-android:textAllCaps="true"
+            android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="26dp" />
+
         <TextView
             android:id="@+id/tv_cat_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginRight="10dp"
-            android:layout_below="@id/tv_event_name"
-            android:fontFamily="@font/futura"
             android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_event_name"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/futura"
             android:text="Category"
 
 
@@ -59,46 +61,48 @@ android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="200dp"
 
-           android:background="@drawable/default_image"
-            android:layout_below="@+id/line1">
+            android:layout_below="@+id/line1"
+            android:background="@drawable/default_image">
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-        <Button
+                <Button
 
-            android:layout_width="0dp"
-            android:layout_weight="0.75"
-            android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-            android:id="@+id/btn_register"
+                    android:id="@+id/btn_register"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="0.75"
 
-            android:background="@drawable/edit_text_background"
-            android:text="Register"
-            android:fontFamily="@font/futura"
-android:textSize="26dp"
-            android:textColor="#fff" />
-    <ImageView
+                    android:background="@drawable/edit_text_background"
+                    android:fontFamily="@font/futura"
+                    android:text="Register"
+                    android:textColor="#fff"
+                    android:textSize="26dp" />
 
-        android:layout_width="0dp"
-        android:layout_weight="0.25"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
+                <ImageView
 
-        android:id="@+id/btn_share"
-android:src="@drawable/vector_share"
-   android:layout_marginLeft="10dp"
-        android:fontFamily="@font/futura"
+                    android:id="@+id/btn_share"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
 
-        android:textColor="#fff" />
-</LinearLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/futura"
+                    android:src="@drawable/vector_share"
+
+                    android:textColor="#fff" />
+            </LinearLayout>
         </LinearLayout>
+
         <View
             android:id="@+id/line2"
             android:layout_width="match_parent"
@@ -159,11 +163,11 @@ android:src="@drawable/vector_share"
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13dp"
                     android:fontFamily="@font/futura"
-                    android:textColor="#333"
                     android:text=" To "
-                    android:textStyle="normal"/>
+                    android:textColor="#333"
+                    android:textSize="13dp"
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/tv_event_end_time"
@@ -182,14 +186,15 @@ android:src="@drawable/vector_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/line2"
-            android:layout_toRightOf="@id/rl_time_date"
             android:layout_marginBottom="10dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/rl_time_date"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="15dp">
+            android:layout_toRightOf="@id/rl_time_date">
+
             <ImageView
                 android:id="@+id/iv_money"
                 android:layout_width="wrap_content"
@@ -213,10 +218,7 @@ android:src="@drawable/vector_share"
                 android:textStyle="normal" />
 
 
-
-
         </RelativeLayout>
-
 
 
         <LinearLayout
@@ -235,7 +237,6 @@ android:src="@drawable/vector_share"
                 android:layout_weight="1">
 
 
-
                 <ImageView
                     android:id="@+id/iv_vector_location"
                     android:layout_width="wrap_content"
@@ -249,16 +250,16 @@ android:src="@drawable/vector_share"
                     android:id="@+id/tv_event_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/iv_vector_location"
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/iv_vector_location"
                     android:layout_toRightOf="@+id/iv_vector_location"
                     android:fontFamily="@font/futura"
+                    android:padding="5dp"
                     android:text="Lal Chowk"
                     android:textColor="#111"
-                    android:padding="5dp"
                     android:textSize="15dp"
-                    android:textStyle="italic"
-                    android:layout_alignBaseline="@id/iv_vector_location"/>
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -290,11 +291,6 @@ android:src="@drawable/vector_share"
 
             </LinearLayout>
         </LinearLayout>
-
-
-
-
-
 
 
         <View
@@ -411,8 +407,7 @@ android:src="@drawable/vector_share"
                 android:fontFamily="@font/futura"
                 android:text="Description:"
                 android:textColor="#111"
-                android:textSize="15dp"
-               />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/tv_description"
@@ -421,10 +416,10 @@ android:src="@drawable/vector_share"
                 android:layout_alignLeft="@id/tv_description_heading"
                 android:layout_alignStart="@id/tv_description_heading"
                 android:layout_below="@+id/tv_description_heading"
+                android:fontFamily="@font/futura"
                 android:text="This exceeding trifling witling, considering ranting criticizing concerning adopting fitting wording being exhibiting transcending learning, was displaying, notwithstanding ridiculing, surpassing boasting swelling reasoning, respecting correcting erring writing, and touching detecting deceiving arguing during debating."
                 android:textColor="#333"
                 android:textSize="13dp"
-                android:fontFamily="@font/futura"
                 android:textStyle="normal" />
 
         </RelativeLayout>
@@ -466,17 +461,16 @@ android:src="@drawable/vector_share"
                 android:fontFamily="@font/futura"
                 android:text="Rules:"
                 android:textColor="#111"
-                android:textSize="15dp"
-               />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/tv_rules"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/futura"
                 android:layout_alignLeft="@id/tv_rules_heading"
                 android:layout_alignStart="@id/tv_rules_heading"
                 android:layout_below="@+id/tv_rules_heading"
+                android:fontFamily="@font/futura"
                 android:text=" 1. Mah Life, My Rulz! \n 2. Android is Lyf! \n 3. I set ma own rulz! \n 4. My lyf is kewl!"
                 android:textColor="#333"
                 android:textSize="13dp"
@@ -518,8 +512,6 @@ android:src="@drawable/vector_share"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_coords_heading"
                 android:orientation="vertical">
-
-
 
 
             </LinearLayout>

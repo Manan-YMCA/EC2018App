@@ -1,17 +1,14 @@
 package com.manan.dev.ec2018app;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,7 +16,6 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.manan.dev.ec2018app.Adapters.CommentAdapter;
 import com.manan.dev.ec2018app.Models.Comment;
 
@@ -53,7 +49,7 @@ public class CommentActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter);
-            commentList.add(new Comment("Jayati Bhayana","Cool!",12345678,R.drawable.vector_rules));
+       //     commentList.add(new Comment("Jayati Bhayana","Cool!",12345678,R.drawable.vector_rules));
 //            mDatabase= FirebaseDatabase.getInstance().getReference().child("posts").child(clubName).child(postId);
 
             postButton.setOnClickListener(new View.OnClickListener() {
