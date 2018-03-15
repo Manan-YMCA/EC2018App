@@ -29,6 +29,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
+
     <style name="CodeFont1" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/Black</item>
         <item name="android:windowActionBar">true</item>
@@ -56,9 +57,9 @@
     </style>
 
 
+    <style name="Xunbao" parent="@android:style/Theme.Holo.Light.DarkActionBar" />
 
-
-    <style name="Xunbao" parent="@android:style/Theme.Holo.Light.DarkActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

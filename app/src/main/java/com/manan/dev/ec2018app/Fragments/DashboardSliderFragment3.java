@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.manan.dev.ec2018app.BrixxActivity;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.R;
 
@@ -43,8 +44,9 @@ public class DashboardSliderFragment3 extends Fragment {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                Toast.makeText(getActivity(),singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(getActivity(), CategoryEventDisplayActivity.class)
+           //     Toast.makeText(getActivity(),singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getActivity(), BrixxActivity.class));
 //                        .putExtra("clubname", singleItem.getClubName())
 //                        .putExtra("clubPhoto", byteArray)
 //                        .putExtra("clubdisplay", singleItem.getDisplayName()));

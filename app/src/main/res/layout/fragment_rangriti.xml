@@ -1,0 +1,90 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.manan.dev.ec2018app.Fragments.RangritiFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/back_img"
+        android:background="@drawable/brixx_img"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/inf_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/inf_date"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="15dp"
+
+                android:fontFamily="@font/futura"
+                android:text="Star Night"
+                android:textAllCaps="true"
+                android:textColor="@color/White"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/inf_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/inf_content"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/futura"
+                android:text="8th April"
+                android:textColor="@color/White"
+                android:textSize="24dp"
+
+                />
+
+            <TextView
+                android:id="@+id/inf_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/futura"
+                android:maxLines="4"
+
+                android:text="@string/dummy"
+                android:textColor="@color/White"
+                android:textSize="13dp"
+
+                />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/insta"
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/insta" />
+
+            <ImageView
+
+                android:id="@+id/fb"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/fb" />
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

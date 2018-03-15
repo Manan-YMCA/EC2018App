@@ -123,7 +123,7 @@
             android:name=".CommentActivity"
             android:label="Comments"
             android:parentActivityName=".CulmycaTimesActivity"
-            android:theme="@style/CodeFont1" />
+            android:theme="@style/CodeFont" />
         <activity
             android:name=".CulmycaTimesActivity"
             android:parentActivityName=".ContentActivity" />
@@ -137,6 +137,8 @@
 
         <receiver android:name=".MyNotificationResponse" />
 
+        <activity android:name=".BrixxActivity"
+            android:theme="@style/CodeFont"></activity>
     </application>
 
 </manifest>
