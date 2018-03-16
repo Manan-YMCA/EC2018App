@@ -6,71 +6,80 @@
 
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment3">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:layout_marginTop="50dp"
-
         android:background="#000">
+
         <LinearLayout
+            android:id="@+id/dsb_tap"
             android:layout_width="280dp"
             android:layout_height="280dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:id="@+id/dsb_tap"
-            android:background="@drawable/vector_circle" >
+            android:background="@drawable/vector_circle"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Informal\nEvents"
-                android:layout_marginTop="40dp"
-                android:textSize="32dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/futura"
                 android:gravity="center_horizontal"
+                android:text="Informal\nEvents!"
                 android:textColor="@color/White"
-                android:fontFamily="@font/futura"
-                android:layout_gravity="center"/>
+                android:textSize="32dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                android:fontFamily="@font/futura"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:text="Browse the event hosted by brixx"/>
+                android:fontFamily="@font/futura"
+                android:text="Events hosted by Brixx Team"
+                android:textColor="@color/White" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/futura"
+                android:gravity="center_horizontal"
+                android:text="Mr and Ms Culmyca"
+                android:textColor="@color/White"
+                android:textSize="22dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/futura"
+                android:gravity="center_horizontal"
                 android:text="Fashion Show"
-
-                android:textSize="22dp"
-                android:gravity="center_horizontal"
                 android:textColor="@color/White"
-                android:fontFamily="@font/futura"
-                android:layout_gravity="center"/>
+                android:textSize="22dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/futura"
+                android:gravity="center_horizontal"
                 android:text="Stand Up Comedy"
-
-                android:textSize="22dp"
-                android:gravity="center_horizontal"
                 android:textColor="@color/White"
-                android:fontFamily="@font/futura"
-                android:layout_gravity="center"/>
+                android:textSize="22dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Star Night"
-
-                android:textSize="22dp"
-                android:gravity="center_horizontal"
-                android:textColor="@color/White"
+                android:layout_gravity="center"
                 android:fontFamily="@font/futura"
-                android:layout_gravity="center"/>
+                android:gravity="center_horizontal"
+                android:text="Star Night"
+                android:textColor="@color/White"
+                android:textSize="22dp" />
         </LinearLayout>
     </RelativeLayout>
-
 </FrameLayout>

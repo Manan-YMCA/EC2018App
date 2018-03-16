@@ -6,9 +6,9 @@ package com.manan.dev.ec2018app.Models;
 
 public class approval {
     public boolean app;
-    public approval(){
 
-    }
+    public approval(){}
+
     public approval(boolean app){
         this.app=app;
     }

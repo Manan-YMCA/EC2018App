@@ -2,9 +2,8 @@ package com.manan.dev.ec2018app;
 
 
 import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,11 +27,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.zxing.qrcode.encoder.QRCode;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
-import com.manan.dev.ec2018app.Models.UserDetails;
 import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.UserDetails;
 
 import org.json.JSONObject;
 
@@ -272,7 +270,6 @@ public class EventRegister extends AppCompatActivity {
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
 
     }
-
 
     private Boolean validateCredentials() {
         for(EditText nameTextView : nameText){

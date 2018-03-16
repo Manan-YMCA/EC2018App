@@ -33,7 +33,6 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
@@ -156,7 +155,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         allSampleData.add(microbird);
 
         CategoryItemModel natraja = new CategoryItemModel();
-        natraja.setClubName("Natraja");
+        natraja.setClubName("Nataraja");
         natraja.setDisplayName("Dance");
         natraja.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.natraja));
         allSampleData.add(natraja);
@@ -187,7 +186,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         CategoryItemModel vivekanand = new CategoryItemModel();
         vivekanand.setClubName("Vivekanand Manch");
-        vivekanand.setDisplayName("Vivekanand Manch");
+        vivekanand.setDisplayName("Socio-cultural");
         vivekanand.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.vivekanand));
         allSampleData.add(vivekanand);
     }
@@ -248,7 +247,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
-
         }
     }
 

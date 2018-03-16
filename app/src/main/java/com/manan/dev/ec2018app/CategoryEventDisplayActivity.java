@@ -34,15 +34,19 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
     private ImageView clubImage;
     private RecyclerView myRecyclerView;
     private DatabaseController databaseController;
+    private ImageView backButton;
+//    private ProgressDialog myDialog;
+    ArrayList<EventDetails> eventList;
+    private TextView clubDescpTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_event_display);
 
+        backButton = findViewById(R.id.iv_back_button);
         clubName = getIntent().getStringExtra("clubname");
         databaseController = new DatabaseController(getApplicationContext());
-        ArrayList<EventDetails> eventList;
         eventList = databaseController.retreiveCategory(clubName);
         Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
 
@@ -61,11 +65,31 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         Drawable drawable = new BitmapDrawable(this.getResources(), clubphoto);
         clubImage.setImageDrawable(drawable);
 
+        clubDescpTextView = findViewById(R.id.tv_category_descp_heading);
+
+//        myDialog = new ProgressDialog(CategoryEventDisplayActivity.this);
+//        myDialog.setMessage("Events Loading...");
+//        myDialog.setCancelable(false);
+//        myDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//                Toast.makeText(CategoryEventDisplayActivity.this, "Error!", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        myDialog.show();
+
         myRecyclerView = (RecyclerView) findViewById(R.id.events_list);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         myRecyclerView.setAdapter(new eventAdapter(this, eventList));
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public class eventAdapter extends RecyclerView.Adapter<eventAdapter.MyViewHolder> {
@@ -92,17 +116,31 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(eventDetails.getmStartTime());
-            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM, yy", Locale.ENGLISH);
             String formattedDate = sdf.format(cal.getTime());
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
             String formattedTime = sdf1.format(cal.getTime());
 
-
             holder.name.setText(eventDetails.getmName());
             holder.date.setText(formattedDate);
             holder.time.setText(formattedTime);
-            holder.eventType.setText(eventDetails.getmEventTeamSize());
+
+            if(!eventDetails.getmEventTeamSize().equals("solo")) {
+                holder.typeOfEventPhoto.setImageDrawable(getResources().getDrawable(R.drawable.vector_team));
+//              Picasso.with(CategoryEventDisplayActivity.this).load(R.drawable.vector_team).resize(50, 50).centerCrop().into(holder.typeOfEventPhoto);
+            }
+            else if(eventDetails.getmEventTeamSize().equals("solo")){
+                holder.typeOfEventPhoto.setImageDrawable(getResources().getDrawable(R.drawable.vector_single));
+//              Picasso.with(CategoryEventDisplayActivity.this).load(R.drawable.vector_single).resize(50, 50).centerCrop().into(holder.typeOfEventPhoto);
+            }
+
+            if(!eventDetails.getmEventTeamSize().equals("NA")) {
+                holder.eventType.setText(eventDetails.getmEventTeamSize());
+            }else if(eventDetails.getmEventTeamSize().equals("NA")){
+                holder.eventType.setText("Open to All");
+            }
+
             holder.desc.setText(eventDetails.getmDesc().substring(0, Math.min(eventDetails.getmDesc().length(), 100)));
             if(eventDetails.getmDesc().length()>100)
                 holder.desc.append("...");
@@ -127,13 +165,15 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            public ImageView photo;
+            public ImageView typeOfEventPhoto;
             public TextView name, date, time, fees, venue, eventType,desc;
             public CardView mCardView;
             public Button viewmore;
 
             public MyViewHolder(View itemLayoutView) {
                 super(itemLayoutView);
+
+                typeOfEventPhoto = itemLayoutView.findViewById(R.id.iv_event_type);
                 name = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_name);
                 desc = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_desc);
                 date = (TextView) itemLayoutView.findViewById(R.id.tv_cv_event_date);

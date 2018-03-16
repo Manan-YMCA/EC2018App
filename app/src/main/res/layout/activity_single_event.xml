@@ -14,39 +14,36 @@
             android:id="@+id/tv_back_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
             android:src="@drawable/vector_arrow"
             android:tint="@color/Black" />
-
 
         <TextView
             android:id="@+id/tv_event_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/futura"
             android:text="Event name"
             android:textAllCaps="true"
             android:textColor="#000"
-            android:textSize="26dp" />
+            android:textSize="21sp" />
 
         <TextView
             android:id="@+id/tv_cat_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_event_name"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:fontFamily="@font/futura"
             android:text="Category"
-
-
+            android:textAllCaps="true"
             android:textColor="#000"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <View
             android:id="@+id/line1"
@@ -74,13 +71,11 @@
                 android:layout_marginRight="20dp">
 
                 <Button
-
                     android:id="@+id/btn_register"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_weight="0.75"
-
                     android:background="@drawable/edit_text_background"
                     android:fontFamily="@font/futura"
                     android:text="Register"
@@ -88,17 +83,14 @@
                     android:textSize="26dp" />
 
                 <ImageView
-
                     android:id="@+id/btn_share"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom"
-
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.25"
                     android:fontFamily="@font/futura"
                     android:src="@drawable/vector_share"
-
                     android:textColor="#fff" />
             </LinearLayout>
         </LinearLayout>
@@ -217,7 +209,6 @@
                 android:textSize="15dp"
                 android:textStyle="normal" />
 
-
         </RelativeLayout>
 
 
@@ -235,7 +226,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
-
 
                 <ImageView
                     android:id="@+id/iv_vector_location"
@@ -257,6 +247,7 @@
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
                     android:text="Lal Chowk"
+                    android:textAllCaps="true"
                     android:textColor="#111"
                     android:textSize="15dp"
                     android:textStyle="italic" />
@@ -273,7 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/vector_event"
+                    android:src="@drawable/vector_team"
                     android:tint="#217c31" />
 
                 <TextView
@@ -284,6 +275,7 @@
                     android:layout_toRightOf="@+id/iv_type_of_event"
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
+                    android:textAllCaps="true"
                     android:text="Single/Team Event"
                     android:textColor="#111"
                     android:textSize="15dp"
@@ -345,7 +337,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
-
                     android:text="First Prize: Rs.2000 "
                     android:textSize="13dp"
                     android:textStyle="normal" />
@@ -512,7 +503,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_coords_heading"
                 android:orientation="vertical">
-
 
             </LinearLayout>
         </RelativeLayout>

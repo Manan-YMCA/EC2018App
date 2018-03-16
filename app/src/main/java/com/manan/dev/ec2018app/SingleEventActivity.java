@@ -1,12 +1,15 @@
 package com.manan.dev.ec2018app;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -45,9 +48,9 @@ import java.util.Locale;
 public class SingleEventActivity extends AppCompatActivity {
 
     Button registerButton;
-    TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, hostClubTextView, feesTextView,
+    TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, feesTextView,
             typeOfEventTextView, firstPrizeTextView, secondPrizeTextView, thirdPrizeTextView, descriptionTextView,
-            rulesTextView, coordsHeading;
+            rulesTextView, coordsHeading, eventCategoryTextView;
     RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, prizesRelativeLayout;
     LinearLayout coordsLinearLayout, goingLinearLayout;
     View line1, line2, line3, line4;
@@ -58,8 +61,9 @@ public class SingleEventActivity extends AppCompatActivity {
     private LinearLayout eventImageLinearLayout;
     private ImageView backbutton;
     private QRTicketModel TicketModel;
-
+//    private ArrayList<Long> coordsPhoneList;
     private String eventId;
+    ImageView categoryEventImageView;
     private DatabaseController databaseController;
 
     @Override
@@ -67,6 +71,7 @@ public class SingleEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
         databaseController = new DatabaseController(this);
+
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
@@ -94,6 +99,7 @@ public class SingleEventActivity extends AppCompatActivity {
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
+
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
 
@@ -113,8 +119,10 @@ public class SingleEventActivity extends AppCompatActivity {
         rulesTextView = (TextView) findViewById(R.id.tv_rules);
         eventNameView = (TextView) findViewById(R.id.tv_event_name);
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
+        eventCategoryTextView = findViewById(R.id.tv_cat_name);
         // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
 
+        categoryEventImageView = findViewById(R.id.iv_type_of_event);
         eventImageLinearLayout = (LinearLayout) findViewById(R.id.ll_btn_register);
 
         line1 = (View) findViewById(R.id.line1);
@@ -160,6 +168,11 @@ public class SingleEventActivity extends AppCompatActivity {
 
         eventNameView.setText(eventDetails.getmName());
 
+        if(eventDetails.getmCategory().equals("solo")){
+            categoryEventImageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_single));
+        }
+        eventCategoryTextView.setText(eventDetails.getmCategory());
+
         locationTextView.setText(eventDetails.getmVenue());
         // hostClubTextView.setText(eventDetails.getmClubname());
         Long fees = eventDetails.getmFees();
@@ -176,7 +189,8 @@ public class SingleEventActivity extends AppCompatActivity {
         } else {
             typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
         }
-        for (Coordinators coord : eventDetails.getmCoordinators()) {
+
+        for (final Coordinators coord : eventDetails.getmCoordinators()) {
             if (!coord.getmCoordName().equals("")) {
                 View view = View.inflate(getApplicationContext(), R.layout.single_layout_event_coords, null);
                 TextView coordNameView = (TextView) view.findViewById(R.id.tv_coords_name);
@@ -184,8 +198,27 @@ public class SingleEventActivity extends AppCompatActivity {
 
                 coordNameView.setText(coord.getmCoordName());
                 coordPhoneView.setText(String.valueOf(coord.getmCoordPhone()));
+//                coordsPhoneList.add(coord.getmCoordPhone());
                 coordCount++;
                 coordsLinearLayout.addView(view);
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + coord.getmCoordPhone()));
+                        if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+                        startActivity(intent);
+                    }
+                });
             }
         }
         if (coordCount == 0) {
@@ -193,7 +226,6 @@ public class SingleEventActivity extends AppCompatActivity {
             coordsHeading.setVisibility(View.GONE);
             //  line2.setVisibility(View.GONE);
         }
-
 
         firstPrizeTextView.setVisibility(View.GONE);
         secondPrizeTextView.setVisibility(View.GONE);
@@ -205,16 +237,16 @@ public class SingleEventActivity extends AppCompatActivity {
             if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 0) {
                 line3.setVisibility(View.VISIBLE);
                 firstPrizeTextView.setVisibility(View.VISIBLE);
-                firstPrizeTextView.setText(prizes);
+                firstPrizeTextView.setText("First Prize: Rs " + prizes);
                 prizesRelativeLayout.setVisibility(View.VISIBLE);
                 prizeCount++;
             } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 1) {
                 secondPrizeTextView.setVisibility(View.VISIBLE);
-                secondPrizeTextView.setText(prizes);
+                secondPrizeTextView.setText("Second Prize: Rs " + prizes);
                 prizeCount++;
             } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 2) {
                 thirdPrizeTextView.setVisibility(View.VISIBLE);
-                thirdPrizeTextView.setText(prizes);
+                thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
                 prizeCount++;
             }
 
@@ -258,6 +290,56 @@ public class SingleEventActivity extends AppCompatActivity {
         });
     }
 
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        if (requestCode == 101) {
+//            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+//                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + String.valueOf(coord.getmCoordPhone())));
+//                startActivity(intent);
+//            }
+//        } else {
+//            Toast.makeText(SingleEventActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+//    public void call_action() {
+//        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
+//        startActivity(intent);
+//    }
+//
+//    public boolean isPermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            if (checkSelfPermission(android.Manifest.permission.CALL_PHONE)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                Log.v("TAG", "Permission is granted");
+//                return true;
+//            } else {
+//
+//                Log.v("TAG", "Permission is revoked");
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            Log.v("TAG", "Permission is granted");
+//            return true;
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        switch (requestCode) {
+//            case 1: {
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
+//                    call_action();
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+//                }
+//                return;
+//            }
+//        }
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_single_event_deeplinking, menu);
@@ -266,17 +348,13 @@ public class SingleEventActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
-
             case R.id.menu_share_event:
                 Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
-
             default:
                 Toast.makeText(getBaseContext(), "Invalid Selection!", Toast.LENGTH_SHORT).show();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }

@@ -28,7 +28,7 @@
         android:layout_below="@+id/view"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/futura"
-        android:text="Login"
+        android:text="Mobile Login"
         android:textColor="@color/White"
         android:textSize="35dp" />
 
@@ -40,7 +40,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/futura"
-        android:text="Enter Your phone number\nFor Logging In"
+        android:text="Enter your phone number\nto Continue."
         android:textColor="@color/White"
         android:textSize="16dp"
 
@@ -67,21 +67,21 @@
             android:id="@+id/mobileNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/edit_text_background"
             android:fontFamily="@font/futura"
             android:hint="Phone Number"
+            android:inputType="number"
             android:padding="16dp"
             android:shadowColor="@color/baseDark"
             android:singleLine="true"
             android:textColor="@color/White"
             android:textColorHint="@color/White"
-            android:textSize="15dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
-            android:inputType="number"/>
+            android:textSize="15dp" />
     </LinearLayout>
 
     <TextView
@@ -94,9 +94,7 @@
         android:fontFamily="@font/futura"
         android:text="Your number will be verified with \n a One-Time-Password."
         android:textColor="@color/White"
-        android:textSize="16dp"
-
-        />
+        android:textSize="16dp" />
 
 
     <Button
@@ -105,7 +103,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/td"
         android:layout_centerInParent="true"
-
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="40dp"
@@ -123,11 +120,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login_mobileNum"
         android:layout_marginTop="24dp"
-        android:textSize="15dp"
-        android:textColor="@color/White"
-        android:text="Already a User, Register!"
+        android:fontFamily="@font/futura"
+        android:text="Haven't completed the details? Click Here!"
         android:textAlignment="center"
-        android:fontFamily="@font/futura"/>
+        android:textColor="@color/White"
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/need_help"

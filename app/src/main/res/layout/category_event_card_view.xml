@@ -4,14 +4,14 @@
     android:id="@+id/cv_event_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:background="@drawable/edit_text_white"
-    app:cardElevation="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="8dp">
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:id="@+id/ll_single_event_all_details"
@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
-
 
         <TextView
             android:id="@+id/tv_cv_event_name"
@@ -29,7 +28,6 @@
             android:text="CODE GOLF"
             android:textColor="@color/Black"
             android:textSize="22dp" />
-
 
         <TextView
             android:id="@+id/tv_cv_event_desc"
@@ -49,10 +47,11 @@
             android:layout_margin="5dp">
 
             <ImageView
+                android:id="@+id/iv_event_type"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/vector_developers" />
-
+                android:src="@drawable/vector_team"
+                android:tint="@color/baseDark" />
 
             <TextView
                 android:id="@+id/tv_event_type"
@@ -61,7 +60,9 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@font/futura"
                 android:gravity="center"
-                android:text="Single-Event" />
+                android:text="Single-Event"
+                android:textAllCaps="true"
+                android:textColor="@color/Black" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:src="@drawable/vector_event"
-                android:tint="@color/baseDark"/>
+                android:tint="@color/baseDark" />
 
             <TextView
                 android:id="@+id/tv_cv_event_date"
@@ -95,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:src="@drawable/vector_time"
-                android:tint="@color/baseDark"/>
+                android:tint="@color/baseDark" />
 
             <TextView
                 android:id="@+id/tv_cv_event_time"
@@ -121,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:src="@drawable/vector_money_inr"
-                android:tint="@color/baseDark"/>
+                android:tint="@color/baseDark" />
 
             <TextView
                 android:id="@+id/tv_cv_event_fees"
@@ -140,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:src="@drawable/vector_location"
-                android:tint="@color/baseDark"/>
+                android:tint="@color/baseDark" />
 
 
             <TextView
@@ -153,6 +154,7 @@
                 android:backgroundTint="@color/baseDark"
                 android:fontFamily="@font/futura"
                 android:maxLines="1"
+                android:textAllCaps="true"
                 android:text="Computer Labs"
                 android:textAlignment="center"
                 android:textColor="@color/Black" />
@@ -170,8 +172,6 @@
             android:text="View More"
             android:textColor="@color/White" />
 
-
     </LinearLayout>
-
 
 </android.support.v7.widget.CardView>

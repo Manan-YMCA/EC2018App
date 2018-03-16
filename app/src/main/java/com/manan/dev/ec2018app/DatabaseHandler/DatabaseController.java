@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
@@ -92,7 +91,6 @@ public class DatabaseController extends SQLiteOpenHelper {
             event = retrieveEvents(readCursor);
             eventList.add(event);
             readCursor.moveToNext();
-
         }
         readCursor.close();
         return eventList;

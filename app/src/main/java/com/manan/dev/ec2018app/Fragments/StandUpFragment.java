@@ -26,18 +26,16 @@ import com.squareup.picasso.Picasso;
  */
 public class StandUpFragment extends Fragment {
 
-
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mAuth;
-    private TextView title_view,date_view,content_view;
-    private ImageView fb_btn,insta;
+    private TextView title_view, date_view, content_view;
+    private ImageView fb_btn, insta;
     private ImageView back_image;
 
     public StandUpFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,34 +47,25 @@ public class StandUpFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("brixx");
         title_view = rootView.findViewById(R.id.inf_event_title);
-        date_view=rootView.findViewById(R.id.inf_date);
-        content_view=rootView.findViewById(R.id.inf_content);
-        fb_btn=rootView.findViewById(R.id.fb);
-        insta=rootView.findViewById(R.id.insta);
-        back_image=rootView.findViewById(R.id.back_img);
-
+        date_view = rootView.findViewById(R.id.inf_date);
+        content_view = rootView.findViewById(R.id.inf_content);
+        fb_btn = rootView.findViewById(R.id.fb);
+        insta = rootView.findViewById(R.id.insta);
+        back_image = rootView.findViewById(R.id.back_img);
 
         return rootView;
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         attachDatabaseListener();
-
-
-
     }
-
 
     @Override
     public void onPause() {
         super.onPause();
-
-
         detatchDatabaseListener();
-
     }
 
 
@@ -85,67 +74,48 @@ public class StandUpFragment extends Fragment {
             mDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
-
     }
-
 
     private void attachDatabaseListener() {
         if (mChildEventListener == null) {
-
             mChildEventListener = new ChildEventListener() {
-
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-                    if(dataSnapshot.getKey().equals("hassrath"))
-                    {
-                        BrixxEventModel w =dataSnapshot.getValue(BrixxEventModel.class);
-                       // Toast.makeText(getActivity(),dataSnapshot.getValue().toString(),Toast.LENGTH_SHORT).show();
-                       updateUI(w);
+                    if (dataSnapshot.getKey().equals("hassrath")) {
+                        BrixxEventModel w = dataSnapshot.getValue(BrixxEventModel.class);
+                        // Toast.makeText(getActivity(),dataSnapshot.getValue().toString(),Toast.LENGTH_SHORT).show();
+                        updateUI(w);
                     }
-
-
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     try {
-                        if(dataSnapshot.getKey().equals("hassrath"))
-                        {
-                            BrixxEventModel w =dataSnapshot.getValue(BrixxEventModel.class);
+                        if (dataSnapshot.getKey().equals("hassrath")) {
+                            BrixxEventModel w = dataSnapshot.getValue(BrixxEventModel.class);
                             updateUI(w);
                         }
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-
                 }
 
                 @Override
                 public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
-
-
         }
-
-
     }
+
     private void updateUI(final BrixxEventModel w) {
         title_view.setText(w.getTitle().toString());
         date_view.setText(w.getDate().toString());
@@ -167,9 +137,5 @@ public class StandUpFragment extends Fragment {
             }
         });
         Picasso.with(getActivity()).load(w.getPhotourl().toString()).into(back_image);
-
-
-
     }
-
 }

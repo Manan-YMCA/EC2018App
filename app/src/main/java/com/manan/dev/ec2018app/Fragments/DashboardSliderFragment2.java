@@ -32,9 +32,6 @@ public class DashboardSliderFragment2 extends Fragment {
         SharedPreferences preferences = this.getActivity().getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-
-
-
           long fest_day=1522866600;
           long curr =System.currentTimeMillis()/1000;
           long diff=fest_day-curr;
@@ -55,28 +52,13 @@ public class DashboardSliderFragment2 extends Fragment {
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
             }
-
             public void onFinish() {
                 time.setText("Fest is Live");
             }
         }.start();
 
-
-
-
-
-
         return rootView;
-
-
-
-
-
-
     }
-
-
-
 }
 
 

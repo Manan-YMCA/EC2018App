@@ -5,8 +5,7 @@
     android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment1">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="320dp"
@@ -18,32 +17,34 @@
             android:layout_height="280dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:background="@drawable/vector_circle" >
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="Whats New?"
-           android:layout_gravity="center_vertical"
-           android:layout_marginTop="50dp"
-           android:textSize="30dp"
-           android:fontFamily="@font/futura"
-           android:textColor="@color/White"
-          android:gravity="center"/>
+            android:background="@drawable/vector_circle"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Welcome!"
+                android:textColor="@color/White"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/content_whatnew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/futura"
-                android:textSize="18dp"
+                android:gravity="center"
                 android:maxLines="6"
-                android:id="@+id/content_whatnew"
+                android:text="You can view the event bookmark them view single events, dynaically open events and lots more \nthings "
                 android:textColor="@color/White"
-                android:text="You can view the event bookmark them view single events, dynaically open events and lots more \nthings "/>
+                android:textSize="18dp" />
 
         </LinearLayout>
     </RelativeLayout>

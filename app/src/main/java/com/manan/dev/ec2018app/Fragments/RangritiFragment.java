@@ -1,6 +1,5 @@
 package com.manan.dev.ec2018app.Fragments;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,14 +24,12 @@ import com.squareup.picasso.Picasso;
  * A simple {@link Fragment} subclass.
  */
 public class RangritiFragment extends Fragment {
-
-
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
     private ChildEventListener mChildEventListener;
     private TextView title_view;
-    private TextView date_view,content_view;
-    private ImageView fb_btn,insta;
+    private TextView date_view, content_view;
+    private ImageView fb_btn, insta;
     private ImageView back_image;
 
     public RangritiFragment() {
@@ -50,36 +47,27 @@ public class RangritiFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("brixx");
         title_view = rootView.findViewById(R.id.inf_event_title);
-        date_view=rootView.findViewById(R.id.inf_date);
-        content_view=rootView.findViewById(R.id.inf_content);
-        fb_btn=rootView.findViewById(R.id.fb);
-        insta=rootView.findViewById(R.id.insta);
-        back_image=rootView.findViewById(R.id.back_img);
+        date_view = rootView.findViewById(R.id.inf_date);
+        content_view = rootView.findViewById(R.id.inf_content);
+        fb_btn = rootView.findViewById(R.id.fb);
+        insta = rootView.findViewById(R.id.insta);
+        back_image = rootView.findViewById(R.id.back_img);
 
-
-
-
-        return rootView;    }
-
+        return rootView;
+    }
 
 
     @Override
     public void onResume() {
         super.onResume();
         attachDatabaseListener();
-
-
-
     }
 
 
     @Override
     public void onPause() {
         super.onPause();
-
-
         detatchDatabaseListener();
-
     }
 
 
@@ -99,56 +87,38 @@ public class RangritiFragment extends Fragment {
 
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-                if(dataSnapshot.getKey().equals("rangriti"))
-                {
-                   BrixxEventModel w =dataSnapshot.getValue(BrixxEventModel.class);
-                    updateUI(w);
-                }
-
-
+                    if (dataSnapshot.getKey().equals("rangriti")) {
+                        BrixxEventModel w = dataSnapshot.getValue(BrixxEventModel.class);
+                        updateUI(w);
+                    }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     try {
-                        if(dataSnapshot.getKey().equals("rangriti"))
-                        {
-                            BrixxEventModel w =dataSnapshot.getValue(BrixxEventModel.class);
+                        if (dataSnapshot.getKey().equals("rangriti")) {
+                            BrixxEventModel w = dataSnapshot.getValue(BrixxEventModel.class);
                             updateUI(w);
                         }
-
-
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-
                 }
 
                 @Override
                 public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
-
-
         }
-
-
     }
 
     private void updateUI(final BrixxEventModel w) {
@@ -158,7 +128,6 @@ public class RangritiFragment extends Fragment {
         fb_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(w.getFblink().toString()));
                 getActivity().startActivity(myIntent);
             }
@@ -166,16 +135,10 @@ public class RangritiFragment extends Fragment {
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(w.getInstalink().toString()));
                 getActivity().startActivity(myIntent);
             }
         });
-
-
         Picasso.with(getActivity()).load(w.getPhotourl().toString()).into(back_image);
-
-
     }
-
 }

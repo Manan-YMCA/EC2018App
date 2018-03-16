@@ -28,8 +28,6 @@ import java.util.TimerTask;
 
 
 public class DashboardSliderFragment1 extends Fragment {
-
-
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
     public ArrayList<WhatsNewModel> whatsnewarraylist;
@@ -49,14 +47,13 @@ public class DashboardSliderFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//
         handler = new Handler();
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment1, container, false);
         mAuth = FirebaseAuth.getInstance();
         WhatsNewModel w;
         whatsnewarraylist = new ArrayList<>();
-        whatsnewarraylist.add(new WhatsNewModel("Welcome to Culmyca 2018 App ,Explore whats new in the Culmyca 2018 App!", 7, "j"));
+        whatsnewarraylist.add(new WhatsNewModel("Explore the new Culmyca'18 App! Various cool features are added and don't forget to register yourself first!", 7, "j"));
         contenttv = rootView.findViewById(R.id.content_whatnew);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("whatsnew");
@@ -77,18 +74,14 @@ public class DashboardSliderFragment1 extends Fragment {
 
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
         mIsRunning=false;
         handler.removeCallbacks(mStatusChecker);
 
-
         detatchDatabaseListener();
-
     }
-
 
     private void detatchDatabaseListener() {
         if (mChildEventListener != null) {
@@ -98,19 +91,14 @@ public class DashboardSliderFragment1 extends Fragment {
 
     }
 
-
     private void attachDatabaseListener() {
         if (mChildEventListener == null) {
-
             mChildEventListener = new ChildEventListener() {
-
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                     WhatsNewModel w = dataSnapshot.getValue(WhatsNewModel.class);
                     whatsnewarraylist.add(w);
-
-
                 }
 
                 @Override
@@ -146,12 +134,9 @@ public class DashboardSliderFragment1 extends Fragment {
             updateUI();
 
         }
-
-
     }
 
     private void updateUI() {
-
         i = 0;
          update = new Runnable() {
              @Override
@@ -182,9 +167,8 @@ public class DashboardSliderFragment1 extends Fragment {
                      }
                  });//
                  // this function can change value of mInterval.
-                 handler.postDelayed(update, 5000);
+                 handler.postDelayed(update, 7000);
              }
-
 
              void startRepeatingTask() {
                  mIsRunning = true;
@@ -197,7 +181,5 @@ public class DashboardSliderFragment1 extends Fragment {
              }
 
          };
-
-
     }
 }

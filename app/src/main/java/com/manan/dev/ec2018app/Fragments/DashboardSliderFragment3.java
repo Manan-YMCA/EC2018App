@@ -33,10 +33,7 @@ public class DashboardSliderFragment3 extends Fragment {
       singleItem.setDisplayName("Non-Formal");
       singleItem.setImage(icon);
 
-
         circleLinearLayout = rootView.findViewById(R.id.dsb_tap);
-
-
 
         circleLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +42,6 @@ public class DashboardSliderFragment3 extends Fragment {
                 singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
            //     Toast.makeText(getActivity(),singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
-
                 startActivity(new Intent(getActivity(), BrixxActivity.class));
 //                        .putExtra("clubname", singleItem.getClubName())
 //                        .putExtra("clubPhoto", byteArray)
@@ -53,8 +49,6 @@ public class DashboardSliderFragment3 extends Fragment {
 
             }
         });
-
-
         return rootView;
     }
 
