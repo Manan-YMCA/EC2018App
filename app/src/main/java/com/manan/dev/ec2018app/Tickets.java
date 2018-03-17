@@ -48,7 +48,8 @@ public class Tickets extends AppCompatActivity {
         mProgress.setMessage("I am working");
         mProgress.setTitle("yes i am");
         mProgress.setCanceledOnTouchOutside(false);
-        GridView userTicketsView = (GridView) findViewById(R.id.gl_user_tickets);
+        RecyclerView userTicketsView = (RecyclerView) findViewById(R.id.gl_user_tickets);
+        userTicketsView.setLayoutManager(new LinearLayoutManager(Tickets.this));
         userTickets = new ArrayList<>();
 
         mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);

@@ -74,7 +74,8 @@
             android:name=".Xunbao.XunbaoActivity"
             android:parentActivityName=".ContentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/xunbao_main_theme" />
+            android:theme="@style/xunbao_main_theme"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".DevelopersActivity"
             android:screenOrientation="portrait"
@@ -140,7 +141,9 @@
             android:theme="@style/CodeFont1"/>
         <activity
             android:name=".AboutActivity"
-            android:theme="@style/CodeFont" />
+            android:theme="@style/CodeFont1"
+            android:parentActivityName=".ContentActivity"
+            android:label="ABOUT"/>
 
         <service
             android:name=".MyNotificationService"
@@ -149,7 +152,7 @@
         <receiver android:name=".MyNotificationResponse" />
 
         <activity android:name=".BrixxActivity"
-            android:theme="@style/CodeFont"></activity>
+            android:theme="@style/CodeFont"/>
     </application>
 
 </manifest>

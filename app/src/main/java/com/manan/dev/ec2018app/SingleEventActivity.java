@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -74,6 +73,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private boolean checkloadedvar=false;
     private Drawable default_image;
     private  RelativeLayout container_se_view;
+    private boolean NO_DEEP_LINK_FLAG = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +100,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             Toast.makeText(this, "deeplink:" + eventName, Toast.LENGTH_SHORT).show();
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
+                NO_DEEP_LINK_FLAG = false;
                 Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(new Intent(this, SplashScreen.class));
             }
         } else {
-            Toast.makeText(this, "nodeeplink:", Toast.LENGTH_SHORT).show();
-            Log.v("nodeeplink", appLinkData + "");
+        //    Toast.makeText(this, "nodeeplink:", Toast.LENGTH_SHORT).show();
+          //  Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
@@ -151,141 +152,142 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
         backbutton = (ImageView) findViewById(R.id.tv_back_button);
 
-        eventDetails = getEventDetails.retreiveEventsByID(eventId);
+        if(NO_DEEP_LINK_FLAG) {
+            eventDetails = getEventDetails.retreiveEventsByID(eventId);
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(eventDetails.getmStartTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(eventDetails.getmStartTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
 
-        String formattedDate = sdf.format(cal.getTime());
-        eventDateTextView.setText(formattedDate);
+            String formattedDate = sdf.format(cal.getTime());
+            eventDateTextView.setText(formattedDate);
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
-        Calendar endTimeMilis = Calendar.getInstance();
-        endTimeMilis.setTimeInMillis(eventDetails.getmEndTime());
+            SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
+            Calendar endTimeMilis = Calendar.getInstance();
+            endTimeMilis.setTimeInMillis(eventDetails.getmEndTime());
 
-        String startTime = sdf1.format(cal.getTime());
-        String endTime = sdf1.format(endTimeMilis.getTime());
+            String startTime = sdf1.format(cal.getTime());
+            String endTime = sdf1.format(endTimeMilis.getTime());
 
-        eventStartTimeTextView.setText(startTime);
-        eventEndTimeTextView.setText(endTime);
-        backbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
+            eventStartTimeTextView.setText(startTime);
+            eventEndTimeTextView.setText(endTime);
+            backbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+
+            eventNameView.setText(eventDetails.getmName());
+
+            if (eventDetails.getmCategory().equals("solo")) {
+                categoryEventImageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_single));
             }
-        });
+            eventCategoryTextView.setText(eventDetails.getmCategory());
 
-        eventNameView.setText(eventDetails.getmName());
+            locationTextView.setText(eventDetails.getmVenue());
+            // hostClubTextView.setText(eventDetails.getmClubname());
+            Long fees = eventDetails.getmFees();
+            if (fees == 0) {
+                feesTextView.setText("Free");
+            } else {
+                feesTextView.setText(String.valueOf(fees));
+            }
 
-        if(eventDetails.getmCategory().equals("solo")){
-            categoryEventImageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_single));
-        }
-        eventCategoryTextView.setText(eventDetails.getmCategory());
+            if (eventDetails.getmEventTeamSize().equals("NA")) {
+                registerButton.setVisibility(View.GONE);
+                //  line1.setVisibility(View.GONE);
+                typeOfEventTextView.setText("Presentation Event");
+            } else {
+                typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
+            }
 
-        locationTextView.setText(eventDetails.getmVenue());
-        // hostClubTextView.setText(eventDetails.getmClubname());
-        Long fees = eventDetails.getmFees();
-        if (fees == 0) {
-            feesTextView.setText("Free");
-        } else {
-            feesTextView.setText(String.valueOf(fees));
-        }
+            for (final Coordinators coord : eventDetails.getmCoordinators()) {
+                if (!coord.getmCoordName().equals("")) {
+                    View view = View.inflate(getApplicationContext(), R.layout.single_layout_event_coords, null);
+                    TextView coordNameView = (TextView) view.findViewById(R.id.tv_coords_name);
+                    TextView coordPhoneView = (TextView) view.findViewById(R.id.tv_coords_phone_no);
 
-        if (eventDetails.getmEventTeamSize().equals("NA")) {
-            registerButton.setVisibility(View.GONE);
-            //  line1.setVisibility(View.GONE);
-            typeOfEventTextView.setText("Presentation Event");
-        } else {
-            typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
-        }
-
-        for (final Coordinators coord : eventDetails.getmCoordinators()) {
-            if (!coord.getmCoordName().equals("")) {
-                View view = View.inflate(getApplicationContext(), R.layout.single_layout_event_coords, null);
-                TextView coordNameView = (TextView) view.findViewById(R.id.tv_coords_name);
-                TextView coordPhoneView = (TextView) view.findViewById(R.id.tv_coords_phone_no);
-
-                coordNameView.setText(coord.getmCoordName());
-                coordPhoneView.setText(String.valueOf(coord.getmCoordPhone()));
+                    coordNameView.setText(coord.getmCoordName());
+                    coordPhoneView.setText(String.valueOf(coord.getmCoordPhone()));
 //                coordsPhoneList.add(coord.getmCoordPhone());
-                coordCount++;
-                coordsLinearLayout.addView(view);
+                    coordCount++;
+                    coordsLinearLayout.addView(view);
 
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + coord.getmCoordPhone()));
-                        if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-                            return;
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + coord.getmCoordPhone()));
+                            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                // TODO: Consider calling
+                                //    ActivityCompat#requestPermissions
+                                // here to request the missing permissions, and then overriding
+                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                //                                          int[] grantResults)
+                                // to handle the case where the user grants the permission. See the documentation
+                                // for ActivityCompat#requestPermissions for more details.
+                                return;
+                            }
+                            startActivity(intent);
                         }
-                        startActivity(intent);
-                    }
-                });
+                    });
+                }
             }
-        }
-        if (coordCount == 0) {
-            coordsLinearLayout.setVisibility(View.GONE);
-            coordsHeading.setVisibility(View.GONE);
-            //  line2.setVisibility(View.GONE);
-        }
-
-        firstPrizeTextView.setVisibility(View.GONE);
-        secondPrizeTextView.setVisibility(View.GONE);
-        thirdPrizeTextView.setVisibility(View.GONE);
-        prizesRelativeLayout.setVisibility(View.GONE);
-        line3.setVisibility(View.GONE);
-
-        for (String prizes : eventDetails.getmPrizes()) {
-            if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 0) {
-                line3.setVisibility(View.VISIBLE);
-                firstPrizeTextView.setVisibility(View.VISIBLE);
-                firstPrizeTextView.setText("First Prize: Rs " + prizes);
-                prizesRelativeLayout.setVisibility(View.VISIBLE);
-                prizeCount++;
-            } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 1) {
-                secondPrizeTextView.setVisibility(View.VISIBLE);
-                secondPrizeTextView.setText("Second Prize: Rs " + prizes);
-                prizeCount++;
-            } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 2) {
-                thirdPrizeTextView.setVisibility(View.VISIBLE);
-                thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
-                prizeCount++;
+            if (coordCount == 0) {
+                coordsLinearLayout.setVisibility(View.GONE);
+                coordsHeading.setVisibility(View.GONE);
+                //  line2.setVisibility(View.GONE);
             }
 
-        }
-        descriptionTextView.setText(eventDetails.getmDesc());
-        rulesTextView.setText(eventDetails.getmRules());
-        dateTimeRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SingleEventActivity.this, "Calender pe reminder set karna hai!", Toast.LENGTH_SHORT).show();
-            }
-        });
+            firstPrizeTextView.setVisibility(View.GONE);
+            secondPrizeTextView.setVisibility(View.GONE);
+            thirdPrizeTextView.setVisibility(View.GONE);
+            prizesRelativeLayout.setVisibility(View.GONE);
+            line3.setVisibility(View.GONE);
 
-        locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (registerButton.getText().toString().equals("View Ticket")) {
+            for (String prizes : eventDetails.getmPrizes()) {
+                if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 0) {
+                    line3.setVisibility(View.VISIBLE);
+                    firstPrizeTextView.setVisibility(View.VISIBLE);
+                    firstPrizeTextView.setText("First Prize: Rs " + prizes);
+                    prizesRelativeLayout.setVisibility(View.VISIBLE);
+                    prizeCount++;
+                } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 1) {
+                    secondPrizeTextView.setVisibility(View.VISIBLE);
+                    secondPrizeTextView.setText("Second Prize: Rs " + prizes);
+                    prizeCount++;
+                } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 2) {
+                    thirdPrizeTextView.setVisibility(View.VISIBLE);
+                    thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
+                    prizeCount++;
+                }
 
-                    FragmentManager fm = getFragmentManager();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("qrcodestring", TicketModel.getQRcode());
-                    bundle.putString("eventid", eventId);
-                    bundle.putInt("activity", 0);
+            }
+            descriptionTextView.setText(eventDetails.getmDesc());
+            rulesTextView.setText(eventDetails.getmRules());
+            dateTimeRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(SingleEventActivity.this, "Calender pe reminder set karna hai!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            registerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (registerButton.getText().toString().equals("View Ticket")) {
+
+                        FragmentManager fm = getFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("qrcodestring", TicketModel.getQRcode());
+                        bundle.putString("eventid", eventId);
+                        bundle.putInt("activity", 0);
 
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
@@ -521,7 +523,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         } else {
             message = "Get a hotspot Buddy";
             Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
-            color = Color.RED;
+
         }
     }
 

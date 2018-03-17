@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +58,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private NavigationView nav_view;
     private String phoneNumber;
     private LinearLayout cotainer_root_frame;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +114,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         categoryRecycleview.setAdapter(adapter);
 
     }
-
-
 
     private void addData() {
 
@@ -295,7 +296,21 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        if(prefs.getString("Phone", null) != null) {
+                            startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        } else {
+                            AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                builder = new AlertDialog.Builder(ContentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                builder = new AlertDialog.Builder(ContentActivity.this);
+                            }
+                            builder.setTitle("Log In")
+                                    .setMessage("To view your tickets you must Log In first.")
+                                    .setPositiveButton("Ok", null)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
                     }
                 }, 130);
                 break;
@@ -414,6 +429,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
 
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+       // prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
 
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -147,14 +148,11 @@ public class DashboardSliderFragment1 extends Fragment {
                  contenttv.setText(whatsnewarraylist.get(i).getContent().toString());
                  //          timer.cancel();
                  //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
-                 i++;
-                 if (i == whatsnewarraylist.size()) {
-                     i = 0;
-                 }
 
                  contenttv.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View v) {
+
                          if (whatsnewarraylist.get(i).getIntent() == 0) {
                              startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
                          }
@@ -164,9 +162,17 @@ public class DashboardSliderFragment1 extends Fragment {
                          if (whatsnewarraylist.get(i).getIntent() == 2) {
                              startActivity(new Intent(getActivity(), MapsActivity.class));
                          }
+                         else {
+
+                         }
                      }
                  });//
                  // this function can change value of mInterval.
+                 i++;
+                 if (i == whatsnewarraylist.size()) {
+                     i = 0;
+                 }
+
                  handler.postDelayed(update, 7000);
              }
 

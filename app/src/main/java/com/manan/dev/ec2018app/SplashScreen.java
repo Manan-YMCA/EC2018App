@@ -9,9 +9,11 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
@@ -49,6 +51,7 @@ public class SplashScreen extends AppCompatActivity {
     private RectF mDisplayRect = new RectF();
     private IncomingHandler incomingHandler;
     private static boolean offline = true;
+    private boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +95,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (Float) animation.getAnimatedValue();
-
+                flag = true;
                 mMatrix.reset();
                 mMatrix.postScale(mScaleFactor, mScaleFactor);
                 mMatrix.postTranslate(value, 0);
@@ -259,14 +262,32 @@ public class SplashScreen extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onPause() {
         super.onPause();
+        if (flag) {
+            mCurrentAnimator.pause();
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (flag)
+            mCurrentAnimator.resume();
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onBackPressed() {
-        mCurrentAnimator.removeAllListeners();
+        if(flag) {
+            mCurrentAnimator.removeAllListeners();
+            flag = false;
+        }
         super.onBackPressed();
     }
 }

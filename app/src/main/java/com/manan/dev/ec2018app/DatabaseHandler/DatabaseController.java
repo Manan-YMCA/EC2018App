@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
@@ -118,6 +119,7 @@ public class DatabaseController extends SQLiteOpenHelper {
     public String retrieveEventIdByName(String eventName){
         SQLiteDatabase db = getReadableDatabase();
         if(checkIfValueByNameExists(eventName)) {
+            Log.v("retrieve","inside if");
             String[] projection = {Schema.DbEntry.EVENT_ID_COLUMN_NAME};
             Cursor readCursor = db.query(Schema.DbEntry.EVENT_LIST_TABLE_NAME, projection, Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " = ?", new String[]{eventName}, null, null, null);
             readCursor.moveToFirst();
@@ -230,9 +232,11 @@ public class DatabaseController extends SQLiteOpenHelper {
         Cursor cs = db.rawQuery(query, new String[]{eventName});
         if (cs.getCount() <= 0) {
             cs.close();
+            Log.v("checkIfValueExists","No found");
             return false;
         }
         cs.close();
+        Log.v("checkIfValueExists","Found");
         return true;
     }
 }
