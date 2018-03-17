@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,8 @@ public class CulmycaTimesActivity extends AppCompatActivity {
 
     public static AlertDialog.Builder builder;
     public static AlertDialog dialog;
+    private LinearLayout cotainer_root_frame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,6 @@ public class CulmycaTimesActivity extends AppCompatActivity {
         progressBar.setCanceledOnTouchOutside(false);
         progressBar.show();
         postReference = FirebaseDatabase.getInstance().getReference("posts");
-
 
         s=findViewById(R.id.swipe_refresh_layout);
 

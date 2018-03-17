@@ -5,10 +5,12 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,6 +35,8 @@ import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
+import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
+import com.manan.dev.ec2018app.Utilities.MyApplication;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,7 +49,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SingleEventActivity extends AppCompatActivity {
+import static com.manan.dev.ec2018app.Utilities.ConnectivityReciever.isConnected;
+
+public class SingleEventActivity extends AppCompatActivity implements ConnectivityReciever.ConnectivityReceiverListener {
 
     Button registerButton;
     TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, feesTextView,
@@ -59,18 +65,23 @@ public class SingleEventActivity extends AppCompatActivity {
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
     private LinearLayout eventImageLinearLayout;
-    private ImageView backbutton;
+    private ImageView backbutton,sharebutton;
     private QRTicketModel TicketModel;
 //    private ArrayList<Long> coordsPhoneList;
     private String eventId;
     ImageView categoryEventImageView;
     private DatabaseController databaseController;
+    private boolean checkloadedvar=false;
+    private Drawable default_image;
+    private  RelativeLayout container_se_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
         databaseController = new DatabaseController(this);
+        default_image = getResources().getDrawable( R.drawable.default_image );
+
 
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
@@ -99,6 +110,7 @@ public class SingleEventActivity extends AppCompatActivity {
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
+        container_se_view=findViewById(R.id.contaner_se);
 
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
@@ -121,7 +133,7 @@ public class SingleEventActivity extends AppCompatActivity {
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
         eventCategoryTextView = findViewById(R.id.tv_cat_name);
         // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
-
+         sharebutton =findViewById(R.id.btn_share);
         categoryEventImageView = findViewById(R.id.iv_type_of_event);
         eventImageLinearLayout = (LinearLayout) findViewById(R.id.ll_btn_register);
 
@@ -132,9 +144,7 @@ public class SingleEventActivity extends AppCompatActivity {
         line4.setVisibility(View.GONE);
         //  goingLinearLayout.setVisibility(View.GONE);
 
-        Uri imageuri = Uri.parse("https://ocul.in/7er");
-        new LoadBackground("https://ocul.in/manan_apple",
-                "androidfigure").execute();
+
         dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
         locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
@@ -288,7 +298,31 @@ public class SingleEventActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        sharebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String baseUrl="http://elementsculmyca.com/event/";
+                String parsedUrl=baseUrl +"#"+eventDetails.getmName().toString().replaceAll(" ","%20");
+
+                Toast.makeText(SingleEventActivity.this,parsedUrl,Toast.LENGTH_SHORT).show();
+                String message="Elements Culmyca 2018:" +eventDetails.getmName().toString()+ " View the event clicking the link: "+parsedUrl;
+                shareEventMessage(message);
+
+            }
+        });
+   showSnack(isConnected());
+
+
     }
+    private void shareEventMessage(String msg) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, msg);
+        startActivity(i);
+    }
+
 
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -382,10 +416,10 @@ public class SingleEventActivity extends AppCompatActivity {
                 return d;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                return null;
+                return default_image;
             } catch (IOException e) {
                 e.printStackTrace();
-                return null;
+                return default_image;
             }
         }
 
@@ -451,9 +485,47 @@ public class SingleEventActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MyApplication.getInstance().setConnectivityListener(SingleEventActivity.this);
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber != null)
             displayTickets(phoneNumber);
+    }
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+
+
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            if(!isloaded())
+            {  String baseUrl="https://manan-ymca.github.io/ElementsCulmyca2018Website/assets/";
+               String parseUrl=baseUrl+
+                       eventDetails.getmName().toString().toUpperCase().replaceAll(" ","%20")+
+                       ".jpg";
+
+                Uri imageuri = Uri.parse(parseUrl);
+            new LoadBackground(parseUrl,
+                    "CurrentImage").execute();
+            }
+            else
+            {checkloadedvar=true;
+
+            }
+//            message = "Connected";
+//            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
+//            color = Color.WHITE;
+        } else {
+            message = "Get a hotspot Buddy";
+            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
+            color = Color.RED;
+        }
+    }
+
+    private boolean isloaded() {
+        return checkloadedvar;
     }
 }

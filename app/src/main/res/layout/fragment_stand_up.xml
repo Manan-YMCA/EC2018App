@@ -24,7 +24,7 @@
                 android:layout_marginLeft="15dp"
 
                 android:fontFamily="@font/futura"
-                android:text="Star Night"
+                android:text="STANDUP"
                 android:textAllCaps="true"
                 android:textColor="@color/White"
                 android:textSize="40dp" />

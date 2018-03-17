@@ -8,6 +8,7 @@
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/contaner_se"
         tools:context="com.manan.dev.ec2018app.SingleEventActivity">
 
         <ImageView
@@ -57,6 +58,7 @@
             android:id="@+id/ll_btn_register"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+
 
             android:layout_below="@+id/line1"
             android:background="@drawable/default_image">

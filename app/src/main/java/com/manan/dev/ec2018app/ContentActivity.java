@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -36,11 +38,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
+import com.manan.dev.ec2018app.Utilities.MyApplication;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
 import java.util.ArrayList;
 
-public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ConnectivityReciever.ConnectivityReceiverListener {
 
     private ViewPager viewPager;
     private TextView[] dots;
@@ -51,11 +55,15 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private String phoneNumber;
+    private LinearLayout cotainer_root_frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
+        cotainer_root_frame=(LinearLayout)findViewById(R.id.content_frame);
+
+
 
         try {
             Log.d("auth", FirebaseAuth.getInstance().getUid());
@@ -103,6 +111,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         categoryRecycleview.setAdapter(adapter);
 
     }
+
+
 
     private void addData() {
 
@@ -400,6 +410,9 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onResume() {
         super.onResume();
+        MyApplication.getInstance().setConnectivityListener(ContentActivity.this);
+
+
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
 
         phoneNumber = prefs.getString("Phone", null);
@@ -418,4 +431,26 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             nav_view.setCheckedItem(R.id.nav_home);
         }
     }
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+
+
+        private void showSnack(boolean isConnected) {
+            String message;
+            int color;
+            if (isConnected) {
+
+                message = "Connected";
+                Snackbar.make(cotainer_root_frame,message,Snackbar.LENGTH_SHORT).show();
+                color = Color.WHITE;
+            } else {
+                message = "Get a hotspot Buddy";
+                Snackbar.make(cotainer_root_frame,message,Snackbar.LENGTH_SHORT).show();
+                color = Color.RED;
+            }
+    }
+
+
 }

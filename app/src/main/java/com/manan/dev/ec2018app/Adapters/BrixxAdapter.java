@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.manan.dev.ec2018app.Fragments.MrCulFragment;
 import com.manan.dev.ec2018app.Fragments.RangritiFragment;
 import com.manan.dev.ec2018app.Fragments.StandUpFragment;
 import com.manan.dev.ec2018app.Fragments.StarNightFragment;
@@ -14,7 +15,7 @@ import com.manan.dev.ec2018app.Fragments.StarNightFragment;
 
 
 public class BrixxAdapter extends FragmentStatePagerAdapter {
-    private static final int TOTAL_PAGES = 3;
+    private static final int TOTAL_PAGES = 4;
 
     public BrixxAdapter(FragmentManager fm) {
         super(fm);
@@ -29,6 +30,8 @@ public class BrixxAdapter extends FragmentStatePagerAdapter {
                 return new StarNightFragment();
             case 2:
                 return new StandUpFragment();
+            case 3:
+                return new MrCulFragment();
 
             default:
                 break;
