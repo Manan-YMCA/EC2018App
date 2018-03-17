@@ -171,13 +171,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
             eventStartTimeTextView.setText(startTime);
             eventEndTimeTextView.setText(endTime);
+
             backbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onBackPressed();
                 }
             });
-
+        }
             eventNameView.setText(eventDetails.getmName());
 
             if (eventDetails.getmCategory().equals("solo")) {
