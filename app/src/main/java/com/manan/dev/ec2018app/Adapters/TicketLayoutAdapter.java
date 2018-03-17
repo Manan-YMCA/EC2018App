@@ -1,38 +1,25 @@
 package com.manan.dev.ec2018app.Adapters;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.manan.dev.ec2018app.CategoryEventDisplayActivity;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
-import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Utilities.TicketsGenerator;
 
-import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,39 +29,27 @@ import java.util.Locale;
  * Created by nisha on 2/28/2018.
  */
 
-public class TicketLayoutAdapter extends BaseAdapter {
+public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapter.MyViewHolder> {
     private ArrayList<QRTicketModel> itemsList;
     private Context mContext;
-    private View v;
-    private int activity;
 
 
     public TicketLayoutAdapter(Context context, ArrayList<QRTicketModel> itemsList) {
         Log.d("Tickets", "view builder");
         this.itemsList = itemsList;
-        mContext = context;
+        this.mContext = context;
     }
 
     @Override
-    public int getCount() {
-        return (null != itemsList ? itemsList.size() : 0);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.qr_ticket_layout, parent, false);
+
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @SuppressLint("ViewHolder")
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        v = LayoutInflater.from(mContext).inflate(R.layout.qr_ticket_layout, null);
-
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         final QRTicketModel singleItem = itemsList.get(position);
         EventDetails currEvent = new EventDetails();
         DatabaseController mDatabaseController = new DatabaseController(mContext);
@@ -82,35 +57,27 @@ public class TicketLayoutAdapter extends BaseAdapter {
         currEvent = mDatabaseController.retreiveEventsByID(singleItem.getEventID());
 
 
-        final ImageView itemImage = (ImageView) v.findViewById(R.id.ticket_qr_iv);
-        TextView feeStatus = (TextView) v.findViewById(R.id.tv_event_fees_status);
-        TextView eventDate = (TextView) v.findViewById(R.id.tv_event_date);
-        TextView eventTime = (TextView) v.findViewById(R.id.tv_event_time);
-        TextView eventFee = (TextView) v.findViewById(R.id.tv_event_fees);
-        TextView eventName = (TextView) v.findViewById(R.id.tv_event_name);
-        CardView cardView=(CardView)v.findViewById(R.id.cv_qr_ticket);
-
         Log.d("Tickets", singleItem.getQRcode());
-        feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
+        holder.feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
         TicketsGenerator generate = new TicketsGenerator();
         Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext,(int) mContext.getResources().getDimension(R.dimen.onefifty),(int) mContext.getResources().getDimension(R.dimen.onefifty));
-        itemImage.setImageBitmap(currTicket);
-        eventName.setText(currEvent.getmName());
-        eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));
+        holder.itemImage.setImageBitmap(currTicket);
+        holder.eventName.setText(currEvent.getmName());
+        holder.eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(currEvent.getmStartTime());
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
         String formattedDate = sdf.format(cal.getTime());
-        eventDate.setText(formattedDate);
+        holder.eventDate.setText(formattedDate);
 
         SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
         String formattedTime = sdf1.format(cal.getTime());
-        eventTime.setText(formattedTime);
+        holder.eventTime.setText(formattedTime);
         Log.d("Tickets", "data setSuccessfully");
 
         final EventDetails finalCurrEvent = currEvent;
-        cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 android.app.FragmentManager fm = ((Activity) mContext).getFragmentManager();
@@ -125,9 +92,31 @@ public class TicketLayoutAdapter extends BaseAdapter {
 
             }
         });
+    }
 
-        return v;
+    @Override
+    public int getItemCount() {
+        return this.itemsList.size();
     }
 
 
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView itemImage;
+        public TextView feeStatus, eventDate, eventTime, eventFee, eventName;
+        public CardView cardView;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+            itemImage = (ImageView) itemView.findViewById(R.id.ticket_qr_iv);
+            feeStatus = (TextView) itemView.findViewById(R.id.tv_event_fees_status);
+            eventDate = (TextView) itemView.findViewById(R.id.tv_event_date);
+            eventTime = (TextView) itemView.findViewById(R.id.tv_event_time);
+            eventFee = (TextView) itemView.findViewById(R.id.tv_event_fees);
+            eventName = (TextView) itemView.findViewById(R.id.tv_event_name);
+            cardView=(CardView)itemView.findViewById(R.id.cv_qr_ticket);
+
+        }
+    }
 }

@@ -78,7 +78,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         topic = postsList.get(position);
         holder.caption.setText(topic.title);
-        holder.postTime.setText(Long.toString(topic.time));
+        holder.postTime.setText(String.valueOf(topic.time));
         holder.caption.setText(topic.title);
         holder.clubName.setText(topic.clubName);
         holder.likes.setText(Integer.toString(topic.likes)+" likes");
@@ -219,7 +219,8 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
 
                 context.startActivity(new Intent(context, CommentActivity.class)
                         .putExtra("clubName", topic.getClubName())
-                        .putExtra("eventId", topic.getPostid()));
+                        .putExtra("eventId", topic.getPostid())
+                        .addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
         });
 

@@ -20,19 +20,19 @@
         android:layout_below="@id/logo"
         android:background="@color/baseDark" />
 
-    <GridView
-        android:id="@+id/gl_user_tickets"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/view"
-        android:layout_marginTop="16dp"
-        android:numColumns="2"
-        android:horizontalSpacing="8dp"
-        android:verticalSpacing="8dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/gl_user_tickets"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

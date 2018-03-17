@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,9 +35,17 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.Models.UserDetails;
 import com.manan.dev.ec2018app.Utilities.GetRoundedImage;
 import com.squareup.picasso.Picasso;
@@ -60,9 +69,11 @@ public class ProfileActivity extends AppCompatActivity {
     private ProgressDialog ProgressDialog;
     private RelativeLayout profilePictureFrame;
     private ImageView profilePicture;
-    AccessToken token;
     private TextView textView1;
     private TextView textView2;
+    private ProfileTracker mProfileTracker;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +85,8 @@ public class ProfileActivity extends AppCompatActivity {
         ProgressDialog = new ProgressDialog(this);
         ProgressDialog.setMessage("I am working");
         ProgressDialog.setTitle("Registering again");
+
+        mAuth = FirebaseAuth.getInstance();
         ProgressDialog.setCanceledOnTouchOutside(false);
         textView1 = (TextView)findViewById(R.id.tv5);
         textView2 = (TextView)findViewById(R.id.tv6);
@@ -88,9 +101,22 @@ public class ProfileActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                if(Profile.getCurrentProfile() == null) {
+                    mProfileTracker = new ProfileTracker() {
+                        @Override
+                        protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                            Log.d("fbProfile", currentProfile.getFirstName() + "bond");
+                            mProfileTracker.stopTracking();
+                        }
+                    };
+                } else {
+                    Profile profile = Profile.getCurrentProfile();
+                    Log.d("fbProfile", profile.getFirstName());
+                }
+
                 userDetails.setmFbId(loginResult.getAccessToken().getUserId());
                 registerUser(userDetails);
-                checkStatus();
+                handleFirebaseLogin(loginResult.getAccessToken());
                 Log.d("hogya", "hogya");
             }
 
@@ -201,6 +227,28 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void handleFirebaseLogin(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(ProfileActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("loginStatus", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            checkStatus();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("loginStatus", "signInWithCredential:failure", task.getException());
+                            Toast.makeText(ProfileActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
     private void getDetails(final String phone) {
         Log.i("tg", "bgg");
         final TextView tvName = (TextView) findViewById(R.id.tv_name);
@@ -294,7 +342,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void addPhoto() {
         try {
-            Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(800,800))
+            Log.d("fbProfile", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getProfilePictureUri(800, 800).toString());
+            Picasso.with(ProfileActivity.this).load(Profile.getCurrentProfile().getProfilePictureUri(800,800).toString())
                     .into(new Target(){
                         @Override
                         public void onBitmapLoaded(final Bitmap bitmap,Picasso.LoadedFrom from){
@@ -303,32 +352,31 @@ public class ProfileActivity extends AppCompatActivity {
                             BitmapDrawable background = new BitmapDrawable(conv_bm);
                             profilePictureFrame.setBackground(background);
                             profilePicture.setImageResource(R.drawable.frame_profile_2);
+                            Toast.makeText(ProfileActivity.this, "Image loaded", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onBitmapFailed(Drawable errorDrawable) {
-
+                            Log.d("fbProfile", errorDrawable.toString());
                         }
 
                         @Override
                         public void onPrepareLoad(Drawable placeHolderDrawable){
 
                         }
-
-
                     });
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("fbProfile", e.getMessage());
         }
 
 
     }
     private void checkStatus(){
-        token = AccessToken.getCurrentAccessToken();
+        AccessToken token = AccessToken.getCurrentAccessToken();
 
         if (token == null) {
-            profilePicture.setBackgroundResource(R.drawable.profile_frame);
+            profilePicture.setImageDrawable(getResources().getDrawable(R.drawable.profile_frame));
         }
         else{
             loginButton.setVisibility(View.GONE);

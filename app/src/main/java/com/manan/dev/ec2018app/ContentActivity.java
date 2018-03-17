@@ -1,11 +1,14 @@
 package com.manan.dev.ec2018app;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -51,6 +54,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private String phoneNumber;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -285,7 +289,21 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        if(prefs.getString("Phone", null) != null) {
+                            startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        } else {
+                            AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                builder = new AlertDialog.Builder(ContentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                builder = new AlertDialog.Builder(ContentActivity.this);
+                            }
+                            builder.setTitle("Log In")
+                                    .setMessage("To view your tickets you must Log In first.")
+                                    .setPositiveButton("Ok", null)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
                     }
                 }, 130);
                 break;
@@ -400,18 +418,16 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
 
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_tickets).setVisible(false);
             menu.findItem(R.id.nav_profile).setTitle("Log In");
         } else {
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(true);
-            menu.findItem(R.id.nav_tickets).setVisible(true);
             menu.findItem(R.id.nav_profile).setTitle("Profile");
         }
         if (nav_view != null) {
