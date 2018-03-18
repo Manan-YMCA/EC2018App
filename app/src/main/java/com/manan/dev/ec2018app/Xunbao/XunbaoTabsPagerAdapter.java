@@ -17,7 +17,6 @@ public class XunbaoTabsPagerAdapter extends FragmentPagerAdapter {
     private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
     private final ArrayList<String> mFragmentTitleList = new ArrayList<>();
 
-
     public XunbaoTabsPagerAdapter(FragmentManager fm) {
         super(fm);
     }

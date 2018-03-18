@@ -1,7 +1,6 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.manan.dev.ec2018app.R;
 
@@ -42,7 +40,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     public void onBindViewHolder(LeaderboardAdapter.MyViewHolder holder, int position) {
         LeaderboardList member = leaderboardList.get(position);
         holder.rank.setText(member.getRank());
-        if(member.getRank().equals("1")){
+        if (member.getRank().equals("1")) {
             holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.xunbao_leader_1));
         } else {
             holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.xunbao_leader_2));
