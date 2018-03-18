@@ -48,14 +48,20 @@ public class DesignFragment extends Fragment {
 
         Boolean k=true;
         List<DeveloperModel> devlist=new ArrayList<>();
-        DeveloperModel dev_obj = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/shubham_final.png?alt=media&token=cb8d55f1-7a2e-4256-8e11-821fd8c7ea11","Shubham Sharma","https://www.google.co.in/","Core Application Developer",k,k,k,k);
+        DeveloperModel dev_obj1 = new DeveloperModel
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/augustine_final.png?alt=media&token=cb8d55f1-7a2e-4256-8e11-821fd8c7ea11","Augustine","https://www.google.co.in/","Core Application Developer",k,k,k,k);
         DeveloperModel dev_obj2 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/yatin.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a","Yatin Dhingra","https://www.google.co.in/","Team Head",k,k,k,k);
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/kartik.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a","Kartik Singla","https://www.google.co.in/","Team Head",k,k,k,k);
+        DeveloperModel dev_obj3 = new DeveloperModel
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/tanisha.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a","Tanisha","https://www.google.co.in/","Team Head",k,k,k,k);
+        DeveloperModel dev_obj4 = new DeveloperModel
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/shubham.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a","Shubham Sharma","https://www.google.co.in/","Team Head",k,k,k,k);
+
+        devlist.add(dev_obj1);
         devlist.add(dev_obj2);
-        devlist.add(dev_obj);
-        devlist.add(dev_obj2);
-        devlist.add(dev_obj);
+        devlist.add(dev_obj3);
+        devlist.add(dev_obj4);
+
 
 
         Toast.makeText(getActivity(),String.valueOf(devlist.size()),Toast.LENGTH_SHORT).show();
