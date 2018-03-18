@@ -364,8 +364,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 finish();
                 break;
             case R.id.nav_sponsors:
-                //TODO
-                //add sponsors
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, SponsorsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
                 break;
             case R.id.nav_share:
                 String msg = "Install the elements culmyca app to stay updated about the latest events. Follow the link: ";
