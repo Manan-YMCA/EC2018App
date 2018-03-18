@@ -105,14 +105,23 @@
             android:layout_margin="10dp"
             android:background="#222" />
 
-        <RelativeLayout
-            android:id="@+id/rl_time_date"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_loc"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/line2"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_time_date"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line2"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp">
 
             <ImageView
@@ -177,24 +186,17 @@
 
         <RelativeLayout
             android:id="@+id/rl_location"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_below="@id/line2"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/rl_time_date"
-            android:layout_toRightOf="@id/rl_time_date">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/iv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:paddingLeft="5dp"
                 android:src="@drawable/vector_money_inr"
                 android:tint="#217c31" />
 
@@ -209,16 +211,19 @@
                 android:text="Fees : Rs. 10"
                 android:textColor="#111"
                 android:textSize="15dp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:layout_toEndOf="@+id/iv_money" />
 
         </RelativeLayout>
+
+        </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/rl_money_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_location"
+            android:layout_below="@+id/ll_loc"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -233,7 +238,6 @@
                     android:id="@+id/iv_vector_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:padding="5dp"
                     android:src="@drawable/vector_location"
                     android:tint="#217c31" />
@@ -242,10 +246,6 @@
                     android:id="@+id/tv_event_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/iv_vector_location"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/iv_vector_location"
-                    android:layout_toRightOf="@+id/iv_vector_location"
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
                     android:text="Lal Chowk"
@@ -273,8 +273,6 @@
                     android:id="@+id/tv_type_of_event"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv_type_of_event"
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
                     android:textAllCaps="true"

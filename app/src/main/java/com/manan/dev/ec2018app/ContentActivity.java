@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
@@ -307,7 +308,20 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                             }
                             builder.setTitle("Log In")
                                     .setMessage("To view your tickets you must Log In first.")
-                                    .setPositiveButton("Ok", null)
+                                    .setPositiveButton("Log In", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            startActivity(new Intent(ContentActivity.this, LoginActivity.class)
+                                                    .putExtra("parent", "ct"));
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            nav_view.setCheckedItem(R.id.nav_home);
+                                            dialog.dismiss();
+                                        }
+                                    })
                                     .setIcon(android.R.drawable.ic_dialog_alert)
                                     .show();
                         }
@@ -428,19 +442,17 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         MyApplication.getInstance().setConnectivityListener(ContentActivity.this);
 
 
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-       // prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        //SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
 
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_tickets).setVisible(false);
             menu.findItem(R.id.nav_profile).setTitle("Log In");
         } else {
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(true);
-            menu.findItem(R.id.nav_tickets).setVisible(true);
             menu.findItem(R.id.nav_profile).setTitle("Profile");
         }
         if (nav_view != null) {

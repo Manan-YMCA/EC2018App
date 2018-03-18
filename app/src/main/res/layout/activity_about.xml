@@ -6,46 +6,34 @@
     android:layout_height="match_parent"
     tools:context="com.manan.dev.ec2018app.AboutActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="100dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp">
+
 
         <ImageView
             android:id="@+id/confetti1"
             android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/pinwheel_about" />
+            android:layout_height="100dp"
+            android:src="@drawable/pinwheel_about"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
 
-        <ImageView
-            android:id="@+id/confetti2"
-            android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="end"
-            android:src="@drawable/pinwheel_about" />
-
-        <ImageView
-            android:id="@+id/confetti3"
-            android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/pinwheel_about" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#000"/>
 
         <ImageView
             android:id="@+id/confetti4"
             android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="100dp"
             android:layout_gravity="end"
-            android:src="@drawable/pinwheel_about" />
-    </LinearLayout>
+            android:src="@drawable/pinwheel_about"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp" />
 
 </RelativeLayout>
