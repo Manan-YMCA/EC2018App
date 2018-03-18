@@ -96,7 +96,6 @@ public class ProfileActivity extends AppCompatActivity {
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
 
-
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -116,6 +115,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 userDetails.setmFbId(loginResult.getAccessToken().getUserId());
                 registerUser(userDetails);
+                profilePicture.setImageBitmap(null);
+                checkStatus();
                 handleFirebaseLogin(loginResult.getAccessToken());
                 Log.d("hogya", "hogya");
             }
@@ -342,6 +343,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void addPhoto() {
         try {
+
+            Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(800,800));
             Log.d("fbProfile", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getProfilePictureUri(800, 800).toString());
             Picasso.with(ProfileActivity.this).load(Profile.getCurrentProfile().getProfilePictureUri(800,800).toString())
                     .into(new Target(){

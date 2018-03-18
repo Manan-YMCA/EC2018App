@@ -273,22 +273,22 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 }
             });
 
-            locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
-                }
-            });
-            registerButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (registerButton.getText().toString().equals("View Ticket")) {
-
-                        FragmentManager fm = getFragmentManager();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("qrcodestring", TicketModel.getQRcode());
-                        bundle.putString("eventid", eventId);
-                        bundle.putInt("activity", 0);
+        locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (registerButton.getText().toString().equals("View Ticket")) {
+                    displayTickets(eventId);
+                    FragmentManager fm = getFragmentManager();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("qrcodestring", TicketModel.getQRcode());
+                    bundle.putString("eventid", eventId);
+                    bundle.putInt("activity", 0);
 
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
@@ -439,60 +439,63 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         }
     }
 
-    private void displayTickets(String phoneNumber) {
+    private void displayTickets(String eventId) {
 
-        String url = getResources().getString(R.string.get_events_qr_code);
-        url += phoneNumber;
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i("My success", "" + response);
-                try {
-                    JSONObject obj1 = new JSONObject(response);
-                    JSONArray ticketDetails = obj1.getJSONArray("data");
-                    for (int i = 0; i < ticketDetails.length(); i++) {
-                        JSONObject obj2 = ticketDetails.getJSONObject(i);
-                        if (obj2.getString("eventid").equals(eventId)) {
-                            TicketModel = new QRTicketModel();
-
-                            TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
-                            TicketModel.setArrivalStatus(obj2.getInt("arrived"));
-                            TicketModel.setQRcode(obj2.getString("qrcode"));
-                            TicketModel.setEventID(obj2.getString("eventid"));
-                            TicketModel.setTimeStamp(obj2.getLong("timestamp"));
-                            registerButton.setText("View Ticket");
-                        }
-
-                    }
-                }
-                // Try and catch are included to handle any errors due to JSON
-                catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d("Tickets", e.getMessage());
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.i("Tickets", "" + error);
-            }
-        });
-        queue.add(request);
+//        String url = getResources().getString(R.string.get_events_qr_code);
+//        url += phoneNumber;
+//        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.i("My success", "" + response);
+//                try {
+//                    JSONObject obj1 = new JSONObject(response);
+//                    JSONArray ticketDetails = obj1.getJSONArray("data");
+//                    for (int i = 0; i < ticketDetails.length(); i++) {
+//                        JSONObject obj2 = ticketDetails.getJSONObject(i);
+//                        if (obj2.getString("eventid").equals(eventId)) {
+//                            TicketModel = new QRTicketModel();
+//
+//                            TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
+//                            TicketModel.setArrivalStatus(obj2.getInt("arrived"));
+//                            TicketModel.setQRcode(obj2.getString("qrcode"));
+//                            TicketModel.setEventID(obj2.getString("eventid"));
+//                            TicketModel.setTimeStamp(obj2.getLong("timestamp"));
+//                            registerButton.setText("View Ticket");
+//                        }
+//
+//                    }
+//                }
+//                // Try and catch are included to handle any errors due to JSON
+//                catch (Exception e) {
+//                    e.printStackTrace();
+//                    Log.d("Tickets", e.getMessage());
+//                }
+//
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//                Log.i("Tickets", "" + error);
+//            }
+//        });
+//        queue.add(request);
+        TicketModel =  databaseController.retrieveTicketsByID(eventId);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
         MyApplication.getInstance().setConnectivityListener(SingleEventActivity.this);
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         phoneNumber = prefs.getString("Phone", null);
-        if (phoneNumber != null)
-            displayTickets(phoneNumber);
+        if(databaseController.checkIfValueExists1(eventId)){
+            registerButton.setText("View Ticket");
+        }
     }
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {

@@ -7,7 +7,9 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
     android:layout_marginTop="8dp"
-    app:cardBackgroundColor="@color/White">
+    app:cardBackgroundColor="@color/White"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center_horizontal">
 
     <RelativeLayout
         android:id="@+id/ticket_layout"

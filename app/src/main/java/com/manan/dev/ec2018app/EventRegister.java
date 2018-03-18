@@ -30,8 +30,10 @@ import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Models.UserDetails;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -61,8 +63,9 @@ public class EventRegister extends AppCompatActivity {
     private String eventName;
     private String eventId;
     private String eventType;
-
+    private QRTicketModel TicketModel;
     private String qrCodeString;
+    private DatabaseController databaseController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class EventRegister extends AppCompatActivity {
         memberno = new ArrayList<>();
         nameText = new ArrayList<>();
         collegeText = new ArrayList<>();
+        databaseController = new DatabaseController(EventRegister.this);
         eventTypeView = (TextView) findViewById(R.id.max_team_mem);
         eventTypeView.setText(eventType);
         eventNameView = (TextView) findViewById(R.id.tv_event_name);
@@ -211,6 +215,12 @@ public class EventRegister extends AppCompatActivity {
                     QRCodeActivity fragobj = new QRCodeActivity();
                     fragobj.setArguments(bundle);
                     fragobj.show(fm, "drff");
+                    SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                    final String phone = prefs.getString("Phone", null);
+                    if (phone == null) {
+                        Toast.makeText(EventRegister.this, "shared pref no data", Toast.LENGTH_SHORT).show();
+                    }
+                    addTicket(phone);
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
@@ -272,14 +282,14 @@ public class EventRegister extends AppCompatActivity {
     }
 
     private Boolean validateCredentials() {
-        for(EditText nameTextView : nameText){
-            if(nameTextView.getText().toString().equals("")){
+        for (EditText nameTextView : nameText) {
+            if (nameTextView.getText().toString().equals("")) {
                 nameTextView.setError("Enter a User Name");
                 return false;
             }
         }
-        for(EditText collegeTextView : collegeText){
-            if(collegeTextView.getText().toString().equals("")){
+        for (EditText collegeTextView : collegeText) {
+            if (collegeTextView.getText().toString().equals("")) {
                 collegeTextView.setError("Enter a College Name");
                 return false;
             }
@@ -348,5 +358,50 @@ public class EventRegister extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    private void addTicket(final String phoneNumber) {
+        String url = getResources().getString(R.string.get_events_qr_code);
+        url += phoneNumber;
+        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("My success", "" + response);
+                try {
+                    JSONObject obj1 = new JSONObject(response);
+                    JSONArray ticketDetails = obj1.getJSONArray("data");
+                    for (int i = 0; i < ticketDetails.length(); i++) {
+                        JSONObject obj2 = ticketDetails.getJSONObject(i);
+                        if (obj2.getString("eventid").equals(eventId)) {
+                            TicketModel = new QRTicketModel();
+
+                            TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
+                            TicketModel.setArrivalStatus(obj2.getInt("arrived"));
+                            TicketModel.setQRcode(obj2.getString("qrcode"));
+                            TicketModel.setEventID(obj2.getString("eventid"));
+                            TicketModel.setTimeStamp(obj2.getLong("timestamp"));
+                            databaseController.addTicketsToDb(TicketModel);
+                        }
+
+                    }
+                }
+                // Try and catch are included to handle any errors due to JSON
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("Tickets", e.getMessage());
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("Tickets", "" + error);
+            }
+        });
+        queue.add(request);
     }
 }

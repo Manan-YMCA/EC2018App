@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +33,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -40,10 +47,15 @@ import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
+import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -60,6 +72,9 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private String phoneNumber;
     private LinearLayout cotainer_root_frame;
     private SharedPreferences prefs;
+    private ArrayList<QRTicketModel> userTickets;
+    private DatabaseController databaseController;
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +96,15 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 ContentActivity.this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        mProgress = new ProgressDialog(this);
+        mProgress.setMessage("I am working");
+        mProgress.setTitle("yes i am");
+        mProgress.setCanceledOnTouchOutside(false);
         nav_view = (NavigationView) findViewById(R.id.nav_view);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
-
+        userTickets = new ArrayList<QRTicketModel>();
+        databaseController = new DatabaseController(ContentActivity.this);
 
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
@@ -455,9 +474,68 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             menu.findItem(R.id.nav_logout).setVisible(true);
             menu.findItem(R.id.nav_profile).setTitle("Profile");
         }
+        checkCount(phoneNumber);
         if (nav_view != null) {
             nav_view.setCheckedItem(R.id.nav_home);
         }
+    }
+    private void checkCount(final String phone){
+        String url = getResources().getString(R.string.get_events_qr_code);
+        url += phone;
+        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("My success", "" + response);
+                mProgress.dismiss();
+                try {
+                    JSONObject obj1 = new JSONObject(response);
+                    JSONArray ticketDetails = obj1.getJSONArray("data");
+                    for (int i = 0; i < ticketDetails.length(); i++) {
+                        JSONObject obj2 = ticketDetails.getJSONObject(i);
+                        QRTicketModel TicketModel = new QRTicketModel();
+
+                        TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
+                        TicketModel.setArrivalStatus(obj2.getInt("arrived"));
+                        TicketModel.setQRcode(obj2.getString("qrcode"));
+                        TicketModel.setEventID(obj2.getString("eventid"));
+                        TicketModel.setTimeStamp(obj2.getLong("timestamp"));
+
+                        userTickets.add(TicketModel);
+                    }
+                    Log.d("Tickets", Integer.toString(userTickets.size()));
+                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
+                    if(userTickets.size()>databaseController.getTicketCount()){
+                        for(int i=0;i<userTickets.size();i++) {
+                            databaseController.addTicketsToDb(userTickets.get(i));
+                        }
+                    }
+                    else {
+                        for(int i=0;i<userTickets.size();i++) {
+                            databaseController.updateDbTickets(userTickets.get(i));
+                        }
+                    }
+                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
+                }
+                // Try and catch are included to handle any errors due to JSON
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("Tickets", e.getMessage());
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("Tickets", "" + error);
+                mProgress.dismiss();
+            }
+        });
+        queue.add(request);
+
     }
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {

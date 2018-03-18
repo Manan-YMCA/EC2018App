@@ -33,5 +33,11 @@ public class Schema {
         public static final String EVENT_PRIZES_3 = "prize3";
         public static final String EVENT_TEAM_SIZE = "teamSize";
         public static final String EVENT_UNIQUE_ID = "uniqueKey";
+        public static final String QR_TICKET_TABLE_NAME = "QRTickets";
+        public static final String EVENT_ID = "eventId";
+        public static final String QR_CODE = "qrCode";
+        public static final String  PAYMENT_STATUS = "paymentStatus";
+        public static final String ARRIVAL_STATUS = "arrivalStatus";
+
     }
 }
