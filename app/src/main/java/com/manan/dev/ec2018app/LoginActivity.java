@@ -114,9 +114,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     }
 
     private void checkOTP(String mobileNum) {
-        FragmentManager fm = getFragmentManager();
-        FragmentOtpChecker otpChecker = new FragmentOtpChecker();
-        otpChecker.show(fm, "otpCheckerFragment");
+        getDetails(userDetails, mobileNum);
     }
 
     private void getDetails(final UserDetails userDetails, final String phone) {
@@ -131,20 +129,15 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                             JSONObject obj1 = new JSONObject(response);
                             Long success = obj1.getLong("success");
                             if (success == 1) {
-                                SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
-                                editor.putString("Phone", userDetails.getmPhone());
-                                editor.apply();
-                                AccessToken token = AccessToken.getCurrentAccessToken();
-                                if (token != null) {
-                                    startSession();
-                                } else {
-                                    FragmentManager fm = getFragmentManager();
-                                    FragmentFbLogin fbLogin = new FragmentFbLogin();
-                                    fbLogin.show(fm, "fbLoginFragment");
-                                }
-                                checkCount(userDetails.getmPhone());
+                                FragmentManager fm = getFragmentManager();
+                                FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("phone", phone);
+                                otpChecker.setArguments(bundle);
+                                otpChecker.show(fm, "otpCheckerFragment");
+
                             } else {
-                                Snackbar.make(RelativeView, "USER DOES NOT EXIST", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(RelativeView, "User doesn't exist.", Snackbar.LENGTH_LONG).show();
                             }
                         }
                         // Try and catch are included to handle any errors due to JSON
@@ -171,7 +164,17 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     @Override
     public void updateResult(boolean status) {
         if (status) {
-            getDetails(userDetails, mobileNum.getText().toString());
+            SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
+            editor.putString("Phone", userDetails.getmPhone());
+            editor.apply();
+            AccessToken token = AccessToken.getCurrentAccessToken();
+            if (token != null) {
+                startSession();
+            } else {
+                FragmentManager fmFB = getFragmentManager();
+                FragmentFbLogin fbLogin = new FragmentFbLogin();
+                fbLogin.show(fmFB, "fbLoginFragment");
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,12 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.Coordinators;
@@ -36,9 +31,6 @@ import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,6 +66,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private Drawable default_image;
     private  RelativeLayout container_se_view;
     private boolean NO_DEEP_LINK_FLAG = true;
+    private Intent phoneIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +80,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
-        Log.v("deeplink", appLinkData + "");
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
             String revStr = new StringBuilder(appLinkData.toString()).reverse().toString();
             int i;
@@ -96,8 +88,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             revStr = revStr.substring(0, i);
             String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
             eventName = eventName.replace("%20", " ");
-            Log.v("deeplink", eventName);
-            Toast.makeText(this, "deeplink:" + eventName, Toast.LENGTH_SHORT).show();
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
@@ -106,8 +96,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 startActivity(new Intent(this, SplashScreen.class));
             }
         } else {
-        //    Toast.makeText(this, "nodeeplink:", Toast.LENGTH_SHORT).show();
-          //  Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
@@ -178,7 +166,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     onBackPressed();
                 }
             });
-        }
+
             eventNameView.setText(eventDetails.getmName());
 
             if (eventDetails.getmCategory().equals("solo")) {
@@ -218,18 +206,15 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + coord.getmCoordPhone()));
+                            phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + coord.getmCoordPhone()));
                             if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                // TODO: Consider calling
-                                //    ActivityCompat#requestPermissions
-                                // here to request the missing permissions, and then overriding
-                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                //                                          int[] grantResults)
-                                // to handle the case where the user grants the permission. See the documentation
-                                // for ActivityCompat#requestPermissions for more details.
-                                return;
+                                final String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
+                                //Asking request Permissions
+                                ActivityCompat.requestPermissions(SingleEventActivity.this, PERMISSIONS_CALL, 9);
+                            } else {
+                                startActivity(phoneIntent);
                             }
-                            startActivity(intent);
+
                         }
                     });
                 }
@@ -273,51 +258,50 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 }
             });
 
-        locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (registerButton.getText().toString().equals("View Ticket")) {
-                    displayTickets(eventId);
-                    FragmentManager fm = getFragmentManager();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("qrcodestring", TicketModel.getQRcode());
-                    bundle.putString("eventid", eventId);
-                    bundle.putInt("activity", 0);
-
-                    QRCodeActivity fragobj = new QRCodeActivity();
-                    fragobj.setArguments(bundle);
-                    fragobj.show(fm, "drff");
-                } else {
-                    startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
-                            .putExtra("eventName", eventDetails.getmName())
-                            .putExtra("eventId", eventDetails.getmEventId())
-                            .putExtra("eventType", eventDetails.getmEventTeamSize()));
+            locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
+            registerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (registerButton.getText().toString().equals("View Ticket")) {
+                        displayTickets(eventId);
+                        FragmentManager fm = getFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("qrcodestring", TicketModel.getQRcode());
+                        bundle.putString("eventid", eventId);
+                        bundle.putInt("activity", 0);
+
+                        QRCodeActivity fragobj = new QRCodeActivity();
+                        fragobj.setArguments(bundle);
+                        fragobj.show(fm, "drff");
+                    } else {
+                        startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
+                                .putExtra("eventName", eventDetails.getmName())
+                                .putExtra("eventId", eventDetails.getmEventId())
+                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
+                    }
+                }
+            });
 
 
-        sharebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String baseUrl="http://elementsculmyca.com/event/";
-                String parsedUrl=baseUrl +"#"+eventDetails.getmName().toString().replaceAll(" ","%20");
+            sharebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String baseUrl = "http://elementsculmyca.com/event/";
+                    String parsedUrl = baseUrl + "#" + eventDetails.getmName().toString().replaceAll(" ", "%20");
 
-                Toast.makeText(SingleEventActivity.this,parsedUrl,Toast.LENGTH_SHORT).show();
-                String message="Elements Culmyca 2018:" +eventDetails.getmName().toString()+ " View the event clicking the link: "+parsedUrl;
-                shareEventMessage(message);
+                    Toast.makeText(SingleEventActivity.this, parsedUrl, Toast.LENGTH_SHORT).show();
+                    String message = "Elements Culmyca 2018:" + eventDetails.getmName().toString() + " View the event clicking the link: " + parsedUrl;
+                    shareEventMessage(message);
 
-            }
-        });
-   showSnack(isConnected());
-
-
+                }
+            });
+            showSnack(isConnected());
+        }
     }
     private void shareEventMessage(String msg) {
         Intent i = new Intent(Intent.ACTION_SEND);
@@ -327,7 +311,23 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     }
 
 
-//    @Override
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        boolean permissionGranted = false;
+        switch(requestCode){
+            case 9:
+                permissionGranted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        Log.v("permission","permission"+permissionGranted);
+        if(permissionGranted){
+            startActivity(phoneIntent);
+        }else {
+            Toast.makeText(SingleEventActivity.this, "You didn't assign permission.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 //        if (requestCode == 101) {
 //            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
