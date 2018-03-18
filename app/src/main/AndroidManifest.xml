@@ -20,6 +20,7 @@
         android:roundIcon="@drawable/ec_logo_temp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <receiver
             android:name=".Utilities.ConnectivityReciever"
             android:enabled="true">
@@ -147,14 +148,12 @@
         <activity
             android:name=".CulmycaTimesActivity"
             android:parentActivityName=".ContentActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CodeFont1" />
+            android:theme="@style/CodeFont"/>
         <activity
             android:name=".AboutActivity"
-            android:label="ABOUT"
+            android:theme="@style/CodeFont"
             android:parentActivityName=".ContentActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CodeFont1" />
+            android:label="ABOUT"/>
 
         <service
             android:name=".Notifications.MyNotificationService"

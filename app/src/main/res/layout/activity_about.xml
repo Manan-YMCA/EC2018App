@@ -5,35 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.manan.dev.ec2018app.AboutActivity">
-
-
-
-        <ImageView
-            android:id="@+id/confetti1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/pinwheel_about"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp" />
-
-        <View
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_centerInParent="true"
-            android:background="#000"/>
+            android:layout_height="60dp"
+            android:background="@color/White"
+            android:id="@+id/action_bar_abt">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                  android:layout_toRightOf="@+id/abt_back_button"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/logo_black"/>
+                <ImageView
+                    android:id="@+id/abt_back_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/vector_arrow"
+                    android:tint="#717070" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/futura"
+                    android:textSize="28dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                  />
 
-        <ImageView
-            android:id="@+id/confetti4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="end"
-            android:src="@drawable/pinwheel_about"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp" />
+
+
+</RelativeLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/about_viewpager"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_below="@id/action_bar_abt"/>
+
 
 </RelativeLayout>

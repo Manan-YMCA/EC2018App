@@ -172,15 +172,16 @@ public class DashboardSliderFragment1 extends Fragment {
                  handler.postDelayed(update, 7000);
              }
 
-             void startRepeatingTask() {
-                 mIsRunning = true;
-                 update.run();
-             }
+//             void startRepeatingTask() {
+//                 mIsRunning = true;
+//                 update.run();
+//             }
+//
+//             void stopRepeatingTask() {
+//                 mIsRunning = false;
+//                 handler.removeCallbacks(mStatusChecker);
+//             }
 
-             void stopRepeatingTask() {
-                 mIsRunning = false;
-                 handler.removeCallbacks(mStatusChecker);
-             }
          };
     }
 }

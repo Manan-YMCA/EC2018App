@@ -33,7 +33,7 @@ private ImageView devbut,desbut,opbut,crebut;
         devviewPager.setAdapter(mydevViewPagerAdapter);
         devviewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-devbut.setOnClickListener(new View.OnClickListener() {
+        devbut.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
