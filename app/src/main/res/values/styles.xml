@@ -51,15 +51,12 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
     <style name="MainMenu" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColorSecondary">#ffffff</item>
     </style>
 
-
     <style name="Xunbao" parent="@android:style/Theme.Holo.Light.DarkActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 
 </resources>

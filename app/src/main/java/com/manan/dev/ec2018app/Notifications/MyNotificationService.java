@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.Notifications;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -7,13 +7,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.IBinder;
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.util.Log;
+
+import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.SingleEventActivity;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by yatindhingra on 10/03/18.
@@ -54,6 +53,4 @@ public class MyNotificationService extends Service {
         notifyi.notify(uniqueId, popup);
         return START_NOT_STICKY;
     }
-
-
 }

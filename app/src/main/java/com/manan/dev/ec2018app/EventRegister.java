@@ -32,6 +32,7 @@ import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Models.UserDetails;
+import com.manan.dev.ec2018app.Notifications.MyNotificationResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

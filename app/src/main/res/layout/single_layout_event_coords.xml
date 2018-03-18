@@ -2,21 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:layout_marginTop="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
         android:backgroundTint="@color/Black"
-       >
-<ImageView
-    android:layout_width="30dp"
-    android:layout_height="50dp"
-    android:id="@+id/photu"
-    android:src="@drawable/vector_person"
-    android:tint="@color/Black"/>
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/photu"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/vector_person"
+            android:tint="@color/Black" />
 
 
         <TextView
@@ -24,23 +23,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="[Full Name]"
             android:layout_toRightOf="@id/photu"
             android:fontFamily="@font/futura"
+            android:text="[Full Name]"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/tv_coords_phone_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura"
-            android:textColor="#8f8f8f"
-            android:layout_toRightOf="@id/photu"
             android:layout_alignLeft="@+id/tv_coords_name"
             android:layout_alignStart="@+id/tv_coords_name"
             android:layout_below="@+id/tv_coords_name"
-            android:text="[Phone Number]" />
+            android:layout_toRightOf="@id/photu"
+            android:fontFamily="@font/futura"
+            android:text="[Phone Number]"
+            android:textColor="#8f8f8f" />
 
     </RelativeLayout>
 

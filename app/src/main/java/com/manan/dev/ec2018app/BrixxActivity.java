@@ -11,10 +11,10 @@ import com.manan.dev.ec2018app.Adapters.BrixxAdapter;
 public class BrixxActivity extends AppCompatActivity {
 
     private BrixxAdapter iViewPagerAdapter;
-   
+
     private ViewPager iViewpager;
     private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
-    private ImageView next_btn,pre_btn;
+    private ImageView next_btn, pre_btn;
 
 
     @Override
@@ -23,38 +23,30 @@ public class BrixxActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_brixx);
 
-
         iViewpager = (ViewPager) findViewById(R.id.ivpPager);
         iViewPagerAdapter = new BrixxAdapter(getSupportFragmentManager());
         iViewpager.setAdapter(iViewPagerAdapter);
         iViewpager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-    next_btn=findViewById(R.id.next);
-    pre_btn=findViewById(R.id.pre);
+        next_btn = findViewById(R.id.next);
+        pre_btn = findViewById(R.id.pre);
 
-
-    next_btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            iViewpager.setCurrentItem(getCurrItem()+1);
-        }
-    });
+        next_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iViewpager.setCurrentItem(getCurrItem() + 1);
+            }
+        });
 
         pre_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                iViewpager.setCurrentItem(getCurrItem()-1);
+                iViewpager.setCurrentItem(getCurrItem() - 1);
             }
         });
-
-
     }
 
-
-
     private int getCurrItem() {
-        return iViewpager.getCurrentItem() ;
+        return iViewpager.getCurrentItem();
     }
 }

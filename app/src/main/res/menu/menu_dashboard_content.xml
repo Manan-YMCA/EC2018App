@@ -17,13 +17,18 @@
             android:icon="@drawable/vector_tickets"
             android:title="My Tickets" />
         <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/vector_notifications"
+            android:title="Notifications" />
+
+        <item
             android:id="@+id/nav_xunbao"
-            android:title="Xunbao"
-            android:icon="@drawable/vector_xunbao"/>
+            android:icon="@drawable/vector_xunbao"
+            android:title="Xunbao" />
         <item
             android:id="@+id/nav_culmyca"
-            android:title="Culmyca Times"
-            android:icon="@drawable/vector_cul_times"/>
+            android:icon="@drawable/vector_cul_times"
+            android:title="Culmyca Times" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/vector_info"

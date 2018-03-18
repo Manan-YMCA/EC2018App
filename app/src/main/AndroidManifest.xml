@@ -13,14 +13,13 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
-    android:name=".Utilities.MyApplication"
-    android:icon="@drawable/ec_app_logo"
+        android:name=".Utilities.MyApplication"
+        android:icon="@drawable/ec_app_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <receiver
             android:name=".Utilities.ConnectivityReciever"
             android:enabled="true">
@@ -75,7 +74,7 @@
             android:parentActivityName=".ContentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/xunbao_main_theme"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".DevelopersActivity"
             android:screenOrientation="portrait"
@@ -146,21 +145,23 @@
         <activity
             android:name=".CulmycaTimesActivity"
             android:parentActivityName=".ContentActivity"
-            android:theme="@style/CodeFont1"/>
+            android:theme="@style/CodeFont1" />
         <activity
             android:name=".AboutActivity"
-            android:theme="@style/CodeFont1"
+            android:label="ABOUT"
             android:parentActivityName=".ContentActivity"
-            android:label="ABOUT"/>
+            android:theme="@style/CodeFont1" />
 
         <service
-            android:name=".MyNotificationService"
+            android:name=".Notifications.MyNotificationService"
             android:enabled="true" />
 
-        <receiver android:name=".MyNotificationResponse" />
+        <receiver android:name=".Notifications.MyNotificationResponse" />
 
-        <activity android:name=".BrixxActivity"
-            android:theme="@style/CodeFont"/>
+        <activity
+            android:name=".BrixxActivity"
+            android:theme="@style/CodeFont" />
+        <activity android:name=".Notifications.MyNotificationsActivity"></activity>
     </application>
 
 </manifest>

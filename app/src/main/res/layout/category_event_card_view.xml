@@ -155,9 +155,9 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/futura"
                 android:maxLines="1"
-                android:textAllCaps="true"
                 android:text="Computer Labs"
                 android:textAlignment="center"
+                android:textAllCaps="true"
                 android:textColor="@color/Black" />
         </LinearLayout>
 

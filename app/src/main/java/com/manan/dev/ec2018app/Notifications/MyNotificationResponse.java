@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.Notifications;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

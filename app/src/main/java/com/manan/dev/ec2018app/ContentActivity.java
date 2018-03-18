@@ -49,6 +49,7 @@ import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Notifications.MyNotificationsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
@@ -80,9 +81,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
-        cotainer_root_frame=(LinearLayout)findViewById(R.id.content_frame);
-
-
+        cotainer_root_frame = (LinearLayout) findViewById(R.id.content_frame);
 
         try {
             Log.d("auth", FirebaseAuth.getInstance().getUid());
@@ -384,10 +383,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                             .Callback() {
                         @Override
                         public void onCompleted(GraphResponse graphResponse) {
-
                             LoginManager.getInstance().logOut();
-                            Toast.makeText(getApplicationContext(), "fb logout ho gya", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getApplicationContext(), "FB logout done!", Toast.LENGTH_SHORT).show();
                         }
                     }).executeAsync();
                 }
@@ -401,6 +398,14 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     @Override
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, SponsorsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }, 130);
+                break;
+            case R.id.nav_notifications:
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ContentActivity.this, MyNotificationsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 }, 130);
                 break;
@@ -541,25 +546,24 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         queue.add(request);
 
     }
+
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
         showSnack(isConnected);
     }
 
-
-        private void showSnack(boolean isConnected) {
-            String message;
-            int color;
-            if (isConnected) {
-
-                message = "Connected";
-                Snackbar.make(cotainer_root_frame,message,Snackbar.LENGTH_SHORT).show();
-                color = Color.WHITE;
-            } else {
-                message = "Get a hotspot Buddy";
-                Snackbar.make(cotainer_root_frame,message,Snackbar.LENGTH_SHORT).show();
-                color = Color.RED;
-            }
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            message = "Yea! You are connected to the internet!";
+            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
+            color = Color.WHITE;
+        } else {
+            message = "Get a hotspot Buddy!";
+            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
+            color = Color.RED;
+        }
     }
 
 

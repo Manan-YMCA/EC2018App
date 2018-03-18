@@ -56,13 +56,11 @@ public class RangritiFragment extends Fragment {
         return rootView;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         attachDatabaseListener();
     }
-
 
     @Override
     public void onPause() {
@@ -70,13 +68,11 @@ public class RangritiFragment extends Fragment {
         detatchDatabaseListener();
     }
 
-
     private void detatchDatabaseListener() {
         if (mChildEventListener != null) {
             mDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
-
     }
 
 
