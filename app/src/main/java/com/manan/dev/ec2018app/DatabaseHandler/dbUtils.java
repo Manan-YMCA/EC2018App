@@ -29,4 +29,10 @@ public class dbUtils {
             + Schema.DbEntry.EVENT_COORDINATOR_ID_2 + " TEXT" + COMMA_SEP
             + Schema.DbEntry.EVENT_COORDINATOR_NAME_2 + " TEXT" + COMMA_SEP
             + Schema.DbEntry.EVENT_COORDINATOR_PHONE_2 + " NUMBER" +")";
+
+    public static final String CREATE_TABLE_1 = "CREATE TABLE " + Schema.DbEntry.QR_TICKET_TABLE_NAME + "( "
+            +Schema.DbEntry.EVENT_ID + " TEXT PRIMARY KEY" + COMMA_SEP
+            +Schema.DbEntry.QR_CODE + " TEXT" + COMMA_SEP
+            +Schema.DbEntry.PAYMENT_STATUS + " NUMBER" + COMMA_SEP
+            +Schema.DbEntry.ARRIVAL_STATUS +" NUMBER" + ")";
 }

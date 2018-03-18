@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class DatabaseController extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(dbUtils.CREATE_TABLE);
+        sqLiteDatabase.execSQL(dbUtils.CREATE_TABLE_1);
     }
 
     @Override
@@ -70,6 +72,18 @@ public class DatabaseController extends SQLiteOpenHelper {
         }
         db.close();
     }
+    public void addTicketsToDb(QRTicketModel model){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        if (!checkIfValueExists1(model.getEventID())){
+            values.put(Schema.DbEntry.EVENT_ID, model.getEventID());
+            values.put(Schema.DbEntry.QR_CODE, model.getQRcode());
+            values.put(Schema.DbEntry.PAYMENT_STATUS, model.getPaymentStatus());
+            values.put(Schema.DbEntry.ARRIVAL_STATUS,model.getArrivalStatus());
+            db.insert(Schema.DbEntry.QR_TICKET_TABLE_NAME , null , values);
+        }
+        db.close();
+    }
 
     public ArrayList<EventDetails> retreiveCategory(String clubName) {
         SQLiteDatabase db = getReadableDatabase();
@@ -96,6 +110,24 @@ public class DatabaseController extends SQLiteOpenHelper {
         readCursor.close();
         return eventList;
     }
+    public ArrayList<QRTicketModel> retrieveAllTickets() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<QRTicketModel> qrTickets = new ArrayList<>();
+        String[] projection = {Schema.DbEntry.EVENT_ID, Schema.DbEntry.QR_CODE
+                , Schema.DbEntry.PAYMENT_STATUS, Schema.DbEntry.ARRIVAL_STATUS};
+        Cursor readCursor = db.query(Schema.DbEntry.QR_TICKET_TABLE_NAME, projection, null,null, null, null, null);
+        readCursor.moveToFirst();
+        int totalTickets = readCursor.getCount();
+        while (totalTickets > 0) {
+            totalTickets--;
+            QRTicketModel tickets = new QRTicketModel();
+            tickets = retrieveTickets(readCursor);
+            qrTickets.add(tickets);
+            readCursor.moveToNext();
+        }
+        readCursor.close();
+        return qrTickets;
+    }
 
     public EventDetails retreiveEventsByID(String EventId) {
         SQLiteDatabase db = getReadableDatabase();
@@ -115,6 +147,23 @@ public class DatabaseController extends SQLiteOpenHelper {
         readCursor.close();
         return ev;
     }
+    public QRTicketModel retrieveTicketsByID(String EventId){
+        QRTicketModel qrTicketModel = new QRTicketModel();
+        if(checkIfValueExists1(EventId)) {
+            SQLiteDatabase db = getReadableDatabase();
+            String[] projection = {Schema.DbEntry.EVENT_ID, Schema.DbEntry.QR_CODE
+                    , Schema.DbEntry.PAYMENT_STATUS, Schema.DbEntry.ARRIVAL_STATUS};
+            Cursor readCursor = db.query(Schema.DbEntry.QR_TICKET_TABLE_NAME, projection, Schema.DbEntry.EVENT_ID + " = ?", new String[]{EventId}, null, null, null);
+            readCursor.moveToFirst();
+            qrTicketModel = retrieveTickets(readCursor);
+            readCursor.close();
+
+            return qrTicketModel;
+        }
+        qrTicketModel.setEventID("null");
+        return qrTicketModel;
+    }
+
 
     public String retrieveEventIdByName(String eventName){
         SQLiteDatabase db = getReadableDatabase();
@@ -130,8 +179,14 @@ public class DatabaseController extends SQLiteOpenHelper {
         else
             return "wrong";
     }
-
-    private EventDetails retrieveEvents(Cursor readCursor) {
+    public QRTicketModel retrieveTickets(Cursor readCursor) {
+        String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID));
+        String qrCode = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.QR_CODE));
+        Integer paymentStatus = readCursor.getInt(readCursor.getColumnIndexOrThrow(Schema.DbEntry.PAYMENT_STATUS));
+        Integer arrivalStatus = readCursor.getInt(readCursor.getColumnIndexOrThrow(Schema.DbEntry.ARRIVAL_STATUS));
+        return new QRTicketModel(paymentStatus,arrivalStatus,qrCode,eventId);
+    }
+    public EventDetails retrieveEvents(Cursor readCursor) {
         String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
         String eventName = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_NAME_COLUMN_NAME));
         String category = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_CATEGORY_COLUMN_NAME));
@@ -203,7 +258,16 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.update(Schema.DbEntry.EVENT_LIST_TABLE_NAME, values, Schema.DbEntry.EVENT_NAME_COLUMN_NAME + "=?", new String[]{event.getmName()});
         db.close();
     }
+    public void updateDbTickets(QRTicketModel model){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Schema.DbEntry.EVENT_ID, model.getEventID());
+        values.put(Schema.DbEntry.QR_CODE, model.getQRcode());
+        values.put(Schema.DbEntry.PAYMENT_STATUS, model.getPaymentStatus());
+        values.put(Schema.DbEntry.ARRIVAL_STATUS,model.getArrivalStatus());
+        db.update(Schema.DbEntry.QR_TICKET_TABLE_NAME , values ,Schema.DbEntry.EVENT_ID + "=?",new String[]{model.getEventID()} );
 
+    }
     public int getCount() {
         int i = 0;
         SQLiteDatabase db = getReadableDatabase();
@@ -213,8 +277,17 @@ public class DatabaseController extends SQLiteOpenHelper {
         cursor.close();
         return i;
     }
+    public int getTicketCount() {
+        int i = 0;
+        SQLiteDatabase db = getReadableDatabase();
+        String[] projection = {Schema.DbEntry.EVENT_ID};
+        Cursor cursor = db.query(Schema.DbEntry.QR_TICKET_TABLE_NAME, projection, null, null, null, null, null);
+        i = cursor.getCount();
+        cursor.close();
+        return i;
+    }
 
-    private Boolean checkIfValueExists(String eventId) {
+    public Boolean checkIfValueExists(String eventId) {
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_ID_COLUMN_NAME + " =?";
         Cursor cs = db.rawQuery(query, new String[]{eventId});
@@ -226,7 +299,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         return true;
     }
 
-    private Boolean checkIfValueByNameExists(String eventName) {
+    public Boolean checkIfValueByNameExists(String eventName) {
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " =?";
         Cursor cs = db.rawQuery(query, new String[]{eventName});
@@ -237,6 +310,17 @@ public class DatabaseController extends SQLiteOpenHelper {
         }
         cs.close();
         Log.v("checkIfValueExists","Found");
+        return true;
+    }
+    public Boolean checkIfValueExists1(String eventId) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + Schema.DbEntry.QR_TICKET_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_ID + " =?";
+        Cursor cs = db.rawQuery(query, new String[]{eventId});
+        if (cs.getCount() <= 0) {
+            cs.close();
+            return false;
+        }
+        cs.close();
         return true;
     }
 }

@@ -27,11 +27,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
+import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.Fragments.FragmentOtpChecker;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Models.UserDetails;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
     EditText mobileNum;
@@ -42,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     private ProgressDialog mProgress;
     private RelativeLayout RelativeView;
     String parent;
+    private ArrayList<QRTicketModel> userTickets;
+    private DatabaseController databaseController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +56,14 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         setContentView(R.layout.activity_login);
 
         parent = getIntent().getStringExtra("parent");
-
+        userTickets = new ArrayList<>();
         userDetails = new UserDetails();
         mobileNum = (EditText) findViewById(R.id.mobileNum);
         loginMobileNum = (Button) findViewById(R.id.login_mobileNum);
         RelativeView = (RelativeLayout) findViewById(R.id.rl_main_view);
         NeedHelp = (TextView) findViewById(R.id.need_help);
         registerView = (TextView) findViewById(R.id.tv_register_option);
+        databaseController = new DatabaseController(LoginActivity.this);
         NeedHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +106,12 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
 
     private void checkOTP(String mobileNum) {
         FragmentManager fm = getFragmentManager();
@@ -128,6 +142,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                                     FragmentFbLogin fbLogin = new FragmentFbLogin();
                                     fbLogin.show(fm, "fbLoginFragment");
                                 }
+                                checkCount(userDetails.getmPhone());
                             } else {
                                 Snackbar.make(RelativeView, "USER DOES NOT EXIST", Snackbar.LENGTH_LONG).show();
                             }
@@ -218,4 +233,63 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
         startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
     }
+    private void checkCount(final String phone){
+        String url = getResources().getString(R.string.get_events_qr_code);
+        url += phone;
+        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("My success", "" + response);
+                mProgress.dismiss();
+                try {
+                    JSONObject obj1 = new JSONObject(response);
+                    JSONArray ticketDetails = obj1.getJSONArray("data");
+                    for (int i = 0; i < ticketDetails.length(); i++) {
+                        JSONObject obj2 = ticketDetails.getJSONObject(i);
+                        QRTicketModel TicketModel = new QRTicketModel();
+
+                        TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
+                        TicketModel.setArrivalStatus(obj2.getInt("arrived"));
+                        TicketModel.setQRcode(obj2.getString("qrcode"));
+                        TicketModel.setEventID(obj2.getString("eventid"));
+                        TicketModel.setTimeStamp(obj2.getLong("timestamp"));
+
+                        userTickets.add(TicketModel);
+                    }
+                    Log.d("Tickets", Integer.toString(userTickets.size()));
+                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
+                    if(userTickets.size()>databaseController.getTicketCount()){
+                        for(int i=0;i<userTickets.size();i++) {
+                            databaseController.addTicketsToDb(userTickets.get(i));
+                        }
+                    }
+                    else {
+                        for(int i=0;i<userTickets.size();i++) {
+                            databaseController.updateDbTickets(userTickets.get(i));
+                        }
+                    }
+                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
+                }
+                // Try and catch are included to handle any errors due to JSON
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("Tickets", e.getMessage());
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("Tickets", "" + error);
+                mProgress.dismiss();
+            }
+        });
+        queue.add(request);
+
+    }
+
 }

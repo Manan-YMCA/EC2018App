@@ -140,7 +140,9 @@
             android:name=".CommentActivity"
             android:label="Comments"
             android:parentActivityName=".CulmycaTimesActivity"
-            android:theme="@style/CodeFont" />
+            android:theme="@style/CodeFont1">
+
+        </activity>
         <activity
             android:name=".CulmycaTimesActivity"
             android:parentActivityName=".ContentActivity"

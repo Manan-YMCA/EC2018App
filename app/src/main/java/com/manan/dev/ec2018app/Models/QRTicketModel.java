@@ -19,6 +19,12 @@ public class QRTicketModel {
         this.eventID = eventID;
         this.timeStamp = timeStamp;
     }
+    public QRTicketModel(int paymentStatus, int arrivalStatus, String QRcode, String eventID) {
+        this.paymentStatus = paymentStatus;
+        this.arrivalStatus = arrivalStatus;
+        this.QRcode = QRcode;
+        this.eventID = eventID;
+    }
 
     public int getPaymentStatus() {
         return paymentStatus;
