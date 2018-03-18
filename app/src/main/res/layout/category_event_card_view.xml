@@ -89,7 +89,8 @@
                 android:maxLines="1"
                 android:text="March 22"
                 android:textAlignment="center"
-                android:textColor="@color/Black" />
+                android:textColor="@color/Black"
+                android:layout_marginStart="12dp" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -134,7 +135,8 @@
                 android:fontFamily="@font/futura"
                 android:text="50"
                 android:textAlignment="center"
-                android:textColor="@color/Black" />
+                android:textColor="@color/Black"
+                android:layout_marginStart="12dp" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -151,7 +153,6 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/baseDark"
                 android:fontFamily="@font/futura"
                 android:maxLines="1"
                 android:textAllCaps="true"
@@ -167,7 +168,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/baseDark"
+            android:background="@color/baseDark"
             android:fontFamily="@font/futura"
             android:text="View More"
             android:textColor="@color/White" />

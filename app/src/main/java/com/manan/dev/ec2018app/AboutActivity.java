@@ -16,7 +16,7 @@ public class AboutActivity extends AppCompatActivity {
 
     private static SensorManager sensorService;
     private Sensor sensor;
-    private ImageView confettiImgView1, confettiImgView2, confettiImgView3, confettiImgView4;
+    private ImageView confettiImgView1, confettiImgView4;
     float current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,6 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         confettiImgView1 = (ImageView) findViewById(R.id.confetti1);
-        confettiImgView2 = (ImageView) findViewById(R.id.confetti2);
-        confettiImgView3 = (ImageView) findViewById(R.id.confetti3);
         confettiImgView4 = (ImageView) findViewById(R.id.confetti4);
         sensorService = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorService.getDefaultSensor(Sensor.TYPE_ORIENTATION);
@@ -57,8 +55,6 @@ public class AboutActivity extends AppCompatActivity {
             if(current != azimuth) {
 
                 confettiImgView1.animate().rotation(azimuth).setDuration(300);
-                confettiImgView2.animate().rotation(180 - azimuth).setDuration(300);
-                confettiImgView3.animate().rotation(azimuth).setDuration(300);
                 confettiImgView4.animate().rotation(180 - azimuth).setDuration(300);
             }
 

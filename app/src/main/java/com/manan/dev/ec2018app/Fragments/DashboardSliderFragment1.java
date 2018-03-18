@@ -145,25 +145,22 @@ public class DashboardSliderFragment1 extends Fragment {
                  if (!mIsRunning) {
                      return; // stop when told to stop
                  }
-                 contenttv.setText(whatsnewarraylist.get(i).getContent().toString());
+                 WhatsNewModel mode = whatsnewarraylist.get(i);
+                 contenttv.setText(mode.getContent());
+                 contenttv.setTag(mode.getIntent());
                  //          timer.cancel();
                  //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
                  contenttv.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View v) {
-
-                         if (whatsnewarraylist.get(i).getIntent() == 0) {
-                             startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
-                         }
-                         if (whatsnewarraylist.get(i).getIntent() == 1) {
+                         if(contenttv.getTag().equals(0)){
                              startActivity(new Intent(getActivity(), XunbaoActivity.class));
-                         }
-                         if (whatsnewarraylist.get(i).getIntent() == 2) {
-                             startActivity(new Intent(getActivity(), MapsActivity.class));
-                         }
-                         else {
+                         } else if(contenttv.getTag().equals(1)){
+                             startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
 
+                         } else if(contenttv.getTag().equals(2)){
+                             startActivity(new Intent(getActivity(), MapsActivity.class));
                          }
                      }
                  });//
