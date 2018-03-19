@@ -13,34 +13,32 @@ import com.manan.dev.ec2018app.Fragments.DevelopesFragment_1;
  */
 
 
-    public class DevelopersPagerAdapter extends FragmentStatePagerAdapter {
-        private static final int TOTAL_PAGES = 3;
+public class DevelopersPagerAdapter extends FragmentStatePagerAdapter {
+    private static final int TOTAL_PAGES = 3;
 
-        public DevelopersPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new DevelopesFragment_1();
-                case 1:
-                    return new DesignFragment();
-                case 2:
-                    return new CreativeFragment();
-
-
-                default:
-                    break;
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return TOTAL_PAGES;
-        }
-
+    public DevelopersPagerAdapter(FragmentManager fm) {
+        super(fm);
     }
+
+    @Override
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0:
+                return new DevelopesFragment_1();
+            case 1:
+                return new DesignFragment();
+            case 2:
+                return new CreativeFragment();
+            default:
+                break;
+        }
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return TOTAL_PAGES;
+    }
+
+}
 

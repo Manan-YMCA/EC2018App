@@ -5,11 +5,12 @@
     tools:context="com.manan.dev.ec2018app.Fragments.MrCulFragment">
 
     <ImageView
+        android:id="@+id/back_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:id="@+id/back_img"
-        android:background="@drawable/brixx_img"/>
+        android:background="@drawable/brixx_img"
+        android:scaleType="centerCrop" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,7 +22,6 @@
             android:layout_above="@+id/inf_date"
             android:layout_margin="10dp"
             android:layout_marginLeft="15dp"
-
             android:fontFamily="@font/futura"
             android:text="MR-MISS CUlMYCA 2018"
             android:textAllCaps="true"
@@ -35,11 +35,9 @@
             android:layout_above="@+id/inf_content"
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/futura"
-            android:text="8th April"
+            android:text="7th April"
             android:textColor="@color/White"
-            android:textSize="24dp"
-
-            />
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/inf_content"
@@ -50,24 +48,20 @@
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/futura"
             android:maxLines="4"
-
-            android:text="@string/dummy"
+            android:text="@string/mrmsculmycadata"
             android:textColor="@color/White"
-            android:textSize="13dp"
-
-            />
+            android:textSize="13dp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/insta"
-
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="5dp"
@@ -80,8 +74,6 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/fb" />
-
-
 
         </LinearLayout>
     </RelativeLayout>

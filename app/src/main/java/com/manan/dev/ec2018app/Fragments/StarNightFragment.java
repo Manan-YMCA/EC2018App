@@ -25,7 +25,6 @@ import com.squareup.picasso.Picasso;
  */
 public class StarNightFragment extends Fragment {
 
-
     private ChildEventListener mChildEventListener;
     private com.google.firebase.database.Query mDatabaseReference;
     private FirebaseAuth mAuth;
@@ -36,7 +35,6 @@ public class StarNightFragment extends Fragment {
     public StarNightFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

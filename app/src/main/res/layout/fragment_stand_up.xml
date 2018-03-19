@@ -22,7 +22,6 @@
                 android:layout_above="@+id/inf_date"
                 android:layout_margin="10dp"
                 android:layout_marginLeft="15dp"
-
                 android:fontFamily="@font/futura"
                 android:text="STANDUP"
                 android:textAllCaps="true"
@@ -36,11 +35,9 @@
                 android:layout_above="@+id/inf_content"
                 android:layout_marginLeft="15dp"
                 android:fontFamily="@font/futura"
-                android:text="8th April"
+                android:text="9th April"
                 android:textColor="@color/White"
-                android:textSize="24dp"
-
-                />
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/inf_content"
@@ -51,11 +48,9 @@
                 android:layout_marginLeft="15dp"
                 android:fontFamily="@font/futura"
                 android:maxLines="4"
-                android:text="@string/dummy"
+                android:text="@string/hassrathdata"
                 android:textColor="@color/White"
-                android:textSize="13dp"
-
-                />
+                android:textSize="13dp" />
 
 
         <LinearLayout
@@ -67,21 +62,17 @@
 
             <ImageView
                 android:id="@+id/insta"
-
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/insta" />
 
             <ImageView
-
                 android:id="@+id/fb"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/fb" />
-
-
 
         </LinearLayout>
     </RelativeLayout>

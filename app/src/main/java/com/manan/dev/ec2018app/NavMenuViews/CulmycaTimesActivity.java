@@ -50,6 +50,7 @@ public class CulmycaTimesActivity extends AppCompatActivity {
 
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Loading!");
+        progressBar.setCancelable(false);
         progressBar.setCanceledOnTouchOutside(false);
         progressBar.show();
 
