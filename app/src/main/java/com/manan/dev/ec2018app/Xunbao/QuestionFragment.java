@@ -158,7 +158,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
                             contestEnd.setVisibility(View.VISIBLE);
                         } else if (xstatus == 1) {
-                            if (!currFbid.equals("notLoggedIn")) {
+                            if (AccessToken.getCurrentAccessToken() != null) {
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                             }
@@ -245,6 +245,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         currFbid = fbId;
         Log.d("xunbao", currFbid);
         checkStatus();
-        getQuestion();
+        if (!currFbid.equals("notLoggedIn"))
+            getQuestion();
     }
 }

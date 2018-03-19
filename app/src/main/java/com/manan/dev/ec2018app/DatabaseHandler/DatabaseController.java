@@ -108,6 +108,7 @@ public class DatabaseController extends SQLiteOpenHelper {
             readCursor.moveToNext();
         }
         readCursor.close();
+        db.close();
         return eventList;
     }
     public ArrayList<QRTicketModel> retrieveAllTickets() {
@@ -126,6 +127,7 @@ public class DatabaseController extends SQLiteOpenHelper {
             readCursor.moveToNext();
         }
         readCursor.close();
+        db.close();
         return qrTickets;
     }
 
@@ -145,6 +147,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         readCursor.moveToFirst();
         ev = retrieveEvents(readCursor);
         readCursor.close();
+        db.close();
         return ev;
     }
     public QRTicketModel retrieveTicketsByID(String EventId){
@@ -174,10 +177,13 @@ public class DatabaseController extends SQLiteOpenHelper {
             readCursor.moveToFirst();
             String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID_COLUMN_NAME));
             readCursor.close();
+            db.close();
             return eventId;
         }
-        else
+        else {
+            db.close();
             return "wrong";
+        }
     }
     public QRTicketModel retrieveTickets(Cursor readCursor) {
         String eventId = readCursor.getString(readCursor.getColumnIndexOrThrow(Schema.DbEntry.EVENT_ID));
@@ -266,7 +272,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         values.put(Schema.DbEntry.PAYMENT_STATUS, model.getPaymentStatus());
         values.put(Schema.DbEntry.ARRIVAL_STATUS,model.getArrivalStatus());
         db.update(Schema.DbEntry.QR_TICKET_TABLE_NAME , values ,Schema.DbEntry.EVENT_ID + "=?",new String[]{model.getEventID()} );
-
+        db.close();
     }
     public int getCount() {
         int i = 0;
@@ -284,6 +290,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         Cursor cursor = db.query(Schema.DbEntry.QR_TICKET_TABLE_NAME, projection, null, null, null, null, null);
         i = cursor.getCount();
         cursor.close();
+        db.close();
         return i;
     }
 
@@ -296,6 +303,7 @@ public class DatabaseController extends SQLiteOpenHelper {
             return false;
         }
         cs.close();
+        db.close();
         return true;
     }
 
@@ -309,6 +317,7 @@ public class DatabaseController extends SQLiteOpenHelper {
             return false;
         }
         cs.close();
+        db.close();
         Log.v("checkIfValueExists","Found");
         return true;
     }
@@ -321,6 +330,7 @@ public class DatabaseController extends SQLiteOpenHelper {
             return false;
         }
         cs.close();
+        db.close();
         return true;
     }
 }

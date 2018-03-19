@@ -68,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             public void onClick(View view) {
                 Boolean checker = validateCredentials();
                 if (checker) {
+                    mProgress.show();
                     userDetails.setEmail(userEmail.getText().toString());
                     userDetails.setmName(userName.getText().toString());
                     userDetails.setmCollege(userCollege.getText().toString());
@@ -99,10 +100,10 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         bundle.putString("phone",userDetails.getmPhone());
         otpChecker.setArguments(bundle);
         otpChecker.show(fm, "otpCheckerFragment");
+        mProgress.hide();
     }
 
     private void registerUser(final UserDetails userDetails) {
-        mProgress.show();
         String url = getResources().getString(R.string.register_user_api);
         Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -110,9 +111,10 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             @Override
             public void onResponse(String response) {
 
+
                 Toast.makeText(getApplicationContext(), "registered", Toast.LENGTH_SHORT).show();
                 Log.i("My success", "" + response);
-                mProgress.dismiss();
+                mProgress.hide();
                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
                 editor.putString("Phone", userDetails.getmPhone());
                 editor.apply();
@@ -131,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
 
                 Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
                 Log.i("My error", "" + error);
-                mProgress.dismiss();
+                mProgress.hide();
             }
         }) {
             @Override
@@ -195,13 +197,17 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     @Override
     public void updateResult(boolean status) {
         if (status) {
+            mProgress.show();
             registerUser(userDetails);
+        } else {
+            mProgress.hide();
         }
     }
 
     @Override
     public void fbStatus(Boolean status, String userId) {
         if (status) {
+            mProgress.show();
             userDetails.setmFbId(userId);
             registerUser(userDetails);
         } else {
@@ -211,9 +217,11 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
 
     private void startSession() {
         if(parent.equals("xunbao") || parent.equals("ct")){
+            mProgress.hide();
             finish();
         } else {
             startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
+            mProgress.hide();
             finish();
         }
     }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,31 +37,30 @@ import java.util.Locale;
 
 
 public class QRCodeActivity extends DialogFragment {
-    TextView eventName,eventDate,eventTime, fees, status;
-    ImageView qrTicketImage ;
+    TextView eventName, eventDate, eventTime, fees, status;
+    ImageView qrTicketImage;
     private String eventId;
     private EventDetails eventDetails;
     private DatabaseController getEventDetails;
     private int activity, paymentStatus, arrivalStatus;
 
-    public QRCodeActivity(){
-        
+    public QRCodeActivity() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.qrcode_dialog_box, container, false);
-
         String qrcodestring = getArguments().getString("qrcodestring");
         eventId = getArguments().getString("eventid");
         activity = getArguments().getInt("activity");
         paymentStatus = getArguments().getInt("paymentStatus");
         arrivalStatus = getArguments().getInt("arrivalStatus");
 
-        qrTicketImage = (ImageView)rootView.findViewById(R.id.qr_ticket);
-        eventName = (TextView)rootView.findViewById(R.id.tv_event_name);
-        eventDate = (TextView)rootView.findViewById(R.id.tv_event_date);
-        eventTime = (TextView)rootView.findViewById(R.id.tv_event_time);
+        qrTicketImage = (ImageView) rootView.findViewById(R.id.qr_ticket);
+        eventName = (TextView) rootView.findViewById(R.id.tv_event_name);
+        eventDate = (TextView) rootView.findViewById(R.id.tv_event_date);
+        eventTime = (TextView) rootView.findViewById(R.id.tv_event_time);
         fees = (TextView) rootView.findViewById(R.id.eventfees);
         status = (TextView) rootView.findViewById(R.id.eventfeestatus);
         getEventDetails = new DatabaseController(getActivity());
@@ -82,17 +82,31 @@ public class QRCodeActivity extends DialogFragment {
         status.setText(String.valueOf(paymentStatus));
 
         TicketsGenerator ticketsGenerator = new TicketsGenerator();
-        Bitmap qrTicket = ticketsGenerator.GenerateClick( qrcodestring, getActivity(), (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty));
+        Bitmap qrTicket = ticketsGenerator.GenerateClick(qrcodestring, getActivity(), (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty), 120, 120);
         qrTicketImage.setImageBitmap(qrTicket);
         return rootView;
     }
 
     @Override
     public void onDestroyView() {
-        if(activity == 1) {
+        if (activity == 1) {
             getActivity().finish();
         }
         super.onDestroyView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().setCancelable(true);
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+
+        // request a window without the title
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
 }

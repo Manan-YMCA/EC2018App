@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     Button loginMobileNum;
     private TextView registerView;
     private UserDetails userDetails;
-    private ProgressDialog mProgress;
     private RelativeLayout RelativeView;
     String parent;
     private ArrayList<QRTicketModel> userTickets;
@@ -94,10 +93,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         });
 
 
-        mProgress = new ProgressDialog(this);
-        mProgress.setMessage("I am working");
-        mProgress.setTitle("yes i am");
-        mProgress.setCanceledOnTouchOutside(false);
         loginMobileNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,16 +196,18 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
             userDetails.setmFbId(userId);
             registerUser(userDetails);
         } else {
-            pbLogin.setVisibility(View.GONE);
+            pbLogin.setVisibility(View.VISIBLE);
             startSession();
         }
     }
 
     private void startSession() {
         if(parent.equals("xunbao") || parent.equals("ct")){
+            pbLogin.setVisibility(View.GONE);
             finish();
         } else {
             startActivity(new Intent(LoginActivity.this, ContentActivity.class));
+            pbLogin.setVisibility(View.GONE);
             finish();
         }
     }
@@ -256,7 +253,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     }
 
     private void registerUser(final UserDetails userDetails) {
-        mProgress.show();
+
         String url = getResources().getString(R.string.register_user_api);
         Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -273,7 +270,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
                 Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
                 Log.i("My error", "" + error);
-                mProgress.dismiss();
             }
         }) {
             @Override

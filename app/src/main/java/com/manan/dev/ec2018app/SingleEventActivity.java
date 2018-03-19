@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app;
 
 import android.Manifest;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -62,13 +63,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private QRTicketModel TicketModel;
     //    private ArrayList<Long> coordsPhoneList;
     private String eventId;
-    private ProgressBar barEventImage;
+    private ProgressBar barEventImage, barViewTicket;
     private DatabaseController databaseController;
     private boolean checkloadedvar = false;
     private Drawable default_image;
     private RelativeLayout container_se_view;
     private boolean NO_DEEP_LINK_FLAG = true;
     private Intent phoneIntent;
+    private QRCodeActivity fragobj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,9 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         eventDetails = new EventDetails();
 
         registerButton = (Button) findViewById(R.id.btn_register);
+        barViewTicket = (ProgressBar) findViewById(R.id.pb_view_ticket);
+        barViewTicket.setVisibility(View.GONE);
+        fragobj = new QRCodeActivity();
 
         barEventImage = (ProgressBar) findViewById(R.id.pb_event_image);
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
@@ -272,21 +277,18 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             registerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    barViewTicket.setVisibility(View.VISIBLE);
                     if (registerButton.getText().toString().equals("View Ticket")) {
-                        displayTickets(eventId);
                         FragmentManager fm = getFragmentManager();
                         Bundle bundle = new Bundle();
-                        Log.d("yatin", TicketModel.getQRcode() + " " + eventId);
                         bundle.putString("qrcodestring", TicketModel.getQRcode());
                         bundle.putString("eventid", eventId);
                         bundle.putInt("activity", 0);
                         bundle.putInt("paymentStatus", TicketModel.getPaymentStatus());
                         bundle.putInt("arrivalStatus", TicketModel.getArrivalStatus());
 
-                        QRCodeActivity fragobj = new QRCodeActivity();
                         fragobj.setArguments(bundle);
                         fragobj.show(fm, "hiiiii");
-                        // fragobj.show(fm, "drff");
                     } else {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                                 .putExtra("eventName", eventDetails.getmName())
@@ -420,6 +422,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         phoneNumber = prefs.getString("Phone", null);
         if (databaseController.checkIfValueExists1(eventId)) {
             registerButton.setText("View Ticket");
+            displayTickets(eventId);
         }
     }
 

@@ -17,6 +17,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.manan.dev.ec2018app.R;
+import com.squareup.okhttp.internal.Platform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class TicketsGenerator {
     private Context context;
     private Bitmap userTicket;
 
-    public Bitmap GenerateClick(String qrCodeData, Context mContext,int width , int height) {
+    public Bitmap GenerateClick(String qrCodeData, Context mContext,int width , int height, int logoWidth, int logoHeight) {
         context = mContext;
         try {
 
@@ -40,7 +41,7 @@ public class TicketsGenerator {
             String charset = "UTF-8";
             Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-            userTicket =  CreateQRCode(qrCodeData, charset, hintMap, smallestDimension, smallestDimension);
+            userTicket =  CreateQRCode(qrCodeData, charset, hintMap, smallestDimension, smallestDimension, logoWidth, logoHeight);
 
         } catch (Exception ex) {
             Log.e("Tickets", ex.getMessage());
@@ -48,7 +49,7 @@ public class TicketsGenerator {
         return userTicket;
     }
 
-    private Bitmap CreateQRCode(String qrCodeData, String charset, Map hintMap, int qrCodeheight, int qrCodewidth) {
+    private Bitmap CreateQRCode(String qrCodeData, String charset, Map hintMap, int qrCodeheight, int qrCodewidth, int logoWidth, int logoHeight) {
 
 
         try {
@@ -75,7 +76,7 @@ public class TicketsGenerator {
             //setting bitmap to image view
 
             Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.qr_logo);
-            Bitmap overlay = Bitmap.createScaledBitmap(b, 80, 80, false);
+            Bitmap overlay = Bitmap.createScaledBitmap(b, logoWidth, logoHeight, false);
             return mergeBitmaps(overlay, bitmap);
 
         } catch (Exception er) {

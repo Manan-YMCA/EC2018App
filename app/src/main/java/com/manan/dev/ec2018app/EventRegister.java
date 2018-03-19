@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +68,7 @@ public class EventRegister extends AppCompatActivity {
     private QRTicketModel TicketModel;
     private String qrCodeString;
     private DatabaseController databaseController;
+    private ProgressBar barLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,9 @@ public class EventRegister extends AppCompatActivity {
         eventId = getIntent().getStringExtra("eventId");
         eventType = getIntent().getStringExtra("eventType");
         userDetails = new UserDetails();
+
+        barLoader = (ProgressBar) findViewById(R.id.pb_register);
+        barLoader.setVisibility(View.VISIBLE);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -214,6 +219,7 @@ public class EventRegister extends AppCompatActivity {
                     bundle.putString("eventid", eventId);
 // set Fragmentclass Arguments
                     QRCodeActivity fragobj = new QRCodeActivity();
+                    fragobj.setCancelable(true);
                     fragobj.setArguments(bundle);
                     fragobj.show(fm, "drff");
                     SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
@@ -324,6 +330,7 @@ public class EventRegister extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            barLoader.setVisibility(View.GONE);
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
                             Toast.makeText(EventRegister.this, obj.getString("name"), Toast.LENGTH_LONG).show();
