@@ -10,44 +10,36 @@ public class postsModel {
 
 
     public String title;
-    public String photoid;
+    public String photoURL;
     public String clubName;
     public String postid;
-    public boolean approval;
-    public int likes;
     public long time;
-    public ArrayList<Comment> comments;
-    public ArrayList<likesModel> likefids;
 
     public postsModel() {
+
     }
 
-    public postsModel(String title, String photoid, String clubName, String postid, boolean approval, int likes, long time, ArrayList<Comment> comments, ArrayList<likesModel> likefids) {
+    public postsModel(String title, String photoURL, String clubName, String postid,long time) {
         this.title = title;
-        this.photoid = photoid;
+        this.photoURL = photoURL;
         this.clubName = clubName;
         this.postid = postid;
-        this.approval = approval;
-        this.likes = likes;
         this.time = time;
-        this.comments = comments;
-        this.likefids = likefids;
     }
 
-    public String getTitle() {
+    public String gettitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void settitle(String title) {
         this.title = title;
-        this.photoid = photoid;
     }
 
-    public String getClubName() {
+    public String getclubName() {
         return clubName;
     }
 
-    public void setClubName(String clubName) {
+    public void setclubName(String clubName) {
         this.clubName = clubName;
     }
 
@@ -59,54 +51,20 @@ public class postsModel {
         this.postid = postid;
     }
 
-    public boolean isApproval() {
-        return approval;
-    }
-
-    public void setApproval(boolean approval) {
-        this.approval = approval;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public long getTime() {
+    public long gettime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void settime(long time) {
         this.time = time;
     }
 
-    public ArrayList<Comment> getComments() {
-        return comments;
+    public String getphotoid() {
+        return photoURL;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public ArrayList<likesModel> getLikefids() {
-        return likefids;
-    }
-
-    public void setLikefids(ArrayList<likesModel> likefids) {
-        this.likefids = likefids;
-    }
-
-
-
-    public String getPhotoid() {
-        return photoid;
-    }
-
-    public void setPhotoid(String photoid) {
-        this.photoid = photoid;
+    public void setphotoid(String photoid) {
+        this.photoURL= photoid;
     }
 
 }

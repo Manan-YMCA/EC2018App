@@ -14,6 +14,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
 
     private EditText userName, userEmail, userPhone, userCollege;
-    private RelativeLayout view;
+    private FrameLayout view;
     private ProgressDialog mProgress;
     private TextView LoginText;
     private UserDetails userDetails;
@@ -53,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         userEmail = (EditText) findViewById(R.id.et_reg_email);
         userCollege = (EditText) findViewById(R.id.et_reg_clg);
         userPhone = (EditText) findViewById(R.id.et_reg_mob);
-        view = (RelativeLayout) findViewById(R.id.rl_main_view);
+        view = (FrameLayout) findViewById(R.id.rl_main_view);
         LoginText = (TextView) this.findViewById(R.id.tv_log_in);
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Registering You");

@@ -23,11 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.manan.dev.ec2018app.Adapters.CTAdapter;
-import com.manan.dev.ec2018app.Models.Comment;
-import com.manan.dev.ec2018app.Models.likesModel;
 import com.manan.dev.ec2018app.Models.postsModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CulmycaTimesActivity extends AppCompatActivity {
@@ -42,24 +42,25 @@ public class CulmycaTimesActivity extends AppCompatActivity {
     private CTAdapter mAdapter;
     SwipeRefreshLayout s;
 
-    public static AlertDialog.Builder builder;
     public static AlertDialog dialog;
-    private LinearLayout cotainer_root_frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_culmyca_times);
+
         allposts=new ArrayList<postsModel>();
+
         recyclerView=findViewById(R.id.ctc_recycler_view);
+
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Loading!");
         progressBar.setCanceledOnTouchOutside(false);
         progressBar.show();
+
         postReference = FirebaseDatabase.getInstance().getReference("posts");
 
         s=findViewById(R.id.swipe_refresh_layout);
-
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                                    @Override
                                    public void onRefresh() {
@@ -67,88 +68,7 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                                    }
                                });
 
-            builder = new AlertDialog.Builder(this);
-        builder.setTitle("Login Required!");
-        builder.setMessage("To like or share, you must login with facebook");
-        builder.setPositiveButton("Continue", new Dialog.OnClickListener(){
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
-                final String phoneNumber = preferences.getString("Phone", null);
-                if (phoneNumber == null) {
-                    finish();
-                    Intent in=new Intent(CulmycaTimesActivity.this, LoginActivity.class);
-                    in.putExtra("parent","ct");
-                    startActivity(in);
-                }
-                else{
-                    /*FragmentManager fm = getFragmentManager();
-                    FragmentFbLogin fbLogin = new FragmentFbLogin();
-                    fbLogin.show(fm, "fbLoginFragment");*/
-                    finish();
-                    Intent in=new Intent(CulmycaTimesActivity.this, ProfileActivity.class);
-                    in.putExtra("parent","ct");
-                    startActivity(in);
-                }
-            }
-        });
-        builder.setNegativeButton("Cancel", new Dialog.OnClickListener(){
-
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        dialog = builder.create();
-
-
-
-        postReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                allposts=new ArrayList<postsModel>();
-                for(DataSnapshot club:dataSnapshot.getChildren()){
-                    String clubName=club.getKey();
-                    for(DataSnapshot posts:club.getChildren()){
-                        Log.d("posts", posts.toString());
-
-                        postsModel post=posts.getValue(postsModel.class);
-                        post.clubName=clubName;
-                        post.postid=posts.getKey();
-                        ArrayList<Comment> allcomments=new ArrayList<Comment>();
-                        for(DataSnapshot comments: posts.child("comments").getChildren()) {
-                            Comment comment = comments.getValue(Comment.class);
-                            allcomments.add(comment);
-                        }
-
-                        post.comments=allcomments;
-
-                        ArrayList<likesModel> alllikes=new ArrayList<likesModel>();
-                        for(DataSnapshot mlikes: posts.child("likefids").getChildren()) {
-                            likesModel l = mlikes.getValue(likesModel.class);
-                            alllikes.add(l);
-                        }
-
-                        post.likefids=alllikes;
-                        allposts.add(post);
-                    }
-                }
-                mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                recyclerView.setLayoutManager(mLayoutManager);
-                mAdapter = new CTAdapter(getApplicationContext(), allposts);
-                recyclerView.setAdapter(mAdapter);
-                progressBar.dismiss();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        reload();
     }
 
     @Override
@@ -160,7 +80,6 @@ public class CulmycaTimesActivity extends AppCompatActivity {
     }
     public void reload(){
 
-        postReference = FirebaseDatabase.getInstance().getReference("posts");
         postReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -168,40 +87,30 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                 for(DataSnapshot club:dataSnapshot.getChildren()){
                     String clubName=club.getKey();
                     for(DataSnapshot posts:club.getChildren()){
-
+                        Log.d("posts", posts.toString());
                         postsModel post=posts.getValue(postsModel.class);
-                        post.clubName=clubName;
                         post.postid=posts.getKey();
-                        ArrayList<Comment> allcomments=new ArrayList<Comment>();
-                        for(DataSnapshot comments: posts.child("comments").getChildren()) {
-                            Comment comment = comments.getValue(Comment.class);
-                            allcomments.add(comment);
-                        }
-
-                        post.comments=allcomments;
-
-                        ArrayList<likesModel> alllikes=new ArrayList<likesModel>();
-                        for(DataSnapshot mlikes: posts.child("likefids").getChildren()) {
-                            likesModel l = mlikes.getValue(likesModel.class);
-                            alllikes.add(l);
-                        }
-
-                        post.likefids=alllikes;
                         allposts.add(post);
                     }
                 }
+                Collections.sort(allposts,new Comparator<postsModel>(){
+                    @Override
+                    public int compare(postsModel t1, postsModel t2) {
+                        long cmp= t1.time-t2.time;
+                        return (int)cmp;
+                    }
+                });
                 mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(mLayoutManager);
                 mAdapter = new CTAdapter(getApplicationContext(), allposts);
                 recyclerView.setAdapter(mAdapter);
-                s.setRefreshing(false);
                 progressBar.dismiss();
-
+                s.setRefreshing(false);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                s.setRefreshing(false);
             }
         });
 

@@ -186,8 +186,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         JSONObject params = new JSONObject();
         try {
             params.put("email", currFbid);
-            params.put("skey", "abbv");
-            params.put("name", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName());
+            if(AccessToken.getCurrentAccessToken()!=null) {
+                params.put("skey", "abbv");
+                params.put("name", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
