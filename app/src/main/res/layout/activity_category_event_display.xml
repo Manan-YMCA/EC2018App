@@ -10,17 +10,18 @@
 
     <ImageView
         android:id="@+id/iv_back_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/vector_arrow" />
 
     <ImageView
         android:id="@+id/ec_logo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/iv_back_button"
         android:layout_toRightOf="@+id/iv_back_button"
         android:src="@drawable/logo_black" />

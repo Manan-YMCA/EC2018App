@@ -30,8 +30,8 @@
         />
 
     <ImageView
-        android:layout_width="280dp"
-        android:layout_height="340dp"
+        android:layout_width="220dp"
+        android:layout_height="280dp"
 
        android:layout_alignParentRight="true"
 
@@ -41,21 +41,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_above="@+id/imageView3"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="148dp"
-       android:layout_marginTop="280dp"
-        android:textSize="12dp"
         android:fontFamily="@font/futura"
+        android:layout_margin="20dp"
         android:text="@string/aboutEc"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="12dp" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
 
         android:src="@drawable/about_culm"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:id="@+id/imageView3" />
 
 
 </RelativeLayout>

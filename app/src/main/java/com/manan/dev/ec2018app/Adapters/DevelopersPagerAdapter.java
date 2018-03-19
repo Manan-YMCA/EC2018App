@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.manan.dev.ec2018app.Fragments.CreativeFragment;
 import com.manan.dev.ec2018app.Fragments.DesignFragment;
 import com.manan.dev.ec2018app.Fragments.DevelopesFragment_1;
-import com.manan.dev.ec2018app.Fragments.OperationalFragment;
 
 /**
  * Created by subham on 13/03/18.
@@ -15,7 +14,7 @@ import com.manan.dev.ec2018app.Fragments.OperationalFragment;
 
 
     public class DevelopersPagerAdapter extends FragmentStatePagerAdapter {
-        private static final int TOTAL_PAGES = 4;
+        private static final int TOTAL_PAGES = 3;
 
         public DevelopersPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -30,8 +29,7 @@ import com.manan.dev.ec2018app.Fragments.OperationalFragment;
                     return new DesignFragment();
                 case 2:
                     return new CreativeFragment();
-                case 3:
-                    return new OperationalFragment();
+
 
                 default:
                     break;

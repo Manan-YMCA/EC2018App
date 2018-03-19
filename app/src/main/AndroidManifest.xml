@@ -107,7 +107,7 @@
             android:label="Sponsors"
             android:parentActivityName=".ContentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont1" />
+            android:theme="@style/CodeFont" />
 
         <activity
             android:name=".LoginActivity"
