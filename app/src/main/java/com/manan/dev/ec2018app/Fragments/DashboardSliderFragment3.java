@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.manan.dev.ec2018app.BrixxActivity;
@@ -32,10 +33,10 @@ public class DashboardSliderFragment3 extends Fragment {
       singleItem.setClubName("Brixx");
       singleItem.setDisplayName("Non-Formal");
       singleItem.setImage(icon);
-
+ Button expre=rootView.findViewById(R.id.buuton_explore_brixx);
         circleLinearLayout = rootView.findViewById(R.id.dsb_tap);
 
-        circleLinearLayout.setOnClickListener(new View.OnClickListener() {
+        expre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();

@@ -32,18 +32,22 @@
         android:textSize="32dp" />
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/arrow_"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:rotation="180"
+        android:tint="@color/White"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/vector_arrow"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:id="@+id/next"/>
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/arrow_"
-        android:rotation="180"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/vector_arrow"
+        android:tint="@color/White"
+       android:layout_marginLeft="10dp"
         android:layout_alignParentBottom="true"
        android:layout_alignParentLeft="true"
         android:id="@+id/pre"/>

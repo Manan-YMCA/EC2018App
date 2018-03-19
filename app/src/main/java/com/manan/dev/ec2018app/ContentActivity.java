@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,7 +80,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private String phoneNumber;
-    private LinearLayout cotainer_root_frame;
+    private RelativeLayout cotainer_root_frame;
     private SharedPreferences prefs;
     private ArrayList<QRTicketModel> userTickets;
     private DatabaseController databaseController;
@@ -90,7 +91,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
-        cotainer_root_frame = (LinearLayout) findViewById(R.id.content_frame);
+        cotainer_root_frame = (RelativeLayout) findViewById(R.id.content_frame);
 
         try {
             Log.d("auth", FirebaseAuth.getInstance().getUid());
@@ -500,8 +501,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private void checkCount(final String phone){
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-//        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
-        Log.e("Content Activity URL: " , "checkCount: " + url );
+        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -600,6 +600,10 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }
             }
         }
+    }
+    public float getPageWidth (int position)
+    {
+        return (float) 0.8;
     }
 
 }

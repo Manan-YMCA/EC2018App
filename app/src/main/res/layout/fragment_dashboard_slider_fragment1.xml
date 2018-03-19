@@ -1,23 +1,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment1">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="match_parent"
+
         android:background="#000">
 
         <LinearLayout
             android:layout_width="280dp"
-            android:layout_height="280dp"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/vector_circle"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -29,7 +28,7 @@
                 android:gravity="center"
                 android:text="Welcome!"
                 android:textColor="@color/White"
-                android:textSize="30dp" />
+                android:textSize="36dp" />
 
             <TextView
                 android:id="@+id/content_whatnew"
@@ -45,6 +44,21 @@
                 android:text="You can view the event bookmark them view single events, dynaically open events and lots more \nthings "
                 android:textColor="@color/White"
                 android:textSize="18dp" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp"
+    android:id="@+id/buuton_explore"
+
+    android:paddingBottom="10dp"
+    android:text=" Explore"
+    android:background="@drawable/edit_text_white"
+    android:drawableLeft="@drawable/vector_arrow"
+    android:fontFamily="@font/futura"/>
 
         </LinearLayout>
     </RelativeLayout>

@@ -1,23 +1,23 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment2">
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="match_parent"
+
         android:background="#000">
         <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="280dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:gravity="center"
             android:orientation="vertical"
-            android:background="@drawable/vector_circle" >
+         >
            <ImageView
                android:layout_width="100dp"
                android:layout_height="100dp"

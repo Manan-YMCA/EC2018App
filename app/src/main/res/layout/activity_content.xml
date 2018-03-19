@@ -1,69 +1,33 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
+    android:id="@+id/content_frame"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/slliderview_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp" />
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
 
-                <ImageView
-                    android:id="@+id/ddss"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/topleftbasic_vector" />
+                    />
 
-                <ImageView
-                    android:id="@+id/drawerTogglebtn"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/vector_menu" />
-
-                <ImageView
-                    android:id="@+id/ds"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/logo_300" />
-
-                <RelativeLayout
-                    android:id="@+id/rl_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="350dp" />
 
                 <LinearLayout
                     android:id="@+id/layoutDots"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_below="@id/rl_pager"
+
                     android:layout_centerInParent="true"
                     android:layout_marginBottom="15dp"
                     android:gravity="center"
@@ -71,8 +35,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/layoutDots"
+                    android:layout_height="0dp"
+                   android:layout_weight="0.4"
                     android:orientation="vertical">
 
 
@@ -97,10 +61,7 @@
                         android:layout_alignParentRight="true"
                         android:background="@color/baseLight" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/category_recycler_view"
@@ -110,7 +71,7 @@
                             android:layout_centerVertical="true"
                             android:foregroundGravity="center_vertical"
                             android:scrollbars="none" />
-                    </RelativeLayout>
+
 
                     <View
                         android:id="@+id/categories_underline_view"
@@ -127,7 +88,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:fontFamily="@font/futura"
-                        android:gravity="right"
+                        android:gravity="right|bottom"
+
                         android:paddingBottom="5dp"
                         android:paddingRight="5dp"
                         android:paddingTop="5dp"
@@ -135,7 +97,31 @@
                         android:textColor="@color/White"
                         android:textSize="16dp" />
                 </LinearLayout>
-            </RelativeLayout>
-        </RelativeLayout>
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+            </LinearLayout>
+    <ImageView
+        android:id="@+id/drawerTogglebtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/vector_menu" />
+
+
+
+    <ImageView
+        android:id="@+id/ddss"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/topleftbasic_vector" />
+    <ImageView
+        android:id="@+id/ds"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/logo_300" />
+
+</RelativeLayout>

@@ -1,10 +1,8 @@
 package com.manan.dev.ec2018app.Adapters;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.manan.dev.ec2018app.Fragments.DashboardSliderFragment1;
 import com.manan.dev.ec2018app.Fragments.DashboardSliderFragment2;
@@ -41,6 +39,7 @@ public class DashboardSlideAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return TOTAL_PAGES;
     }
+
 
 }
 

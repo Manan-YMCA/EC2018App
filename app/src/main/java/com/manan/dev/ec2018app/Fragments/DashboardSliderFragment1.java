@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -16,9 +18,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.manan.dev.ec2018app.Models.WhatsNewModel;
 import com.manan.dev.ec2018app.NavMenuViews.CulmycaTimesActivity;
 import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
-import com.manan.dev.ec2018app.Models.WhatsNewModel;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
@@ -38,6 +40,7 @@ public class DashboardSliderFragment1 extends Fragment {
     private Runnable update;
     private Timer timer;
     private int i;
+    private Button explore;
     private boolean mIsRunning;
     private TimerTask mStatusChecker;
 
@@ -55,7 +58,7 @@ public class DashboardSliderFragment1 extends Fragment {
         whatsnewarraylist = new ArrayList<>();
         whatsnewarraylist.add(new WhatsNewModel("Explore the new Culmyca'18 App! Various cool features are added and don't forget to register yourself first!", 7, "j"));
         contenttv = rootView.findViewById(R.id.content_whatnew);
-
+        explore =rootView.findViewById(R.id.buuton_explore);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("whatsnew");
         int t1 = whatsnewarraylist.size();
         Log.e("value", String.valueOf(t1));
@@ -150,7 +153,7 @@ public class DashboardSliderFragment1 extends Fragment {
                  //          timer.cancel();
                  //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
-                 contenttv.setOnClickListener(new View.OnClickListener() {
+                 explore.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View v) {
                          if(contenttv.getTag().equals(0)){
@@ -161,6 +164,12 @@ public class DashboardSliderFragment1 extends Fragment {
                          } else if(contenttv.getTag().equals(2)){
                              startActivity(new Intent(getActivity(), MapsActivity.class));
                          }
+                         else if(contenttv.getTag().equals(7))
+                         {
+                             Toast.makeText(getActivity(),"Pull the Navigation Drawer",Toast.LENGTH_SHORT).show();
+                         }
+
+
                      }
                  });//
                  // this function can change value of mInterval.
@@ -169,7 +178,7 @@ public class DashboardSliderFragment1 extends Fragment {
                      i = 0;
                  }
 
-                 handler.postDelayed(update, 7000);
+                 handler.postDelayed(update, 4000);
              }
 
 //             void startRepeatingTask() {
