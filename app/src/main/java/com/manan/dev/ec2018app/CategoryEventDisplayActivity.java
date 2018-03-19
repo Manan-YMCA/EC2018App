@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.EventDetails;
@@ -48,7 +47,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         clubName = getIntent().getStringExtra("clubname");
         databaseController = new DatabaseController(getApplicationContext());
         eventList = databaseController.retreiveCategory(clubName);
-        Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
 
         byte[] byteArray = getIntent().getByteArrayExtra("clubPhoto");
         Bitmap clubphoto = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -78,6 +77,61 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 //            }
 //        });
 //        myDialog.show();
+
+        if(clubName.equals("Manan")){
+            clubDescpTextView.setText("Manananananan");
+        }
+        else if(clubName.equals("Ananya")){
+            clubDescpTextView.setText("We can break the world into words.");
+        }
+
+        else if(clubName.equals("Vividha")){
+            clubDescpTextView.setText("Vividhaaaaaaaaaaaaaaaaaaaaa");
+        }
+
+        else if(clubName.equals("Jhalak")){
+            clubDescpTextView.setText("The word “photography” is derived from the Greek words photos (light) and graphé (representation by means of lines). It literally means “drawing with light”!");
+        }
+
+        else if(clubName.equals("Eklavya")){
+            clubDescpTextView.setText("If u can't have fun there is no sense of doing it. So, Ask yourself, 'Am I having fun?'");
+        }
+
+        else if(clubName.equals("IEEE")){
+            clubDescpTextView.setText("People who are crazy enough enough to think they can change the world are the ones who do.");
+        }
+
+        else if(clubName.equals("Mechnext")){
+            clubDescpTextView.setText("Blood, Sweat and Tears? Nah! Blood, Swear and Gears. ;)");
+        }
+
+        else if(clubName.equals("Microbird")){
+            clubDescpTextView.setText("Oh, come on! You are going to compile codes for some MNC all your life anyway. Try hands-on these robotic beasts this year!");
+        }
+
+        else if(clubName.equals("Nataraja")){
+            clubDescpTextView.setText("नृत्य के लिए समय निकालें ।");
+        }
+
+        else if(clubName.equals("SAE/BAJA")){
+            clubDescpTextView.setText("We create! We destroy! But when we screw, even metals would cry.");
+        }
+
+        else if(clubName.equals("Samarpan")){
+            clubDescpTextView.setText("The different merited people who gets together and extends the technical bond to family bond.");
+        }
+
+        else if(clubName.equals("Srijan")){
+            clubDescpTextView.setText("People here play with colours and experiment with varied forms of  art to embrace the hidden artistic element in every sphere of life as what are days with no colours  .It innovatively makes every dead wall to speak the language of colours and weave it's own story.");
+        }
+
+        else if(clubName.equals("Taranuum")){
+            clubDescpTextView.setText("Tarannum originated in India meaning 'melody' and justifying the name we give melody to the words; calling it music.");
+        }
+
+        else if(clubName.equals("Vivekanand Manch")){
+            clubDescpTextView.setText("Inspired by Swami Vivekanand this is the category where cultural and fun activities fuse with social values. Witness the Social Bonanza.");
+        }
 
         myRecyclerView = (RecyclerView) findViewById(R.id.events_list);
         myRecyclerView.setHasFixedSize(true);

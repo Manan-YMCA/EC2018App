@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.manan.dev.ec2018app.Adapters.DevelopersPagerAdapter;
+import com.manan.dev.ec2018app.R;
 
 public class DevelopersActivity extends AppCompatActivity {
 

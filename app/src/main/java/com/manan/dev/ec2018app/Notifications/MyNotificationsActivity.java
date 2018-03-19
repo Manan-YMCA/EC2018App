@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Notifications;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +29,9 @@ public class MyNotificationsActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     String TAG = "Errorrrrrrrr!";
     ImageView backButton;
+    ProgressDialog pd;
+    ProgressDialog progress;
+    TextView noNotifyTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,21 @@ public class MyNotificationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_notifications);
 
         backButton = findViewById(R.id.iv_back_button);
+        noNotifyTV = findViewById(R.id.tv_no_notify);
+        noNotifyTV.setVisibility(View.GONE);
+
+        progress = new ProgressDialog(MyNotificationsActivity.this);
+        progress.setTitle("Loading Notifications...");
+        progress.setCancelable(false);
+        progress.show();
+//        Runnable progressRunnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                progress.cancel();
+//            }
+//        };
+//        Handler pdCanceller = new Handler();
+//        pdCanceller.postDelayed(progressRunnable, 10000);
 
         notifyRecyclerView = findViewById(R.id.rv_notifications);
         allNotificationsArrayList = new ArrayList<>();
@@ -57,6 +77,12 @@ public class MyNotificationsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        if (allNotificationsArrayList.size() == 0) {
+            progress.dismiss();
+//            Toast.makeText(this, "No Notifications!", Toast.LENGTH_SHORT).show();
+            noNotifyTV.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -115,7 +141,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Log.e("The read failed: ", databaseError.getDetails() );
+                    Log.e("The read failed: ", databaseError.getDetails());
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
@@ -123,8 +149,14 @@ public class MyNotificationsActivity extends AppCompatActivity {
     }
 
     private void updateList(NotificationModel nm) {
-        Log.e(TAG, "updateList: " + allNotificationsArrayList.size() );
+        Log.e(TAG, "updateList: " + allNotificationsArrayList.size());
         allNotificationsArrayList.add(nm);
+
+        if (allNotificationsArrayList.size() > 0) {
+            progress.dismiss();
+//            Toast.makeText(this, "There is something!", Toast.LENGTH_SHORT).show();
+            noNotifyTV.setVisibility(View.GONE);
+        }
         myNotificationsAdapter.notifyDataSetChanged();
     }
 }

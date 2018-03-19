@@ -1,13 +1,10 @@
 package com.manan.dev.ec2018app.Models;
 
-import java.util.ArrayList;
-
 /**
  * Created by KASHISH on 10-03-2018.
  */
 
 public class postsModel {
-
 
     public String title;
     public String photoURL;

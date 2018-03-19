@@ -1,10 +1,11 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.manan.dev.ec2018app.Adapters.AboutAdapter;
+import com.manan.dev.ec2018app.R;
 
 public class AboutActivity extends AppCompatActivity {
 

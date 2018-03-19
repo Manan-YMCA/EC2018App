@@ -50,11 +50,16 @@ import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
-import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
+import com.manan.dev.ec2018app.NavMenuViews.AboutActivity;
+import com.manan.dev.ec2018app.NavMenuViews.CulmycaTimesActivity;
+import com.manan.dev.ec2018app.NavMenuViews.DevelopersActivity;
+import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
+import com.manan.dev.ec2018app.NavMenuViews.ProfileActivity;
+import com.manan.dev.ec2018app.NavMenuViews.SponsorsActivity;
 import com.manan.dev.ec2018app.Notifications.MyNotificationsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
-import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
 import org.json.JSONArray;
@@ -495,7 +500,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private void checkCount(final String phone){
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("Content Activity URL: " , "checkCount: " + url );
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

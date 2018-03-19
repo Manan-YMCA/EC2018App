@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.manan.dev.ec2018app">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:name=".Utilities.MyApplication"
@@ -79,7 +80,7 @@
             android:theme="@style/xunbao_main_theme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".DevelopersActivity"
+            android:name=".NavMenuViews.DevelopersActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
 
@@ -88,12 +89,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".NavMenuViews.MapsActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".NavMenuViews.ProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
         <activity
@@ -111,7 +112,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SponsorsActivity"
+            android:name=".NavMenuViews.SponsorsActivity"
             android:label="Sponsors"
             android:parentActivityName=".ContentActivity"
             android:screenOrientation="portrait"
@@ -120,12 +121,8 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/CodeFont">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".EventRegister"
@@ -135,29 +132,27 @@
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Tickets"
             android:screenOrientation="portrait"
             android:theme="@style/CodeFont" />
         <activity
-            android:name=".CommentActivity"
-            android:label="Comments"
-            android:parentActivityName=".CulmycaTimesActivity"
+            android:name=".NavMenuViews.CulmycaTimesActivity"
+            android:parentActivityName=".ContentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CodeFont1">
-
-        </activity>
+            android:theme="@style/CodeFont" />
         <activity
-            android:name=".CulmycaTimesActivity"
+            android:name=".NavMenuViews.AboutActivity"
+            android:label="ABOUT"
             android:parentActivityName=".ContentActivity"
-            android:theme="@style/CodeFont"/>
-        <activity
-            android:name=".AboutActivity"
-            android:theme="@style/CodeFont"
-            android:parentActivityName=".ContentActivity"
-            android:label="ABOUT"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/CodeFont" />
 
         <service
             android:name=".Notifications.MyNotificationService"

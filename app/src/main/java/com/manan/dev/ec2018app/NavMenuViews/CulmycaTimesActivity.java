@@ -1,21 +1,15 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.manan.dev.ec2018app.Adapters.CTAdapter;
 import com.manan.dev.ec2018app.Models.postsModel;
+import com.manan.dev.ec2018app.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,8 +27,6 @@ import java.util.List;
 
 public class CulmycaTimesActivity extends AppCompatActivity {
 
-
-    ValueEventListener getPosts;
     DatabaseReference postReference;
     List<postsModel> allposts;
     RecyclerView recyclerView;
@@ -41,6 +34,7 @@ public class CulmycaTimesActivity extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     private CTAdapter mAdapter;
     SwipeRefreshLayout s;
+    ImageView backButton;
 
     public static AlertDialog dialog;
 
@@ -51,6 +45,7 @@ public class CulmycaTimesActivity extends AppCompatActivity {
 
         allposts=new ArrayList<postsModel>();
 
+        backButton = findViewById(R.id.cul_back_button);
         recyclerView=findViewById(R.id.ctc_recycler_view);
 
         progressBar = new ProgressDialog(this);
@@ -67,6 +62,13 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                                        reload();
                                    }
                                });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         reload();
     }

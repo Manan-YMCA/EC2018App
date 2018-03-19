@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.manan.dev.ec2018app.DevelopersActivity">
+    tools:context="com.manan.dev.ec2018app.NavMenuViews.DevelopersActivity">
 
     <ImageView
         android:id="@+id/dv_ec_logo"

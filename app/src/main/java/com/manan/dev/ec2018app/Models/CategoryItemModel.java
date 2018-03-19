@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 
 public class CategoryItemModel {
 
-
     private String displayName, clubName;
     private Bitmap image;
 

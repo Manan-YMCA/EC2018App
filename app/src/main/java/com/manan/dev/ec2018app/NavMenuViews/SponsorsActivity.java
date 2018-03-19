@@ -1,9 +1,8 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,15 +17,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.Adapters.SponserAdapter;
-import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.Sponsers;
+import com.manan.dev.ec2018app.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SponsorsActivity extends AppCompatActivity {
     private ArrayList<Sponsers> sponserList = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
 
 import android.content.Context;
@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.manan.dev.ec2018app.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
