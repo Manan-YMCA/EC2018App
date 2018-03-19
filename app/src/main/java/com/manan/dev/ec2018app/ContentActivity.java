@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -49,6 +50,7 @@ import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
+import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Notifications.MyNotificationsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
@@ -58,6 +60,7 @@ import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ConnectivityReciever.ConnectivityReceiverListener {
@@ -76,6 +79,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private ArrayList<QRTicketModel> userTickets;
     private DatabaseController databaseController;
     private ProgressDialog mProgress;
+    private IncomingHandler mIncomingHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +108,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         nav_view.setCheckedItem(R.id.nav_home);
         userTickets = new ArrayList<QRTicketModel>();
         databaseController = new DatabaseController(ContentActivity.this);
-
+        mIncomingHandler = new IncomingHandler(ContentActivity.this);
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
@@ -482,8 +486,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(true);
             menu.findItem(R.id.nav_profile).setTitle("Profile");
+            checkCount(phoneNumber);
         }
-        checkCount(phoneNumber);
         if (nav_view != null) {
             nav_view.setCheckedItem(R.id.nav_home);
         }
@@ -515,16 +519,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     }
                     Log.d("Tickets", Integer.toString(userTickets.size()));
                     Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
-                    if(userTickets.size()>databaseController.getTicketCount()){
-                        for(int i=0;i<userTickets.size();i++) {
-                            databaseController.addTicketsToDb(userTickets.get(i));
-                        }
-                    }
-                    else {
-                        for(int i=0;i<userTickets.size();i++) {
-                            databaseController.updateDbTickets(userTickets.get(i));
-                        }
-                    }
+                    mIncomingHandler.sendEmptyMessage(0);
                     Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
                 }
                 // Try and catch are included to handle any errors due to JSON
@@ -566,5 +561,39 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         }
     }
 
+    public class IncomingHandler extends Handler {
+        private WeakReference<ContentActivity> yourActivityWeakReference;
+
+        IncomingHandler(ContentActivity yourActivity) {
+            yourActivityWeakReference = new WeakReference<>(yourActivity);
+            databaseController = new DatabaseController(getApplicationContext());
+        }
+
+        @Override
+        public void handleMessage(Message message) {
+            if (yourActivityWeakReference != null) {
+                ContentActivity yourActivity = yourActivityWeakReference.get();
+
+                switch (message.what) {
+                    case 0:
+                        updateDatabase();
+                        break;
+                }
+            }
+        }
+
+        private void updateDatabase() {
+            if(userTickets.size()>databaseController.getTicketCount()){
+                for(int i=0;i<userTickets.size();i++) {
+                    databaseController.addTicketsToDb(userTickets.get(i));
+                }
+            }
+            else {
+                for(int i=0;i<userTickets.size();i++) {
+                    databaseController.updateDbTickets(userTickets.get(i));
+                }
+            }
+        }
+    }
 
 }

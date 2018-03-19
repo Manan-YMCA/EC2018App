@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,16 +20,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.Coordinators;
@@ -36,9 +32,6 @@ import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,35 +52,36 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, prizesRelativeLayout;
     LinearLayout coordsLinearLayout, goingLinearLayout;
     View line1, line2, line3, line4;
+    ImageView categoryEventImageView;
     private String phoneNumber;
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
-    private LinearLayout eventImageLinearLayout;
-    private ImageView backbutton,sharebutton;
+    private RelativeLayout eventImageLinearLayout;
+    private ImageView backbutton, sharebutton;
     private QRTicketModel TicketModel;
-//    private ArrayList<Long> coordsPhoneList;
+    //    private ArrayList<Long> coordsPhoneList;
     private String eventId;
-    ImageView categoryEventImageView;
+    private ProgressBar barEventImage;
     private DatabaseController databaseController;
-    private boolean checkloadedvar=false;
+    private boolean checkloadedvar = false;
     private Drawable default_image;
-    private  RelativeLayout container_se_view;
+    private RelativeLayout container_se_view;
     private boolean NO_DEEP_LINK_FLAG = true;
+    private Intent phoneIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
         databaseController = new DatabaseController(this);
-        default_image = getResources().getDrawable( R.drawable.default_image );
+        default_image = getResources().getDrawable(R.drawable.default_image);
 
 
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
-        Log.v("deeplink", appLinkData + "");
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
             String revStr = new StringBuilder(appLinkData.toString()).reverse().toString();
             int i;
@@ -97,7 +91,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
             eventName = eventName.replace("%20", " ");
             Log.v("deeplink", eventName);
-            Toast.makeText(this, "deeplink:" + eventName, Toast.LENGTH_SHORT).show();
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
@@ -106,18 +99,18 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 startActivity(new Intent(this, SplashScreen.class));
             }
         } else {
-        //    Toast.makeText(this, "nodeeplink:", Toast.LENGTH_SHORT).show();
-          //  Log.v("nodeeplink", appLinkData + "");
+            //  Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
-        container_se_view=findViewById(R.id.contaner_se);
+        container_se_view = findViewById(R.id.contaner_se);
 
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
 
         registerButton = (Button) findViewById(R.id.btn_register);
 
+        barEventImage = (ProgressBar) findViewById(R.id.pb_event_image);
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
         eventStartTimeTextView = (TextView) findViewById(R.id.tv_event_start_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
@@ -134,9 +127,9 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
         eventCategoryTextView = findViewById(R.id.tv_cat_name);
         // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
-         sharebutton =findViewById(R.id.btn_share);
+        sharebutton = findViewById(R.id.btn_share);
         categoryEventImageView = findViewById(R.id.iv_type_of_event);
-        eventImageLinearLayout = (LinearLayout) findViewById(R.id.ll_btn_register);
+        eventImageLinearLayout = (RelativeLayout) findViewById(R.id.ll_btn_register);
 
         line1 = (View) findViewById(R.id.line1);
         // line2 = (View) findViewById(R.id.line4);
@@ -152,7 +145,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
         backbutton = (ImageView) findViewById(R.id.tv_back_button);
 
-        if(NO_DEEP_LINK_FLAG) {
+        if (NO_DEEP_LINK_FLAG) {
             eventDetails = getEventDetails.retreiveEventsByID(eventId);
 
             Calendar cal = Calendar.getInstance();
@@ -178,7 +171,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     onBackPressed();
                 }
             });
-        }
+
             eventNameView.setText(eventDetails.getmName());
 
             if (eventDetails.getmCategory().equals("solo")) {
@@ -188,7 +181,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
             locationTextView.setText(eventDetails.getmVenue());
             // hostClubTextView.setText(eventDetails.getmClubname());
-            Long fees = eventDetails.getmFees();
+            final Long fees = eventDetails.getmFees();
             if (fees == 0) {
                 feesTextView.setText("Free");
             } else {
@@ -218,18 +211,15 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + coord.getmCoordPhone()));
+                            phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + coord.getmCoordPhone()));
                             if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                // TODO: Consider calling
-                                //    ActivityCompat#requestPermissions
-                                // here to request the missing permissions, and then overriding
-                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                //                                          int[] grantResults)
-                                // to handle the case where the user grants the permission. See the documentation
-                                // for ActivityCompat#requestPermissions for more details.
-                                return;
+                                final String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
+                                //Asking request Permissions
+                                ActivityCompat.requestPermissions(SingleEventActivity.this, PERMISSIONS_CALL, 9);
+                            } else {
+                                startActivity(phoneIntent);
                             }
-                            startActivity(intent);
+
                         }
                     });
                 }
@@ -273,52 +263,57 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 }
             });
 
-        locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (registerButton.getText().toString().equals("View Ticket")) {
-                    displayTickets(eventId);
-                    FragmentManager fm = getFragmentManager();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("qrcodestring", TicketModel.getQRcode());
-                    bundle.putString("eventid", eventId);
-                    bundle.putInt("activity", 0);
-
-                    QRCodeActivity fragobj = new QRCodeActivity();
-                    fragobj.setArguments(bundle);
-                    fragobj.show(fm, "drff");
-                } else {
-                    startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
-                            .putExtra("eventName", eventDetails.getmName())
-                            .putExtra("eventId", eventDetails.getmEventId())
-                            .putExtra("eventType", eventDetails.getmEventTeamSize()));
+            locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
+            registerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (registerButton.getText().toString().equals("View Ticket")) {
+                        displayTickets(eventId);
+                        FragmentManager fm = getFragmentManager();
+                        Bundle bundle = new Bundle();
+                        Log.d("yatin", TicketModel.getQRcode() + " " + eventId);
+                        bundle.putString("qrcodestring", TicketModel.getQRcode());
+                        bundle.putString("eventid", eventId);
+                        bundle.putInt("activity", 0);
+                        bundle.putInt("paymentStatus", TicketModel.getPaymentStatus());
+                        bundle.putInt("arrivalStatus", TicketModel.getArrivalStatus());
+
+                        QRCodeActivity fragobj = new QRCodeActivity();
+                        fragobj.setArguments(bundle);
+                        fragobj.show(fm, "hiiiii");
+                        // fragobj.show(fm, "drff");
+                    } else {
+                        startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
+                                .putExtra("eventName", eventDetails.getmName())
+                                .putExtra("eventId", eventDetails.getmEventId())
+                                .putExtra("eventType", eventDetails.getmEventTeamSize()));
+                    }
+                }
+            });
 
 
-        sharebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String baseUrl="http://elementsculmyca.com/event/";
-                String parsedUrl=baseUrl +"#"+eventDetails.getmName().toString().replaceAll(" ","%20");
+            sharebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String baseUrl = "http://elementsculmyca.com/event/";
+                    String parsedUrl = baseUrl + "#" + eventDetails.getmName().toString().replaceAll(" ", "%20");
 
-                Toast.makeText(SingleEventActivity.this,parsedUrl,Toast.LENGTH_SHORT).show();
-                String message="Elements Culmyca 2018:" +eventDetails.getmName().toString()+ " View the event clicking the link: "+parsedUrl;
-                shareEventMessage(message);
+                    Toast.makeText(SingleEventActivity.this, parsedUrl, Toast.LENGTH_SHORT).show();
+                    String message = "Elements Culmyca 2018:" + eventDetails.getmName().toString() + " View the event clicking the link: " + parsedUrl;
+                    shareEventMessage(message);
 
-            }
-        });
-   showSnack(isConnected());
+                }
+            });
+            showSnack(isConnected());
 
-
+        }
     }
+
     private void shareEventMessage(String msg) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
@@ -327,7 +322,23 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     }
 
 
-//    @Override
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        boolean permissionGranted = false;
+        switch (requestCode) {
+            case 9:
+                permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        Log.v("permission", "permission" + permissionGranted);
+        if (permissionGranted) {
+            startActivity(phoneIntent);
+        } else {
+            Toast.makeText(SingleEventActivity.this, "You didn't assign permission.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 //        if (requestCode == 101) {
 //            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
@@ -396,6 +407,60 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         return super.onOptionsItemSelected(item);
     }
 
+    private void displayTickets(String eventId) {
+        TicketModel = databaseController.retrieveTicketsByID(eventId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MyApplication.getInstance().setConnectivityListener(SingleEventActivity.this);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if (databaseController.checkIfValueExists1(eventId)) {
+            registerButton.setText("View Ticket");
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            if (!isloaded()) {
+                String baseUrl = "https://manan-ymca.github.io/ElementsCulmyca2018Website/assets/";
+                String parseUrl = baseUrl +
+                        eventDetails.getmName().toString().toUpperCase().replaceAll(" ", "%20") +
+                        ".jpg";
+
+                Uri imageuri = Uri.parse(parseUrl);
+                barEventImage.setVisibility(View.VISIBLE);
+                new LoadBackground(parseUrl,
+                        "CurrentImage").execute();
+            } else {
+                barEventImage.setVisibility(View.GONE);
+                checkloadedvar = true;
+
+            }
+//            message = "Connected";
+//            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
+//            color = Color.WHITE;
+        } else {
+            message = "Get a hotspot Buddy";
+            Snackbar.make(container_se_view, message, Snackbar.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private boolean isloaded() {
+        return checkloadedvar;
+    }
+
     private class LoadBackground extends AsyncTask<String, Void, Drawable> {
 
         private String imageUrl, imageName;
@@ -435,103 +500,8 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         @Override
         protected void onPostExecute(Drawable result) {
             super.onPostExecute(result);
+            barEventImage.setVisibility(View.GONE);
             eventImageLinearLayout.setBackground(result);
         }
-    }
-
-    private void displayTickets(String eventId) {
-
-//        String url = getResources().getString(R.string.get_events_qr_code);
-//        url += phoneNumber;
-//        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.i("My success", "" + response);
-//                try {
-//                    JSONObject obj1 = new JSONObject(response);
-//                    JSONArray ticketDetails = obj1.getJSONArray("data");
-//                    for (int i = 0; i < ticketDetails.length(); i++) {
-//                        JSONObject obj2 = ticketDetails.getJSONObject(i);
-//                        if (obj2.getString("eventid").equals(eventId)) {
-//                            TicketModel = new QRTicketModel();
-//
-//                            TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
-//                            TicketModel.setArrivalStatus(obj2.getInt("arrived"));
-//                            TicketModel.setQRcode(obj2.getString("qrcode"));
-//                            TicketModel.setEventID(obj2.getString("eventid"));
-//                            TicketModel.setTimeStamp(obj2.getLong("timestamp"));
-//                            registerButton.setText("View Ticket");
-//                        }
-//
-//                    }
-//                }
-//                // Try and catch are included to handle any errors due to JSON
-//                catch (Exception e) {
-//                    e.printStackTrace();
-//                    Log.d("Tickets", e.getMessage());
-//                }
-//
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                Log.i("Tickets", "" + error);
-//            }
-//        });
-//        queue.add(request);
-        TicketModel =  databaseController.retrieveTicketsByID(eventId);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        MyApplication.getInstance().setConnectivityListener(SingleEventActivity.this);
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-        phoneNumber = prefs.getString("Phone", null);
-        if(databaseController.checkIfValueExists1(eventId)){
-            registerButton.setText("View Ticket");
-        }
-    }
-    @Override
-    public void onNetworkConnectionChanged(boolean isConnected) {
-        showSnack(isConnected);
-    }
-
-
-    private void showSnack(boolean isConnected) {
-        String message;
-        int color;
-        if (isConnected) {
-            if(!isloaded())
-            {  String baseUrl="https://manan-ymca.github.io/ElementsCulmyca2018Website/assets/";
-               String parseUrl=baseUrl+
-                       eventDetails.getmName().toString().toUpperCase().replaceAll(" ","%20")+
-                       ".jpg";
-
-                Uri imageuri = Uri.parse(parseUrl);
-            new LoadBackground(parseUrl,
-                    "CurrentImage").execute();
-            }
-            else
-            {checkloadedvar=true;
-
-            }
-//            message = "Connected";
-//            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
-//            color = Color.WHITE;
-        } else {
-            message = "Get a hotspot Buddy";
-            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
-
-        }
-    }
-
-    private boolean isloaded() {
-        return checkloadedvar;
     }
 }

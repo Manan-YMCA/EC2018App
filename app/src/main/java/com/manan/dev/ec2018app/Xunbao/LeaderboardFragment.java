@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +34,7 @@ public class LeaderboardFragment extends Fragment {
     static LeaderboardAdapter leaderboardAdapter;
     static RecyclerView recyclerView;
     static Context c;
+    private ProgressBar bar;
     static RequestQueue queue;
     static StringRequest stringRequest;
     //ProgressDialog progressBar;
@@ -44,6 +46,9 @@ public class LeaderboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         c = getActivity();
+        bar = (ProgressBar) view.findViewById(R.id.pb_leaderboard);
+        bar.setVisibility(View.VISIBLE);
+        bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
         setData();
 //        progressBar = new ProgressDialog(getActivity());
 //        progressBar.setMessage("Loading");
@@ -71,6 +76,7 @@ public class LeaderboardFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         recyclerView.setVisibility(View.VISIBLE);
+                        bar.setVisibility(View.GONE);
                         //progressBar.dismiss();
                         try {
                             JSONArray k = new JSONArray(response);

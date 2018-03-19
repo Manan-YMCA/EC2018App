@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.R;
 
-import java.util.zip.Inflater;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by yatindhingra on 02/03/18.
@@ -26,13 +36,14 @@ public class FragmentOtpChecker extends DialogFragment {
     EditText et1, et2, et3, et4, et5, et6;
     TextView submitOtp, resendOtp;
     String otp;
-    private String smsOtp;
+    private String otpNum;
+    private String phoneNum;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.otp_checker_fragment_layout, container, false);
-
+        phoneNum = getArguments().getString("phone");
         et1 = (EditText) rootView.findViewById(R.id.et_otp_dig_1);
         et2 = (EditText) rootView.findViewById(R.id.et_otp_dig_2);
         et3 = (EditText) rootView.findViewById(R.id.et_otp_dig_3);
@@ -43,18 +54,18 @@ public class FragmentOtpChecker extends DialogFragment {
         resendOtp = (TextView) rootView.findViewById(R.id.tv_otp_resend);
 
         addOnTextChangeListener();
-        smsOtp = getOTP();
-
+        otpNum = getOTP();
+        sendSMS(phoneNum,otpNum);
         submitOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 retrieveEnteredText();
                 otpCheckStatus activity = (otpCheckStatus) getActivity();
-                if (otp.equals("123456")) {
+                if (otp.equals(otpNum)) {
                     activity.updateResult(true);
                     dismiss();
                 } else {
-                    Toast.makeText(getActivity(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Incorrect OTP", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -62,17 +73,49 @@ public class FragmentOtpChecker extends DialogFragment {
         resendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                smsOtp = getOTP();
+                sendSMS(phoneNum,otpNum);
             }
         });
 
         return rootView;
     }
 
-    private String getOTP() {
-        //TODO
-        //send sms and get otp
-        return "123456";
+    private String getOTP(){
+        //get otp
+        Random rnd = new Random();
+        Integer num = 100000 + rnd.nextInt(900000);
+        return num.toString();
+    }
+
+    private void sendSMS(final String phone, final String otpNum) {
+        String url = getResources().getString(R.string.send_sms_api);
+        Toast.makeText(getActivity(), "URL: " + url, Toast.LENGTH_LONG).show();
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest smsReq = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // TODO
+                        Log.v("sms","response: " + response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO
+                Log.v("sms","error: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("From", "CLMYCA");
+                params.put("To", phone);
+                params.put("TemplateName", "culmyca-otp");
+                params.put("VAR1", otpNum);
+                return params;
+            }
+        };
+        queue.add(smsReq);
     }
 
     private void addOnTextChangeListener() {
@@ -237,7 +280,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 } else if (s.toString().length() == 1) {
                     retrieveEnteredText();
                     otpCheckStatus activity = (otpCheckStatus) getActivity();
-                    if (otp.equals("123456")) {
+                    if (otp.equals(otpNum)) {
                         activity.updateResult(true);
                         dismiss();
                     } else {

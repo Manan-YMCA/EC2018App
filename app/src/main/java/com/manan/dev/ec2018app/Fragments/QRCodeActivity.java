@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.ProfileActivity;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.SingleEventActivity;
@@ -34,23 +36,33 @@ import java.util.Locale;
 
 
 public class QRCodeActivity extends DialogFragment {
-    TextView eventName,eventDate,eventTime;
+    TextView eventName,eventDate,eventTime, fees, status;
     ImageView qrTicketImage ;
     private String eventId;
     private EventDetails eventDetails;
     private DatabaseController getEventDetails;
-    private int activity;
-    @Nullable
+    private int activity, paymentStatus, arrivalStatus;
+
+    public QRCodeActivity(){
+        
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.qrcode_dialog_box, container, false);
+
         String qrcodestring = getArguments().getString("qrcodestring");
         eventId = getArguments().getString("eventid");
         activity = getArguments().getInt("activity");
+        paymentStatus = getArguments().getInt("paymentStatus");
+        arrivalStatus = getArguments().getInt("arrivalStatus");
+
         qrTicketImage = (ImageView)rootView.findViewById(R.id.qr_ticket);
         eventName = (TextView)rootView.findViewById(R.id.tv_event_name);
         eventDate = (TextView)rootView.findViewById(R.id.tv_event_date);
         eventTime = (TextView)rootView.findViewById(R.id.tv_event_time);
+        fees = (TextView) rootView.findViewById(R.id.eventfees);
+        status = (TextView) rootView.findViewById(R.id.eventfeestatus);
         getEventDetails = new DatabaseController(getActivity());
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
         eventName.setText(eventDetails.getmName());
@@ -66,6 +78,9 @@ public class QRCodeActivity extends DialogFragment {
         eventDate.setText(formattedDate);
         eventTime.setText(formattedTime);
 
+        fees.setText(String.valueOf("RS " + eventDetails.getmFees()));
+        status.setText(String.valueOf(paymentStatus));
+
         TicketsGenerator ticketsGenerator = new TicketsGenerator();
         Bitmap qrTicket = ticketsGenerator.GenerateClick( qrcodestring, getActivity(), (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty));
         qrTicketImage.setImageBitmap(qrTicket);
@@ -79,4 +94,5 @@ public class QRCodeActivity extends DialogFragment {
         }
         super.onDestroyView();
     }
+
 }

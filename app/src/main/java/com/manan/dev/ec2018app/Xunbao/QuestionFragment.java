@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,7 +96,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
         try {
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
-            answer.put("name", Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
             answer.put("email", currFbid);
             answer.put("skey", "abbv");
             answer.put("ans", ans.getText());
@@ -158,7 +158,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
                             contestEnd.setVisibility(View.VISIBLE);
                         } else if (xstatus == 1) {
-                            if(!currFbid.equals("notLoggedIn")) {
+                            if (!currFbid.equals("notLoggedIn")) {
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                             }
@@ -185,9 +185,9 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         JSONArray jsonArray = new JSONArray();
         JSONObject params = new JSONObject();
         try {
-//            if (!currFbid.equals("notLoggedIn"))
-                params.put("email", currFbid);
+            params.put("email", currFbid);
             params.put("skey", "abbv");
+            params.put("name", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
