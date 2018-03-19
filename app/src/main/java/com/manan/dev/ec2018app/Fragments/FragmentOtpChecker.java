@@ -2,8 +2,11 @@ package com.manan.dev.ec2018app.Fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,8 +27,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.Utilities.IncomingSms;
+import com.manan.dev.ec2018app.Utilities.SmsListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -40,6 +47,7 @@ public class FragmentOtpChecker extends DialogFragment {
     String otp;
     private String otpNum;
     private String phoneNum;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     @Nullable
     @Override
@@ -119,6 +127,42 @@ public class FragmentOtpChecker extends DialogFragment {
             }
         };
         queue.add(smsReq);
+        if(checkAndRequestPermissions()) {
+            IncomingSms.bindListener(new SmsListener() {
+                @Override
+                public void messageReceived(String messageText) {
+                    if(messageText.contains("Culmyca")) {
+                        otp = messageText.substring(0, 6);
+                        Toast.makeText(getActivity(), "OTP: " + otp, Toast.LENGTH_LONG).show();
+                        // Handle this OTP TODO
+                    }
+                }
+            });
+        }
+    }
+
+    private  boolean checkAndRequestPermissions() {
+        int receiveSMS = ContextCompat.checkSelfPermission(getActivity(),
+                android.Manifest.permission.RECEIVE_SMS);
+
+        int readSMS = ContextCompat.checkSelfPermission(getActivity(),
+                android.Manifest.permission.READ_SMS);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.RECEIVE_MMS);
+        }
+        if (readSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.READ_SMS);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
     }
 
     private void addOnTextChangeListener() {
