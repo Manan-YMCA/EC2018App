@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <ImageView
             android:id="@+id/EClogo"
             android:layout_width="70dp"
@@ -60,6 +62,14 @@
             android:layout_below="@+id/tv2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
+            <ProgressBar
+                android:id="@+id/pb_profile_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:indeterminate="true"/>
 
             <ImageView
                 android:id="@+id/profile_pic"
@@ -127,6 +137,14 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
             android:background="@drawable/edit_text_background">
+
+            <ProgressBar
+                android:id="@+id/pb_user_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:indeterminate="true"/>
 
 
             <ImageView

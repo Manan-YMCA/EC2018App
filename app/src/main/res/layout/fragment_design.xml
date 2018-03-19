@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Design"
+            android:text="Creative And Design"
             android:id="@+id/cat_head"
             android:textSize="32dp"
             android:fontFamily="@font/futura"/>

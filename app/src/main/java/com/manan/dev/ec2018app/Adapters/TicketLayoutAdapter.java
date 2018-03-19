@@ -85,6 +85,8 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
                 bundle.putString("qrcodestring", singleItem.getQRcode());
                 bundle.putString("eventid", finalCurrEvent.getmEventId());
                 bundle.putInt("activity", 0);
+                bundle.putInt("paymentStatus", singleItem.getPaymentStatus());
+                bundle.putInt("arrivalStatus", singleItem.getArrivalStatus());
 // set Fragmentclass Arguments
                 QRCodeActivity fragobj = new QRCodeActivity();
                 fragobj.setArguments(bundle);

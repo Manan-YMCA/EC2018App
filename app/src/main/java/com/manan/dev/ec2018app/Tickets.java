@@ -181,9 +181,11 @@ public class Tickets extends AppCompatActivity {
 //        });
 //        queue.add(request);
         userTickets = databaseController.retrieveAllTickets();
-        Log.d("yatin", String.valueOf(userTickets.get(0).getQRcode()));
-        mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
-        userTicketsView.setAdapter(mAdapter);
+        if(userTickets.size() > 0) {
+            Log.d("yatin", String.valueOf(userTickets.get(0).getQRcode()));
+            mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
+            userTicketsView.setAdapter(mAdapter);
+        }
         //mAdapter.notifyDataSetChanged();
    }
 }

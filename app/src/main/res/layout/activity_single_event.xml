@@ -54,20 +54,26 @@
             android:layout_margin="10dp"
             android:background="#222" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_btn_register"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-
-
             android:layout_below="@+id/line1"
             android:background="@drawable/default_image">
+
+            <ProgressBar
+                android:id="@+id/pb_event_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                android:visibility="gone"/>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
@@ -95,7 +101,7 @@
                     android:src="@drawable/vector_share"
                     android:textColor="#fff" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
         <View
             android:id="@+id/line2"

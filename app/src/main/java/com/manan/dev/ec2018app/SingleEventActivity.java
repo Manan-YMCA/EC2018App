@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,20 +52,21 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, prizesRelativeLayout;
     LinearLayout coordsLinearLayout, goingLinearLayout;
     View line1, line2, line3, line4;
+    ImageView categoryEventImageView;
     private String phoneNumber;
     private DatabaseController getEventDetails;
     private EventDetails eventDetails;
     private int coordCount = 0, prizeCount = 0;
-    private LinearLayout eventImageLinearLayout;
-    private ImageView backbutton,sharebutton;
+    private RelativeLayout eventImageLinearLayout;
+    private ImageView backbutton, sharebutton;
     private QRTicketModel TicketModel;
-//    private ArrayList<Long> coordsPhoneList;
+    //    private ArrayList<Long> coordsPhoneList;
     private String eventId;
-    ImageView categoryEventImageView;
+    private ProgressBar barEventImage;
     private DatabaseController databaseController;
-    private boolean checkloadedvar=false;
+    private boolean checkloadedvar = false;
     private Drawable default_image;
-    private  RelativeLayout container_se_view;
+    private RelativeLayout container_se_view;
     private boolean NO_DEEP_LINK_FLAG = true;
     private Intent phoneIntent;
 
@@ -73,7 +75,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
         databaseController = new DatabaseController(this);
-        default_image = getResources().getDrawable( R.drawable.default_image );
+        default_image = getResources().getDrawable(R.drawable.default_image);
 
 
         // ATTENTION: This was auto-generated to handle app links.
@@ -88,6 +90,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             revStr = revStr.substring(0, i);
             String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
             eventName = eventName.replace("%20", " ");
+            Log.v("deeplink", eventName);
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
@@ -96,16 +99,18 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 startActivity(new Intent(this, SplashScreen.class));
             }
         } else {
+            //  Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
         Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
-        container_se_view=findViewById(R.id.contaner_se);
+        container_se_view = findViewById(R.id.contaner_se);
 
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
 
         registerButton = (Button) findViewById(R.id.btn_register);
 
+        barEventImage = (ProgressBar) findViewById(R.id.pb_event_image);
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
         eventStartTimeTextView = (TextView) findViewById(R.id.tv_event_start_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
@@ -122,9 +127,9 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         prizesRelativeLayout = (RelativeLayout) findViewById(R.id.rl_prizes);
         eventCategoryTextView = findViewById(R.id.tv_cat_name);
         // goingLinearLayout = (LinearLayout) findViewById(R.id.ll_people_going);
-         sharebutton =findViewById(R.id.btn_share);
+        sharebutton = findViewById(R.id.btn_share);
         categoryEventImageView = findViewById(R.id.iv_type_of_event);
-        eventImageLinearLayout = (LinearLayout) findViewById(R.id.ll_btn_register);
+        eventImageLinearLayout = (RelativeLayout) findViewById(R.id.ll_btn_register);
 
         line1 = (View) findViewById(R.id.line1);
         // line2 = (View) findViewById(R.id.line4);
@@ -140,7 +145,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
         backbutton = (ImageView) findViewById(R.id.tv_back_button);
 
-        if(NO_DEEP_LINK_FLAG) {
+        if (NO_DEEP_LINK_FLAG) {
             eventDetails = getEventDetails.retreiveEventsByID(eventId);
 
             Calendar cal = Calendar.getInstance();
@@ -176,7 +181,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
             locationTextView.setText(eventDetails.getmVenue());
             // hostClubTextView.setText(eventDetails.getmClubname());
-            Long fees = eventDetails.getmFees();
+            final Long fees = eventDetails.getmFees();
             if (fees == 0) {
                 feesTextView.setText("Free");
             } else {
@@ -271,13 +276,17 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                         displayTickets(eventId);
                         FragmentManager fm = getFragmentManager();
                         Bundle bundle = new Bundle();
+                        Log.d("yatin", TicketModel.getQRcode() + " " + eventId);
                         bundle.putString("qrcodestring", TicketModel.getQRcode());
                         bundle.putString("eventid", eventId);
                         bundle.putInt("activity", 0);
+                        bundle.putInt("paymentStatus", TicketModel.getPaymentStatus());
+                        bundle.putInt("arrivalStatus", TicketModel.getArrivalStatus());
 
                         QRCodeActivity fragobj = new QRCodeActivity();
                         fragobj.setArguments(bundle);
-                        fragobj.show(fm, "drff");
+                        fragobj.show(fm, "hiiiii");
+                        // fragobj.show(fm, "drff");
                     } else {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                                 .putExtra("eventName", eventDetails.getmName())
@@ -301,8 +310,10 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 }
             });
             showSnack(isConnected());
+
         }
     }
+
     private void shareEventMessage(String msg) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
@@ -314,15 +325,15 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         boolean permissionGranted = false;
-        switch(requestCode){
+        switch (requestCode) {
             case 9:
-                permissionGranted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+                permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 break;
         }
-        Log.v("permission","permission"+permissionGranted);
-        if(permissionGranted){
+        Log.v("permission", "permission" + permissionGranted);
+        if (permissionGranted) {
             startActivity(phoneIntent);
-        }else {
+        } else {
             Toast.makeText(SingleEventActivity.this, "You didn't assign permission.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -396,6 +407,60 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         return super.onOptionsItemSelected(item);
     }
 
+    private void displayTickets(String eventId) {
+        TicketModel = databaseController.retrieveTicketsByID(eventId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MyApplication.getInstance().setConnectivityListener(SingleEventActivity.this);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if (databaseController.checkIfValueExists1(eventId)) {
+            registerButton.setText("View Ticket");
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            if (!isloaded()) {
+                String baseUrl = "https://manan-ymca.github.io/ElementsCulmyca2018Website/assets/";
+                String parseUrl = baseUrl +
+                        eventDetails.getmName().toString().toUpperCase().replaceAll(" ", "%20") +
+                        ".jpg";
+
+                Uri imageuri = Uri.parse(parseUrl);
+                barEventImage.setVisibility(View.VISIBLE);
+                new LoadBackground(parseUrl,
+                        "CurrentImage").execute();
+            } else {
+                barEventImage.setVisibility(View.GONE);
+                checkloadedvar = true;
+
+            }
+//            message = "Connected";
+//            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
+//            color = Color.WHITE;
+        } else {
+            message = "Get a hotspot Buddy";
+            Snackbar.make(container_se_view, message, Snackbar.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private boolean isloaded() {
+        return checkloadedvar;
+    }
+
     private class LoadBackground extends AsyncTask<String, Void, Drawable> {
 
         private String imageUrl, imageName;
@@ -435,103 +500,8 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         @Override
         protected void onPostExecute(Drawable result) {
             super.onPostExecute(result);
+            barEventImage.setVisibility(View.GONE);
             eventImageLinearLayout.setBackground(result);
         }
-    }
-
-    private void displayTickets(String eventId) {
-
-//        String url = getResources().getString(R.string.get_events_qr_code);
-//        url += phoneNumber;
-//        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.i("My success", "" + response);
-//                try {
-//                    JSONObject obj1 = new JSONObject(response);
-//                    JSONArray ticketDetails = obj1.getJSONArray("data");
-//                    for (int i = 0; i < ticketDetails.length(); i++) {
-//                        JSONObject obj2 = ticketDetails.getJSONObject(i);
-//                        if (obj2.getString("eventid").equals(eventId)) {
-//                            TicketModel = new QRTicketModel();
-//
-//                            TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
-//                            TicketModel.setArrivalStatus(obj2.getInt("arrived"));
-//                            TicketModel.setQRcode(obj2.getString("qrcode"));
-//                            TicketModel.setEventID(obj2.getString("eventid"));
-//                            TicketModel.setTimeStamp(obj2.getLong("timestamp"));
-//                            registerButton.setText("View Ticket");
-//                        }
-//
-//                    }
-//                }
-//                // Try and catch are included to handle any errors due to JSON
-//                catch (Exception e) {
-//                    e.printStackTrace();
-//                    Log.d("Tickets", e.getMessage());
-//                }
-//
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                Log.i("Tickets", "" + error);
-//            }
-//        });
-//        queue.add(request);
-        TicketModel =  databaseController.retrieveTicketsByID(eventId);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        MyApplication.getInstance().setConnectivityListener(SingleEventActivity.this);
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-        phoneNumber = prefs.getString("Phone", null);
-        if(databaseController.checkIfValueExists1(eventId)){
-            registerButton.setText("View Ticket");
-        }
-    }
-    @Override
-    public void onNetworkConnectionChanged(boolean isConnected) {
-        showSnack(isConnected);
-    }
-
-
-    private void showSnack(boolean isConnected) {
-        String message;
-        int color;
-        if (isConnected) {
-            if(!isloaded())
-            {  String baseUrl="https://manan-ymca.github.io/ElementsCulmyca2018Website/assets/";
-               String parseUrl=baseUrl+
-                       eventDetails.getmName().toString().toUpperCase().replaceAll(" ","%20")+
-                       ".jpg";
-
-                Uri imageuri = Uri.parse(parseUrl);
-            new LoadBackground(parseUrl,
-                    "CurrentImage").execute();
-            }
-            else
-            {checkloadedvar=true;
-
-            }
-//            message = "Connected";
-//            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
-//            color = Color.WHITE;
-        } else {
-            message = "Get a hotspot Buddy";
-            Snackbar.make(container_se_view,message,Snackbar.LENGTH_SHORT).show();
-
-        }
-    }
-
-    private boolean isloaded() {
-        return checkloadedvar;
     }
 }

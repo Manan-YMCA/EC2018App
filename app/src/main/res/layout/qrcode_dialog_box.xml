@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-    <ImageView
-        android:layout_width="350dp"
-        android:layout_height="240dp"
-        android:id="@+id/qr_ticket"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_margin="30dp"
-        android:src="@drawable/qr_logo"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-        />
-    <view
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/Black"
-        android:layout_below="@+id/qr_ticket"
-        android:layout_margin="20dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        tools:text="CODE GOLF"
-        android:textStyle="bold"
-        android:textColor="@color/Black"
-        android:textSize="30sp"
-        android:layout_below="@+id/line"
-        android:id="@+id/tv_event_name"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="March 22,2018"
-        android:layout_below="@+id/tv_event_name"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/tv_event_date"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="2 PM"
-        android:layout_below="@+id/tv_event_date"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/tv_event_time"
-        />
-    <TextView
-        android:id="@+id/fee_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Fee Details"
-        android:layout_below="@+id/tv_event_time"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:textColor="@color/Black"
-        android:textStyle="bold"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fee_details"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/eventfees"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="monospace"
-            android:text="Rs 50"
-            android:textAlignment="center"
-            android:textSize="28dp"
-            android:textColor="@color/Black" />
+        <ImageView
+            android:id="@+id/qr_ticket"
+            android:layout_width="350dp"
+            android:layout_height="240dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/qr_logo" />
 
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/qr_ticket"
+            android:layout_margin="20dp"
             android:background="@color/Black" />
 
         <TextView
-            android:id="@+id/eventfeestatus"
-            android:layout_width="0dp"
+            android:id="@+id/tv_event_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="X"
-            android:textAlignment="center"
-            android:textColor="#b61010"
-            android:textSize="28dp"
-            android:textStyle="bold" />
+            android:layout_below="@+id/line"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/Black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="CODE GOLF" />
+
+        <TextView
+            android:id="@+id/tv_event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_event_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            tools:text="March 22,2018" />
+
+        <TextView
+            android:id="@+id/tv_event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_event_date"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            tools:text="2 PM" />
+
+        <TextView
+            android:id="@+id/fee_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_event_time"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/Black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Fee Details" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fee_details"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/eventfees"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="monospace"
+                android:text="Rs 50"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="28dp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/Black" />
+
+            <TextView
+                android:id="@+id/eventfeestatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="X"
+                android:textAlignment="center"
+                android:textColor="#b61010"
+                android:textSize="28dp"
+                android:textStyle="bold" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 </RelativeLayout>

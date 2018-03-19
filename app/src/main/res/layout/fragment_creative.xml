@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Creative"
+        android:text="Operational"
         android:id="@+id/cat_head"
         android:textSize="32dp"
         android:fontFamily="@font/futura"/>
