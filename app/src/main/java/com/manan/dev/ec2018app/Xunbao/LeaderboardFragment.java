@@ -84,7 +84,7 @@ public class LeaderboardFragment extends Fragment {
                                 JSONObject k1 = k.getJSONObject(i);
                                 String k2 = k1.getString("user");
                                 String k3 = k1.getString("solved");
-                                LeaderboardList k4 = new LeaderboardList(k2, Integer.toString(i + 1), k3);
+                                LeaderboardList k4 = new LeaderboardList(k2, Integer.toString(i), k3);
                                 leaderboardList.add(k4);
                             }
 
