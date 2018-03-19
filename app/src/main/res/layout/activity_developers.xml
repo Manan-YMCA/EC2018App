@@ -11,9 +11,20 @@
     <ImageView
         android:id="@+id/dv_ec_logo"
         android:layout_width="40dp"
+        android:layout_toRightOf="@id/dev_back_button"
         android:layout_height="40dp"
         android:layout_margin="8dp"
         android:src="@drawable/logo_black" />
+    <ImageView
+        android:id="@+id/dev_back_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+
+        android:src="@drawable/vector_arrow"
+        android:tint="#717070" />
 
     <TextView
         android:id="@+id/dv_category_name_heading"
@@ -45,31 +56,63 @@
 
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
+     <LinearLayout
+         android:layout_width="0dp"
+         android:layout_height="60dp"
+         android:layout_weight="1"
+         android:orientation="vertical">
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
 
             android:id="@+id/but_dev"
             android:src="@drawable/devp"/>
+         <TextView
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:layout_height="wrap_content"
+             android:text="Developers"
+             android:fontFamily="@font/futura"/>
+     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/but_des"
-            android:src="@drawable/des"/>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/but_cre"
+
             android:src="@drawable/crea"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Creatives &amp; Des"
+            android:fontFamily="@font/futura"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:id="@+id/but_op"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/but_cre"
             android:layout_weight="1"
             android:src="@drawable/op"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Backstage"
+            android:fontFamily="@font/futura"/>
+    </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>
