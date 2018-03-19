@@ -109,7 +109,7 @@ public class SponsorsActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressBar.dismiss();
-                    Toast.makeText(SponsorsActivity.this, error.getLocalizedMessage() , Toast.LENGTH_SHORT).show();
+                    Log.e("TAG", "onErrorResponse: " + error.getLocalizedMessage() );
                     noSponTV.setVisibility(View.VISIBLE);
                 }
             });
