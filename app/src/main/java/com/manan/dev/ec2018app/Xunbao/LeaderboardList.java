@@ -20,11 +20,23 @@ public class LeaderboardList {
         return name1;
     }
 
+    public void setName1(String name1) {
+        this.name1 = name1;
+    }
+
     public String getRank() {
         return rank;
     }
 
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
     public String getLevel() {
         return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

@@ -7,10 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -27,18 +26,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
-import com.facebook.login.LoginManager;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.Fragments.FragmentOtpChecker;
 import com.manan.dev.ec2018app.Models.UserDetails;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
 
@@ -100,8 +93,11 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     }
 
     private void checkOTP(UserDetails userDetails) {
+        Bundle bundle = new Bundle();
         FragmentManager fm = getFragmentManager();
         FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+        bundle.putString("phone",userDetails.getmPhone());
+        otpChecker.setArguments(bundle);
         otpChecker.show(fm, "otpCheckerFragment");
     }
 

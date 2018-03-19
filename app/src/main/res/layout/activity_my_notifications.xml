@@ -14,10 +14,11 @@
 
         <ImageView
             android:id="@+id/iv_back_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="5dp"
+     android:layout_centerVertical="true"
             android:src="@drawable/vector_arrow" />
 
         <TextView
@@ -27,6 +28,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/futura"
+            android:layout_centerVertical="true"
             android:text="Notifications"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -35,8 +37,10 @@
 
         <ImageView
             android:id="@+id/ec_logo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/logo_black" />
     </RelativeLayout>

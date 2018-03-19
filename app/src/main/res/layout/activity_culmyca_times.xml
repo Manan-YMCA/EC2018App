@@ -4,11 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.manan.dev.ec2018app.CulmycaTimesActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/White"
+        android:id="@+id/action_bar_cul_times">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+           android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo_black"/>
+        <ImageView
+            android:id="@+id/cul_back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/vector_arrow"
+            android:tint="#717070" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Culmyca Times"
+            android:fontFamily="@font/futura"
+            android:textSize="24dp"
+            android:layout_centerInParent="true"/>
+
+
+    </RelativeLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
+        android:layout_below="@id/action_bar_cul_times"
         android:layout_height="wrap_content">
 
     <android.support.v7.widget.RecyclerView
@@ -16,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:padding="4dp"/>
+        />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

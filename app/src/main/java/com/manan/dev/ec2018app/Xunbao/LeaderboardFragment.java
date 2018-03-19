@@ -1,21 +1,16 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,19 +34,21 @@ public class LeaderboardFragment extends Fragment {
     static LeaderboardAdapter leaderboardAdapter;
     static RecyclerView recyclerView;
     static Context c;
+    private ProgressBar bar;
     static RequestQueue queue;
     static StringRequest stringRequest;
     //ProgressDialog progressBar;
+
     public LeaderboardFragment() {
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        c=getActivity();
+        c = getActivity();
+        bar = (ProgressBar) view.findViewById(R.id.pb_leaderboard);
+        bar.setVisibility(View.VISIBLE);
+        bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
         setData();
 //        progressBar = new ProgressDialog(getActivity());
 //        progressBar.setMessage("Loading");
@@ -67,23 +64,23 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.v("heyt","resume");
+        Log.v("heyt", "resume");
     }
 
-    public void setData(){
-
+    public void setData() {
         queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.xunbao_leaderboard_api);
         stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
-                    List<LeaderboardList> leaderboardList=new ArrayList<>();
+                    List<LeaderboardList> leaderboardList = new ArrayList<>();
                     @Override
                     public void onResponse(String response) {
                         recyclerView.setVisibility(View.VISIBLE);
+                        bar.setVisibility(View.GONE);
                         //progressBar.dismiss();
                         try {
                             JSONArray k = new JSONArray(response);
-                            for (int i=0;i<k.length();i++) {
+                            for (int i = 0; i < k.length(); i++) {
                                 JSONObject k1 = k.getJSONObject(i);
                                 String k2 = k1.getString("user");
                                 String k3 = k1.getString("solved");
@@ -94,31 +91,27 @@ public class LeaderboardFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                            leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
-                            recyclerView.setAdapter(leaderboardAdapter);
-
-
+                        leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
+                        recyclerView.setAdapter(leaderboardAdapter);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
                 //progressBar.dismiss();
-                List<LeaderboardList> leaderboardList=new ArrayList<>();
+                List<LeaderboardList> leaderboardList = new ArrayList<>();
 
                 Toast.makeText(c, "Problem Loading!", Toast.LENGTH_SHORT).show();
 
-                    leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
-                    recyclerView.setAdapter(leaderboardAdapter);
+                leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
+                recyclerView.setAdapter(leaderboardAdapter);
             }
         });
         queue.add(stringRequest);
-
     }
 
-    public void reload(){
+    public void reload() {
         recyclerView.setVisibility(View.GONE);
         queue.add(stringRequest);
     }
-
 }

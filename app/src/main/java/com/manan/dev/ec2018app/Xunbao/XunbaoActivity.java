@@ -1,6 +1,5 @@
 package com.manan.dev.ec2018app.Xunbao;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
@@ -19,7 +18,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
-import com.facebook.Profile;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.LoginActivity;
 import com.manan.dev.ec2018app.R;
@@ -61,14 +59,12 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
             }
         });
 
-
         viewPagerXunbao = (ViewPager) findViewById(R.id.xunbao_view_pager);
 
         viewPagerXunbao.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
-
             @Override
             public void onPageSelected(int position) {
                 navBar.getMenu().getItem(position).setChecked(true);
@@ -81,7 +77,6 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
                     }
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -157,9 +152,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
 
             final AlertDialog dialog = builder.create();
             dialog.show();
-
         } else {
-
             if (!flag) {
                 if (AccessToken.getCurrentAccessToken() == null) {
                     FragmentManager fm = getFragmentManager();
@@ -167,9 +160,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
                     fbLogin.show(fm, "fbLoginFragment");
                 }
             }
-
         }
-
     }
 
     @Override

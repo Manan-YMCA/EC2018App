@@ -15,17 +15,15 @@ public class DevelopersActivity extends AppCompatActivity {
     private ViewPager devviewPager;
     private DevelopersPagerAdapter mydevViewPagerAdapter;
 
-private ImageView devbut,desbut,opbut,crebut;
+    private ImageView devbut, desbut, crebut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developers);
-        devbut =findViewById(R.id.but_dev);
-        desbut =findViewById(R.id.but_des);
-        opbut = findViewById(R.id.but_op);
-        crebut =findViewById(R.id.but_cre);
-
-
+        devbut = findViewById(R.id.but_dev);
+        desbut = findViewById(R.id.but_des);
+        crebut = findViewById(R.id.but_cre);
 
 
         devviewPager = (ViewPager) findViewById(R.id.vpPager);
@@ -33,70 +31,53 @@ private ImageView devbut,desbut,opbut,crebut;
         devviewPager.setAdapter(mydevViewPagerAdapter);
         devviewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-devbut.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        devbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        devviewPager.setCurrentItem(0);
+                devviewPager.setCurrentItem(0);
 
 
-    }
-});
-desbut.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        devviewPager.setCurrentItem(1,true);
-    }
-});
+            }
+        });
+        desbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                devviewPager.setCurrentItem(1, true);
+            }
+        });
 
-opbut.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        devviewPager.setCurrentItem(3,true);
+        crebut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                devviewPager.setCurrentItem(2, true);
 
-    }
-});
-crebut.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        devviewPager.setCurrentItem(2,true);
-
-    }
-});
+            }
+        });
 
 
     }
+
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
-        if(position==0) {
-            devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
-            desbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-            crebut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-            opbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-        }
-        if(position==1)
-        {
-            devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-            desbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
-            crebut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-            opbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-        }
-        if(position==2)
-        {
-            devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-            desbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-            crebut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
-            opbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-        }
-            if(position==3)
-            {
-                devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
+            if (position == 0) {
+                devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
                 desbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
                 crebut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
-                opbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
             }
+            if (position == 1) {
+                devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
+                desbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
+                crebut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
+            }
+            if (position == 2) {
+                devbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
+                desbut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.White), PorterDuff.Mode.MULTIPLY);
+                crebut.setColorFilter(ContextCompat.getColor(DevelopersActivity.this, R.color.baseDark), PorterDuff.Mode.MULTIPLY);
+            }
+
         }
 
         @Override

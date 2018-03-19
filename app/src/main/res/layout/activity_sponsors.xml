@@ -5,11 +5,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Black"
+    android:background="@color/White"
     tools:context="com.manan.dev.ec2018app.SponsorsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/White"
+        android:id="@+id/action_bar_spon">
+        <ImageView
+            android:id="@+id/spo_back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/vector_arrow"
+            android:tint="#717070" />
+    <ImageView
+        android:id="@+id/dv_ec_logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/spo_back_button"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/logo_black" />
+
+    <TextView
+        android:id="@+id/spo_category_name_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/futura"
+        android:text="Sponsors"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+
+        android:textSize="22dp" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
+        android:layout_below="@id/action_bar_spon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical" />

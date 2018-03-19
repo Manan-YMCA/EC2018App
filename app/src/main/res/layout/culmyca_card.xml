@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp"
-    app:cardElevation="8dp"
+
+android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/White"
     android:layout_height="wrap_content">
+    <View
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="#ffffff"
+        android:id="@+id/lin1"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/ctc_rl_top"
+        android:layout_below="@id/lin1"
+        >
         <LinearLayout
             android:id="@+id/ctc_ll_clubtime"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/ctc_clubicon"
-                android:layout_margin="4dp"
+                android:layout_margin="10dp"
                 android:layout_width="48dp"
+                android:src="@drawable/logo_black"
                 android:layout_height="48dp" />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_margin="4dp">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
                 <TextView
                     android:id="@+id/ctc_clubname"
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:textSize="16sp"
-                    android:gravity="center_vertical"
+
                     android:textStyle="bold"
+                    android:textColor="@color/Black"
                     android:fontFamily="@font/futura"
                     android:text="Manan - A Techno Surge"/>
                 <TextView
@@ -41,31 +57,43 @@
                     android:layout_height="20dp" />
             </RelativeLayout>
         </LinearLayout>
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000"
+            android:layout_below="@id/ctc_ll_clubtime"
+            android:id="@+id/lin2"
+            />
         <TextView
             android:id="@+id/ctc_posttitle"
             android:text="My name is Anthony"
-            android:textSize="14dp"
-            android:layout_margin="4dp"
-            android:layout_below="@+id/ctc_ll_clubtime"
+            android:textSize="18dp"
+            android:textColor="@color/Black"
+         android:layout_margin="10dp"
+            android:layout_below="@+id/lin2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/futura" />
         <ImageView
             android:id="@+id/ctc_postimage"
-            android:layout_margin="4dp"
-            android:layout_below="@+id/ctc_posttitle"
-            android:src="@drawable/xunbao_logo"
-            android:scaleType="centerInside"
+
+            android:layout_below="@id/lin2"
+            android:src="@drawable/default_image"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
+
             android:layout_height="240dp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+           android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_below="@+id/ctc_postimage">
             <TextView
                 android:id="@+id/ctc_likescount"
                 android:text="215 likes"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -73,7 +101,7 @@
             <TextView
                 android:id="@+id/ctc_commentscount"
                 android:text="21 comments"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 android:layout_toRightOf="@+id/ctc_likescount"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -104,6 +132,13 @@
                 android:layout_toLeftOf="@+id/ctc_commentbtn" />
         </RelativeLayout>
 
-    </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+    </RelativeLayout>
+    <View
+        android:layout_below="@id/ctc_rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="#000"
+        android:id="@+id/lin3"
+        />
+</RelativeLayout>

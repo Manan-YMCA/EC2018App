@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.manan.dev.ec2018app.Fragments.YmcaAboutFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YMCA"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/futura"
+            android:textSize="28dp"
+            android:id="@+id/elements"
+            android:textColor="@color/Black"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_below="@id/elements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="University"
+            android:textAllCaps="true"
+            android:textColor="@color/Black"
+            android:fontFamily="@font/futura"
+            android:textSize="32dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="278dp"
+
+           android:layout_alignParentLeft="true"
+
+
+            android:src="@drawable/lamp2"
+            android:id="@+id/imageView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="17dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/futura"
+            android:text="@string/aboutymca"
+            android:textAlignment="center"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+
+            android:src="@drawable/ymcaust"
+            android:id="@+id/imageView2" />
+
+
+    </RelativeLayout>
+</FrameLayout>

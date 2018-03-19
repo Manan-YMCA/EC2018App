@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.manan.dev.ec2018app.R;
 import com.squareup.picasso.Picasso;
 
@@ -50,12 +52,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
-
 //        progressBar = new ProgressDialog(getActivity());
 //        progressBar.setMessage("Loading Question!");
 //        progressBar.setCanceledOnTouchOutside(false);
 //        progressBar.show();
-
 
         queURL = getActivity().getResources().getString(R.string.xunbao_get_question_api);
         ansURL = getActivity().getResources().getString(R.string.xunbao_check_answer_api);
@@ -80,7 +80,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 }
         );
 
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,9 +88,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 submitAnswer();
             }
         });
-
         return view;
-
     }
 
     private void submitAnswer() {
@@ -108,9 +105,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         @Override
                         public void onResponse(JSONObject resp) {
                             try {
-
                                 //progressBar.dismiss();
-
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
                                 if (end.equals("0"))
@@ -125,7 +120,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 //progressBar.dismiss();
                                 e.printStackTrace();
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -136,14 +130,11 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             volleyError.printStackTrace();
                         }
                     });
-
             queue.add(answ);
-
         } catch (JSONException e) {
             Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
             //progressBar.dismiss();
         }
-
     }
 
     public void reload() {
@@ -167,11 +158,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START");
                             contestEnd.setVisibility(View.VISIBLE);
                         } else if (xstatus == 1) {
-                            if(!currFbid.equals("notLoggedIn")) {
+                            if (!currFbid.equals("notLoggedIn")) {
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                             }
-
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
                             contestEnd.setText("THE CONTEST IS OVER! THANKS FOR PLAYING. IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
@@ -195,9 +185,9 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         JSONArray jsonArray = new JSONArray();
         JSONObject params = new JSONObject();
         try {
-//            if (!currFbid.equals("notLoggedIn"))
-                params.put("email", currFbid);
+            params.put("email", currFbid);
             params.put("skey", "abbv");
+            params.put("name", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -215,7 +205,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 contestEnd.setVisibility(View.VISIBLE);
                                 contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 31st March, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
                                 //progressBar.dismiss();
-
                             } catch (Exception e) {
                                 queLayout.setVisibility(View.VISIBLE);
                                 String imgUrl = resp.getString("image");
@@ -248,7 +237,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     }
                 });
         queue.add(stat);
-
     }
 
 

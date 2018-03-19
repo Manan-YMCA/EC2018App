@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,16 +64,19 @@ import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
     private UserDetails userDetails;
-    private ProgressDialog mProgress;
     private CallbackManager callbackManager;
     private LoginButton loginButton;
-    private ProgressDialog ProgressDialog;
     private RelativeLayout profilePictureFrame;
     private ImageView profilePicture;
     private TextView textView1;
     private TextView textView2;
     private ProfileTracker mProfileTracker;
     private FirebaseAuth mAuth;
+    private ProgressBar ivBar, detailsBar;
+    private TextView tvCollege;
+    private TextView tvName;
+    private TextView tvMail;
+    private TextView tvPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,26 +85,42 @@ public class ProfileActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         userDetails = new UserDetails();
         userDetails.setmFbId("null");
+        tvName = (TextView) findViewById(R.id.tv_name);
+        tvMail = (TextView) findViewById(R.id.tv_email);
+        tvCollege = (TextView) findViewById(R.id.tv_college);
+        tvPhone = (TextView) findViewById(R.id.tv_phone);
         final String EMAIL = "email";
-        ProgressDialog = new ProgressDialog(this);
-        ProgressDialog.setMessage("I am working");
-        ProgressDialog.setTitle("Registering again");
+
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        final String phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber == null) {
+            Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
+        }
+        getDetails(phoneNumber);
+
+        ivBar = (ProgressBar) findViewById(R.id.pb_profile_image);
+        detailsBar = (ProgressBar) findViewById(R.id.pb_user_profile);
+
+        ivBar.setVisibility(View.VISIBLE);
+        detailsBar.setVisibility(View.VISIBLE);
+
 
         mAuth = FirebaseAuth.getInstance();
-        ProgressDialog.setCanceledOnTouchOutside(false);
-        textView1 = (TextView)findViewById(R.id.tv5);
-        textView2 = (TextView)findViewById(R.id.tv6);
+        textView1 = (TextView) findViewById(R.id.tv5);
+        textView2 = (TextView) findViewById(R.id.tv6);
         loginButton = (LoginButton) findViewById(R.id.login_button);
         profilePictureFrame = (RelativeLayout) findViewById(R.id.profile_picture_layout);
-        profilePicture = (ImageView)findViewById(R.id.profile_pic);
+        profilePicture = (ImageView) findViewById(R.id.profile_pic);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
+        checkStatus();
         // If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                if(Profile.getCurrentProfile() == null) {
+                ivBar.setVisibility(View.VISIBLE);
+                if (Profile.getCurrentProfile() == null) {
                     mProfileTracker = new ProfileTracker() {
                         @Override
                         protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
@@ -131,18 +151,6 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(ProfileActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        mProgress = new ProgressDialog(this);
-        mProgress.setMessage("I am working");
-        mProgress.setTitle("yes i am");
-        mProgress.setCanceledOnTouchOutside(false);
-
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-        final String phoneNumber = prefs.getString("Phone", null);
-        if (phoneNumber == null) {
-            Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
-        }
-        checkStatus();
-        getDetails(phoneNumber);
 //        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dashboard_image);
 //        Bitmap resized = Bitmap.createScaledBitmap(largeIcon, 100, 100, true);
 //        GetRoundedImage getRoundedImage = new GetRoundedImage();
@@ -154,10 +162,6 @@ public class ProfileActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final TextView tvName = (TextView) findViewById(R.id.tv_name);
-                final TextView tvMail = (TextView) findViewById(R.id.tv_email);
-                final TextView tvCollege = (TextView) findViewById(R.id.tv_college);
-                final TextView tvPhone = (TextView) findViewById(R.id.tv_phone);
                 final EditText input1 = new EditText(ProfileActivity.this);
                 final EditText input2 = new EditText(ProfileActivity.this);
                 final EditText input3 = new EditText(ProfileActivity.this);
@@ -170,17 +174,17 @@ public class ProfileActivity extends AppCompatActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                 layoutParams.setMargins(30, 0, 30, 0);
-                TextView tv_name = new TextView(ProfileActivity.this);
+                final TextView tv_name = new TextView(ProfileActivity.this);
                 tv_name.setLayoutParams(layoutParams);
 
 
                 tv_name.setText("Name");
                 input1.setLayoutParams(layoutParams);
-                TextView tv_email = new TextView(ProfileActivity.this);
+                final TextView tv_email = new TextView(ProfileActivity.this);
                 tv_email.setText("Email");
                 tv_email.setLayoutParams(layoutParams);
                 input2.setLayoutParams(layoutParams);
-                TextView tv_college = new TextView(ProfileActivity.this);
+                final TextView tv_college = new TextView(ProfileActivity.this);
                 tv_college.setText("College Name");
                 Toast.makeText(ProfileActivity.this, userDetails.getmName(), Toast.LENGTH_SHORT).show();
                 input1.setText(userDetails.getmName());
@@ -202,13 +206,15 @@ public class ProfileActivity extends AppCompatActivity {
                                 Log.i("AlertDialog", "TextEntry 1 Entered " + input1.getText().toString());
                                 Log.i("AlertDialog", "TextEntry 2 Entered " + input2.getText().toString());
     /* User clicked OK so do some stuff */
+                                detailsBar.setVisibility(View.VISIBLE);
                                 userDetails.setmName(input1.getText().toString());
                                 userDetails.setEmail(input2.getText().toString());
                                 userDetails.setmCollege(input3.getText().toString());
+                                tvName.setText("");
+                                tvCollege.setText("");
+                                tvMail.setText("");
+                                tvPhone.setText("");
                                 registerUser(userDetails);
-                                tvName.setText(userDetails.getmName());
-                                tvMail.setText(userDetails.getEmail());
-                                tvCollege.setText(userDetails.getmCollege());
                                 layout.removeAllViews();
                             }
                         }).setNegativeButton("Cancel",
@@ -264,6 +270,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            detailsBar.setVisibility(View.GONE);
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
                             Toast.makeText(ProfileActivity.this, obj.getString("name"), Toast.LENGTH_LONG).show();
@@ -310,10 +317,13 @@ public class ProfileActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                detailsBar.setVisibility(View.GONE);
+                tvName.setText(userDetails.getmName());
+                tvMail.setText(userDetails.getEmail());
+                tvCollege.setText(userDetails.getmCollege());
+                tvPhone.setText(userDetails.getmPhone());
                 Toast.makeText(getApplicationContext(), "dfdsfsd" + response, Toast.LENGTH_SHORT).show();
                 Log.i("My success", "" + response);
-                mProgress.dismiss();
                 Toast.makeText(ProfileActivity.this, "Api info updated", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
@@ -322,10 +332,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
                 Log.i("My error", "" + error);
-                mProgress.dismiss();
             }
-        })
-        {
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
@@ -344,18 +352,19 @@ public class ProfileActivity extends AppCompatActivity {
     public void addPhoto() {
         try {
 
-            Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(800,800));
+            Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(800, 800));
             Log.d("fbProfile", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getProfilePictureUri(800, 800).toString());
-            Picasso.with(ProfileActivity.this).load(Profile.getCurrentProfile().getProfilePictureUri(800,800).toString())
-                    .into(new Target(){
+            Picasso.with(ProfileActivity.this).load(Profile.getCurrentProfile().getProfilePictureUri(800, 800).toString())
+                    .into(new Target() {
                         @Override
-                        public void onBitmapLoaded(final Bitmap bitmap,Picasso.LoadedFrom from){
+                        public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
                             GetRoundedImage getRoundedImage = new GetRoundedImage();
                             Bitmap conv_bm = getRoundedImage.getRoundedShape(bitmap);
                             BitmapDrawable background = new BitmapDrawable(conv_bm);
                             profilePictureFrame.setBackground(background);
                             profilePicture.setImageResource(R.drawable.frame_profile_2);
                             Toast.makeText(ProfileActivity.this, "Image loaded", Toast.LENGTH_SHORT).show();
+                            ivBar.setVisibility(View.GONE);
                         }
 
                         @Override
@@ -364,7 +373,7 @@ public class ProfileActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable){
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
 
                         }
                     });
@@ -375,18 +384,19 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
-    private void checkStatus(){
+
+    private void checkStatus() {
         AccessToken token = AccessToken.getCurrentAccessToken();
 
         if (token == null) {
+            ivBar.setVisibility(View.GONE);
             profilePicture.setImageDrawable(getResources().getDrawable(R.drawable.profile_frame));
-        }
-        else{
+        } else {
             loginButton.setVisibility(View.GONE);
             textView1.setVisibility(View.GONE);
             textView2.setVisibility(View.GONE);
             addPhoto();
-        //    Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(200,200));
+            //    Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(200,200));
         }
 
     }
