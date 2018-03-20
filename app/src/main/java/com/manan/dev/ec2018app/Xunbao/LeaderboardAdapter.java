@@ -41,9 +41,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         LeaderboardList member = leaderboardList.get(position);
         holder.rank.setText(member.getRank());
         if (member.getRank().equals("1")) {
-            holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.xunbao_leader_1));
+            holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.plank_black));
         } else {
-            holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.xunbao_leader_2));
+            holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.plank_black));
         }
         holder.name1.setText(member.getName1());
         holder.level.setText(member.getLevel());

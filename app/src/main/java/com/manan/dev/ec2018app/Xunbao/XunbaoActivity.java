@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -32,14 +33,23 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     private XunbaoTabsPagerAdapter adapter;
     private String userFbId;
     private boolean flag = false;
+    private ImageView backbutton_xun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xunbao);
 
+        backbutton_xun=findViewById(R.id.xunbao_back_button);
         navBar = (BottomNavigationView) findViewById(R.id.xunbao_nav_bar);
         navBar.getMenu().getItem(1).setChecked(true);
+
+        backbutton_xun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

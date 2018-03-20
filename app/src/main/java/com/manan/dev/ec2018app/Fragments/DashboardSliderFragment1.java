@@ -150,6 +150,18 @@ public class DashboardSliderFragment1 extends Fragment {
                  WhatsNewModel mode = whatsnewarraylist.get(i);
                  contenttv.setText(mode.getContent());
                  contenttv.setTag(mode.getIntent());
+                 if(contenttv.getTag().equals(0))
+                 {
+                     explore.setText("Xunbao");
+                 }
+                 else if(contenttv.getTag().equals(1)){
+                     explore.setText("Culm. Times");
+
+                 } else if(contenttv.getTag().equals(2)){
+                     explore.setText("Maps");
+                 }
+
+
                  //          timer.cancel();
                  //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
@@ -172,6 +184,8 @@ public class DashboardSliderFragment1 extends Fragment {
 
                      }
                  });//
+
+
                  // this function can change value of mInterval.
                  i++;
                  if (i == whatsnewarraylist.size()) {

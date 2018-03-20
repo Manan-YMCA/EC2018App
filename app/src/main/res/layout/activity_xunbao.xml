@@ -6,15 +6,21 @@
     android:layout_height="match_parent"
     tools:context="com.manan.dev.ec2018app.Xunbao.XunbaoActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/xunbao_back"
         android:layout_marginBottom="56dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/back_xunbao"/>
         <ImageView
             android:id="@+id/xunbao_heading"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="70dp"
             android:layout_marginTop="20dp"
             android:gravity=""
             android:src="@drawable/xunbao_logo" />
@@ -26,7 +32,7 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         app:menu="@menu/xunbao_bottom_nav_menu"
-        android:background="#290101"
+        android:background="@drawable/pager_xubao_nav"
         android:theme="@style/XunbaoTheme"
         app:itemTextColor="@color/xunbao_nav_bar_selector"
         app:itemIconTint="@color/xunbao_nav_bar_selector"/>
@@ -36,5 +42,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/xunbao_nav_bar"/>
+    <ImageView
+        android:id="@+id/xunbao_back_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+
+        android:src="@drawable/vector_arrow" />
+    <ImageView
+        android:id="@+id/ec_logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+   android:layout_marginTop="6dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/logo_black" />
 
 </RelativeLayout>

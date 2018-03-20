@@ -7,7 +7,16 @@
 
 
 
-
+    <TextView
+        android:id="@+id/tv_qweuestion_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="26dp"
+        android:textColor="@color/Black"
+        android:text="Questions"
+        android:fontFamily="@font/futura"
+        android:layout_marginTop="90dp"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,6 +33,8 @@
                 android:id="@+id/iv_xunbao_question_image"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/treasure_hunt_map" />
@@ -148,6 +159,7 @@
             android:layout_below="@+id/refresh_button"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/futura"
             android:text="NOT LOGGED IN"
              />
 

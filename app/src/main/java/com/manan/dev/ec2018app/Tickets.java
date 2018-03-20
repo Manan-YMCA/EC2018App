@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +32,7 @@ public class Tickets extends AppCompatActivity {
     private ArrayList<QRTicketModel> userTickets;
     private DatabaseController databaseController;
     private RecyclerView userTicketsView;
+    private ImageView tickback;
     SwipeRefreshLayout s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class Tickets extends AppCompatActivity {
         Log.d("Tickets", phoneNumber);
         Log.d("Tickets", Integer.toString(userTickets.size()));
         userTicketsView.setAdapter(mAdapter);
+        tickback=findViewById(R.id.tic_back_button);
 
         s=findViewById(R.id.swipe_refresh_layout);
 
@@ -66,6 +70,14 @@ public class Tickets extends AppCompatActivity {
         } else {
             displayTickets(phoneNumber);
         }
+        tickback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
     }
 
     private void reload(String phone) {

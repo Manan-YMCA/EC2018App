@@ -6,15 +6,30 @@
 
 
     <ScrollView
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="50dp"
-        android:textSize="18dp"
-        android:text="Welcome to Xunbao. Play and get a chance to win exciting prizes.\n Prizes:\n1st prize: Bluetooth Speaker\n2nd Prize: VR Headset\n3rd Prize: Pencil"/>
+        android:padding="40dp"
 
+        android:fontFamily="@font/futura"
+        android:textSize="14dp"
+        android:textAlignment="center"
+       android:text="@string/xunbao_about"
+
+        />
     </ScrollView>
+    <TextView
+        android:id="@+id/tv_leaderboard_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="26dp"
+        android:textColor="@color/Black"
+        android:text="About"
+
+        android:fontFamily="@font/futura"
+        android:layout_marginTop="90dp"/>
 </RelativeLayout>

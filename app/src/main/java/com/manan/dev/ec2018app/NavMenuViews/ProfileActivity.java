@@ -60,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private RelativeLayout profilePictureFrame;
-    private ImageView profilePicture;
+    private ImageView profilePicture,backbutton;
     private TextView textView1;
     private TextView textView2;
     private ProfileTracker mProfileTracker;
@@ -83,6 +83,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvCollege = (TextView) findViewById(R.id.tv_college);
         tvPhone = (TextView) findViewById(R.id.tv_phone);
         final String EMAIL = "email";
+        backbutton=findViewById(R.id.pr_back_button);
+
 
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         final String phoneNumber = prefs.getString("Phone", null);
@@ -109,6 +111,14 @@ public class ProfileActivity extends AppCompatActivity {
         // If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
