@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app.Xunbao;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -82,9 +83,12 @@ public class LeaderboardFragment extends Fragment {
                             JSONArray k = new JSONArray(response);
                             for (int i = 0; i < k.length(); i++) {
                                 JSONObject k1 = k.getJSONObject(i);
-                                String k2 = k1.getString("user");
+                                JSONObject k2 = k1.getJSONObject("user");
+                                String fname=k2.getString("first_name");
+                                String lname=k2.getString("last_name");
+                                String fid=k2.getString("username");
                                 String k3 = k1.getString("solved");
-                                LeaderboardList k4 = new LeaderboardList(k2, Integer.toString(i), k3);
+                                LeaderboardList k4 = new LeaderboardList(fname+" "+lname, Integer.toString(i+1), Integer.toString(Integer.parseInt(k3)-1),fid);
                                 leaderboardList.add(k4);
                             }
 
