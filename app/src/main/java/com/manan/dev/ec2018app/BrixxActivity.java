@@ -11,7 +11,6 @@ import com.manan.dev.ec2018app.Adapters.BrixxAdapter;
 public class BrixxActivity extends AppCompatActivity {
 
     private BrixxAdapter iViewPagerAdapter;
-
     private ViewPager iViewpager;
     private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
     private ImageView next_btn, pre_btn;

@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-android:layout_marginBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp"
-    android:background="@color/White"
-    android:layout_height="wrap_content">
+    android:background="@color/White">
+
     <View
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="0.7dp"
-        android:background="#ffffff"
         android:id="@+id/lin1"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:background="#000" />
+
     <RelativeLayout
+        android:id="@+id/ctc_rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ctc_rl_top"
-        android:layout_below="@id/lin1"
-        >
+        android:layout_below="@id/lin1">
+
         <LinearLayout
             android:id="@+id/ctc_ll_clubtime"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/ctc_clubicon"
-                android:layout_margin="10dp"
                 android:layout_width="48dp"
-                android:src="@drawable/logo_black"
-                android:layout_height="48dp" />
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/logo_black" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,105 +41,57 @@ android:layout_marginBottom="10dp"
                     android:id="@+id/ctc_clubname"
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
-                    android:textSize="16sp"
-
-                    android:textStyle="bold"
-                    android:textColor="@color/Black"
                     android:fontFamily="@font/futura"
-                    android:text="Manan - A Techno Surge"/>
+                    android:text="Manan - A Techno Surge"
+                    android:textColor="@color/Black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/ctc_posttime"
-                    android:layout_below="@+id/ctc_clubname"
-                    android:text="2 hours ago"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/futura"
-                    android:layout_centerVertical="true"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/ctc_clubname"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/futura"
+                    android:text="2 hours ago"
+                    android:textSize="12dp" />
             </RelativeLayout>
         </LinearLayout>
-        <View
 
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#000"
-            android:layout_below="@id/ctc_ll_clubtime"
-            android:id="@+id/lin2"
-            />
         <TextView
             android:id="@+id/ctc_posttitle"
-            android:text="My name is Anthony"
-            android:textSize="18dp"
-            android:textColor="@color/Black"
-         android:layout_margin="10dp"
-            android:layout_below="@+id/lin2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura" />
+            android:layout_below="@+id/ctc_ll_clubtime"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/futura"
+            android:text="My name is Anthony"
+            android:textColor="@color/Black"
+            android:textSize="18dp" />
+
+        <View
+            android:id="@+id/lin2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/ctc_posttitle"
+            android:background="#000" />
+
         <ImageView
             android:id="@+id/ctc_postimage"
-
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
             android:layout_below="@id/lin2"
-            android:src="@drawable/default_image"
             android:scaleType="centerCrop"
+            android:src="@drawable/default_image" />
+
+        <View
+            android:id="@+id/lin3"
             android:layout_width="match_parent"
-
-            android:layout_height="240dp" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-           android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_below="@+id/ctc_postimage">
-            <TextView
-                android:id="@+id/ctc_likescount"
-                android:text="215 likes"
-                android:layout_margin="8dp"
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/futura" />
-            <TextView
-                android:id="@+id/ctc_commentscount"
-                android:text="21 comments"
-                android:layout_margin="8dp"
-                android:layout_toRightOf="@+id/ctc_likescount"
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/futura"/>
-            <ImageView
-                android:id="@+id/ctc_sharebtn"
-                android:layout_centerVertical="true"
-                android:layout_width="32dp"
-                android:layout_margin="4dp"
-                android:layout_alignParentRight="true"
-                android:layout_height="32dp"
-                android:src="@android:drawable/ic_menu_share"
-                android:layout_alignParentEnd="true" />
-            <ImageView
-                android:id="@+id/ctc_commentbtn"
-                android:layout_width="32dp"
-                android:layout_margin="4dp"
-                android:layout_toLeftOf="@+id/ctc_sharebtn"
-                android:layout_height="32dp"
-                android:src="@android:drawable/sym_action_chat" />
-            <ImageView
-                android:id="@+id/ctc_likebtn"
-                android:layout_width="32dp"
-                android:layout_margin="4dp"
-                android:layout_height="32dp"
-                android:src="@android:drawable/btn_star_big_off"
-                android:layout_toLeftOf="@+id/ctc_commentbtn" />
-        </RelativeLayout>
-
-
+            android:layout_height="1dp"
+            android:layout_below="@id/ctc_postimage"
+            android:layout_marginTop="0.5dp"
+            android:background="#000" />
     </RelativeLayout>
-    <View
-        android:layout_below="@id/ctc_rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="0.7dp"
-        android:background="#000"
-        android:id="@+id/lin3"
-        />
+
 </RelativeLayout>

@@ -7,6 +7,14 @@
     android:background="@color/White"
     tools:context="com.manan.dev.ec2018app.EventRegister">
 
+    <ProgressBar
+        android:id="@+id/pb_register"
+        android:indeterminate="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
     <ImageView
         android:id="@+id/logo_left"
         android:layout_width="40dp"

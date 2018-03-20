@@ -7,25 +7,25 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Backstage "
-        android:id="@+id/cat_head"
-        android:textSize="32dp"
-        android:fontFamily="@font/futura"/>
+
+        <TextView
+            android:id="@+id/cat_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/futura"
+            android:text="Brixx"
+            android:textSize="32dp" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/dev_recycler_view_f3"
-            android:layout_below="@id/cat_head"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
+            android:layout_below="@id/cat_head"
+            android:layout_marginBottom="50dp"
             android:layout_marginTop="5dp"
             android:padding="10dp"
-            android:layout_marginBottom="50dp"
-            />
+            android:scrollbars="none" />
     </RelativeLayout>
 </FrameLayout>

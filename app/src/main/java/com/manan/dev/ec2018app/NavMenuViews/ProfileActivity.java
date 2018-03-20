@@ -1,18 +1,15 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +34,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,16 +44,13 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.Models.UserDetails;
+import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Utilities.GetRoundedImage;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         final String phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
-            Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
+            Log.e("TAG", "onCreate : " + "Shared pref no data!");
         }
         getDetails(phoneNumber);
 
@@ -143,12 +136,12 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Toast.makeText(ProfileActivity.this, "Fb login cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(ProfileActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onError: " + exception.getMessage());
             }
         });
 //        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dashboard_image);
@@ -186,7 +179,9 @@ public class ProfileActivity extends AppCompatActivity {
                 input2.setLayoutParams(layoutParams);
                 final TextView tv_college = new TextView(ProfileActivity.this);
                 tv_college.setText("College Name");
-                Toast.makeText(ProfileActivity.this, userDetails.getmName(), Toast.LENGTH_SHORT).show();
+
+                Log.e("TAG", "onClick: " + userDetails.getmName());
+
                 input1.setText(userDetails.getmName());
                 input3.setText(userDetails.getmCollege());
                 input2.setText(userDetails.getEmail());
@@ -248,8 +243,7 @@ public class ProfileActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("loginStatus", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(ProfileActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -263,7 +257,9 @@ public class ProfileActivity extends AppCompatActivity {
         final TextView tvCollege = (TextView) findViewById(R.id.tv_college);
         final TextView tvPhone = (TextView) findViewById(R.id.tv_phone);
         String url = getResources().getString(R.string.get_user_details_api) + phone;
-        Toast.makeText(this, "URL: " + url, Toast.LENGTH_LONG).show();
+
+        Log.e("TAG", "getDetails url: " + url);
+
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -273,7 +269,7 @@ public class ProfileActivity extends AppCompatActivity {
                             detailsBar.setVisibility(View.GONE);
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
-                            Toast.makeText(ProfileActivity.this, obj.getString("name"), Toast.LENGTH_LONG).show();
+                            Log.e("TAG", "onResponse: " + obj.getString("name"));
                             tvName.setText(obj.getString("name"));
                             tvMail.setText(obj.getString("email"));
                             tvCollege.setText(obj.getString("college"));
@@ -294,7 +290,7 @@ public class ProfileActivity extends AppCompatActivity {
                         catch (Exception e) {
                             // If an error occurs, this prints the error to the log
                             e.printStackTrace();
-                            Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("TAG", "onResponse: " + e.getMessage());
                         }
                     }
                 },
@@ -302,7 +298,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     // Handles errors that occur due to Volley
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ProfileActivity.this, "Error aagya2", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "onErrorResponse: " + error.getMessage());
                         Log.e("Volley", "Error");
                     }
                 }
@@ -312,7 +308,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void registerUser(final UserDetails userDetails) {
         String url = getResources().getString(R.string.register_user_api);
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "registerUser url : " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -322,15 +318,16 @@ public class ProfileActivity extends AppCompatActivity {
                 tvMail.setText(userDetails.getEmail());
                 tvCollege.setText(userDetails.getmCollege());
                 tvPhone.setText(userDetails.getmPhone());
-                Toast.makeText(getApplicationContext(), "dfdsfsd" + response, Toast.LENGTH_SHORT).show();
+
+                Log.e("TAG", "onResponse: " + response);
                 Log.i("My success", "" + response);
-                Toast.makeText(ProfileActivity.this, "Api info updated", Toast.LENGTH_SHORT).show();
+
+                Log.e("TAG", "onResponse: " + "API info updated!");
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
+                Log.e("TAG", "onErrorResponse error : " + error);
                 Log.i("My error", "" + error);
             }
         }) {
@@ -363,7 +360,7 @@ public class ProfileActivity extends AppCompatActivity {
                             BitmapDrawable background = new BitmapDrawable(conv_bm);
                             profilePictureFrame.setBackground(background);
                             profilePicture.setImageResource(R.drawable.frame_profile_2);
-                            Toast.makeText(ProfileActivity.this, "Image loaded", Toast.LENGTH_SHORT).show();
+                            Log.e("TAG", "onBitmapLoaded: " + "Image Loaded!");
                             ivBar.setVisibility(View.GONE);
                         }
 

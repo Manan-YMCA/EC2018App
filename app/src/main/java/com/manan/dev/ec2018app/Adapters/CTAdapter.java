@@ -1,69 +1,52 @@
 package com.manan.dev.ec2018app.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.AccessToken;
-import com.facebook.Profile;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
-import com.manan.dev.ec2018app.CommentActivity;
-import com.manan.dev.ec2018app.Models.likesModel;
 import com.manan.dev.ec2018app.Models.postsModel;
 import com.manan.dev.ec2018app.R;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.manan.dev.ec2018app.CulmycaTimesActivity.dialog;
+import java.util.Locale;
 
 
-public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
+public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder> {
 
     private List<postsModel> postsList;
     private Context context;
     private postsModel topic;
-    int liked=0;
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView clubName,caption,likes,comments,postTime;
-        public ImageView clubIcon,like, comment,share;
+        public TextView clubName, caption, postTime;
+        public ImageView clubIcon, postImage;
 
 
         public MyViewHolder(View view) {
             super(view);
             clubName = (TextView) view.findViewById(R.id.ctc_clubname);
             caption = (TextView) view.findViewById(R.id.ctc_posttitle);
-            likes = (TextView) view.findViewById(R.id.ctc_likescount);
-            comments = (TextView) view.findViewById(R.id.ctc_commentscount);
             postTime = (TextView) view.findViewById(R.id.ctc_posttime);
             clubIcon = (ImageView) view.findViewById(R.id.ctc_clubicon);
-            like = (ImageView) view.findViewById(R.id.ctc_likebtn);
-            comment = (ImageView) view.findViewById(R.id.ctc_commentbtn);
-            share = (ImageView) view.findViewById(R.id.ctc_sharebtn);
+            postImage = (ImageView) view.findViewById(R.id.ctc_postimage);
         }
     }
 
 
-    public CTAdapter(Context context,List<postsModel> topicList) {
+    public CTAdapter(Context context, List<postsModel> topicList) {
         this.postsList = topicList;
-        this.context =context;
+        this.context = context;
     }
 
     @Override
@@ -75,175 +58,47 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         topic = postsList.get(position);
         holder.caption.setText(topic.title);
-        holder.postTime.setText(String.valueOf(topic.time));
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(topic.time);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM,yy", Locale.ENGLISH);
+        String formattedDate = sdf.format(cal.getTime());
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
+        String formattedTime = sdf1.format(cal.getTime());
+
+        holder.postTime.setText(formattedDate + " " + formattedTime);
+
         holder.caption.setText(topic.title);
-        holder.clubName.setText(topic.clubName);
-        holder.likes.setText(Integer.toString(topic.likes)+" likes");
-        holder.comments.setText(Integer.toString(topic.comments.size())+" comments");
-        DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
+        Log.d("CT Adapterrrrrrrrrrr", topic.title);
+        holder.clubName.setText(topic.clubName.toUpperCase());
 
-        final AccessToken token=AccessToken.getCurrentAccessToken();
-        if(token!=null) {
-
-            postRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int flg = 0;
-                    postsModel m = dataSnapshot.getValue(postsModel.class);
-
-                    holder.likes.setText(Integer.toString(m.likes) + " likes");
-                    for (DataSnapshot mlikes : dataSnapshot.child("likefids").getChildren()) {
-                        likesModel l = mlikes.getValue(likesModel.class);
-
-                        if (l.fid.equals(Profile.getCurrentProfile().getId())) {
-                            flg = 1;
-                            break;
-                        }
-                    }
-                    if (flg == 1) {
-                        holder.like.setImageResource(R.drawable.xunbao_back);
-                    } else {
-                        holder.like.setImageResource(R.drawable.xunbao_about);
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
-
-
-
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        Target mTarget;
+        mTarget = new Target() {
             @Override
-            public void onClick(View view) {
-
-                AccessToken token=AccessToken.getCurrentAccessToken();
-                if(token==null) {
-                    dialog.show();
-                }
-                else {
-
-                    DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postsList.get(holder.getAdapterPosition()).clubName).child(postsList.get(holder.getAdapterPosition()).postid);
-
-                    postRef.runTransaction(new Transaction.Handler() {
-
-                        @Override
-                        public Transaction.Result doTransaction(MutableData mutableData) {
-                            postsModel p = mutableData.getValue(postsModel.class);
-
-                            if (p == null) {
-                                return Transaction.success(mutableData);
-
-                            }
-                            Log.v("heyt","1");
-                            ArrayList<likesModel> alllikes=new ArrayList<likesModel>();
-                            for(MutableData mlikes: mutableData.child("likefids").getChildren()) {
-                                likesModel l = mlikes.getValue(likesModel.class);
-                                Log.v("heyt",l.fid);
-                                alllikes.add(l);
-                            }
-
-
-                            Log.v("heyt","2");
-                            p.likefids=alllikes;
-                            int flag=0;
-
-
-                            Log.v("heyt","3");
-                            for(likesModel l:p.likefids){
-                                Log.v("heyt",l.fid+Profile.getCurrentProfile().getId());
-                                if(l.fid.equals(Profile.getCurrentProfile().getId())){
-                                    flag=1;
-                                    break;
-                                }
-                            }
-
-                            Log.v("heyt","4");
-
-                            if (flag==1) {
-                                p.likes = p.likes - 1;
-                                int i=0;
-                                liked=0;
-
-                                Log.v("heyt","10");
-                                for(likesModel l: p.likefids){
-                                    if(l.fid.equals(Profile.getCurrentProfile().getId())){
-                                        p.likefids.remove(i);
-                                        Log.v("i value",Integer.toString(p.likefids.size()));
-                                        break;
-                                    }
-                                    i++;
-                                }
-                            } else {
-
-                                liked=1;
-                                Log.d("added",Integer.toString(p.likes));
-                                p.likes = p.likes + 1;
-                                p.likefids.add(new likesModel(Profile.getCurrentProfile().getId()));
-                            }
-                            mutableData.setValue(p);
-
-                            Log.v("heyt","5");
-                            return Transaction.success(mutableData);
-                        }
-
-                        @Override
-                        public void onComplete(DatabaseError databaseError, boolean b,
-                                               DataSnapshot dataSnapshot) {
-                            if(liked==0){
-                                topic.likes--;
-                                holder.likes.setText(topic.likes+"");
-                            }
-                            else{
-                                topic.likes++;
-                                holder.likes.setText(topic.likes+"");
-
-                            }
-                            // Transaction completed
-                        }
-                    });
-                }
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                holder.postImage.setImageBitmap(bitmap);
             }
-        });
 
-        holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onBitmapFailed(Drawable errorDrawable) {
 
-                context.startActivity(new Intent(context, CommentActivity.class)
-                        .putExtra("clubName", topic.getClubName())
-                        .putExtra("eventId", topic.getPostid())
-                        .addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
-        });
 
-        holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String msg = "Check out this post by "+topic.getClubName()+". Follow the link:";
-                shareTextMessage(msg);
-            }
-        });
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
 
-    }
-    private void shareTextMessage(String msg) {
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_TEXT, msg);
-        i.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        context.getApplicationContext().startActivity(i);
+            }
+        };
+        Picasso.with(context).load(topic.photoURL).into(mTarget);
     }
 
     @Override
     public int getItemCount() {
-
         return postsList.size();
     }
 }

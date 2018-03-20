@@ -1,118 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.manan.dev.ec2018app.DevelopersActivity">
+    tools:context="com.manan.dev.ec2018app.NavMenuViews.DevelopersActivity">
 
-    <ImageView
-        android:id="@+id/dv_ec_logo"
-        android:layout_width="40dp"
-        android:layout_toRightOf="@id/dev_back_button"
-        android:layout_height="40dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/logo_black" />
-    <ImageView
-        android:id="@+id/dev_back_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
+    <RelativeLayout
+        android:id="@+id/action_bar_dev"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/White">
 
-        android:src="@drawable/vector_arrow"
-        android:tint="#717070" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo_black" />
 
-    <TextView
-        android:id="@+id/dv_category_name_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/futura"
-        android:text="CREDITS"
-        android:textAlignment="center"
-        android:textAllCaps="true"
+        <ImageView
+            android:id="@+id/dev_back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/vector_arrow"
+            android:tint="#717070" />
 
-        android:textSize="22dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/futura"
+            android:text="CREDITS"
+            android:textSize="24dp" />
+
+    </RelativeLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vpPager"
-
         android:layout_width="match_parent"
-        android:layout_below="@id/dv_ec_logo"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
+        android:layout_below="@id/action_bar_dev" />
+
+    <LinearLayout
         android:id="@+id/nav"
-        android:padding="15dp"
-        android:background="@color/White"
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-     <LinearLayout
-         android:layout_width="0dp"
-         android:layout_height="60dp"
-         android:layout_weight="1"
-         android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:background="@color/White"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
-            android:id="@+id/but_dev"
-            android:src="@drawable/devp"/>
-         <TextView
-             android:layout_width="match_parent"
-             android:gravity="center"
-             android:layout_height="wrap_content"
-             android:text="Developers"
-             android:fontFamily="@font/futura"/>
-     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
-            android:id="@+id/but_des"
+            android:orientation="vertical">
 
-            android:src="@drawable/crea"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:text="Creatives &amp; Des"
-            android:fontFamily="@font/futura"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/but_cre"
+            <ImageView
+                android:id="@+id/but_dev"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/devp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Developers" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
-            android:src="@drawable/op"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:text="Backstage"
-            android:fontFamily="@font/futura"/>
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/but_des"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/crea" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Creatives" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/but_cre"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/op" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Brixx" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

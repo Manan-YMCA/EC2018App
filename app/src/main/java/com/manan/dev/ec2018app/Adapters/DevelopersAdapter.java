@@ -25,23 +25,24 @@ import java.util.List;
 
 public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.ViewHolder> {
 
-  private List<DeveloperModel> item;
-
+    private List<DeveloperModel> item;
     private Context context;
 
-    public DevelopersAdapter(Context context,List<DeveloperModel> item) {
+    public DevelopersAdapter(Context context, List<DeveloperModel> item) {
         this.item = item;
         this.context = context;
     }
 
-    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.developer_display, parent, false);
         return new ViewHolder(v);
     }
 
-    @Override public void onBindViewHolder(ViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
-        final DeveloperModel dev= item.get(position);
+        final DeveloperModel dev = item.get(position);
         Picasso.with(context).load(dev.getPhotoUrl().toString()).into(holder.photo);
         holder.name.setText(dev.getName());
         holder.more.setText(dev.getMore().toString());
@@ -52,8 +53,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
                 context.startActivity(myIntent);
             }
         });
-        if(dev.getDesign()==true)
-        {
+        if (dev.getDesign() == true) {
             holder.star.setColorFilter(ContextCompat.getColor(context, R.color.yellow), PorterDuff.Mode.MULTIPLY);
         }
 
@@ -69,16 +69,16 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
         public TextView name;
         public TextView more;
 
-        public ImageView linkedin,star;
+        public ImageView linkedin, star;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             photo = (ImageView) itemView.findViewById(R.id.dev_photo);
             name = (TextView) itemView.findViewById(R.id.dev_name);
-            linkedin=(ImageView) itemView.findViewById(R.id.dev_linkdin);
+            linkedin = (ImageView) itemView.findViewById(R.id.dev_linkdin);
             more = (TextView) itemView.findViewById(R.id.dev_more);
-            star =(ImageView)itemView.findViewById(R.id.dev_star);
+            star = (ImageView) itemView.findViewById(R.id.dev_star);
 
 
         }

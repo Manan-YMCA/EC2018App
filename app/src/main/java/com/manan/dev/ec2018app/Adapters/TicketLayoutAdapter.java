@@ -60,7 +60,7 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
         Log.d("Tickets", singleItem.getQRcode());
         holder.feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
         TicketsGenerator generate = new TicketsGenerator();
-        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext,(int) mContext.getResources().getDimension(R.dimen.onefifty),(int) mContext.getResources().getDimension(R.dimen.onefifty));
+        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext,(int) mContext.getResources().getDimension(R.dimen.onefifty),(int) mContext.getResources().getDimension(R.dimen.onefifty), 80, 80);
         holder.itemImage.setImageBitmap(currTicket);
         holder.eventName.setText(currEvent.getmName());
         holder.eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));

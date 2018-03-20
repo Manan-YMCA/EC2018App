@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +34,14 @@ import com.manan.dev.ec2018app.Models.EventDetails;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -52,6 +59,7 @@ public class SplashScreen extends AppCompatActivity {
     private IncomingHandler incomingHandler;
     private static boolean offline = true;
     private boolean flag = false;
+    static boolean flagJSONParse = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,92 +138,126 @@ public class SplashScreen extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        JSONArray eventArray = object.getJSONArray("data");
-                        for (int i = 0; i < eventArray.length(); i++) {
-                            EventDetails event = new EventDetails();
-                            JSONObject currEvent = eventArray.getJSONObject(i);
-                            event.setmUniqueKey(i);
-                            if (currEvent.has("timing"))
-                                event.setmName(currEvent.getString("title"));
-                            if (currEvent.has("fee"))
-                                event.setmFees(currEvent.getLong("fee"));
-                            if (currEvent.has("timing")) {
-                                JSONObject timing = currEvent.getJSONObject("timing");
-                                if (timing.has("from"))
-                                    event.setmStartTime(timing.getLong("from"));
-                                if (timing.has("to"))
-                                    event.setmEndTime(timing.getLong("to"));
-                            }
-                            if (currEvent.has("clubname"))
-                                event.setmClubname(currEvent.getString("clubname"));
-                            if (currEvent.has("category"))
-                                event.setmCategory(currEvent.getString("category"));
-                            if (currEvent.has("desc"))
-                                event.setmDesc(currEvent.getString("desc"));
-                            if (currEvent.has("venue"))
-                                event.setmVenue(currEvent.getString("venue"));
-                            if (currEvent.has("rules"))
-                                event.setmRules(currEvent.getString("rules"));
-                            if (currEvent.has("photolink")) {
-                                event.setmPhotoUrl(currEvent.getString("photolink"));
-                            } else {
-                                event.setmPhotoUrl(null);
-                            }
-                            event.setmCoordinators(new ArrayList<Coordinators>());
-                            if (currEvent.has("coordinators")) {
-                                JSONArray coordinators = currEvent.getJSONArray("coordinators");
-                                for (int j = 0; j < coordinators.length(); j++) {
-                                    JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
-                                    Coordinators coord = new Coordinators();
-                                    if (coordinatorsDetail.has("_id"))
-                                        coord.setmCoordId(coordinatorsDetail.getString("_id"));
-                                    if (coordinatorsDetail.has("phone"))
-                                        coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
-                                    if (coordinatorsDetail.has("name"))
-                                        coord.setmCoordName(coordinatorsDetail.getString("name"));
-                                    event.getmCoordinators().add(coord);
-                                }
-                            }
-                            event.setmPrizes(new ArrayList<String>());
-                            if (currEvent.has("prizes")) {
-                                JSONObject prize = currEvent.getJSONObject("prizes");
-                                if (prize.has("prize1"))
-                                    event.getmPrizes().add(prize.getString("prize1"));
-                                if (prize.has("prize2"))
-                                    event.getmPrizes().add(prize.getString("prize2"));
-                                if (prize.has("prize3"))
-                                    event.getmPrizes().add(prize.getString("prize3"));
-                            } else {
-                                event.getmPrizes().add(null);
-                                event.getmPrizes().add(null);
-                                event.getmPrizes().add(null);
-                            }
-                            if (currEvent.has("_id"))
-                                event.setmEventId(currEvent.getString("_id"));
-                            if (currEvent.has("eventtype")) {
-                                event.setmEventTeamSize(currEvent.getString("eventtype"));
-                                //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
-                            }
-                            //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
-                            allEvents.add(event);
-                        }
-                        incomingHandler.sendEmptyMessage(0);
-                    } catch (Exception e) {
-                        Toast.makeText(SplashScreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("DBChecker", e.getMessage());
-                        e.printStackTrace();
-                    }
-
+                    flagJSONParse = true;
+                    JsonParse(response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    if (!flagJSONParse) {
+                        retreiveEventsHardCode();
+                    }
                 }
             });
             queue.add(stringRequest);
+        } else if (!flagJSONParse) {
+            retreiveEventsHardCode();
+        }
+    }
+
+    void retreiveEventsHardCode() {
+        InputStream is = getResources().openRawResource(R.raw.all_events);
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        String jsonString = writer.toString();
+
+        JsonParse(jsonString);
+    }
+
+    void JsonParse(String response) {
+        try {
+            JSONObject object = new JSONObject(response);
+            JSONArray eventArray = object.getJSONArray("data");
+            for (int i = 0; i < eventArray.length(); i++) {
+                EventDetails event = new EventDetails();
+                JSONObject currEvent = eventArray.getJSONObject(i);
+                event.setmUniqueKey(i);
+                if (currEvent.has("timing"))
+                    event.setmName(currEvent.getString("title"));
+                if (currEvent.has("fee"))
+                    event.setmFees(currEvent.getLong("fee"));
+                if (currEvent.has("timing")) {
+                    JSONObject timing = currEvent.getJSONObject("timing");
+                    if (timing.has("from"))
+                        event.setmStartTime(timing.getLong("from"));
+                    if (timing.has("to"))
+                        event.setmEndTime(timing.getLong("to"));
+                }
+                if (currEvent.has("clubname"))
+                    event.setmClubname(currEvent.getString("clubname"));
+                if (currEvent.has("category"))
+                    event.setmCategory(currEvent.getString("category"));
+                if (currEvent.has("desc"))
+                    event.setmDesc(currEvent.getString("desc"));
+                if (currEvent.has("venue"))
+                    event.setmVenue(currEvent.getString("venue"));
+                if (currEvent.has("rules"))
+                    event.setmRules(currEvent.getString("rules"));
+                if (currEvent.has("photolink")) {
+                    event.setmPhotoUrl(currEvent.getString("photolink"));
+                } else {
+                    event.setmPhotoUrl(null);
+                }
+                event.setmCoordinators(new ArrayList<Coordinators>());
+                if (currEvent.has("coordinators")) {
+                    JSONArray coordinators = currEvent.getJSONArray("coordinators");
+                    for (int j = 0; j < coordinators.length(); j++) {
+                        JSONObject coordinatorsDetail = coordinators.getJSONObject(j);
+                        Coordinators coord = new Coordinators();
+                        if (coordinatorsDetail.has("_id"))
+                            coord.setmCoordId(coordinatorsDetail.getString("_id"));
+                        if (coordinatorsDetail.has("phone"))
+                            coord.setmCoordPhone(coordinatorsDetail.getLong("phone"));
+                        if (coordinatorsDetail.has("name"))
+                            coord.setmCoordName(coordinatorsDetail.getString("name"));
+                        event.getmCoordinators().add(coord);
+                    }
+                }
+                event.setmPrizes(new ArrayList<String>());
+                if (currEvent.has("prizes")) {
+                    JSONObject prize = currEvent.getJSONObject("prizes");
+                    if (prize.has("prize1"))
+                        event.getmPrizes().add(prize.getString("prize1"));
+                    if (prize.has("prize2"))
+                        event.getmPrizes().add(prize.getString("prize2"));
+                    if (prize.has("prize3"))
+                        event.getmPrizes().add(prize.getString("prize3"));
+                } else {
+                    event.getmPrizes().add(null);
+                    event.getmPrizes().add(null);
+                    event.getmPrizes().add(null);
+                }
+                if (currEvent.has("_id"))
+                    event.setmEventId(currEvent.getString("_id"));
+                if (currEvent.has("eventtype")) {
+                    event.setmEventTeamSize(currEvent.getString("eventtype"));
+                    //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
+                allEvents.add(event);
+            }
+            incomingHandler.sendEmptyMessage(0);
+        } catch (Exception e) {
+            Log.e("TAG", "JsonParse: " + e.getMessage() );
+            Log.d("DBChecker", e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -280,15 +322,15 @@ public class SplashScreen extends AppCompatActivity {
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onBackPressed() {
-        if(flag) {
+        if (flag) {
             mCurrentAnimator.removeAllListeners();
             flag = false;
         }
         super.onBackPressed();
     }
+
 }
 

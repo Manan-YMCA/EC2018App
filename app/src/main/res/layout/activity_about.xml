@@ -4,51 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manan.dev.ec2018app.AboutActivity">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/White"
-            android:id="@+id/action_bar_abt">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                  android:layout_toRightOf="@+id/abt_back_button"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/logo_black"/>
-                <ImageView
-                    android:id="@+id/abt_back_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/vector_arrow"
-                    android:tint="#717070" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="About"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/futura"
-                    android:textSize="22dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                  />
+    tools:context="com.manan.dev.ec2018app.NavMenuViews.AboutActivity">
 
+    <RelativeLayout
+        android:id="@+id/action_bar_abt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/White">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo_black" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/about_back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/vector_arrow"
+            android:tint="#717070" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/futura"
+            android:text="About"
+            android:textSize="24dp" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/about_viewpager"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_below="@id/action_bar_abt"/>
+    </RelativeLayout>
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/about_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar_abt" />
 
 </RelativeLayout>

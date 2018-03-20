@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -155,16 +154,16 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         Log.d("hey", "" + xstatus);
                         if (xstatus == 2) {
                             //progressBar.dismiss();
-                            contestEnd.setText("KEEP CALM! CONTEST YET TO START");
+                            contestEnd.setText("KEEP CALM! CONTEST YET TO START!");
                             contestEnd.setVisibility(View.VISIBLE);
                         } else if (xstatus == 1) {
-                            if (!currFbid.equals("notLoggedIn")) {
+                            if (AccessToken.getCurrentAccessToken() != null) {
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                             }
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
-                            contestEnd.setText("THE CONTEST IS OVER! THANKS FOR PLAYING. IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
+                            contestEnd.setText("THE CONTEST IS OVER! THANKS FOR PLAYING. IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY.");
                             contestEnd.setVisibility(View.VISIBLE);
                         }
                     }
@@ -185,9 +184,12 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         JSONArray jsonArray = new JSONArray();
         JSONObject params = new JSONObject();
         try {
-            params.put("email", currFbid);
-            params.put("skey", "abbv");
-            params.put("name", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName());
+            params.put("fid", currFbid);
+            if(AccessToken.getCurrentAccessToken()!=null) {
+                params.put("skey", "abbv");
+                params.put("fname",Profile.getCurrentProfile().getFirstName());
+                params.put("lname",Profile.getCurrentProfile().getLastName());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -245,6 +247,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         currFbid = fbId;
         Log.d("xunbao", currFbid);
         checkStatus();
-        getQuestion();
+        if (!currFbid.equals("notLoggedIn"))
+            getQuestion();
     }
 }

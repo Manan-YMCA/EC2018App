@@ -1,8 +1,12 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +27,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.Utilities.IncomingSms;
+import com.manan.dev.ec2018app.Utilities.SmsListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -38,6 +47,7 @@ public class FragmentOtpChecker extends DialogFragment {
     String otp;
     private String otpNum;
     private String phoneNum;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     @Nullable
     @Override
@@ -65,7 +75,7 @@ public class FragmentOtpChecker extends DialogFragment {
                     activity.updateResult(true);
                     dismiss();
                 } else {
-                    Toast.makeText(getActivity(), "Incorrect OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,11 +99,14 @@ public class FragmentOtpChecker extends DialogFragment {
 
     private void sendSMS(final String phone, final String otpNum) {
         String url = getResources().getString(R.string.send_sms_api);
-        Toast.makeText(getActivity(), "URL: " + url, Toast.LENGTH_LONG).show();
+
+        Log.e("TAG", "sendSMS url: " + url );
+
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest smsReq = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
+
                     public void onResponse(String response) {
                         // TODO
                         Log.v("sms","response: " + response);
@@ -116,6 +129,42 @@ public class FragmentOtpChecker extends DialogFragment {
             }
         };
         queue.add(smsReq);
+        if(checkAndRequestPermissions()) {
+            IncomingSms.bindListener(new SmsListener() {
+                @Override
+                public void messageReceived(String messageText) {
+                    if(messageText.contains("Culmyca")) {
+                        otp = messageText.substring(0, 6);
+                        Log.e("TAG" , "messageReceived OTP : " + otp );
+                        // Handle this OTP TODO
+                    }
+                }
+            });
+        }
+    }
+
+    private  boolean checkAndRequestPermissions() {
+        int receiveSMS = ContextCompat.checkSelfPermission(getActivity(),
+                android.Manifest.permission.RECEIVE_SMS);
+
+        int readSMS = ContextCompat.checkSelfPermission(getActivity(),
+                android.Manifest.permission.READ_SMS);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.RECEIVE_MMS);
+        }
+        if (readSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.READ_SMS);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
     }
 
     private void addOnTextChangeListener() {
@@ -284,7 +333,7 @@ public class FragmentOtpChecker extends DialogFragment {
                         activity.updateResult(true);
                         dismiss();
                     } else {
-                        Toast.makeText(getActivity(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -327,5 +376,14 @@ public class FragmentOtpChecker extends DialogFragment {
         otpCheckStatus activity = (otpCheckStatus) getActivity();
         activity.updateResult(false);
         super.onDestroyView();
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+
+        // request a window without the title
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
     }
 }

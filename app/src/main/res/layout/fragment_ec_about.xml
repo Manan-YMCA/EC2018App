@@ -30,27 +30,28 @@
         />
 
     <ImageView
-        android:layout_width="220dp"
-        android:layout_height="280dp"
-
+        android:layout_width="210dp"
+        android:layout_height="240dp"
        android:layout_alignParentRight="true"
 
-
+android:id="@+id/lamp1"
         android:src="@drawable/lamp1" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView3"
+        android:layout_below="@id/lamp1"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/futura"
+        android:id="@+id/conetn"
         android:layout_margin="20dp"
         android:text="@string/aboutEc"
         android:textAlignment="center"
         android:textSize="12dp" />
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/conetn"
 
         android:src="@drawable/about_culm"
         android:layout_alignParentBottom="true"

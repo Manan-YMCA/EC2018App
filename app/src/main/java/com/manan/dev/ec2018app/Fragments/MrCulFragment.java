@@ -26,7 +26,6 @@ import com.squareup.picasso.Picasso;
  */
 public class MrCulFragment extends Fragment {
 
-
     public MrCulFragment() {
         // Required empty public constructor
     }
@@ -38,7 +37,6 @@ public class MrCulFragment extends Fragment {
     private TextView date_view, content_view;
     private ImageView fb_btn, insta;
     private ImageView back_image;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

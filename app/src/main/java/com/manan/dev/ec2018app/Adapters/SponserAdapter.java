@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.manan.dev.ec2018app.Models.Comment;
 import com.manan.dev.ec2018app.Models.Sponsers;
 import com.manan.dev.ec2018app.R;
 import com.squareup.picasso.Picasso;

@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -46,7 +47,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
                 item.setChecked(true);
                 Toast.makeText(XunbaoActivity.this, Integer.toString(item.getOrder()), Toast.LENGTH_SHORT).show();
                 viewPagerXunbao.setCurrentItem(item.getOrder() - 1);
-                if(viewPagerXunbao.getAdapter().getPageTitle(item.getOrder() - 1).toString().equals("QUESTIONS")) {
+                if (viewPagerXunbao.getAdapter().getPageTitle(item.getOrder() - 1).toString().equals("QUESTIONS")) {
                     loadQuestionFragment fragment = (loadQuestionFragment) adapter.instantiateItem(viewPagerXunbao, item.getOrder() - 1);
                     if (AccessToken.getCurrentAccessToken() != null) {
 
@@ -65,18 +66,20 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
                 navBar.getMenu().getItem(position).setChecked(true);
-                if(viewPagerXunbao.getAdapter().getPageTitle(position).toString().equals("QUESTIONS")){
+                if (viewPagerXunbao.getAdapter().getPageTitle(position).toString().equals("QUESTIONS")) {
                     loadQuestionFragment fragment = (loadQuestionFragment) adapter.instantiateItem(viewPagerXunbao, position);
-                    if(AccessToken.getCurrentAccessToken() != null){
+                    if (AccessToken.getCurrentAccessToken() != null) {
                         fragment.makeQuestionVisible(userFbId);
                     } else {
                         fragment.makeQuestionVisible("notLoggedIn");
                     }
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -118,7 +121,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     @Override
     protected void onResume() {
         super.onResume();
-        if(AccessToken.getCurrentAccessToken() != null) {
+        if (AccessToken.getCurrentAccessToken() != null) {
             userFbId = AccessToken.getCurrentAccessToken().getUserId();
         } else {
             userFbId = "notLoggedIn";
@@ -165,23 +168,23 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
 
     @Override
     protected void onPause() {
-        Log.d("pauser",  String.valueOf(adapter.getCount()));
+        Log.d("pauser", String.valueOf(adapter.getCount()));
         super.onPause();
         adapter.removeFragment(0);
         adapter.removeFragment(0);
         adapter.removeFragment(0);
         adapter.notifyDataSetChanged();
-        Log.d("pauser",  String.valueOf(adapter.getCount()));
+        Log.d("pauser", String.valueOf(adapter.getCount()));
     }
 
     @Override
     public void fbStatus(final Boolean status, String userId) {
-        if(status){
+        if (status) {
             userFbId = userId;
         }
     }
 
-    public interface loadQuestionFragment{
+    public interface loadQuestionFragment {
         void makeQuestionVisible(String fbId);
     }
 }

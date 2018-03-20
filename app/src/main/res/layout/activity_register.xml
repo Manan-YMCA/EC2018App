@@ -1,214 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Black"
-    android:id="@+id/rl_main_view"
     tools:context="com.manan.dev.ec2018app.RegisterActivity">
 
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/logo_300" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="180dp"
-        android:layout_height="3.5dp"
-        android:layout_below="@id/logo"
-        android:background="@color/baseDark" />
-
-    <TextView
-        android:id="@+id/txt_reg"
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="12dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/futura"
-        android:text="Registration"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/White"
-        android:textSize="32dp" />
-<LinearLayout
-    android:layout_below="@id/view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="2">
-    <TextView
-        android:id="@+id/txt_wel"
-        android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_reg"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/futura"
-        android:text="Welcome to registration portal of"
-        android:textColor="@color/White"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/txt_ec"
-        android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_wel"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/futura"
-        android:text="Elements Culmyca 2K18!"
-        android:textColor="@color/White"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/txt_fill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/futura"
-        android:text="Fill up the following details to Register"
-        android:textColor="@color/White"
-        android:textSize="15dp" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/et_reg_name"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_weight="1"
-android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/futura"
-        android:hint="Name"
-        android:padding="12dp"
-        android:shadowColor="@color/White"
-        android:singleLine="true"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
-        android:textSize="13dp" />
-
-
-    <EditText
-        android:id="@+id/et_reg_email"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@id/et_reg_name"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/futura"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
-        android:textSize="13dp"
-        android:maxLines="1"
-        android:singleLine="true"/>
-
-
-    <EditText
-        android:id="@+id/et_reg_clg"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@id/et_reg_email"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/futura"
-        android:hint="College"
-        android:padding="12dp"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
-        android:textSize="13dp"
-        android:maxLines="1"
-        android:singleLine="true"/>
-
-
-    <EditText
-        android:id="@+id/et_reg_mob"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@id/et_reg_clg"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/futura"
-        android:hint="Mobile No."
-        android:inputType="phone"
-        android:padding="12dp"
-        android:textColor="@color/White"
-        android:textColorHint="@color/White"
-        android:textSize="13dp"
-        android:maxLines="1"
-        android:singleLine="true"/>
-
+        android:layout_gravity="center"/>
 
     <RelativeLayout
-        android:id="@+id/hint_set"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@+id/et_reg_mob"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-       android:layout_marginTop="30dp"
-        android:backgroundTint="@color/baseDark"
-        android:background="@drawable/edit_text_background"
-        tools:targetApi="lollipop">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/logo_300" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="180dp"
+            android:layout_height="2dp"
+            android:layout_below="@id/logo"
+            android:background="@color/baseDark" />
 
         <TextView
-            android:id="@+id/tv_reg_submit"
+            android:id="@+id/txt_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/futura"
+            android:paddingRight="12dp"
+            android:text="Registration"
+            android:textColor="@color/White"
+            android:textSize="28dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/futura"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="All set to fire?"
-            android:textColor="@color/White"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:layout_below="@id/view"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_wel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_reg"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/futura"
+                    android:text="Welcome to registration portal of"
+                    android:textColor="@color/White"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_ec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_wel"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/futura"
+                    android:text="Elements Culmyca 2K18!"
+                    android:textColor="@color/White"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_fill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/futura"
+                    android:text="Fill up the following details to Register"
+                    android:textColor="@color/White"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_reg_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/futura"
+                android:hint="Name"
+                android:padding="12dp"
+                android:shadowColor="@color/White"
+                android:singleLine="true"
+                android:textColor="@color/White"
+                android:textColorHint="@color/White"
+                android:textSize="13dp" />
+
+
+            <EditText
+                android:id="@+id/et_reg_email"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/et_reg_name"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/futura"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/White"
+                android:textColorHint="@color/White"
+                android:textSize="13dp" />
+
+
+            <EditText
+                android:id="@+id/et_reg_clg"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/et_reg_email"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/futura"
+                android:hint="College"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/White"
+                android:textColorHint="@color/White"
+                android:textSize="13dp" />
+
+
+            <EditText
+                android:id="@+id/et_reg_mob"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/et_reg_clg"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/futura"
+                android:hint="Mobile No."
+                android:inputType="phone"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/White"
+                android:textColorHint="@color/White"
+                android:textSize="13dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/hint_set"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_below="@+id/et_reg_mob"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:backgroundTint="@color/baseDark"
+                tools:targetApi="kitkat">
+
+
+                <TextView
+                    android:id="@+id/tv_reg_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/futura"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="All set to fire?"
+                    android:textColor="@color/White"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_log_in"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/hint_set"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/futura"
+                android:text="Already a User? Login"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                android:textSize="16dp" />
+
+        </LinearLayout>
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tv_log_in"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textColor="@color/White"
-        android:layout_below="@id/hint_set"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"
-        android:fontFamily="@font/futura"
-        android:text="Already a User? Login"
-        android:textSize="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        />
-
-</LinearLayout>
-</RelativeLayout>
+</FrameLayout>
 
 

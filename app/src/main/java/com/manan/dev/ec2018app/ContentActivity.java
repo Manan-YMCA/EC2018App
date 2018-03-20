@@ -31,8 +31,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,11 +50,16 @@ import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
-import com.manan.dev.ec2018app.Models.EventDetails;
+import com.manan.dev.ec2018app.Models.QRTicketModel;
+import com.manan.dev.ec2018app.NavMenuViews.AboutActivity;
+import com.manan.dev.ec2018app.NavMenuViews.CulmycaTimesActivity;
+import com.manan.dev.ec2018app.NavMenuViews.DevelopersActivity;
+import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
+import com.manan.dev.ec2018app.NavMenuViews.ProfileActivity;
+import com.manan.dev.ec2018app.NavMenuViews.SponsorsActivity;
 import com.manan.dev.ec2018app.Notifications.MyNotificationsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
-import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 
 import org.json.JSONArray;
@@ -74,7 +79,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private String phoneNumber;
-    private LinearLayout cotainer_root_frame;
+    private RelativeLayout cotainer_root_frame;
     private SharedPreferences prefs;
     private ArrayList<QRTicketModel> userTickets;
     private DatabaseController databaseController;
@@ -85,7 +90,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navbar_content);
-        cotainer_root_frame = (LinearLayout) findViewById(R.id.content_frame);
+        cotainer_root_frame = (RelativeLayout) findViewById(R.id.content_frame);
 
         try {
             Log.d("auth", FirebaseAuth.getInstance().getUid());
@@ -273,7 +278,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     public void onBackPressed() {
         //super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+            Log.e(getApplication().getPackageName() , "onBackPressed: " + "Errrrrrrrrrrrrror" );
             drawer.closeDrawer(GravityCompat.START, true);
         } else {
             startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
@@ -388,7 +393,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                         @Override
                         public void onCompleted(GraphResponse graphResponse) {
                             LoginManager.getInstance().logOut();
-                            Toast.makeText(getApplicationContext(), "FB logout done!", Toast.LENGTH_SHORT).show();
+                            Log.e("TAG", "onCompleted: " + "FB logout successful." );
                         }
                     }).executeAsync();
                 }
@@ -495,7 +500,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private void checkCount(final String phone){
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "checkCount url : " + url );
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -594,6 +599,10 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }
             }
         }
+    }
+    public float getPageWidth (int position)
+    {
+        return (float) 0.8;
     }
 
 }

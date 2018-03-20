@@ -1,4 +1,4 @@
-package com.manan.dev.ec2018app;
+package com.manan.dev.ec2018app.NavMenuViews;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.manan.dev.ec2018app.Adapters.DevelopersPagerAdapter;
+import com.manan.dev.ec2018app.R;
 
 public class DevelopersActivity extends AppCompatActivity {
 
     private ViewPager devviewPager;
     private DevelopersPagerAdapter mydevViewPagerAdapter;
-
     private ImageView devbut, desbut, crebut;
 
     @Override
@@ -25,7 +25,6 @@ public class DevelopersActivity extends AppCompatActivity {
         desbut = findViewById(R.id.but_des);
         crebut = findViewById(R.id.but_cre);
 
-
         devviewPager = (ViewPager) findViewById(R.id.vpPager);
         mydevViewPagerAdapter = new DevelopersPagerAdapter(getSupportFragmentManager());
         devviewPager.setAdapter(mydevViewPagerAdapter);
@@ -34,10 +33,7 @@ public class DevelopersActivity extends AppCompatActivity {
         devbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 devviewPager.setCurrentItem(0);
-
-
             }
         });
         desbut.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +47,15 @@ public class DevelopersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 devviewPager.setCurrentItem(2, true);
-
             }
         });
 
-
+        findViewById(R.id.dev_back_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {

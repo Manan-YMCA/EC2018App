@@ -17,8 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -67,6 +67,7 @@ public class EventRegister extends AppCompatActivity {
     private QRTicketModel TicketModel;
     private String qrCodeString;
     private DatabaseController databaseController;
+    private ProgressBar barLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,9 @@ public class EventRegister extends AppCompatActivity {
         eventId = getIntent().getStringExtra("eventId");
         eventType = getIntent().getStringExtra("eventType");
         userDetails = new UserDetails();
+
+        barLoader = (ProgressBar) findViewById(R.id.pb_register);
+        barLoader.setVisibility(View.VISIBLE);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -108,7 +112,7 @@ public class EventRegister extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         final String phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
-            Toast.makeText(this, "shared pref no data", Toast.LENGTH_SHORT).show();
+            Log.e("TAG", "onCreate: " + "Shared Pref no data!!!!!!!!!!!!");
         }
         getDetails(phoneNumber);
         Add.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +198,7 @@ public class EventRegister extends AppCompatActivity {
 
     private void registerEvent() {
         String url = getResources().getString(R.string.event_register_api);
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "registerEvent: " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -202,7 +206,9 @@ public class EventRegister extends AppCompatActivity {
 
                 try {
                     JSONObject obj = new JSONObject(response);
-                    Toast.makeText(EventRegister.this, obj.getString("qrcode"), Toast.LENGTH_LONG).show();
+
+                    Log.e("TAG", "onResponse: " + obj.getString("qrcode"));
+
                     qrCodeString = (obj.getString("qrcode"));
 
                     sendNotification();
@@ -214,12 +220,13 @@ public class EventRegister extends AppCompatActivity {
                     bundle.putString("eventid", eventId);
 // set Fragmentclass Arguments
                     QRCodeActivity fragobj = new QRCodeActivity();
+                    fragobj.setCancelable(true);
                     fragobj.setArguments(bundle);
                     fragobj.show(fm, "drff");
                     SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
                     final String phone = prefs.getString("Phone", null);
                     if (phone == null) {
-                        Toast.makeText(EventRegister.this, "shared pref no data", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "onResponse: " + "Shared Pref no data!");
                     }
                     addTicket(phone);
                 }
@@ -227,14 +234,13 @@ public class EventRegister extends AppCompatActivity {
                 catch (Exception e) {
                     // If an error occurs, this prints the error to the log
                     e.printStackTrace();
-                    Toast.makeText(EventRegister.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("TAG", "onResponse: " + e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
+                Log.e("TAG", "onErrorResponse: my errrrrrrrrrrrror" + error);
                 Log.i("My error", "" + error);
             }
         }) {
@@ -317,16 +323,19 @@ public class EventRegister extends AppCompatActivity {
     private void getDetails(final String phone) {
         Log.i("tg", "bgg");
         String url = getResources().getString(R.string.get_user_details_api) + phone;
-        Toast.makeText(this, "URL: " + url, Toast.LENGTH_LONG).show();
+
+        Log.e(getPackageName(), "getDetails url : " + url);
+
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            barLoader.setVisibility(View.GONE);
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
-                            Toast.makeText(EventRegister.this, obj.getString("name"), Toast.LENGTH_LONG).show();
+                            Log.e("TAG", "onResponse: " + obj.getString("name"));
                             mainName.setText(obj.getString("name"));
                             mainmail.setText(obj.getString("email"));
                             mainClg.setText(obj.getString("college"));
@@ -340,7 +349,7 @@ public class EventRegister extends AppCompatActivity {
                         catch (Exception e) {
                             // If an error occurs, this prints the error to the log
                             e.printStackTrace();
-                            Toast.makeText(EventRegister.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("TAG", "onResponse: " + e.getMessage());
                         }
                     }
                 },
@@ -348,7 +357,7 @@ public class EventRegister extends AppCompatActivity {
                     @Override
                     // Handles errors that occur due to Volley
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EventRegister.this, "Error aagya2", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "onErrorResponse: " + error);
                         Log.e("Volley", "Error");
                     }
                 }
@@ -364,7 +373,7 @@ public class EventRegister extends AppCompatActivity {
     private void addTicket(final String phoneNumber) {
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phoneNumber;
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "addTicket: " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

@@ -7,21 +7,27 @@
     android:background="#000"
     android:orientation="vertical"
     tools:context="com.manan.dev.ec2018app.UserLoginActivity">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:src="@drawable/logo_opacity" />
+    <LinearLayout
+       android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="430dp" />
+
+
 
         <LinearLayout
             android:id="@+id/layoutDots"
@@ -34,7 +40,7 @@
         <LinearLayout
             android:id="@+id/ll_below"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:gravity="center"
@@ -43,13 +49,14 @@
             <TextView
                 android:id="@+id/ReadyText"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/view"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
+
                 android:fontFamily="@font/futura"
                 android:padding="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="Explore the Extravagenza of Culture enriched \n with Technology"
                 android:textAlignment="center"
                 android:textColor="@color/White"
@@ -77,9 +84,10 @@
             <LinearLayout
                 android:id="@+id/guest_user_ll"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:padding="20dp">
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                >
 
                 <TextView
                     android:id="@+id/ContinueText"
@@ -96,6 +104,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
                     android:text="Guest?"
+
                     android:textColor="@color/baseDark"
                     android:textSize="18dp" />
 
@@ -103,10 +112,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_margin="15dp"
-        android:src="@drawable/logo_opacity" />
+
 </RelativeLayout>

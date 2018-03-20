@@ -62,13 +62,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private QRTicketModel TicketModel;
     //    private ArrayList<Long> coordsPhoneList;
     private String eventId;
-    private ProgressBar barEventImage;
+    private ProgressBar barEventImage, barViewTicket;
     private DatabaseController databaseController;
     private boolean checkloadedvar = false;
     private Drawable default_image;
     private RelativeLayout container_se_view;
     private boolean NO_DEEP_LINK_FLAG = true;
     private Intent phoneIntent;
+    private QRCodeActivity fragobj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +95,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
-                Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onCreate: " + "There's no such event.");
                 finish();
                 startActivity(new Intent(this, SplashScreen.class));
             }
@@ -102,13 +103,16 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             //  Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
-        Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "onCreate: " + eventId );
         container_se_view = findViewById(R.id.contaner_se);
 
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
 
         registerButton = (Button) findViewById(R.id.btn_register);
+        barViewTicket = (ProgressBar) findViewById(R.id.pb_view_ticket);
+        barViewTicket.setVisibility(View.GONE);
+        fragobj = new QRCodeActivity();
 
         barEventImage = (ProgressBar) findViewById(R.id.pb_event_image);
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
@@ -272,21 +276,18 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             registerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    barViewTicket.setVisibility(View.VISIBLE);
                     if (registerButton.getText().toString().equals("View Ticket")) {
-                        displayTickets(eventId);
                         FragmentManager fm = getFragmentManager();
                         Bundle bundle = new Bundle();
-                        Log.d("yatin", TicketModel.getQRcode() + " " + eventId);
                         bundle.putString("qrcodestring", TicketModel.getQRcode());
                         bundle.putString("eventid", eventId);
                         bundle.putInt("activity", 0);
                         bundle.putInt("paymentStatus", TicketModel.getPaymentStatus());
                         bundle.putInt("arrivalStatus", TicketModel.getArrivalStatus());
 
-                        QRCodeActivity fragobj = new QRCodeActivity();
                         fragobj.setArguments(bundle);
                         fragobj.show(fm, "hiiiii");
-                        // fragobj.show(fm, "drff");
                     } else {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                                 .putExtra("eventName", eventDetails.getmName())
@@ -303,7 +304,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     String baseUrl = "http://elementsculmyca.com/event/";
                     String parsedUrl = baseUrl + "#" + eventDetails.getmName().toString().replaceAll(" ", "%20");
 
-                    Toast.makeText(SingleEventActivity.this, parsedUrl, Toast.LENGTH_SHORT).show();
+                    Log.e("TAG", "onClick: " + parsedUrl );
                     String message = "Elements Culmyca 2018:" + eventDetails.getmName().toString() + " View the event clicking the link: " + parsedUrl;
                     shareEventMessage(message);
 
@@ -338,55 +339,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         }
     }
 
-    //    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode == 101) {
-//            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-//                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + String.valueOf(coord.getmCoordPhone())));
-//                startActivity(intent);
-//            }
-//        } else {
-//            Toast.makeText(SingleEventActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-//    public void call_action() {
-//        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
-//        startActivity(intent);
-//    }
-//
-//    public boolean isPermissionGranted() {
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            if (checkSelfPermission(android.Manifest.permission.CALL_PHONE)
-//                    == PackageManager.PERMISSION_GRANTED) {
-//                Log.v("TAG", "Permission is granted");
-//                return true;
-//            } else {
-//
-//                Log.v("TAG", "Permission is revoked");
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
-//                return false;
-//            }
-//        } else { //permission is automatically granted on sdk<23 upon installation
-//            Log.v("TAG", "Permission is granted");
-//            return true;
-//        }
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        switch (requestCode) {
-//            case 1: {
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
-//                    call_action();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
-//                }
-//                return;
-//            }
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -398,10 +350,10 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_share_event:
-                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onOptionsItemSelected: " + item.getTitle() );
                 break;
             default:
-                Toast.makeText(getBaseContext(), "Invalid Selection!", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onOptionsItemSelected: " + "Invalid Selection!");
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -420,6 +372,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         phoneNumber = prefs.getString("Phone", null);
         if (databaseController.checkIfValueExists1(eventId)) {
             registerButton.setText("View Ticket");
+            displayTickets(eventId);
         }
     }
 
