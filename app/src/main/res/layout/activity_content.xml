@@ -84,7 +84,7 @@
                         android:paddingBottom="5dp"
                         android:paddingRight="5dp"
                         android:paddingTop="2dp"
-                        android:text="To get all events in digital format. Click here!"
+                        android:text="Want to see day-wise schedule? Tap here!"
                         android:textColor="@color/White"
                         android:textSize="16dp"
                         android:paddingEnd="5dp"

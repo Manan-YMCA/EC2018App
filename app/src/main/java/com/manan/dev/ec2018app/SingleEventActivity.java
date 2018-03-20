@@ -95,7 +95,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
-                Log.e("TAG", "onCreate: " + "There's no such event.");
+                Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(new Intent(this, SplashScreen.class));
             }

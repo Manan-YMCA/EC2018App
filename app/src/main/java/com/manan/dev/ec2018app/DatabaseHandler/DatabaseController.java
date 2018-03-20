@@ -307,18 +307,15 @@ public class DatabaseController extends SQLiteOpenHelper {
         return true;
     }
 
-    public Boolean checkIfValueByNameExists(String eventName) {
+    private Boolean checkIfValueByNameExists(String eventName) {
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM " + Schema.DbEntry.EVENT_LIST_TABLE_NAME + " WHERE " + Schema.DbEntry.EVENT_NAME_COLUMN_NAME + " =?";
         Cursor cs = db.rawQuery(query, new String[]{eventName});
         if (cs.getCount() <= 0) {
             cs.close();
-            Log.v("checkIfValueExists","No found");
             return false;
         }
         cs.close();
-        db.close();
-        Log.v("checkIfValueExists","Found");
         return true;
     }
     public Boolean checkIfValueExists1(String eventId) {
