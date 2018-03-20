@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -72,9 +73,9 @@ public class MyNotificationsActivity extends AppCompatActivity {
         });
 
         if (allNotificationsArrayList.size() == 0) {
-            progress.dismiss();
-//            Toast.makeText(this, "No Notifications!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Get a internet connection!", Toast.LENGTH_SHORT).show();
             noNotifyTV.setVisibility(View.VISIBLE);
+            progress.dismiss();
         }
     }
 

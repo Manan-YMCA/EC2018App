@@ -14,11 +14,9 @@ import com.manan.dev.ec2018app.R;
  */
 public class EcAboutFragment extends Fragment {
 
-
     public EcAboutFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

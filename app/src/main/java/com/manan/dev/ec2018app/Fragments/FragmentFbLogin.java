@@ -16,13 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,7 +32,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.R;
 
 import java.util.Arrays;
-import java.util.concurrent.Executor;
 
 /**
  * Created by yatindhingra on 02/03/18.
@@ -84,18 +80,17 @@ public class FragmentFbLogin extends DialogFragment {
                 fbLoginButton activity = (fbLoginButton) getActivity();
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
-                Toast.makeText(getActivity(), "fbLoginHo gya", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Facebook Login Done!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(getActivity(), "Fb login cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(getActivity(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onError: " + exception.getMessage() );
             }
         });
 

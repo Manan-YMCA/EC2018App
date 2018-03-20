@@ -1,7 +1,6 @@
 package com.manan.dev.ec2018app;
 
 import android.app.FragmentManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +34,6 @@ import com.manan.dev.ec2018app.Fragments.FragmentOtpChecker;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Models.UserDetails;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -121,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
     private void getDetails(final UserDetails userDetails, final String phone) {
         String url = getResources().getString(R.string.get_user_details_api) + phone;
-        Toast.makeText(this, "URL: " + url, Toast.LENGTH_LONG).show();
+        Log.e("TAG", "getDetails url: " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -137,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                                 bundle.putString("phone", phone);
                                 otpChecker.setArguments(bundle);
                                 otpChecker.show(fm, "otpCheckerFragment");
-                                if(otpChecker.isVisible())
+                                if (otpChecker.isVisible())
                                     pbLogin.setVisibility(View.GONE);
                             } else {
                                 pbLogin.setVisibility(View.GONE);
@@ -148,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                         catch (Exception e) {
                             // If an error occurs, this prints the error to the log
                             e.printStackTrace();
-                            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("TAG", "onResponse: " + e.getMessage());
                         }
                     }
                 },
@@ -156,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                     @Override
                     // Handles errors that occur due to Volley
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "onErrorResponse: " + "Errorrrrrr");
                         Log.e("Volley", "Error");
                     }
                 }
@@ -180,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                 FragmentManager fmFB = getFragmentManager();
                 FragmentFbLogin fbLogin = new FragmentFbLogin();
                 fbLogin.show(fmFB, "fbLoginFragment");
-                if(fbLogin.isVisible()){
+                if (fbLogin.isVisible()) {
                     pbLogin.setVisibility(View.GONE);
                 }
             }
@@ -202,7 +200,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     }
 
     private void startSession() {
-        if(parent.equals("xunbao") || parent.equals("ct")){
+        if (parent.equals("xunbao") || parent.equals("ct")) {
             pbLogin.setVisibility(View.GONE);
             finish();
         } else {
@@ -214,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
     private Boolean validateCredentials() {
         if (!isNetworkAvailable()) {
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (mobileNum.getText().toString().equals("")) {
@@ -255,20 +253,19 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     private void registerUser(final UserDetails userDetails) {
 
         String url = getResources().getString(R.string.register_user_api);
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "registerUser url: " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pbLogin.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
                 startSession();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
+                Log.e("TAG", "onErrorResponse my errorrrrrrrrrrr: " + error);
                 Log.i("My error", "" + error);
             }
         }) {

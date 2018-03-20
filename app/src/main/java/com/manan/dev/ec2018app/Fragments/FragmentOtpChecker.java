@@ -75,7 +75,7 @@ public class FragmentOtpChecker extends DialogFragment {
                     activity.updateResult(true);
                     dismiss();
                 } else {
-                    Toast.makeText(getActivity(), "Incorrect OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -99,7 +99,9 @@ public class FragmentOtpChecker extends DialogFragment {
 
     private void sendSMS(final String phone, final String otpNum) {
         String url = getResources().getString(R.string.send_sms_api);
-        Toast.makeText(getActivity(), "URL: " + url, Toast.LENGTH_LONG).show();
+
+        Log.e("TAG", "sendSMS url: " + url );
+
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest smsReq = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -133,7 +135,7 @@ public class FragmentOtpChecker extends DialogFragment {
                 public void messageReceived(String messageText) {
                     if(messageText.contains("Culmyca")) {
                         otp = messageText.substring(0, 6);
-                        Toast.makeText(getActivity(), "OTP: " + otp, Toast.LENGTH_LONG).show();
+                        Log.e("TAG" , "messageReceived OTP : " + otp );
                         // Handle this OTP TODO
                     }
                 }
@@ -331,7 +333,7 @@ public class FragmentOtpChecker extends DialogFragment {
                         activity.updateResult(true);
                         dismiss();
                     } else {
-                        Toast.makeText(getActivity(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

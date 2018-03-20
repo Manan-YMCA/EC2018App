@@ -33,7 +33,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -279,7 +278,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     public void onBackPressed() {
         //super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+            Log.e(getApplication().getPackageName() , "onBackPressed: " + "Errrrrrrrrrrrrror" );
             drawer.closeDrawer(GravityCompat.START, true);
         } else {
             startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
@@ -394,7 +393,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                         @Override
                         public void onCompleted(GraphResponse graphResponse) {
                             LoginManager.getInstance().logOut();
-                            Toast.makeText(getApplicationContext(), "FB logout done!", Toast.LENGTH_SHORT).show();
+                            Log.e("TAG", "onCompleted: " + "FB logout successful." );
                         }
                     }).executeAsync();
                 }
@@ -501,7 +500,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private void checkCount(final String phone){
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "checkCount url : " + url );
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

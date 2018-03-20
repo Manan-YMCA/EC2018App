@@ -166,7 +166,7 @@ public class DashboardSliderFragment1 extends Fragment {
                          }
                          else if(contenttv.getTag().equals(7))
                          {
-                             Toast.makeText(getActivity(),"Pull the Navigation Drawer",Toast.LENGTH_SHORT).show();
+                             Toast.makeText(getActivity(),"Pull the Navigation Drawer!",Toast.LENGTH_SHORT).show();
                          }
 
 

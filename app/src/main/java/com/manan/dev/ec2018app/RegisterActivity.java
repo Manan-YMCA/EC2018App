@@ -15,7 +15,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
                     userDetails.setmName(userName.getText().toString());
                     userDetails.setmCollege(userCollege.getText().toString());
                     userDetails.setmPhone(userPhone.getText().toString());
-                    Toast.makeText(RegisterActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Done!", Toast.LENGTH_SHORT).show();
                     checkOTP(userDetails);
                 }
             }
@@ -106,14 +105,12 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
 
     private void registerUser(final UserDetails userDetails) {
         String url = getResources().getString(R.string.register_user_api);
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "registerUser url : " + url );
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-
-                Toast.makeText(getApplicationContext(), "registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
                 Log.i("My success", "" + response);
                 mProgress.hide();
                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
@@ -131,8 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), "my error :" + error, Toast.LENGTH_LONG).show();
+                Log.e("TAG", "onErrorResponse error : " + error );
                 Log.i("My error", "" + error);
                 mProgress.hide();
             }

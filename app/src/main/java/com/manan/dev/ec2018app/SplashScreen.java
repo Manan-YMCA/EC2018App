@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -256,7 +255,7 @@ public class SplashScreen extends AppCompatActivity {
             }
             incomingHandler.sendEmptyMessage(0);
         } catch (Exception e) {
-            Toast.makeText(SplashScreen.this, "Chutiya!", Toast.LENGTH_SHORT).show();
+            Log.e("TAG", "JsonParse: " + e.getMessage() );
             Log.d("DBChecker", e.getMessage());
             e.printStackTrace();
         }

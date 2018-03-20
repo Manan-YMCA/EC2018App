@@ -1,22 +1,14 @@
 package com.manan.dev.ec2018app;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.Snackbar;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,8 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Tickets extends AppCompatActivity {
     ProgressDialog mProgress;
@@ -70,7 +60,7 @@ public class Tickets extends AppCompatActivity {
             }
         });
         if (phoneNumber == null) {
-            Toast.makeText(this, "no data in shred preference", Toast.LENGTH_SHORT).show();
+            Log.e("TAG", "onCreate: " + "No data in shared pref!" );
         } else {
             displayTickets(phoneNumber);
         }
@@ -79,7 +69,7 @@ public class Tickets extends AppCompatActivity {
     private void reload(String phone) {
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Toast.makeText(this, "url: " + url, Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "reload url : " + url );
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

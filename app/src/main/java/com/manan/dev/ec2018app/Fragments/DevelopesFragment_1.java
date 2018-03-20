@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.manan.dev.ec2018app.Adapters.DevelopersAdapter;
 import com.manan.dev.ec2018app.Models.DeveloperModel;
@@ -21,7 +21,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class DevelopesFragment_1 extends Fragment {
-
 
     private RecyclerView devrecyclerView;
 
@@ -93,7 +92,7 @@ public class DevelopesFragment_1 extends Fragment {
         devlist.add(dev_obj12);
         devlist.add(dev_obj13);
 
-        Toast.makeText(getActivity(),String.valueOf(devlist.size()),Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()) );
         DevelopersAdapter dev_ad = new DevelopersAdapter(getActivity(), devlist);
         devrecyclerView.setAdapter(dev_ad);
 
