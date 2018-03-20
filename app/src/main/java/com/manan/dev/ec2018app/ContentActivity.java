@@ -328,11 +328,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                             startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         } else {
                             AlertDialog.Builder builder;
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                builder = new AlertDialog.Builder(ContentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                            } else {
-                                builder = new AlertDialog.Builder(ContentActivity.this);
-                            }
+                            builder = new AlertDialog.Builder(ContentActivity.this);
                             builder.setTitle("Log In")
                                     .setMessage("To view your tickets you must Log In first.")
                                     .setPositiveButton("Log In", new DialogInterface.OnClickListener() {
@@ -346,6 +342,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             nav_view.setCheckedItem(R.id.nav_home);
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialog) {
                                             dialog.dismiss();
                                         }
                                     })
