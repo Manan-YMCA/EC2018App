@@ -216,7 +216,8 @@
                 android:text="Already a User? Login"
                 android:textAlignment="center"
                 android:textColor="@color/White"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:background="@drawable/ripple_effect"/>
 
         </LinearLayout>
     </RelativeLayout>

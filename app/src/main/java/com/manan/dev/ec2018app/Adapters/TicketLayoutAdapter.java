@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-/**
- * Created by nisha on 2/28/2018.
- */
 
 public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapter.MyViewHolder> {
     private ArrayList<QRTicketModel> itemsList;
@@ -58,7 +55,12 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
 
 
         Log.d("Tickets", singleItem.getQRcode());
-        holder.feeStatus.setText(String.valueOf(singleItem.getPaymentStatus()));
+        if(String.valueOf(singleItem.getPaymentStatus()).equals("0")){
+            holder.feeStatus.setImageResource(R.drawable.unpaid);
+        }
+        else {
+            holder.feeStatus.setImageResource(R.drawable.paid);
+        }
         TicketsGenerator generate = new TicketsGenerator();
         Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext,(int) mContext.getResources().getDimension(R.dimen.onefifty),(int) mContext.getResources().getDimension(R.dimen.onefifty), 80, 80);
         holder.itemImage.setImageBitmap(currTicket);
@@ -104,15 +106,15 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView itemImage;
-        public TextView feeStatus, eventDate, eventTime, eventFee, eventName;
+        public ImageView itemImage , feeStatus;
+        public TextView eventDate, eventTime, eventFee, eventName;
         public CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             itemImage = (ImageView) itemView.findViewById(R.id.ticket_qr_iv);
-            feeStatus = (TextView) itemView.findViewById(R.id.tv_event_fees_status);
+            feeStatus = (ImageView) itemView.findViewById(R.id.iv_event_fees_status);
             eventDate = (TextView) itemView.findViewById(R.id.tv_event_date);
             eventTime = (TextView) itemView.findViewById(R.id.tv_event_time);
             eventFee = (TextView) itemView.findViewById(R.id.tv_event_fees);

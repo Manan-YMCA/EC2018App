@@ -113,16 +113,12 @@
                 android:layout_height="match_parent"
                 android:background="#aaa" />
 
-            <TextView
-                android:id="@+id/tv_event_fees_status"
+            <ImageView
+                android:id="@+id/iv_event_fees_status"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_weight="1"
-                android:text="X"
-                android:textAlignment="center"
-                android:textColor="#b61010"
-                android:textSize="22dp"
-                android:textStyle="bold" />
+                />
 
 
         </LinearLayout>

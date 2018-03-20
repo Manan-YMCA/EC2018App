@@ -56,7 +56,9 @@ public class Tickets extends AppCompatActivity {
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 reload(phoneNumber);
+                s.setRefreshing(false);
             }
         });
         if (phoneNumber == null) {

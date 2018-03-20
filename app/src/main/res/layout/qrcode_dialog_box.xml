@@ -66,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/fee_details"
             android:layout_marginTop="4dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/eventfees"
@@ -84,16 +85,12 @@
                 android:layout_height="match_parent"
                 android:background="@color/Black" />
 
-            <TextView
-                android:id="@+id/eventfeestatus"
+            <ImageView
+                android:id="@+id/iv_event_fees_status"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="X"
-                android:textAlignment="center"
-                android:textColor="#b61010"
-                android:textSize="28dp"
-                android:textStyle="bold" />
+                />
 
 
         </LinearLayout>

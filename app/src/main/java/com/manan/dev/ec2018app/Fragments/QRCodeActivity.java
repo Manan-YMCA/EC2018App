@@ -22,8 +22,8 @@ import java.util.Locale;
 
 
 public class QRCodeActivity extends DialogFragment {
-    TextView eventName, eventDate, eventTime, fees, status;
-    ImageView qrTicketImage;
+    TextView eventName, eventDate, eventTime, fees;
+    ImageView qrTicketImage, status;
     private String eventId;
     private EventDetails eventDetails;
     private DatabaseController getEventDetails;
@@ -47,7 +47,7 @@ public class QRCodeActivity extends DialogFragment {
         eventDate = (TextView) rootView.findViewById(R.id.tv_event_date);
         eventTime = (TextView) rootView.findViewById(R.id.tv_event_time);
         fees = (TextView) rootView.findViewById(R.id.eventfees);
-        status = (TextView) rootView.findViewById(R.id.eventfeestatus);
+        status = (ImageView) rootView.findViewById(R.id.iv_event_fees_status);
         getEventDetails = new DatabaseController(getActivity());
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
         eventName.setText(eventDetails.getmName());
@@ -64,7 +64,19 @@ public class QRCodeActivity extends DialogFragment {
         eventTime.setText(formattedTime);
 
         fees.setText(String.valueOf("RS " + eventDetails.getmFees()));
-        status.setText(String.valueOf(paymentStatus));
+
+        if(String.valueOf(eventDetails.getmFees()).equals("0")) {
+            status.setImageResource(R.drawable.paid);
+        }
+        else if (String.valueOf(paymentStatus).equals("0")){
+            status.setImageResource(R.drawable.unpaid);
+        }
+
+        else
+            {
+                status.setImageResource(R.drawable.paid);
+            }
+
 
         TicketsGenerator ticketsGenerator = new TicketsGenerator();
         Bitmap qrTicket = ticketsGenerator.GenerateClick(qrcodestring, getActivity(), (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty), 120, 120);

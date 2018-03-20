@@ -85,6 +85,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private DatabaseController databaseController;
     private ProgressDialog mProgress;
     private IncomingHandler mIncomingHandler;
+    private TextView pdfTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         mProgress.setTitle("yes i am");
         mProgress.setCanceledOnTouchOutside(false);
         nav_view = (NavigationView) findViewById(R.id.nav_view);
+        pdfTextView = (TextView)findViewById(R.id.tv_pdf);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
         userTickets = new ArrayList<QRTicketModel>();
@@ -126,6 +128,14 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 if (!drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.openDrawer(GravityCompat.START);
                 }
+            }
+        });
+        pdfTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 
