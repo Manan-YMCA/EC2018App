@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.manan.dev.ec2018app.Fragments.CreativeFragment;
-import com.manan.dev.ec2018app.Fragments.DesignFragment;
 import com.manan.dev.ec2018app.Fragments.DevelopesFragment_1;
 
 /**
@@ -14,7 +13,7 @@ import com.manan.dev.ec2018app.Fragments.DevelopesFragment_1;
 
 
 public class DevelopersPagerAdapter extends FragmentStatePagerAdapter {
-    private static final int TOTAL_PAGES = 3;
+    private static final int TOTAL_PAGES = 2;
 
     public DevelopersPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -26,8 +25,6 @@ public class DevelopersPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new DevelopesFragment_1();
             case 1:
-                return new DesignFragment();
-            case 2:
                 return new CreativeFragment();
             default:
                 break;

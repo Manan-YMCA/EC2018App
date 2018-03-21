@@ -21,12 +21,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.manan.dev.ec2018app.Adapters.CTAdapter;
 import com.manan.dev.ec2018app.Models.postsModel;
 import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
+import com.manan.dev.ec2018app.Utilities.MyApplication;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CulmycaTimesActivity extends AppCompatActivity {
+public class CulmycaTimesActivity extends AppCompatActivity implements ConnectivityReciever.ConnectivityReceiverListener {
 
     DatabaseReference postReference;
     List<postsModel> allposts;
@@ -43,9 +45,6 @@ public class CulmycaTimesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_culmyca_times);
 
         allposts = new ArrayList<postsModel>();
-
-        String url = "https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/final_image.jpeg?alt=media&token=e7685e47-6762-42d9-bc12-8b8484e0fe38";
-        allposts.add(new postsModel("Culmyca Times to keep yourself updated with all the insides.", url, "manan", "-L7zAP6vrQM_7j914Eyb", 1521478378210L));
 
         backButton = findViewById(R.id.cul_back_button);
         recyclerView = findViewById(R.id.ctc_recycler_view);
@@ -73,7 +72,7 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                     reload();
                 } else {
                     progressBar.dismiss();
-                    MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+                    s.setRefreshing(false);
                 }
             }
         });
@@ -83,27 +82,29 @@ public class CulmycaTimesActivity extends AppCompatActivity {
         } else {
             MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
             progressBar.dismiss();
+            s.setRefreshing(false);
         }
     }
 
 //    @Override
-//    public void onRefresh() {
-//        Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mSwipeRefreshLayout.setRefreshing(false);
-//            }
-//        }, 2000);
-//    }
-
-//    @Override
 //    public void onBackPressed() {
-//        mLayoutManager.smoothScrollToPosition(recyclerView, null, 0);
-//        if (!recyclerView.canScrollVertically(-1)) {
+//        if (allposts.size() > 0) {
+//            recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(CulmycaTimesActivity.this));
+//            recyclerView.smoothScrollToPosition(0);
+//            if (!recyclerView.canScrollVertically(-1)) {
+//                super.onBackPressed();
+//            }
+//        } else {
 //            super.onBackPressed();
 //        }
 //    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(CulmycaTimesActivity.this);
+    }
 
     public void reload() {
         postReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -156,4 +157,58 @@ public class CulmycaTimesActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showNetError(isConnected);
+    }
+
+    private void showNetError(boolean isConnected) {
+        if (isConnected) {
+            reload();
+        } else {
+            progressBar.dismiss();
+            MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+            s.setRefreshing(false);
+        }
+    }
+
+//    public class LinearLayoutManagerWithSmoothScroller extends LinearLayoutManager {
+//
+//        public LinearLayoutManagerWithSmoothScroller(Context context) {
+//            super(context, VERTICAL, false);
+//        }
+//
+//        public LinearLayoutManagerWithSmoothScroller(Context context, int orientation, boolean reverseLayout) {
+//            super(context, orientation, reverseLayout);
+//        }
+//
+//        @Override
+//        public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state,
+//                                           int position) {
+//            RecyclerView.SmoothScroller smoothScroller = new TopSnappedSmoothScroller(recyclerView.getContext());
+//            smoothScroller.setTargetPosition(position);
+//            startSmoothScroll(smoothScroller);
+//        }
+//
+//        private class TopSnappedSmoothScroller extends LinearSmoothScroller {
+//            public TopSnappedSmoothScroller(Context context) {
+//                super(context);
+//
+//            }
+//
+//            @Override
+//            public PointF computeScrollVectorForPosition(int targetPosition) {
+//                return LinearLayoutManagerWithSmoothScroller.this
+//                        .computeScrollVectorForPosition(targetPosition);
+//            }
+//
+//            @Override
+//            protected int getVerticalSnapPreference() {
+//                return SNAP_TO_START;
+//            }
+//        }
+//    }
 }
+
+

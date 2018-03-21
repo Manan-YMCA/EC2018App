@@ -68,9 +68,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
         public ImageView photo;
         public TextView name;
         public TextView more;
-
         public ImageView linkedin, star;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -79,7 +77,6 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
             linkedin = (ImageView) itemView.findViewById(R.id.dev_linkdin);
             more = (TextView) itemView.findViewById(R.id.dev_more);
             star = (ImageView) itemView.findViewById(R.id.dev_star);
-
 
         }
     }

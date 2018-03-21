@@ -54,7 +54,7 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Sponsers sponsers = sponsersList.get(position);
         holder.sname.setText(sponsers.getSname());
-        Picasso.with(mContext).load(sponsers.getImageUrl()).resize(7500,500).into(holder.sponserPic);
+        Picasso.with(mContext).load(sponsers.getImageUrl()).resize(750,500).into(holder.sponserPic);
         holder.title.setText(sponsers.getTitle());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,6 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
                 Uri uri = Uri.parse(sponsers.getUrl());
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 mContext.startActivity(intent);
-
             }
         });
     }

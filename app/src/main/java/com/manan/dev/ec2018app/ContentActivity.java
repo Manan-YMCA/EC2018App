@@ -488,7 +488,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         super.onResume();
         MyApplication.getInstance().setConnectivityListener(ContentActivity.this);
 
-
         //SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
 
@@ -533,9 +532,9 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                         userTickets.add(TicketModel);
                     }
                     Log.d("Tickets", Integer.toString(userTickets.size()));
-                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
+                    Log.d("Ticket Countttt", String.valueOf(databaseController.getTicketCount()));
                     mIncomingHandler.sendEmptyMessage(0);
-                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
+                    Log.d("Ticket Countttt", String.valueOf(databaseController.getTicketCount()));
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {

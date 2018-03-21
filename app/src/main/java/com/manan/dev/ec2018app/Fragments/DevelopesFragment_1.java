@@ -21,13 +21,11 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class DevelopesFragment_1 extends Fragment {
-
     private RecyclerView devrecyclerView;
 
     public DevelopesFragment_1() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +34,6 @@ public class DevelopesFragment_1 extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_developers_1, container, false);
-
 
 
         devrecyclerView = (RecyclerView) rootView.findViewById(R.id.dev_recycler_view_f1);
@@ -73,9 +70,6 @@ public class DevelopesFragment_1 extends Fragment {
                 ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/rishabh_final.png?alt=media&token=cb8d55f1-7a2e-4256-8e11-821fd8c7ea11","Rishabh","https://www.google.co.in/","Core Application Developer",k,k,k,k);
         DeveloperModel dev_obj13 = new DeveloperModel
                 ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/hemant_final.png?alt=media&token=cb8d55f1-7a2e-4256-8e11-821fd8c7ea11","Hemant Bansal","https://www.google.co.in/","Core Application Developer",k,k,k,k);
-
-
-
 
 
         devlist.add(dev_obj);
