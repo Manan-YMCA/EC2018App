@@ -30,7 +30,7 @@
             android:fontFamily="@font/futura"
             android:text="GitHub"
             android:textColor="@color/Black"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv2"

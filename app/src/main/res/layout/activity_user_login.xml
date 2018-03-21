@@ -97,6 +97,7 @@
                     android:fontFamily="@font/futura"
                     android:text="Continue as a  "
                     android:textColor="@color/White"
+
                     android:textSize="16dp" />
 
                 <TextView

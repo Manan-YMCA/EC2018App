@@ -38,6 +38,7 @@
         android:text="Elements Culmyca"
         android:fontFamily="@font/futura"
         android:textSize="26dp"
+        android:textAllCaps="true"
         android:textColor="@color/White"
         android:layout_centerInParent="true"
         android:layout_below="@id/logo_sp"/>

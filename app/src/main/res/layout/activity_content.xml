@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.6"
+
             />
 
 
@@ -98,8 +99,8 @@
             </LinearLayout>
     <ImageView
         android:id="@+id/drawerTogglebtn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="8dp"
         android:src="@drawable/vector_menu" />
 

@@ -7,6 +7,9 @@
     <color name="baseLight">#ed8979</color>
     <color name="primaryFocused">#ae1010</color>
     <color name="primaryPressed">#830202</color>
+    <color name="pree">#10000000</color>
+    <color name="apree">#28000000</color>
+
     <color name="White">#FFF</color>
     <color name="Black">#000</color>
     <color name="yellow">#ffb404</color>

@@ -47,7 +47,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
 
         android:src="@drawable/vector_arrow" />
@@ -56,7 +56,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-   android:layout_marginTop="6dp"
+   android:layout_marginTop="10dp"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="10dp"
         android:src="@drawable/logo_black" />
