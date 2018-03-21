@@ -214,8 +214,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 Integer level = resp.getInt("pk");
                                 question.setText(que);
                                 stage.setText("STAGE - " + Integer.toString(level));
-                                float density = getResources().getDisplayMetrics().density;
-                                float size = (question.getMeasuredHeight() + stage.getMeasuredHeight()) / density + 50;
+
                                 Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg);
                                 //progressBar.dismiss();
                             }

@@ -79,18 +79,18 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 //        myDialog.show();
 
         if(clubName.equals("Manan")){
-            clubDescpTextView.setText("Manananananan");
+            clubDescpTextView.setText("The sooner you the start the code, the longer the program will take ");
         }
         else if(clubName.equals("Ananya")){
             clubDescpTextView.setText("We can break the world into words.");
         }
 
         else if(clubName.equals("Vividha")){
-            clubDescpTextView.setText("Vividhaaaaaaaaaaaaaaaaaaaaa");
+            clubDescpTextView.setText("Dramatics are what that keeps you in the seats");
         }
 
         else if(clubName.equals("Jhalak")){
-            clubDescpTextView.setText("The word “photography” is derived from the Greek words photos (light) and graphé (representation by means of lines). It literally means “drawing with light”!");
+            clubDescpTextView.setText("The word “photography” is derived from the Greek words photos (light) and graphé (representation by means of lines)....");
         }
 
         else if(clubName.equals("Eklavya")){
@@ -122,7 +122,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         }
 
         else if(clubName.equals("Srijan")){
-            clubDescpTextView.setText("People here play with colours and experiment with varied forms of  art to embrace the hidden artistic element in every sphere of life as what are days with no colours  .It innovatively makes every dead wall to speak the language of colours and weave it's own story.");
+            clubDescpTextView.setText("People here play with colours and experiment with varied forms of  art to embrace the hidden artistic element in every sphere of life as what are days with no colours...");
         }
 
         else if(clubName.equals("Taranuum")){

@@ -55,16 +55,19 @@
                 android:layout_width="200dp"
                 android:layout_height="2dp"
                 android:background="@color/baseLight" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.8">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/category_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:foregroundGravity="center_vertical"
                 android:scrollbars="none" />
 
-
+</LinearLayout>
             <View
                 android:id="@+id/categories_underline_view"
                 android:layout_width="200dp"
@@ -76,14 +79,16 @@
                     <TextView
                         android:id="@+id/tv_pdf"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
                         android:layout_gravity="right"
                         android:fontFamily="@font/futura"
-                        android:gravity="right|bottom"
+                        android:gravity="center_vertical"
                         android:background="@drawable/ripple_effect"
                         android:paddingBottom="5dp"
                         android:paddingRight="5dp"
                         android:paddingTop="2dp"
+
                         android:text="Want to see day-wise schedule? Tap here!"
                         android:textColor="@color/White"
                         android:textSize="16dp"

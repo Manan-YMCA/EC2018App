@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="@font/futura"
                 android:gravity="center_horizontal"
                 android:text="Informals"
@@ -39,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:padding="5dp"
                 android:fontFamily="@font/futura"
                 android:gravity="center_horizontal"
                 android:text="Mr and Ms Culmyca"
@@ -51,6 +52,7 @@
                 android:fontFamily="@font/futura"
                 android:gravity="center_horizontal"
                 android:text="Fashion Show"
+                android:padding="5dp"
                 android:textColor="@color/White"
                 android:textSize="18dp" />
 
@@ -59,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/futura"
+                android:padding="5dp"
                 android:gravity="center_horizontal"
                 android:text="Stand Up Comedy"
                 android:textColor="@color/White"
@@ -77,15 +80,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:paddingTop="10dp"
                 android:id="@+id/buuton_explore_brixx"
                 android:layout_gravity="center"
-                android:paddingBottom="10dp"
                 android:text=" Explore"
                 android:background="@drawable/edit_text_white"
-                android:drawableLeft="@drawable/vector_arrow"
                 android:fontFamily="@font/futura"/>
 
         </LinearLayout>

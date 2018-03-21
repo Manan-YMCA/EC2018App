@@ -53,8 +53,8 @@
                 android:background="@drawable/edit_text_white"
                 android:fontFamily="@font/futura"
                 android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:paddingTop="10dp"
                 android:text=" Explore" />
 
