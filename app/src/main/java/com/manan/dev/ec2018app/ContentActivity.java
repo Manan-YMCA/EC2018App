@@ -9,12 +9,14 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -25,6 +27,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -60,6 +64,7 @@ import com.manan.dev.ec2018app.Notifications.MyNotificationsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -109,7 +114,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         mProgress.setTitle("yes i am");
         mProgress.setCanceledOnTouchOutside(false);
         nav_view = (NavigationView) findViewById(R.id.nav_view);
-        pdfTextView = (TextView)findViewById(R.id.tv_pdf);
+        pdfTextView = (TextView) findViewById(R.id.tv_pdf);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
         userTickets = new ArrayList<QRTicketModel>();
@@ -287,7 +292,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     public void onBackPressed() {
         //super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            Log.e(getApplication().getPackageName() , "onBackPressed: " + "Errrrrrrrrrrrrror" );
+            Log.e(getApplication().getPackageName(), "onBackPressed: " + "Errrrrrrrrrrrrror");
             drawer.closeDrawer(GravityCompat.START, true);
         } else {
             startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
@@ -311,6 +316,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_home:
                 //handle home case
                 break;
+
             case R.id.nav_profile:
 
                 handler.postDelayed(new Runnable() {
@@ -328,11 +334,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }, 130);
 
                 break;
+
             case R.id.nav_tickets:
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(prefs.getString("Phone", null) != null) {
+                        if (prefs.getString("Phone", null) != null) {
                             startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         } else {
                             AlertDialog.Builder builder;
@@ -373,6 +380,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     }
                 }, 130);
                 break;
+
             case R.id.nav_culmyca:
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -381,6 +389,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     }
                 }, 130);
                 break;
+
             case R.id.nav_about:
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -389,29 +398,52 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     }
                 }, 130);
                 break;
+
             case R.id.nav_logout:
                 SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
-                FirebaseAuth.getInstance().signOut();
-                if (AccessToken.getCurrentAccessToken() != null) {
 
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                FirebaseAuth.getInstance().signOut();
+                                if (AccessToken.getCurrentAccessToken() != null) {
+                                    new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                                            .Callback() {
+                                        @Override
+                                        public void onCompleted(GraphResponse graphResponse) {
+                                            LoginManager.getInstance().logOut();
+                                            Log.e("TAG", "onCompleted: " + "FB logout successful.");
+                                        }
+                                    }).executeAsync();
+                                }
+                                startActivity(new Intent(getApplicationContext(), UserLoginActivity.class)
+                                        .putExtra("logout", true)
+                                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
-                    new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
-                            .Callback() {
-                        @Override
-                        public void onCompleted(GraphResponse graphResponse) {
-                            LoginManager.getInstance().logOut();
-                            Log.e("TAG", "onCompleted: " + "FB logout successful." );
+                                finish();
+                                MDToast.makeText(ContentActivity.this,"Logout Successful", Toast.LENGTH_SHORT,MDToast.TYPE_SUCCESS).show();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                MDToast.makeText(ContentActivity.this,"Logout Cancelled", Toast.LENGTH_SHORT,MDToast.TYPE_INFO).show();
+                                break;
                         }
-                    }).executeAsync();
-                }
-                startActivity(new Intent(getApplicationContext(), UserLoginActivity.class)
-                        .putExtra("logout", true)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                finish();
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ContentActivity.this);
+                builder.setMessage("Do you want to logout?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
                 break;
+
             case R.id.nav_sponsors:
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -420,6 +452,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     }
                 }, 130);
                 break;
+
             case R.id.nav_notifications:
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -428,21 +461,25 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     }
                 }, 130);
                 break;
+
             case R.id.nav_share:
                 String msg = "Install the elements culmyca app to stay updated about the latest events. Follow the link: ";
                 shareTextMessage(msg);
                 break;
+
             case R.id.nav_bug:
                 String to = "manantechnosurge@gmail.com";
                 String subject = "Bug Found";
                 String messg = "I found a bug!\n";
                 sendEmailBug(to, subject, messg);
                 break;
+
             case R.id.nav_dev:
                 //TODO
                 startActivity(new Intent(ContentActivity.this, DevelopersActivity.class));
                 //show developers
                 break;
+
             case R.id.nav_location:
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -463,7 +500,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     }
 
     private void sendEmailBug(String to, String subject, String msg) {
-
         Uri uri = Uri.parse("mailto:")
                 .buildUpon()
                 .appendQueryParameter("subject", subject)
@@ -506,10 +542,11 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             nav_view.setCheckedItem(R.id.nav_home);
         }
     }
-    private void checkCount(final String phone){
+
+    private void checkCount(final String phone) {
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Log.e("TAG", "checkCount url : " + url );
+        Log.e("TAG", "checkCount url : " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -566,12 +603,36 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         int color;
         if (isConnected) {
             message = "Yea! You are connected to the internet!";
-            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
-            color = Color.WHITE;
+//            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
+            Snackbar snack = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+            View view = snack.getView();
+            view.setBackgroundColor(Color.GREEN);
+            TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+            tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.colorWhite));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            } else {
+                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+
+            snack.show();
+
         } else {
-            message = "Get a hotspot Buddy!";
-            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
-            color = Color.RED;
+            message = "Get a hotspot buddy!";
+//            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
+            Snackbar snack = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+            View view = snack.getView();
+            view.setBackgroundColor(Color.GRAY);
+            TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+            tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.Black));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            } else {
+                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+            snack.show();
         }
     }
 
@@ -597,20 +658,20 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         }
 
         private void updateDatabase() {
-            if(userTickets.size()>databaseController.getTicketCount()){
-                for(int i=0;i<userTickets.size();i++) {
+            if (userTickets.size() > databaseController.getTicketCount()) {
+                for (int i = 0; i < userTickets.size(); i++) {
                     databaseController.addTicketsToDb(userTickets.get(i));
                 }
-            }
-            else {
-                for(int i=0;i<userTickets.size();i++) {
+            } else {
+                for (int i = 0; i < userTickets.size(); i++) {
                     databaseController.updateDbTickets(userTickets.get(i));
                 }
             }
         }
+
     }
-    public float getPageWidth (int position)
-    {
+
+    public float getPageWidth(int position) {
         return (float) 0.8;
     }
 

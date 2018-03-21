@@ -26,7 +26,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/futura"
-        android:text="Informal's"
+        android:text="Informals"
         android:layout_alignParentRight="true"
         android:textColor="@color/White"
         android:textSize="32dp" />
