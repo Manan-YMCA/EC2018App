@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.EventDetails;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,11 +39,13 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 //    private ProgressDialog myDialog;
     ArrayList<EventDetails> eventList;
     private TextView clubDescpTextView;
+    private boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_event_display);
+        flag = false;
 
         backButton = findViewById(R.id.iv_back_button);
         clubName = getIntent().getStringExtra("clubname");
@@ -79,7 +83,17 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 //        myDialog.show();
 
         if(clubName.equals("Manan")){
-            clubDescpTextView.setText("The sooner you the start the code, the longer the program will take ");
+            clubDescpTextView.setText("01010011 01010111 \n01000001 01000111");
+            clubDescpTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!flag) {
+                        flag = true;
+                        clubDescpTextView.setText("You just touched SWAG of Manan!");
+                        MDToast.makeText(CategoryEventDisplayActivity.this, "You just touched SWAG of Manan!", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                    }
+                }
+            });
         }
         else if(clubName.equals("Ananya")){
             clubDescpTextView.setText("We can break the world into words.");

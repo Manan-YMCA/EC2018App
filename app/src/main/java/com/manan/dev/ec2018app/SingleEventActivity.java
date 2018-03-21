@@ -493,7 +493,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             finish();
         } else {
-            onBackPressed();
+            super.onBackPressed();
         }
     }
 }
