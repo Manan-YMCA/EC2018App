@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.manan.dev.ec2018app.Models.NotificationModel;
@@ -37,11 +38,33 @@ public class MyNotificationsAdapter extends RecyclerView.Adapter<MyNotifications
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         NotificationModel nm = notificationModelArrayList.get(position);
 
         holder.notificationHeadingTextView.setText(nm.getTextHeading());
         holder.notificationDescriptionTextView.setText(nm.getText());
+
+        holder.logoImageView.setTag(1);
+        holder.logoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if(!flag[0]){
+//                    Picasso.with(context).load(R.drawable.logo_black).fit().into(holder.logoImageView);
+//                    flag[0] = true;
+//                }
+//                if(flag[0]){
+//                    Picasso.with(context).load(R.drawable.logo_300).fit().into(holder.logoImageView);
+//                    flag[0] = false;
+//                }
+                if(holder.logoImageView.getTag().equals(1)){
+                    holder.logoImageView.setImageResource(R.drawable.logo_black);
+                    holder.logoImageView.setTag(2);
+                }else{
+                    holder.logoImageView.setImageResource(R.drawable.logo_300);
+                    holder.logoImageView.setTag(1);
+                }
+            }
+        });
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(nm.getTime());
@@ -65,9 +88,11 @@ public class MyNotificationsAdapter extends RecyclerView.Adapter<MyNotifications
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView notificationHeadingTextView, notificationDescriptionTextView, notificationTimeTextView, notificationDateTextView;
+        ImageView logoImageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            logoImageView = itemView.findViewById(R.id.iv_ec_logo);
             notificationHeadingTextView = itemView.findViewById(R.id.tv_notification_heading);
             notificationDescriptionTextView = itemView.findViewById(R.id.tv_notification_description);
             notificationDateTextView = itemView.findViewById(R.id.tv_notification_date);

@@ -15,7 +15,6 @@ public class BrixxActivity extends AppCompatActivity {
     private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
     private ImageView next_btn, pre_btn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

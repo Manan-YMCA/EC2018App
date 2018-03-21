@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,6 +32,7 @@ import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.Fragments.FragmentOtpChecker;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Models.UserDetails;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONObject;
 
@@ -212,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
     private Boolean validateCredentials() {
         if (!isNetworkAvailable()) {
-            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+            MDToast.makeText(LoginActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
             return false;
         }
         if (mobileNum.getText().toString().equals("")) {
@@ -259,7 +259,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
             @Override
             public void onResponse(String response) {
                 pbLogin.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
+                MDToast.makeText(LoginActivity.this, "Registered!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
                 startSession();
             }
         }, new Response.ErrorListener() {

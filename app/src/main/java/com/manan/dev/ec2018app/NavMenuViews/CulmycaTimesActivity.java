@@ -1,6 +1,5 @@
 package com.manan.dev.ec2018app.NavMenuViews;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -13,8 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.manan.dev.ec2018app.Adapters.CTAdapter;
 import com.manan.dev.ec2018app.Models.postsModel;
 import com.manan.dev.ec2018app.R;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +36,6 @@ public class CulmycaTimesActivity extends AppCompatActivity {
     private CTAdapter mAdapter;
     SwipeRefreshLayout s;
     ImageView backButton;
-    TextView noPostTV;
-
-    public static AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +44,11 @@ public class CulmycaTimesActivity extends AppCompatActivity {
 
         allposts = new ArrayList<postsModel>();
 
+        String url = "https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/final_image.jpeg?alt=media&token=e7685e47-6762-42d9-bc12-8b8484e0fe38";
+        allposts.add(new postsModel("Culmyca Times to keep yourself updated with all the insides.", url, "manan", "-L7zAP6vrQM_7j914Eyb", 1521478378210L));
+
         backButton = findViewById(R.id.cul_back_button);
         recyclerView = findViewById(R.id.ctc_recycler_view);
-        noPostTV = findViewById(R.id.tv_no_posts);
-        noPostTV.setVisibility(View.GONE);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,28 +71,18 @@ public class CulmycaTimesActivity extends AppCompatActivity {
             public void onRefresh() {
                 if (isNetworkAvailable()) {
                     reload();
-                }
-                else{
+                } else {
                     progressBar.dismiss();
-                    noPostTV.setVisibility(View.VISIBLE);
-                    Toast.makeText(CulmycaTimesActivity.this, "Connect to fast internet connection!", Toast.LENGTH_SHORT).show();
-
+                    MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
                 }
             }
         });
 
         if (isNetworkAvailable()) {
             reload();
-        }
-        else{
-            noPostTV.setVisibility(View.VISIBLE);
-            Toast.makeText(CulmycaTimesActivity.this, "Connect to fast internet connection!", Toast.LENGTH_SHORT).show();
+        } else {
+            MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
             progressBar.dismiss();
-        }
-
-        if (allposts.size() == 0) {
-            progressBar.dismiss();
-            noPostTV.setVisibility(View.VISIBLE);
         }
     }
 
@@ -128,16 +114,17 @@ public class CulmycaTimesActivity extends AppCompatActivity {
                 for (DataSnapshot club : dataSnapshot.getChildren()) {
                     String clubName = club.getKey();
                     for (DataSnapshot posts : club.getChildren()) {
+                        Log.e("posts", posts.toString());
 
-                        Log.d("posts", posts.toString());
                         postsModel post = posts.getValue(postsModel.class);
                         post.postid = posts.getKey();
+
+                        Log.e("TAG", "onDataChange: postiddddddddddddddddddd" + post.getPostid());
+
                         allposts.add(post);
                         if (allposts.size() > 0) {
                             progressBar.dismiss();
-                            noPostTV.setVisibility(View.GONE);
                         }
-
                     }
                 }
                 mLayoutManager = new LinearLayoutManager(CulmycaTimesActivity.this);

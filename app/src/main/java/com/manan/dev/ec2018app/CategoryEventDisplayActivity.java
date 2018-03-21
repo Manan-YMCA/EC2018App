@@ -110,7 +110,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         }
 
         else if(clubName.equals("Nataraja")){
-            clubDescpTextView.setText("नृत्य के लिए समय निकालें ।");
+            clubDescpTextView.setText("Dance dance dance till your feet will follow your heart.");
         }
 
         else if(clubName.equals("SAE/BAJA")){

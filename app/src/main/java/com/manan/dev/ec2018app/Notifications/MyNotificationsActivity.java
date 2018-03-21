@@ -1,6 +1,9 @@
 package com.manan.dev.ec2018app.Notifications;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,8 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -19,12 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.manan.dev.ec2018app.Adapters.MyNotificationsAdapter;
 import com.manan.dev.ec2018app.Models.NotificationModel;
 import com.manan.dev.ec2018app.R;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 
 public class MyNotificationsActivity extends AppCompatActivity {
     RecyclerView notifyRecyclerView;
-    ArrayList<NotificationModel> allNotificationsArrayList, notificationDuplicateArrayList;
+    ArrayList<NotificationModel> allNotificationsArrayList;
     MyNotificationsAdapter myNotificationsAdapter;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
@@ -32,7 +34,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
     ImageView backButton;
     ProgressDialog pd;
     ProgressDialog progress;
-    TextView noNotifyTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +41,17 @@ public class MyNotificationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_notifications);
 
         backButton = findViewById(R.id.iv_back_button);
-        noNotifyTV = findViewById(R.id.tv_no_notify);
-        noNotifyTV.setVisibility(View.GONE);
-
         progress = new ProgressDialog(MyNotificationsActivity.this);
-        progress.setTitle("Loading Notifications...");
+        progress.setTitle("Loading...");
         progress.setCanceledOnTouchOutside(false);
         progress.setCancelable(false);
         progress.show();
 
         notifyRecyclerView = findViewById(R.id.rv_notifications);
         allNotificationsArrayList = new ArrayList<>();
-        notificationDuplicateArrayList = new ArrayList<>();
+
+        long lTime = 1521523868202L;
+        allNotificationsArrayList.add(new NotificationModel("Attention!", "Welcome to Culmyca 18.", lTime));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(MyNotificationsActivity.this);
         layoutManager.setReverseLayout(true);
@@ -72,10 +72,9 @@ public class MyNotificationsActivity extends AppCompatActivity {
             }
         });
 
-        if (allNotificationsArrayList.size() == 0) {
-            Toast.makeText(this, "Get a internet connection!", Toast.LENGTH_SHORT).show();
-            noNotifyTV.setVisibility(View.VISIBLE);
+        if(!isNetworkAvailable()){
             progress.dismiss();
+            MDToast.makeText(MyNotificationsActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
         }
     }
 
@@ -105,10 +104,9 @@ public class MyNotificationsActivity extends AppCompatActivity {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Log.e(TAG, "onChildAdded:" + dataSnapshot.getKey());
-//                    Toast.makeText(MyNotificationsActivity.this, dataSnapshot.getValue().toString() , Toast.LENGTH_SHORT).show();
                     NotificationModel nm = dataSnapshot.getValue(NotificationModel.class);
-//                    Toast.makeText(MyNotificationsActivity.this, nm.getTextHeading()  , Toast.LENGTH_SHORT).show();
                     updateList(nm);
+                    progress.dismiss();
                 }
 
                 @Override
@@ -116,10 +114,11 @@ public class MyNotificationsActivity extends AppCompatActivity {
                     Log.e(TAG, "onChildChanged:" + dataSnapshot.getKey());
                     try {
                         NotificationModel nm = dataSnapshot.getValue(NotificationModel.class);
-                        //String nmString = dataSnapshot.getKey();
-                        // updateList(nm);
+                        updateList(nm);
+                        progress.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
+                        progress.dismiss();
                     }
                 }
 
@@ -127,6 +126,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
                     NotificationModel nm = dataSnapshot.getValue(NotificationModel.class);
                     allNotificationsArrayList.remove(nm);
+                    progress.dismiss();
                 }
 
                 @Override
@@ -136,6 +136,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Log.e("The read failed: ", databaseError.getDetails());
+                    progress.dismiss();
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
@@ -148,9 +149,15 @@ public class MyNotificationsActivity extends AppCompatActivity {
 
         if (allNotificationsArrayList.size() > 0) {
             progress.dismiss();
-//            Toast.makeText(this, "There is something!", Toast.LENGTH_SHORT).show();
-            noNotifyTV.setVisibility(View.GONE);
         }
         myNotificationsAdapter.notifyDataSetChanged();
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }

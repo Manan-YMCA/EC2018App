@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -23,15 +24,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.Coordinators;
 import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
+import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,8 +51,8 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, feesTextView,
             typeOfEventTextView, firstPrizeTextView, secondPrizeTextView, thirdPrizeTextView, descriptionTextView,
             rulesTextView, coordsHeading, eventCategoryTextView;
-    RelativeLayout dateTimeRelativeLayout, locationRelativeLayout, prizesRelativeLayout;
-    LinearLayout coordsLinearLayout, goingLinearLayout;
+    RelativeLayout dateTimeRelativeLayout, prizesRelativeLayout;
+    LinearLayout coordsLinearLayout, locationRelativeLayout;
     View line1, line2, line3, line4;
     ImageView categoryEventImageView;
     private String phoneNumber;
@@ -70,6 +72,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private boolean NO_DEEP_LINK_FLAG = true;
     private Intent phoneIntent;
     private QRCodeActivity fragobj;
+    String startTime, endTime, formattedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +98,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
-                Toast.makeText(this, "There's no such event.", Toast.LENGTH_SHORT).show();
+                MDToast.makeText(SingleEventActivity.this, "There's no such event.", MDToast.LENGTH_SHORT, MDToast.TYPE_WARNING).show();
                 finish();
                 startActivity(new Intent(this, SplashScreen.class));
             }
@@ -144,7 +147,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
 
         dateTimeRelativeLayout = (RelativeLayout) findViewById(R.id.rl_time_date);
-        locationRelativeLayout = (RelativeLayout) findViewById(R.id.rl_location);
+        locationRelativeLayout = (LinearLayout) findViewById(R.id.ll_location);
         coordsLinearLayout = (LinearLayout) findViewById(R.id.ll_coordinators);
         coordsHeading = (TextView) findViewById(R.id.tv_coords_heading);
         backbutton = (ImageView) findViewById(R.id.tv_back_button);
@@ -154,17 +157,17 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(eventDetails.getmStartTime());
-            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
 
-            String formattedDate = sdf.format(cal.getTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+            formattedDate = sdf.format(cal.getTime());
             eventDateTextView.setText(formattedDate);
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
             Calendar endTimeMilis = Calendar.getInstance();
             endTimeMilis.setTimeInMillis(eventDetails.getmEndTime());
 
-            String startTime = sdf1.format(cal.getTime());
-            String endTime = sdf1.format(endTimeMilis.getTime());
+            startTime = sdf1.format(cal.getTime());
+            endTime = sdf1.format(endTimeMilis.getTime());
 
             eventStartTimeTextView.setText(startTime);
             eventEndTimeTextView.setText(endTime);
@@ -263,14 +266,29 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             dateTimeRelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(SingleEventActivity.this, "Calender pe reminder set karna hai!", Toast.LENGTH_SHORT).show();
+                    MDToast.makeText(SingleEventActivity.this, "Set a reminder!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+
+                    Intent intent = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.EventsEntity.CONTENT_URI)
+                            .setType("vnd.android.cursor.item/event")
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventDetails.getmStartTime())
+                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, eventDetails.getmEndTime())
+                            .putExtra(CalendarContract.EventsEntity.TITLE, eventDetails.getmName())
+                            .putExtra(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
+                            .putExtra(CalendarContract.Reminders.MINUTES, 5);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(intent);
                 }
             });
 
             locationRelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(SingleEventActivity.this, "Google ke rastha dekhna hai!", Toast.LENGTH_SHORT).show();
+                    MDToast.makeText(SingleEventActivity.this, "Search on Maps!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+                    Intent intentMap = new Intent(SingleEventActivity.this, MapsActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intentMap);
                 }
             });
             registerButton.setOnClickListener(new View.OnClickListener() {
@@ -335,7 +353,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         if (permissionGranted) {
             startActivity(phoneIntent);
         } else {
-            Toast.makeText(SingleEventActivity.this, "You didn't assign permission.", Toast.LENGTH_SHORT).show();
+            MDToast.makeText(SingleEventActivity.this, "You didn't assign permission.", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
     }
 

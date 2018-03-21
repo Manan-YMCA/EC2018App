@@ -70,7 +70,7 @@
                 android:fontFamily="@font/futura"
                 android:paddingLeft="20dp"
                 android:text="@string/content_head"
-                android:textSize="15sp" />
+                android:textSize="13.5sp" />
 
         </LinearLayout>
 

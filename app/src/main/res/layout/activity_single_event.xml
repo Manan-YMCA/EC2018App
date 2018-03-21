@@ -6,26 +6,25 @@
     android:scrollbars="none">
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/contaner_se"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/contaner_se"
         tools:context="com.manan.dev.ec2018app.SingleEventActivity">
-
 
         <ProgressBar
             android:id="@+id/pb_view_ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:indeterminate="true"/>
+            android:indeterminate="true" />
 
         <ImageView
             android:id="@+id/tv_back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/vector_arrow"
             android:tint="@color/Black" />
 
@@ -76,8 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:indeterminate="true"
-                android:visibility="gone"/>
-
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,25 +88,22 @@
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="bottom"
                     android:layout_weight="0.75"
                     android:background="@drawable/edit_text_background"
                     android:fontFamily="@font/futura"
                     android:text="Register"
                     android:textColor="#fff"
-                    android:textSize="26dp" />
+                    android:textSize="26sp" />
 
                 <ImageView
                     android:id="@+id/btn_share"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="0.25"
-                    android:fontFamily="@font/futura"
-                    android:src="@drawable/vector_share"
-                    android:textColor="#fff" />
+                    android:src="@drawable/vector_share" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -130,109 +125,108 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="10dp">
 
-        <RelativeLayout
-            android:id="@+id/rl_time_date"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line2"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/iv_vector_time"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/rl_time_date"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:padding="5dp"
-                android:src="@drawable/vector_time"
-                android:tint="#217c31" />
+                android:layout_below="@id/line2"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_event_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/iv_vector_time"
-                android:layout_toRightOf="@+id/iv_vector_time"
-                android:fontFamily="@font/futura"
-                android:text="Sunday, 18 March 2018"
-                android:textColor="#111"
-                android:textSize="15dp"
-                android:textStyle="italic" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_event_date"
-                android:layout_alignStart="@id/tv_event_date"
-                android:layout_below="@id/tv_event_date">
-
-                <TextView
-                    android:id="@+id/tv_event_start_time"
+                <ImageView
+                    android:id="@+id/iv_vector_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura"
-                    android:text="10:00"
-                    android:textColor="#333"
-                    android:textSize="13dp"
-                    android:textStyle="normal" />
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    android:src="@drawable/vector_time"
+                    android:tint="#217c31" />
 
                 <TextView
+                    android:id="@+id/tv_event_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/iv_vector_time"
+                    android:layout_toRightOf="@+id/iv_vector_time"
                     android:fontFamily="@font/futura"
-                    android:text=" To "
-                    android:textColor="#333"
-                    android:textSize="13dp"
-                    android:textStyle="normal" />
+                    android:text="Sunday, 18 March 2018"
+                    android:textColor="#111"
+                    android:textSize="15dp"
+                    android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/tv_event_end_time"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura"
-                    android:text="16:00"
-                    android:textColor="#333"
-                    android:textSize="13dp"
-                    android:textStyle="normal" />
-            </LinearLayout>
-        </RelativeLayout>
+                    android:layout_alignLeft="@id/tv_event_date"
+                    android:layout_alignStart="@id/tv_event_date"
+                    android:layout_below="@id/tv_event_date">
 
-        <RelativeLayout
-            android:id="@+id/rl_location"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/tv_event_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura"
+                        android:text="10:00"
+                        android:textColor="#333"
+                        android:textSize="13dp"
+                        android:textStyle="normal" />
 
-            <ImageView
-                android:id="@+id/iv_money"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:src="@drawable/vector_money_inr"
-                android:tint="#217c31" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura"
+                        android:text=" To "
+                        android:textColor="#333"
+                        android:textSize="13dp"
+                        android:textStyle="normal" />
 
-            <TextView
-                android:id="@+id/tv_fees"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_event_end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura"
+                        android:text="16:00"
+                        android:textColor="#333"
+                        android:textSize="13dp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_location"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_money"
-                android:fontFamily="@font/futura"
-                android:padding="5dp"
-                android:text="Fees : Rs. 10"
-                android:textColor="#111"
-                android:textSize="15dp"
-                android:textStyle="normal"
-                android:layout_toEndOf="@+id/iv_money" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/iv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/vector_money_inr"
+                    android:tint="#217c31" />
+
+                <TextView
+                    android:id="@+id/tv_fees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_money"
+                    android:layout_toRightOf="@+id/iv_money"
+                    android:fontFamily="@font/futura"
+                    android:padding="5dp"
+                    android:text="Fees : Rs. 10"
+                    android:textColor="#111"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/rl_money_type"
@@ -245,6 +239,7 @@
             android:layout_marginTop="10dp">
 
             <LinearLayout
+                android:id="@+id/ll_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -290,15 +285,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
                     android:padding="5dp"
-                    android:textAllCaps="true"
                     android:text="Single/Team Event"
+                    android:textAllCaps="true"
                     android:textColor="#111"
                     android:textSize="15dp"
                     android:textStyle="normal" />
 
             </LinearLayout>
         </LinearLayout>
-
 
         <View
             android:id="@+id/line5"

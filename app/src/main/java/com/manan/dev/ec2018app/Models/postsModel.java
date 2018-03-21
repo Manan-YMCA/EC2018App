@@ -16,7 +16,7 @@ public class postsModel {
 
     }
 
-    public postsModel(String title, String photoURL, String clubName, String postid,long time) {
+    public postsModel(String title, String photoURL, String clubName, String postid, long time) {
         this.title = title;
         this.photoURL = photoURL;
         this.clubName = clubName;
@@ -61,7 +61,7 @@ public class postsModel {
     }
 
     public void setphotoid(String photoid) {
-        this.photoURL= photoid;
+        this.photoURL = photoid;
     }
 
 }

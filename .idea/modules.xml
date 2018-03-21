@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Suneja's\Downloads\EC2018App\EC18App.iml" filepath="C:\Users\Suneja's\Downloads\EC2018App\EC18App.iml" />
       <module fileurl="file://$PROJECT_DIR$/EC2018App.iml" filepath="$PROJECT_DIR$/EC2018App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

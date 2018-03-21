@@ -23,7 +23,8 @@ import com.squareup.picasso.Picasso;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RangritiFragment extends Fragment {
+public class
+RangritiFragment extends Fragment {
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
     private ChildEventListener mChildEventListener;

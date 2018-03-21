@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -23,14 +22,14 @@ import com.manan.dev.ec2018app.NavMenuViews.CulmycaTimesActivity;
 import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class DashboardSliderFragment1 extends Fragment {
-    private DatabaseReference mDatabaseReference;
+                                                                                                                                  private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
     public ArrayList<WhatsNewModel> whatsnewarraylist;
     private ChildEventListener mChildEventListCurEvent;
@@ -43,7 +42,6 @@ public class DashboardSliderFragment1 extends Fragment {
     private Button explore;
     private boolean mIsRunning;
     private TimerTask mStatusChecker;
-
 
     // TODO: Rename parameter arguments, choose names that mat
     @Override
@@ -58,7 +56,7 @@ public class DashboardSliderFragment1 extends Fragment {
         whatsnewarraylist = new ArrayList<>();
         whatsnewarraylist.add(new WhatsNewModel("Explore the new Culmyca'18 App! Various cool features are added and don't forget to register yourself first!", 7, "j"));
         contenttv = rootView.findViewById(R.id.content_whatnew);
-        explore =rootView.findViewById(R.id.buuton_explore);
+        explore = rootView.findViewById(R.id.buuton_explore);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("whatsnew");
         int t1 = whatsnewarraylist.size();
         Log.e("value", String.valueOf(t1));
@@ -72,15 +70,15 @@ public class DashboardSliderFragment1 extends Fragment {
         super.onResume();
         attachDatabaseListener();
 
-    mIsRunning=true;
-      update.run();
+        mIsRunning = true;
+        update.run();
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mIsRunning=false;
+        mIsRunning = false;
         handler.removeCallbacks(mStatusChecker);
 
         detatchDatabaseListener();
@@ -141,59 +139,55 @@ public class DashboardSliderFragment1 extends Fragment {
 
     private void updateUI() {
         i = 0;
-         update = new Runnable() {
-             @Override
-             public void run() {
-                 if (!mIsRunning) {
-                     return; // stop when told to stop
-                 }
-                 WhatsNewModel mode = whatsnewarraylist.get(i);
-                 contenttv.setText(mode.getContent());
-                 contenttv.setTag(mode.getIntent());
-                 if(contenttv.getTag().equals(0))
-                 {
-                     explore.setText("Xunbao");
-                 }
-                 else if(contenttv.getTag().equals(1)){
-                     explore.setText("Culm. Times");
+        update = new Runnable() {
+            @Override
+            public void run() {
+                if (!mIsRunning) {
+                    return; // stop when told to stop
+                }
+                WhatsNewModel mode = whatsnewarraylist.get(i);
+                contenttv.setText(mode.getContent());
+                contenttv.setTag(mode.getIntent());
+                if (contenttv.getTag().equals(0)) {
+                    explore.setText("Xunbao");
+                } else if (contenttv.getTag().equals(1)) {
+                    explore.setText("EC Times");
 
-                 } else if(contenttv.getTag().equals(2)){
-                     explore.setText("Maps");
-                 }
+                } else if (contenttv.getTag().equals(2)) {
+                    explore.setText("Maps");
+                }
 
+                //          timer.cancel();
+                //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
-                 //          timer.cancel();
-                 //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
+                explore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (contenttv.getTag().equals(0)) {
+                            startActivity(new Intent(getActivity(), XunbaoActivity.class));
+                        } else if (contenttv.getTag().equals(1)) {
+                            startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
 
-                 explore.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View v) {
-                         if(contenttv.getTag().equals(0)){
-                             startActivity(new Intent(getActivity(), XunbaoActivity.class));
-                         } else if(contenttv.getTag().equals(1)){
-                             startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
-
-                         } else if(contenttv.getTag().equals(2)){
-                             startActivity(new Intent(getActivity(), MapsActivity.class));
-                         }
-                         else if(contenttv.getTag().equals(7))
-                         {
-                             Toast.makeText(getActivity(),"Pull the Navigation Drawer!",Toast.LENGTH_SHORT).show();
-                         }
+                        } else if (contenttv.getTag().equals(2)) {
+                            startActivity(new Intent(getActivity(), MapsActivity.class));
+                        } else if (contenttv.getTag().equals(7)) {
+//                            if (!drawer.isDrawerOpen(GravityCompat.START)) {
+//                                drawer.openDrawer(GravityCompat.START);
+//                            }
+                            MDToast.makeText(getActivity(), "Pull Navigation Drawer", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+                        }
 
 
-                     }
-                 });//
+                    }
+                });//
 
-
-                 // this function can change value of mInterval.
-                 i++;
-                 if (i == whatsnewarraylist.size()) {
-                     i = 0;
-                 }
-
-                 handler.postDelayed(update, 4000);
-             }
+                // this function can change value of mInterval.
+                i++;
+                if (i == whatsnewarraylist.size()) {
+                    i = 0;
+                }
+                handler.postDelayed(update, 4000);
+            }
 
 //             void startRepeatingTask() {
 //                 mIsRunning = true;
@@ -205,6 +199,6 @@ public class DashboardSliderFragment1 extends Fragment {
 //                 handler.removeCallbacks(mStatusChecker);
 //             }
 
-         };
+        };
     }
 }

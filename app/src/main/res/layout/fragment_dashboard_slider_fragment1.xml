@@ -45,20 +45,18 @@
                 android:textColor="@color/White"
                 android:textSize="18dp" />
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="10dp"
-    android:id="@+id/buuton_explore"
-
-    android:paddingBottom="10dp"
-    android:text=" Explore"
-    android:background="@drawable/edit_text_white"
-    android:drawableLeft="@drawable/vector_arrow"
-    android:fontFamily="@font/futura"/>
+            <Button
+                android:id="@+id/buuton_explore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_white"
+                android:fontFamily="@font/futura"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:text=" Explore" />
 
         </LinearLayout>
     </RelativeLayout>
