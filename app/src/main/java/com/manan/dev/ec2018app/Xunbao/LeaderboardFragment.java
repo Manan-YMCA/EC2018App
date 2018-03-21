@@ -5,13 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,8 +39,11 @@ public class LeaderboardFragment extends Fragment {
     static RecyclerView recyclerView;
     static Context c;
     private ProgressBar bar;
+    TextView refresh;
     static RequestQueue queue;
     static StringRequest stringRequest;
+//    ImageView refreshB;
+    SwipeRefreshLayout swipeRefreshLayout;
     //ProgressDialog progressBar;
 
     public LeaderboardFragment() {
@@ -47,6 +53,15 @@ public class LeaderboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         c = getActivity();
+//        refreshB=view.findViewById(R.id.refresh_butto);
+        refresh=view.findViewById(R.id.refresh_text);
+        swipeRefreshLayout=view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                reload();
+            }
+        });
         bar = (ProgressBar) view.findViewById(R.id.pb_leaderboard);
         bar.setVisibility(View.VISIBLE);
         bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -59,6 +74,14 @@ public class LeaderboardFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c);
         recyclerView.setLayoutManager(mLayoutManager);
+//        refreshB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                refreshB.setVisibility(View.GONE);
+//                bar.setVisibility(View.VISIBLE);
+//                reload();
+//            }
+//        });
         return view;
     }
 
@@ -73,9 +96,10 @@ public class LeaderboardFragment extends Fragment {
         String url = c.getResources().getString(R.string.xunbao_leaderboard_api);
         stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
-                    List<LeaderboardList> leaderboardList = new ArrayList<>();
                     @Override
                     public void onResponse(String response) {
+
+                        List<LeaderboardList> leaderboardList = new ArrayList<>();
                         recyclerView.setVisibility(View.VISIBLE);
                         bar.setVisibility(View.GONE);
                         //progressBar.dismiss();
@@ -91,9 +115,13 @@ public class LeaderboardFragment extends Fragment {
                                 LeaderboardList k4 = new LeaderboardList(fname+" "+lname, Integer.toString(i+1), Integer.toString(Integer.parseInt(k3)-1),fid);
                                 leaderboardList.add(k4);
                             }
+                            swipeRefreshLayout.setRefreshing(false);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            refresh.setVisibility(View.VISIBLE);
+//                            refreshB.setVisibility(View.VISIBLE);
+                            swipeRefreshLayout.setRefreshing(false);
                         }
                         leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
                         recyclerView.setAdapter(leaderboardAdapter);
@@ -104,7 +132,11 @@ public class LeaderboardFragment extends Fragment {
 
                 //progressBar.dismiss();
                 List<LeaderboardList> leaderboardList = new ArrayList<>();
+                bar.setVisibility(View.GONE);
+                refresh.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(false);
 
+//                refreshB.setVisibility(View.VISIBLE);
                 Toast.makeText(c, "Problem Loading!", Toast.LENGTH_SHORT).show();
 
                 leaderboardAdapter = new LeaderboardAdapter(c, leaderboardList);
@@ -116,6 +148,7 @@ public class LeaderboardFragment extends Fragment {
 
     public void reload() {
         recyclerView.setVisibility(View.GONE);
+        refresh.setVisibility(View.GONE);
         queue.add(stringRequest);
     }
 }

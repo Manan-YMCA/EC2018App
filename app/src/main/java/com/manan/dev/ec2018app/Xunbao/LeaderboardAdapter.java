@@ -1,14 +1,18 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.manan.dev.ec2018app.R;
 
 import java.util.List;
@@ -39,14 +43,24 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @Override
     public void onBindViewHolder(LeaderboardAdapter.MyViewHolder holder, int position) {
         LeaderboardList member = leaderboardList.get(position);
-        holder.rank.setText(member.getRank());
+
+        holder.rank.setText(member.getRank()+".");
+        holder.name1.setText(member.getName1());
+        holder.level.setText(member.getLevel());
+
         if (member.getRank().equals("1")) {
             holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.plank_black));
         } else {
             holder.llBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.plank_black));
         }
-        holder.name1.setText(member.getName1());
-        holder.level.setText(member.getLevel());
+
+        if(AccessToken.getCurrentAccessToken()!=null) {
+            if(member.getFid().equals(Profile.getCurrentProfile().getId())){
+                holder.name1.setTextColor(Color.parseColor("#fffb00"));
+                holder.level.setTextColor(Color.parseColor("#fffb00"));
+                holder.rank.setTextColor(Color.parseColor("#fffb00"));
+            }
+        }
     }
 
     @Override

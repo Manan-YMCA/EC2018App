@@ -2,12 +2,14 @@ package com.manan.dev.ec2018app.NavMenuViews;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.PointF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -52,7 +54,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
 
@@ -86,18 +88,18 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (allposts.size() > 0) {
-//            recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(CulmycaTimesActivity.this));
-//            recyclerView.smoothScrollToPosition(0);
-//            if (!recyclerView.canScrollVertically(-1)) {
-//                super.onBackPressed();
-//            }
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        if (allposts.size() > 0) {
+            if (!recyclerView.canScrollVertically(-1)) {
+                super.onBackPressed();
+            }
+            recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(CulmycaTimesActivity.this));
+            recyclerView.smoothScrollToPosition(0);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 
     @Override
@@ -173,42 +175,42 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
         }
     }
 
-//    public class LinearLayoutManagerWithSmoothScroller extends LinearLayoutManager {
-//
-//        public LinearLayoutManagerWithSmoothScroller(Context context) {
-//            super(context, VERTICAL, false);
-//        }
-//
-//        public LinearLayoutManagerWithSmoothScroller(Context context, int orientation, boolean reverseLayout) {
-//            super(context, orientation, reverseLayout);
-//        }
-//
-//        @Override
-//        public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state,
-//                                           int position) {
-//            RecyclerView.SmoothScroller smoothScroller = new TopSnappedSmoothScroller(recyclerView.getContext());
-//            smoothScroller.setTargetPosition(position);
-//            startSmoothScroll(smoothScroller);
-//        }
-//
-//        private class TopSnappedSmoothScroller extends LinearSmoothScroller {
-//            public TopSnappedSmoothScroller(Context context) {
-//                super(context);
-//
-//            }
-//
-//            @Override
-//            public PointF computeScrollVectorForPosition(int targetPosition) {
-//                return LinearLayoutManagerWithSmoothScroller.this
-//                        .computeScrollVectorForPosition(targetPosition);
-//            }
-//
-//            @Override
-//            protected int getVerticalSnapPreference() {
-//                return SNAP_TO_START;
-//            }
-//        }
-//    }
+    public class LinearLayoutManagerWithSmoothScroller extends LinearLayoutManager {
+
+        public LinearLayoutManagerWithSmoothScroller(Context context) {
+            super(context, VERTICAL, false);
+        }
+
+        public LinearLayoutManagerWithSmoothScroller(Context context, int orientation, boolean reverseLayout) {
+            super(context, orientation, reverseLayout);
+        }
+
+        @Override
+        public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state,
+                                           int position) {
+            RecyclerView.SmoothScroller smoothScroller = new TopSnappedSmoothScroller(recyclerView.getContext());
+            smoothScroller.setTargetPosition(position);
+            startSmoothScroll(smoothScroller);
+        }
+
+        private class TopSnappedSmoothScroller extends LinearSmoothScroller {
+            public TopSnappedSmoothScroller(Context context) {
+                super(context);
+
+            }
+
+            @Override
+            public PointF computeScrollVectorForPosition(int targetPosition) {
+                return LinearLayoutManagerWithSmoothScroller.this
+                        .computeScrollVectorForPosition(targetPosition);
+            }
+
+            @Override
+            protected int getVerticalSnapPreference() {
+                return SNAP_TO_START;
+            }
+        }
+    }
 }
 
 

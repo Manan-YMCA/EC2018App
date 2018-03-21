@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     JsonArrayRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
+    private ProgressBar bar;
     //ProgressDialog progressBar;
     int xstatus = 2;
     private String currFbid;
@@ -50,6 +52,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_question, container, false);
+
+        bar = (ProgressBar) view.findViewById(R.id.pb_question);
+        bar.setVisibility(View.VISIBLE);
+        bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
 
 //        progressBar = new ProgressDialog(getActivity());
 //        progressBar.setMessage("Loading Question!");
@@ -68,6 +74,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         contestEnd = view.findViewById(R.id.contest_ends);
         refreshButton = view.findViewById(R.id.refresh_button);
         refreshText = view.findViewById(R.id.refresh_text);
+
         queue = Volley.newRequestQueue(getActivity());
 
         refreshButton.setOnClickListener(
@@ -83,6 +90,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
             @Override
             public void onClick(View view) {
 
+                bar.setVisibility(View.VISIBLE);
                 //progressBar.show();
                 submitAnswer();
             }
@@ -103,6 +111,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
+                            bar.setVisibility(View.INVISIBLE);
                             try {
                                 //progressBar.dismiss();
                                 String end = resp.getString("response");
@@ -124,6 +133,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
+                            bar.setVisibility(View.INVISIBLE);
                             //progressBar.dismiss();
                             Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
                             volleyError.printStackTrace();
@@ -131,6 +141,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     });
             queue.add(answ);
         } catch (JSONException e) {
+            bar.setVisibility(View.INVISIBLE);
             Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
             //progressBar.dismiss();
         }
@@ -138,6 +149,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
     public void reload() {
         //progressBar.show();
+        bar.setVisibility(View.VISIBLE);
         queLayout.setVisibility(View.GONE);
         contestEnd.setVisibility(View.GONE);
         refreshButton.setVisibility(View.GONE);
@@ -150,6 +162,9 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        bar.setVisibility(View.INVISIBLE);
+                        refreshButton.setVisibility(View.GONE);
                         xstatus = Integer.parseInt(response);
                         Log.d("hey", "" + xstatus);
                         if (xstatus == 2) {
@@ -161,6 +176,9 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                             }
+                            else{
+                                refreshText.setVisibility(View.VISIBLE);
+                            }
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
                             contestEnd.setText("THE CONTEST IS OVER! THANKS FOR PLAYING. IF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY.");
@@ -170,10 +188,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                bar.setVisibility(View.INVISIBLE);
                 Log.d("hey", "" + error);
                 //progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
-                refreshText.setVisibility(View.VISIBLE);
                 Toast.makeText(getActivity(), "Problem loading!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -199,13 +217,15 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        bar.setVisibility(View.INVISIBLE);
                         JSONObject resp;
+                        refreshButton.setVisibility(View.GONE);
                         try {
                             resp = response.getJSONObject(0);
                             try {
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
-                                contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 31st March, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
+                                contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 7th APRIL, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
                                 //progressBar.dismiss();
                             } catch (Exception e) {
                                 queLayout.setVisibility(View.VISIBLE);
@@ -221,7 +241,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         } catch (JSONException e) {
                             //progressBar.dismiss();
                             refreshButton.setVisibility(View.VISIBLE);
-                            refreshText.setVisibility(View.VISIBLE);
                             e.printStackTrace();
                         }
 
@@ -231,8 +250,9 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //progressBar.dismiss();
+
+                        bar.setVisibility(View.INVISIBLE);
                         refreshButton.setVisibility(View.VISIBLE);
-                        refreshText.setVisibility(View.VISIBLE);
 
                         volleyError.printStackTrace();
                     }
@@ -245,6 +265,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     public void makeQuestionVisible(String fbId) {
         currFbid = fbId;
         Log.d("xunbao", currFbid);
+
         checkStatus();
         if (!currFbid.equals("notLoggedIn"))
             getQuestion();

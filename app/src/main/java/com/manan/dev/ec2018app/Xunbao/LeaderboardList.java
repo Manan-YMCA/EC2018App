@@ -40,4 +40,12 @@ public class LeaderboardList {
     public void setLevel(String level) {
         this.level = level;
     }
+
+    public String getFid() {
+        return fid;
+    }
+
+    public void setFid(String fid) {
+        this.fid = fid;
+    }
 }
