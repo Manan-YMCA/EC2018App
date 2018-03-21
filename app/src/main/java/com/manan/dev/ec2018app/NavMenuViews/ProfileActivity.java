@@ -101,8 +101,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        textView1 = (TextView) findViewById(R.id.tv5);
-        textView2 = (TextView) findViewById(R.id.tv6);
+        textView1 = (TextView) findViewById(R.id.tv6);
         loginButton = (LoginButton) findViewById(R.id.login_button);
         profilePictureFrame = (RelativeLayout) findViewById(R.id.profile_picture_layout);
         profilePicture = (ImageView) findViewById(R.id.profile_pic);
@@ -400,8 +399,7 @@ public class ProfileActivity extends AppCompatActivity {
             profilePicture.setImageDrawable(getResources().getDrawable(R.drawable.profile_frame));
         } else {
             loginButton.setVisibility(View.GONE);
-            textView1.setText("On days when we're not working on our college fest,");
-            textView2.setText("we help recruit for James Bond. Check your details to see if the biodata we're sending is correct.`");
+            textView1.setText("On days when we're not working on our college fest, we help recruit for James Bond. Check your details to see if the biodata we're sending is correct.");
             addPhoto();
             //    Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(200,200));
         }

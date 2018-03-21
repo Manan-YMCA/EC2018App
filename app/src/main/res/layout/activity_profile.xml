@@ -80,30 +80,20 @@
                 />
         </RelativeLayout>
         
-        <TextView
-            android:id="@+id/tv5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_picture_layout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/futura"
-            android:text="Let Culmyca App be the new Tinder."
-            android:textColor="@color/White"
-            android:textSize="15dp" />
+
 
         <TextView
             android:id="@+id/tv6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv5"
+            android:layout_below="@+id/profile_picture_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="2dp"
             android:layout_marginRight="18dp"
             android:fontFamily="@font/futura"
-            android:text="Login with Facebook to upload your photo and let people know about this beautiful face that they'll be seeing at our fest."
+            android:text="Let Culmyca App be the new Tinder. Login with Facebook to upload your photo and let people know about this beautiful face that they'll be seeing at our fest."
             android:textColor="@color/White"
             android:textAlignment="center"
             android:textSize="15dp" />

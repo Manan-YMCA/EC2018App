@@ -73,6 +73,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private Intent phoneIntent;
     private QRCodeActivity fragobj;
     String startTime, endTime, formattedDate;
+    private static boolean deep = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
             eventName = eventName.replace("%20", " ");
             Log.v("deeplink", eventName);
+            deep = true;
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
                 NO_DEEP_LINK_FLAG = false;
@@ -175,7 +177,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             backbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onBackPressed();
+                    if(deep){
+                        startActivity(new Intent(SingleEventActivity.this, UserLoginActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        finish();
+                    } else {
+                        onBackPressed();
+                    }
                 }
             });
 
@@ -473,6 +482,18 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             super.onPostExecute(result);
             barEventImage.setVisibility(View.GONE);
             eventImageLinearLayout.setBackground(result);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(deep){
+            startActivity(new Intent(SingleEventActivity.this, UserLoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
+        } else {
+            onBackPressed();
         }
     }
 }
