@@ -1,10 +1,12 @@
 package com.manan.dev.ec2018app.Models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Shubham on 3/18/2018.
  */
 
-public class NotificationModel {
+public class NotificationModel implements Comparable<NotificationModel>{
     String textHeading,text;
     long time;
 
@@ -38,5 +40,13 @@ public class NotificationModel {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    @Override
+    public int compareTo(@NonNull NotificationModel o) {
+        if(this.getTime() < o.getTime())
+            return 1;
+        else
+            return -1;
     }
 }

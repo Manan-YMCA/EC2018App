@@ -1,10 +1,12 @@
 package com.manan.dev.ec2018app.Models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by KASHISH on 10-03-2018.
  */
 
-public class postsModel {
+public class postsModel implements Comparable<postsModel> {
 
     public String title;
     public String photoURL;
@@ -64,4 +66,11 @@ public class postsModel {
         this.photoURL = photoid;
     }
 
+    @Override
+    public int compareTo(@NonNull postsModel o) {
+        if(this.gettime() < o.gettime())
+            return 1;
+        else
+            return -1;
+    }
 }

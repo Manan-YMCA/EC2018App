@@ -83,7 +83,7 @@
             android:layout_height="240dp"
             android:layout_below="@id/lin2"
             android:scaleType="centerCrop"
-            android:src="@drawable/default_image" />
+            android:src="@drawable/default_image_1" />
 
         <View
             android:id="@+id/lin3"

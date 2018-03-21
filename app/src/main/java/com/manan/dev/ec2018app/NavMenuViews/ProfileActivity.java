@@ -400,8 +400,8 @@ public class ProfileActivity extends AppCompatActivity {
             profilePicture.setImageDrawable(getResources().getDrawable(R.drawable.profile_frame));
         } else {
             loginButton.setVisibility(View.GONE);
-            textView1.setVisibility(View.GONE);
-            textView2.setVisibility(View.GONE);
+            textView1.setText("On days when we're not working on our college fest,");
+            textView2.setText("we help recruit for James Bond. Check your details to see if the biodata we're sending is correct.`");
             addPhoto();
             //    Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(200,200));
         }

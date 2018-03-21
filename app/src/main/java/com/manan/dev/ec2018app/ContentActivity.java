@@ -98,7 +98,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         cotainer_root_frame = (RelativeLayout) findViewById(R.id.content_frame);
 
         try {
-            Log.d("auth", FirebaseAuth.getInstance().getUid());
+            Log.d("auth", FirebaseAuth.getInstance().getCurrentUser().getUid());
         } catch (Exception e) {
             Log.d("auth", e.getMessage());
         }

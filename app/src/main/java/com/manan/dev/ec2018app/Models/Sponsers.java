@@ -1,10 +1,12 @@
 package com.manan.dev.ec2018app.Models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Dell on 15-03-2018.
  */
 
-public class Sponsers {
+public class Sponsers implements Comparable<Sponsers>{
     private String sname, title,url,id;
     private String imageUrl;
     int rank;
@@ -67,5 +69,14 @@ public class Sponsers {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public int compareTo(@NonNull Sponsers o) {
+        if(this.getRank() > o.getRank()){
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

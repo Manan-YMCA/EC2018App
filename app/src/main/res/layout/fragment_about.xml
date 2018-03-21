@@ -5,22 +5,6 @@
     tools:context="com.manan.dev.ec2018app.Xunbao.AboutFragment">
 
 
-    <ScrollView
-        android:layout_marginTop="110dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="40dp"
-
-        android:fontFamily="@font/futura"
-        android:textSize="14dp"
-        android:textAlignment="center"
-       android:text="@string/xunbao_about"
-
-        />
-    </ScrollView>
     <TextView
         android:id="@+id/tv_leaderboard_text"
         android:layout_width="match_parent"
@@ -29,7 +13,26 @@
         android:textSize="26dp"
         android:textColor="@color/Black"
         android:text="About"
-
         android:fontFamily="@font/futura"
         android:layout_marginTop="90dp"/>
+
+    <ScrollView
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_leaderboard_text">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingRight="40dp"
+            android:fontFamily="@font/futura"
+            android:textSize="14dp"
+            android:textAlignment="center"
+            android:text="@string/xunbao_about"
+
+            />
+    </ScrollView>
 </RelativeLayout>

@@ -30,6 +30,8 @@ import com.valdesekamdem.library.mdtoast.MDToast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 public class CulmycaTimesActivity extends AppCompatActivity implements ConnectivityReciever.ConnectivityReceiverListener {
 
     DatabaseReference postReference;
@@ -131,10 +133,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
                     }
                 }
                 mLayoutManager = new LinearLayoutManager(CulmycaTimesActivity.this);
-
-                mLayoutManager.setReverseLayout(true);
-                mLayoutManager.setStackFromEnd(true);
-
+                sort(allposts);
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setHasFixedSize(true);
 

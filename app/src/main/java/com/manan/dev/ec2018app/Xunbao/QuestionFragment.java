@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.manan.dev.ec2018app.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -43,7 +44,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     JsonArrayRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
-    private ProgressBar bar;
+    private ProgressBar bar, barImage;
     //ProgressDialog progressBar;
     int xstatus = 2;
     private String currFbid;
@@ -54,9 +55,11 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
         bar = (ProgressBar) view.findViewById(R.id.pb_question);
-        bar.setVisibility(View.VISIBLE);
         bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
-
+        barImage = (ProgressBar) view.findViewById(R.id.pb_image);
+        barImage.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
+        bar.setVisibility(View.VISIBLE);
+        barImage.setVisibility(View.GONE);
 //        progressBar = new ProgressDialog(getActivity());
 //        progressBar.setMessage("Loading Question!");
 //        progressBar.setCanceledOnTouchOutside(false);
@@ -175,8 +178,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             if (AccessToken.getCurrentAccessToken() != null) {
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
-                            }
-                            else{
+                            } else {
                                 refreshText.setVisibility(View.VISIBLE);
                             }
                         } else if (xstatus == 3) {
@@ -203,10 +205,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         JSONObject params = new JSONObject();
         try {
             params.put("fid", currFbid);
-            if(AccessToken.getCurrentAccessToken()!=null) {
+            if (AccessToken.getCurrentAccessToken() != null) {
                 params.put("skey", "abbv");
-                params.put("fname",Profile.getCurrentProfile().getFirstName());
-                params.put("lname",Profile.getCurrentProfile().getLastName());
+                params.put("fname", Profile.getCurrentProfile().getFirstName());
+                params.put("lname", Profile.getCurrentProfile().getLastName());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -228,6 +230,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 7th APRIL, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
                                 //progressBar.dismiss();
                             } catch (Exception e) {
+                                barImage.setVisibility(View.VISIBLE);
                                 queLayout.setVisibility(View.VISIBLE);
                                 String imgUrl = resp.getString("image");
                                 String que = resp.getString("desc");
@@ -235,7 +238,17 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 question.setText(que);
                                 stage.setText("STAGE - " + Integer.toString(level));
 
-                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg);
+                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        barImage.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        barImage.setVisibility(View.GONE);
+                                    }
+                                });
                                 //progressBar.dismiss();
                             }
                         } catch (JSONException e) {

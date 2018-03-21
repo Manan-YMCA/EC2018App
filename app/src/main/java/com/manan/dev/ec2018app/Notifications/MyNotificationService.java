@@ -44,7 +44,7 @@ public class MyNotificationService extends Service {
                 .setContentTitle("Elements Culmyca")
                 .setContentText(eventName + " is about to start. Please hurry up.")
                 .setContentIntent(pending_intent_i)
-                .setSmallIcon(R.drawable.ec_app_logo)
+                .setSmallIcon(R.drawable.logo_ec)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setAutoCancel(true)
                 .setPriority(Notification.PRIORITY_HIGH)

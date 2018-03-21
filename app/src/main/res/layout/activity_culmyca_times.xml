@@ -46,7 +46,8 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/action_bar_cul_times">
+        android:layout_below="@id/action_bar_cul_times"
+        android:background="#d7d7d7">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ctc_recycler_view"

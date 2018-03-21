@@ -24,6 +24,8 @@ import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 
+import static java.util.Collections.sort;
+
 public class MyNotificationsActivity extends AppCompatActivity {
     RecyclerView notifyRecyclerView;
     ArrayList<NotificationModel> allNotificationsArrayList;
@@ -54,8 +56,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
         allNotificationsArrayList.add(new NotificationModel("Attention!", "Welcome to Culmyca 18.", lTime));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(MyNotificationsActivity.this);
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
 
         notifyRecyclerView.setLayoutManager(layoutManager);
         notifyRecyclerView.setHasFixedSize(true);
@@ -150,6 +150,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
         if (allNotificationsArrayList.size() > 0) {
             progress.dismiss();
         }
+        sort(allNotificationsArrayList);
         myNotificationsAdapter.notifyDataSetChanged();
     }
 

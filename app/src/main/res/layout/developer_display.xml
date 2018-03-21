@@ -16,7 +16,7 @@ android:layout_marginRight="15dp"
         android:layout_weight="0.4"
         android:id="@+id/dev_photo"
         android:scaleType="centerCrop"
-        android:src="@drawable/default_image"
+        android:src="@drawable/default_image_1"
         android:layout_height="180dp"/>
     <RelativeLayout
         android:layout_width="0dp"

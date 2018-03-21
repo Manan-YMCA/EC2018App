@@ -5,9 +5,6 @@
     android:fillViewport="true"
     android:fitsSystemWindows="true">
 
-
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,6 +16,10 @@
             android:layout_height="wrap_content"
             android:visibility="gone">
 
+            <RelativeLayout
+                android:id="@+id/rl_xunbao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_xunbao_question_image"
@@ -30,11 +31,20 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/treasure_hunt_map" />
 
+                <ProgressBar
+                    android:id="@+id/pb_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"/>
+
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_question_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_xunbao_question_image"
+                android:layout_below="@+id/rl_xunbao"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/futura"
                 android:gravity="center"

@@ -79,7 +79,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
         databaseController = new DatabaseController(this);
-        default_image = getResources().getDrawable(R.drawable.default_image);
+        default_image = getResources().getDrawable(R.drawable.default_image_1);
 
 
         // ATTENTION: This was auto-generated to handle app links.

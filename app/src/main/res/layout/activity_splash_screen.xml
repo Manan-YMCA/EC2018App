@@ -20,11 +20,27 @@
             android:scaleType="matrix"/>
 
     </FrameLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+    android:gravity="center_horizontal">
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:id="@+id/logo_sp"
         android:layout_centerInParent="true"
         android:src="@drawable/logo_300"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elements Culmyca"
+        android:fontFamily="@font/futura"
+        android:textSize="26dp"
+        android:textColor="@color/White"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/logo_sp"/>
+</LinearLayout>
 
 </RelativeLayout>

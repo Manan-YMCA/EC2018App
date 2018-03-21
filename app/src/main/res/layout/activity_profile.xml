@@ -54,6 +54,7 @@
             android:textSize="28dp" />
 
 
+
         <RelativeLayout
             android:id="@+id/profile_picture_layout"
             android:layout_width="180dp"
@@ -78,7 +79,7 @@
 
                 />
         </RelativeLayout>
-
+        
         <TextView
             android:id="@+id/tv5"
             android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/futura"
-            android:text="We don't have your photo!"
+            android:text="Let Culmyca App be the new Tinder."
             android:textColor="@color/White"
             android:textSize="15dp" />
 
@@ -100,9 +101,11 @@
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="2dp"
+            android:layout_marginRight="18dp"
             android:fontFamily="@font/futura"
-            android:text="To upload one, Login with Facebook"
+            android:text="Login with Facebook to upload your photo and let people know about this beautiful face that they'll be seeing at our fest."
             android:textColor="@color/White"
+            android:textAlignment="center"
             android:textSize="15dp" />
 
         <com.facebook.login.widget.LoginButton
@@ -127,7 +130,7 @@
             android:layout_below="@+id/login_button"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-           >
+            android:background="@drawable/edit_text_background" >
 
             <ProgressBar
                 android:id="@+id/pb_user_profile"

@@ -86,7 +86,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         }
 
         else if(clubName.equals("Vividha")){
-            clubDescpTextView.setText("Dramatics are what that keeps you in the seats");
+            clubDescpTextView.setText("Dramatics is what that keeps you in the seats");
         }
 
         else if(clubName.equals("Jhalak")){
@@ -94,7 +94,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         }
 
         else if(clubName.equals("Eklavya")){
-            clubDescpTextView.setText("If u can't have fun there is no sense of doing it. So, Ask yourself, 'Am I having fun?'");
+            clubDescpTextView.setText("If you can't have fun there is no sense of doing it. So, Ask yourself, 'Am I having fun?'");
         }
 
         else if(clubName.equals("IEEE")){

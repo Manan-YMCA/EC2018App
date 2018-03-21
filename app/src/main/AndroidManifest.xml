@@ -12,10 +12,10 @@
 
     <application
         android:name=".Utilities.MyApplication"
-        android:icon="@drawable/ec_logo_temp"
+        android:icon="@drawable/logo_ec"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@drawable/ec_logo_temp"
+        android:roundIcon="@drawable/logo_ec"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -166,7 +166,20 @@
             android:theme="@style/CodeFont" />
         <activity
             android:name=".Notifications.MyNotificationsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.manan.dev.OPEN_ACTIVITY_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".Notifications.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
