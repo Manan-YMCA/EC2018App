@@ -26,7 +26,7 @@
             android:layout_below="@+id/line"
             android:layout_centerHorizontal="true"
             android:textColor="@color/Black"
-            android:textSize="28dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             tools:text="CODE GOLF" />
 

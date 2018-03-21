@@ -4,11 +4,15 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
@@ -38,7 +42,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.manan.dev.ec2018app.Fragments.FragmentOtpChecker.REQUEST_ID_MULTIPLE_PERMISSIONS;
 
 public class LoginActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
     EditText mobileNum;
@@ -99,7 +106,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                     pbLogin.setVisibility(View.VISIBLE);
                     userDetails.setmPhone(mobileNum.getText().toString());
                     checkOTP(mobileNum.getText().toString());
-
                 }
             }
         });
@@ -129,14 +135,15 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                             JSONObject obj1 = new JSONObject(response);
                             Long success = obj1.getLong("success");
                             if (success == 1) {
-                                FragmentManager fm = getFragmentManager();
-                                FragmentOtpChecker otpChecker = new FragmentOtpChecker();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("phone", phone);
-                                otpChecker.setArguments(bundle);
-                                otpChecker.show(fm, "otpCheckerFragment");
-                                if (otpChecker.isVisible())
-                                    pbLogin.setVisibility(View.GONE);
+                                checkAndRequestPermissions();
+                                if(ContextCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED){
+                                    FragmentManager fm = getFragmentManager();
+                                    FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("phone", mobileNum.getText().toString());
+                                    otpChecker.setArguments(bundle);
+                                    otpChecker.show(fm, "otpCheckerFragment");
+                                }
                             } else {
                                 pbLogin.setVisibility(View.GONE);
                                 Snackbar.make(RelativeView, "User doesn't exist.", Snackbar.LENGTH_LONG).show();
@@ -209,7 +216,27 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
             finish();
         }
     }
+    private void checkAndRequestPermissions() {
+        int receiveSMS = ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.RECEIVE_SMS);
 
+        int readSMS = ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.READ_SMS);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.RECEIVE_MMS);
+        }
+        if (readSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.READ_SMS);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
+        }
+    }
     private Boolean validateCredentials() {
         if (!isNetworkAvailable()) {
             MDToast.makeText(LoginActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
@@ -284,4 +311,16 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         queue.add(request);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS){
+
+            FragmentManager fm = getFragmentManager();
+            FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+            Bundle bundle = new Bundle();
+            bundle.putString("phone", mobileNum.getText().toString());
+            otpChecker.setArguments(bundle);
+            otpChecker.show(fm, "otpCheckerFragment");
+        }
+    }
 }

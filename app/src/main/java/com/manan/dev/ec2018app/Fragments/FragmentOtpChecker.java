@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -56,6 +59,7 @@ public class FragmentOtpChecker extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.otp_checker_fragment_layout, container, false);
         phoneNum = getArguments().getString("phone");
+
         bar = (ProgressBar) rootView.findViewById(R.id.pb_otp);
         et1 = (EditText) rootView.findViewById(R.id.et_otp_dig_1);
         et2 = (EditText) rootView.findViewById(R.id.et_otp_dig_2);
@@ -68,7 +72,7 @@ public class FragmentOtpChecker extends DialogFragment {
 
         addOnTextChangeListener();
         otpNum = getOTP();
-        sendSMS(phoneNum,otpNum);
+        sendSMS(phoneNum, otpNum);
         submitOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,14 +84,14 @@ public class FragmentOtpChecker extends DialogFragment {
         resendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendSMS(phoneNum,otpNum);
+                sendSMS(phoneNum, otpNum);
             }
         });
 
         return rootView;
     }
 
-    private String getOTP(){
+    private String getOTP() {
         //get otp
         Random rnd = new Random();
         Integer num = 100000 + rnd.nextInt(900000);
@@ -98,7 +102,7 @@ public class FragmentOtpChecker extends DialogFragment {
         bar.setVisibility(View.VISIBLE);
         String url = getResources().getString(R.string.send_sms_api);
 
-        Log.e("TAG", "sendSMS url: " + url );
+        Log.e("TAG", "sendSMS url: " + url);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest smsReq = new StringRequest(Request.Method.POST, url,
@@ -107,14 +111,14 @@ public class FragmentOtpChecker extends DialogFragment {
 
                     public void onResponse(String response) {
                         // TODO
-                        Log.v("sms","response: " + response);
+                        Log.v("sms", "response: " + response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO
                 bar.setVisibility(View.GONE);
-                Log.v("sms","error: " + error.getMessage());
+                Log.v("sms", "error: " + error.getMessage());
             }
         }) {
             @Override
@@ -128,15 +132,18 @@ public class FragmentOtpChecker extends DialogFragment {
             }
         };
         queue.add(smsReq);
-        if(checkAndRequestPermissions()) {
+        if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            bar.setVisibility(View.GONE);
+            Log.d("TAG", "sendSMS: type otp");
+        } else {
             IncomingSms.bindListener(new SmsListener() {
                 @Override
                 public void messageReceived(String messageText) {
                     Log.e("TAG", "messageReceived: " + messageText);
-                    if(messageText.contains("Culmyca")) {
+                    if (messageText.contains("Culmyca")) {
                         otp = messageText.substring(0, 6);
-                        Log.e("TAG" , "messageReceived OTP : " + otp );
-                        if(otp.length() == 6){
+                        Log.e("TAG", "messageReceived OTP : " + otp);
+                        if (otp.length() == 6) {
                             Log.d("yatin", otp.substring(0, 1));
                             et1.setText(otp.substring(0, 1));
                             et2.setText(otp.substring(1, 2));
@@ -154,34 +161,17 @@ public class FragmentOtpChecker extends DialogFragment {
                     }
                 }
             });
-        } else {
-            bar.setVisibility(View.GONE);
+            Handler handler= new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    bar.setVisibility(View.GONE);
+                    et1.requestFocus();
+                }
+            }, 10000);
         }
     }
 
-    private  boolean checkAndRequestPermissions() {
-        int receiveSMS = ContextCompat.checkSelfPermission(getActivity(),
-                android.Manifest.permission.RECEIVE_SMS);
-
-        int readSMS = ContextCompat.checkSelfPermission(getActivity(),
-                android.Manifest.permission.READ_SMS);
-        List<String> listPermissionsNeeded = new ArrayList<>();
-
-        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(android.Manifest.permission.RECEIVE_MMS);
-        }
-        if (readSMS != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(android.Manifest.permission.READ_SMS);
-        }
-
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
-                    REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
-        return true;
-    }
 
     private void addOnTextChangeListener() {
         et1.addTextChangedListener(new TextWatcher() {
@@ -312,7 +302,8 @@ public class FragmentOtpChecker extends DialogFragment {
         et2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                deleteOtp();
+                if (keyCode == KeyEvent.KEYCODE_DEL)
+                    deleteOtp();
                 return false;
             }
         });
@@ -320,7 +311,8 @@ public class FragmentOtpChecker extends DialogFragment {
         et3.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                deleteOtp();
+                if (keyCode == KeyEvent.KEYCODE_DEL)
+                    deleteOtp();
                 return false;
             }
         });
@@ -328,7 +320,8 @@ public class FragmentOtpChecker extends DialogFragment {
         et4.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                deleteOtp();
+                if (keyCode == KeyEvent.KEYCODE_DEL)
+                    deleteOtp();
                 return false;
             }
         });
@@ -336,7 +329,8 @@ public class FragmentOtpChecker extends DialogFragment {
         et5.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                deleteOtp();
+                if (keyCode == KeyEvent.KEYCODE_DEL)
+                    deleteOtp();
                 return false;
             }
         });
@@ -344,7 +338,8 @@ public class FragmentOtpChecker extends DialogFragment {
         et6.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                deleteOtp();
+                if (keyCode == KeyEvent.KEYCODE_DEL)
+                    deleteOtp();
                 return false;
             }
         });
@@ -360,27 +355,25 @@ public class FragmentOtpChecker extends DialogFragment {
         et1.requestFocus();
     }
 
-    private void checkOtp(){
+    private void checkOtp() {
+        bar.setVisibility(View.VISIBLE);
         retrieveEnteredText();
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e){
-            Log.e("TAG", e.getMessage());
-        }
-        otpCheckStatus activity = (otpCheckStatus) getActivity();
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e){
-            Log.e("TAG", "checkOtp: " + "error");
-        }
-        if (otp.equals(otpNum)) {
-            activity.updateResult(true);
-            bar.setVisibility(View.GONE);
-            dismiss();
-        } else {
-            bar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
-        }
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                otpCheckStatus activity = (otpCheckStatus) getActivity();
+                if (otp.equals(otpNum)) {
+                    activity.updateResult(true);
+                    bar.setVisibility(View.GONE);
+                    dismiss();
+                } else {
+                    bar.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, 2000);
     }
 
     private void retrieveEnteredText() {
@@ -418,5 +411,11 @@ public class FragmentOtpChecker extends DialogFragment {
         // request a window without the title
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return dialog;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().setCancelable(false);
     }
 }
