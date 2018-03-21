@@ -5,16 +5,21 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -30,8 +35,12 @@ import com.manan.dev.ec2018app.Fragments.FragmentOtpChecker;
 import com.manan.dev.ec2018app.Models.UserDetails;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.manan.dev.ec2018app.Fragments.FragmentOtpChecker.REQUEST_ID_MULTIPLE_PERMISSIONS;
 
 public class RegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
 
@@ -73,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
                     userDetails.setmName(userName.getText().toString());
                     userDetails.setmCollege(userCollege.getText().toString());
                     userDetails.setmPhone(userPhone.getText().toString());
-                    MDToast.makeText(RegisterActivity.this, "Done!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                    //MDToast.makeText(RegisterActivity.this, "Done!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
                     checkOTP(userDetails);
                 }
             }
@@ -94,12 +103,15 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     }
 
     private void checkOTP(UserDetails userDetails) {
-        Bundle bundle = new Bundle();
-        FragmentManager fm = getFragmentManager();
-        FragmentOtpChecker otpChecker = new FragmentOtpChecker();
-        bundle.putString("phone", userDetails.getmPhone());
-        otpChecker.setArguments(bundle);
-        otpChecker.show(fm, "otpCheckerFragment");
+        checkAndRequestPermissions();
+        if(ContextCompat.checkSelfPermission(RegisterActivity.this, android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED){
+            FragmentManager fm = getFragmentManager();
+            FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+            Bundle bundle = new Bundle();
+            bundle.putString("phone", userPhone.getText().toString());
+            otpChecker.setArguments(bundle);
+            otpChecker.show(fm, "otpCheckerFragment");
+        }
         mProgress.hide();
     }
 
@@ -212,6 +224,28 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         }
     }
 
+    private void checkAndRequestPermissions() {
+        int receiveSMS = ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.RECEIVE_SMS);
+
+        int readSMS = ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.READ_SMS);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.RECEIVE_MMS);
+        }
+        if (readSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.READ_SMS);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
+        }
+    }
+
     private void startSession() {
         if (parent.equals("xunbao") || parent.equals("ct")) {
             mProgress.hide();
@@ -220,6 +254,18 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
             mProgress.hide();
             finish();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS){
+            Bundle bundle = new Bundle();
+            FragmentManager fm = getFragmentManager();
+            FragmentOtpChecker otpChecker = new FragmentOtpChecker();
+            bundle.putString("phone", userDetails.getmPhone());
+            otpChecker.setArguments(bundle);
+            otpChecker.show(fm, "otpCheckerFragment");
         }
     }
 }

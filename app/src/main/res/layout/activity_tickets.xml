@@ -51,6 +51,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
         android:layout_below="@id/view">
 
 
@@ -59,7 +64,7 @@
                 android:id="@+id/gl_user_tickets"
                 android:foregroundGravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
 
     </android.support.v4.widget.SwipeRefreshLayout>
