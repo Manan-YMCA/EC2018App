@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class CreativeFragment extends Fragment {
 
 
     private RecyclerView devrecyclerView;
+    private Context mContext;
 
     public CreativeFragment() {
         // Required empty public constructor
@@ -102,7 +104,7 @@ public class CreativeFragment extends Fragment {
         devlist.add(dev_obj13);
 
         Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()));
-        DevelopersAdapter dev_ad = new DevelopersAdapter(getActivity(), devlist);
+        DevelopersAdapter dev_ad = new DevelopersAdapter(mContext, devlist);
         devrecyclerView.setAdapter(dev_ad);
 
         return rootView;
@@ -110,4 +112,9 @@ public class CreativeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 }

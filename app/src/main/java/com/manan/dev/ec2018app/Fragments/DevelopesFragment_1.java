@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,14 @@ import java.util.List;
  */
 public class DevelopesFragment_1 extends Fragment {
     private RecyclerView devrecyclerView;
+
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 
     public DevelopesFragment_1() {
         // Required empty public constructor
@@ -94,7 +103,7 @@ public class DevelopesFragment_1 extends Fragment {
         devlist.add(dev_obj10);
 
         Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()));
-        DevelopersAdapter dev_ad = new DevelopersAdapter(getActivity(), devlist);
+        DevelopersAdapter dev_ad = new DevelopersAdapter(mContext, devlist);
         devrecyclerView.setAdapter(dev_ad);
 
         return rootView;

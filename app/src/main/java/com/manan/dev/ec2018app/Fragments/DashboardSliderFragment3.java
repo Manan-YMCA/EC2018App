@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,13 @@ import java.io.ByteArrayOutputStream;
 
 public class DashboardSliderFragment3 extends Fragment {
     private LinearLayout circleLinearLayout;
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +35,7 @@ public class DashboardSliderFragment3 extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment3, container, false);
 
-        Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(),
+        Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(),
                 R.raw.sae);
       final CategoryItemModel singleItem = new CategoryItemModel();
       singleItem.setClubName("Brixx");
@@ -42,8 +50,8 @@ public class DashboardSliderFragment3 extends Fragment {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-           //     Toast.makeText(getActivity(),singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), BrixxActivity.class));
+           //     Toast.makeText(mContext,singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mContext, BrixxActivity.class));
 //                        .putExtra("clubname", singleItem.getClubName())
 //                        .putExtra("clubPhoto", byteArray)
 //                        .putExtra("clubdisplay", singleItem.getDisplayName()));

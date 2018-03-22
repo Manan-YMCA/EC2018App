@@ -54,6 +54,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
+import com.manan.dev.ec2018app.Fragments.DashboardSliderFragment1;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.NavMenuViews.AboutActivity;
@@ -74,7 +75,7 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ConnectivityReciever.ConnectivityReceiverListener {
+public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ConnectivityReciever.ConnectivityReceiverListener, DashboardSliderFragment1.navBarOpenStatus {
 
     private ViewPager viewPager;
     private TextView[] dots;
@@ -643,6 +644,15 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 tv.setGravity(Gravity.CENTER_HORIZONTAL);
             }
             snack.show();
+        }
+    }
+
+    @Override
+    public void openNavBar(boolean open) {
+        if(open){
+            if(!drawer.isDrawerOpen(GravityCompat.START)){
+                drawer.openDrawer(GravityCompat.START);
+            }
         }
     }
 

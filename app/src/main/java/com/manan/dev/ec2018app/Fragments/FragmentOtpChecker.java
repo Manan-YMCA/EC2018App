@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app.Fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +55,14 @@ public class FragmentOtpChecker extends DialogFragment {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     private ProgressBar bar;
 
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -104,7 +113,7 @@ public class FragmentOtpChecker extends DialogFragment {
 
         Log.e("TAG", "sendSMS url: " + url);
 
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        RequestQueue queue = Volley.newRequestQueue(mContext);
         StringRequest smsReq = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -132,7 +141,7 @@ public class FragmentOtpChecker extends DialogFragment {
             }
         };
         queue.add(smsReq);
-        if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             bar.setVisibility(View.GONE);
             Log.d("TAG", "sendSMS: type otp");
         } else {
@@ -363,14 +372,14 @@ public class FragmentOtpChecker extends DialogFragment {
             @Override
             public void run() {
 
-                otpCheckStatus activity = (otpCheckStatus) getActivity();
+                otpCheckStatus activity = (otpCheckStatus) mContext;
                 if (otp.equals(otpNum)) {
                     activity.updateResult(true);
                     bar.setVisibility(View.GONE);
                     dismiss();
                 } else {
                     bar.setVisibility(View.GONE);
-                    Toast.makeText(getActivity(), "Incorrect OTP!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Incorrect OTP!", Toast.LENGTH_SHORT).show();
                 }
             }
         }, 2000);
@@ -392,14 +401,14 @@ public class FragmentOtpChecker extends DialogFragment {
 
     @Override
     public void onDestroy() {
-        otpCheckStatus activity = (otpCheckStatus) getActivity();
+        otpCheckStatus activity = (otpCheckStatus) mContext;
         activity.updateResult(false);
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        otpCheckStatus activity = (otpCheckStatus) getActivity();
+        otpCheckStatus activity = (otpCheckStatus) mContext;
         activity.updateResult(false);
         super.onDestroyView();
     }

@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app.Fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,14 @@ public class QRCodeActivity extends DialogFragment {
     private DatabaseController getEventDetails;
     private int activity, paymentStatus, arrivalStatus;
 
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
+
     public QRCodeActivity() {
 
     }
@@ -49,7 +58,7 @@ public class QRCodeActivity extends DialogFragment {
         fees = (TextView) rootView.findViewById(R.id.eventfees);
         status = (TextView) rootView.findViewById(R.id.iv_event_fees_status);
         back = (ImageView) rootView.findViewById(R.id.iv_cross);
-        getEventDetails = new DatabaseController(getActivity());
+        getEventDetails = new DatabaseController(mContext);
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
         eventName.setText(eventDetails.getmName());
 
@@ -74,19 +83,19 @@ public class QRCodeActivity extends DialogFragment {
         fees.setText(String.valueOf("RS " + eventDetails.getmFees()));
 
         if (String.valueOf(eventDetails.getmFees()).equals("0")) {
-            status.setTextColor(getActivity().getResources().getColor(R.color.status_free));
+            status.setTextColor(mContext.getResources().getColor(R.color.status_free));
             status.setText("FREE");
         } else if (String.valueOf(paymentStatus).equals("0")) {
-            status.setTextColor(getActivity().getResources().getColor(R.color.primaryFocused));
+            status.setTextColor(mContext.getResources().getColor(R.color.primaryFocused));
             status.setText("PENDING");
         } else {
-            status.setTextColor(getActivity().getResources().getColor(R.color.status_paid));
+            status.setTextColor(mContext.getResources().getColor(R.color.status_paid));
             status.setText("PAID");
         }
 
 
         TicketsGenerator ticketsGenerator = new TicketsGenerator();
-        Bitmap qrTicket = ticketsGenerator.GenerateClick(qrcodestring, getActivity(), (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty), 120, 120);
+        Bitmap qrTicket = ticketsGenerator.GenerateClick(qrcodestring, mContext, (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty), 120, 120);
         qrTicketImage.setImageBitmap(qrTicket);
         return rootView;
     }

@@ -1,8 +1,10 @@
 package com.manan.dev.ec2018app.Fragments;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -47,6 +49,14 @@ public class FragmentFbLogin extends DialogFragment {
     private ProgressBar barLogin;
     private FirebaseAuth mAuth;
 
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
+
 
     @Nullable
     @Override
@@ -54,7 +64,7 @@ public class FragmentFbLogin extends DialogFragment {
         View rootView = inflater.inflate(R.layout.fblogin_dialog_box, container, false);
         skipLogin = (TextView) rootView.findViewById(R.id.tv_skip_fb_login);
         loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
-        FacebookSdk.sdkInitialize(getActivity());
+        FacebookSdk.sdkInitialize(mContext);
         callbackManager = CallbackManager.Factory.create();
         barLogin = (ProgressBar) rootView.findViewById(R.id.pb_login);
 
@@ -63,7 +73,7 @@ public class FragmentFbLogin extends DialogFragment {
         skipLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fbLoginButton activity = (fbLoginButton) getActivity();
+                fbLoginButton activity = (fbLoginButton) mContext;
                 activity.fbStatus(false, null);
                 dismiss();
             }
@@ -86,15 +96,15 @@ public class FragmentFbLogin extends DialogFragment {
                 skipLogin.setVisibility(View.INVISIBLE);
                 getDialog().setCancelable(false);
                 AccessToken accessToken = loginResult.getAccessToken();
-                fbLoginButton activity = (fbLoginButton) getActivity();
+                fbLoginButton activity = (fbLoginButton) mContext;
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
-                MDToast.makeText(getActivity(), "Facebook login done", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                MDToast.makeText(mContext, "Facebook login done", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
             }
 
             @Override
             public void onCancel() {
-                MDToast.makeText(getActivity(), "Facebook login cancelled", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                MDToast.makeText(mContext, "Facebook login cancelled", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             }
 
             @Override
@@ -109,7 +119,7 @@ public class FragmentFbLogin extends DialogFragment {
     private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -121,7 +131,7 @@ public class FragmentFbLogin extends DialogFragment {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("loginStatus", "signInWithCredential:failure", task.getException());
-                            MDToast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                            MDToast.makeText(mContext, "Authentication failed.", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             dismiss();
                         }
                     }
@@ -145,7 +155,7 @@ public class FragmentFbLogin extends DialogFragment {
 
     @Override
     public void onDestroyView() {
-        fbLoginButton activity = (fbLoginButton) getActivity();
+        fbLoginButton activity = (fbLoginButton) mContext;
         activity.fbStatus(false, null);
         super.onDestroyView();
     }

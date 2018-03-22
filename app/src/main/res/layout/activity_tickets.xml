@@ -7,6 +7,16 @@
     android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.Tickets">
 
+    <TextView
+        android:id="@+id/tv_no_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:textColor="@color/White"
+        android:layout_centerInParent="true"
+        android:text="No Tickets To Display"/>
+
     <ImageView
         android:id="@+id/tic_back_button"
         android:layout_width="30dp"

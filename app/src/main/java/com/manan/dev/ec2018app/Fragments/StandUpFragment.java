@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,13 @@ public class StandUpFragment extends Fragment {
     private TextView title_view, date_view, content_view;
     private ImageView fb_btn, insta;
     private ImageView back_image;
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 
     public StandUpFragment() {
         // Required empty public constructor
@@ -83,7 +91,7 @@ public class StandUpFragment extends Fragment {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     if (dataSnapshot.getKey().equals("hassrath")) {
                         BrixxEventModel w = dataSnapshot.getValue(BrixxEventModel.class);
-                        // Toast.makeText(getActivity(),dataSnapshot.getValue().toString(),Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(mContext,dataSnapshot.getValue().toString(),Toast.LENGTH_SHORT).show();
                         updateUI(w);
                     }
                 }
@@ -125,7 +133,7 @@ public class StandUpFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(w.getFblink().toString()));
-                getActivity().startActivity(myIntent);
+                mContext.startActivity(myIntent);
             }
         });
         insta.setOnClickListener(new View.OnClickListener() {
@@ -133,9 +141,9 @@ public class StandUpFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(w.getInstalink().toString()));
-                getActivity().startActivity(myIntent);
+                mContext.startActivity(myIntent);
             }
         });
-        Picasso.with(getActivity()).load(w.getPhotourl().toString()).into(back_image);
+        Picasso.with(mContext).load(w.getPhotourl().toString()).into(back_image);
     }
 }

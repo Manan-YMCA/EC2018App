@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,6 +43,7 @@ public class DashboardSliderFragment1 extends Fragment {
     private Button explore;
     private boolean mIsRunning;
     private TimerTask mStatusChecker;
+    private Context mContext;
 
     // TODO: Rename parameter arguments, choose names that mat
     @Override
@@ -149,23 +151,27 @@ public class DashboardSliderFragment1 extends Fragment {
                 contenttv.setText(mode.getContent());
                 contenttv.setTag(mode.getIntent());
                 //          timer.cancel();
-                //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
+                final navBarOpenStatus activity = (navBarOpenStatus) mContext;
                 explore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (contenttv.getTag().equals(0)) {
-                            startActivity(new Intent(getActivity(), XunbaoActivity.class));
+                            startActivity(new Intent(mContext, XunbaoActivity.class));
+                            activity.openNavBar(false);
                         } else if (contenttv.getTag().equals(1)) {
-                            startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
-
+                            startActivity(new Intent(mContext, CulmycaTimesActivity.class));
+                            activity.openNavBar(false);
                         } else if (contenttv.getTag().equals(2)) {
-                            startActivity(new Intent(getActivity(), MapsActivity.class));
+                            startActivity(new Intent(mContext, MapsActivity.class));
+                            activity.openNavBar(false);
                         } else if (contenttv.getTag().equals(7)) {
 //                            if (!drawer.isDrawerOpen(GravityCompat.START)) {
 //                                drawer.openDrawer(GravityCompat.START);
 //                            }
-                            MDToast.makeText(getActivity(), "Pull Navigation Drawer", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+                            activity.openNavBar(true);
+                            MDToast.makeText(mContext, "Pull Navigation Drawer", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
                         }
                     }
                 });//
@@ -174,13 +180,11 @@ public class DashboardSliderFragment1 extends Fragment {
                     explore.setText("Xunbao");
                 } else if (contenttv.getTag().equals(1)) {
                     explore.setText("EC Times");
-
                 } else if (contenttv.getTag().equals(2)) {
                     explore.setText("Maps");
                 } else {
                     explore.setText("Explore");
                 }
-
 
                 // this function can change value of mInterval.
                 i++;
@@ -201,5 +205,15 @@ public class DashboardSliderFragment1 extends Fragment {
 //             }
 
         };
+    }
+
+    public interface navBarOpenStatus {
+        void openNavBar(boolean open);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
     }
 }

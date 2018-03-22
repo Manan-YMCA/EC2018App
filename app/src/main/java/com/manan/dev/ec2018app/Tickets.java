@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,6 +42,7 @@ public class Tickets extends AppCompatActivity {
     private DatabaseController databaseController;
     private RecyclerView userTicketsView;
     private ImageView tickback;
+    private TextView noTickets;
     SwipeRefreshLayout s;
     private String phoneNumber;
 
@@ -57,6 +59,7 @@ public class Tickets extends AppCompatActivity {
         mProgress.setMessage("Showing your ticket.");
         mProgress.setTitle("Loading...");
         mProgress.setCanceledOnTouchOutside(false);
+        noTickets = (TextView) findViewById(R.id.tv_no_tickets);
 
         userTicketsView = (RecyclerView) findViewById(R.id.gl_user_tickets);
         userTicketsView.setLayoutManager(new LinearLayoutManager(Tickets.this));
@@ -66,6 +69,9 @@ public class Tickets extends AppCompatActivity {
         mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
         Log.d("Tickets", phoneNumber);
         Log.d("Tickets", Integer.toString(userTickets.size()));
+        if(userTickets.size() > 0){
+            noTickets.setVisibility(View.GONE);
+        }
         userTicketsView.setAdapter(mAdapter);
         tickback = findViewById(R.id.tic_back_button);
 
@@ -145,6 +151,7 @@ public class Tickets extends AppCompatActivity {
 
         userTickets = databaseController.retrieveAllTickets();
         if (userTickets.size() > 0) {
+            noTickets.setVisibility(View.GONE);
             mProgress.dismiss();
             Log.d("yatin", String.valueOf(userTickets.get(0).getQRcode()));
             mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
