@@ -107,24 +107,25 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         try {
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             answer.put("email", currFbid);
-            answer.put("skey", "abbv");
+            answer.put("skey",getActivity().getResources().getString(R.string.skey));
             answer.put("ans", ans.getText());
 
             final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL, answer,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
-                            bar.setVisibility(View.INVISIBLE);
+                            bar.setVisibility(View.GONE);
                             try {
                                 //progressBar.dismiss();
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
-                                if (end.equals("0"))
-                                    Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
-                                else {
+                                if(end.equals("1")) {
                                     Toast.makeText(getActivity(), "Congrats! Right answer!", Toast.LENGTH_SHORT).show();
                                     reload();
                                 }
+                                else
+                                    Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
+
                             } catch (JSONException e) {
 
                                 Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
@@ -136,7 +137,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            bar.setVisibility(View.INVISIBLE);
+                            bar.setVisibility(View.GONE);
                             //progressBar.dismiss();
                             Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
                             volleyError.printStackTrace();
@@ -144,7 +145,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     });
             queue.add(answ);
         } catch (JSONException e) {
-            bar.setVisibility(View.INVISIBLE);
+            bar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
             //progressBar.dismiss();
         }
@@ -166,7 +167,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     @Override
                     public void onResponse(String response) {
 
-                        bar.setVisibility(View.INVISIBLE);
+                        bar.setVisibility(View.GONE);
                         refreshButton.setVisibility(View.GONE);
                         xstatus = Integer.parseInt(response);
                         Log.d("hey", "" + xstatus);
@@ -176,6 +177,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             contestEnd.setVisibility(View.VISIBLE);
                         } else if (xstatus == 1) {
                             if (AccessToken.getCurrentAccessToken() != null) {
+                                bar.setVisibility(View.VISIBLE);
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                             } else {
@@ -190,7 +192,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                bar.setVisibility(View.INVISIBLE);
+                bar.setVisibility(View.GONE);
                 Log.d("hey", "" + error);
                 //progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
@@ -205,10 +207,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         JSONObject params = new JSONObject();
         try {
             params.put("fid", currFbid);
-            if (AccessToken.getCurrentAccessToken() != null) {
-                params.put("skey", "abbv");
-                params.put("fname", Profile.getCurrentProfile().getFirstName());
-                params.put("lname", Profile.getCurrentProfile().getLastName());
+            if(Profile.getCurrentProfile()!=null) {
+                params.put("skey", getActivity().getResources().getString(R.string.skey));
+                params.put("fname",Profile.getCurrentProfile().getFirstName());
+                params.put("lname",Profile.getCurrentProfile().getLastName());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -219,7 +221,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        bar.setVisibility(View.INVISIBLE);
+                        bar.setVisibility(View.GONE);
                         JSONObject resp;
                         refreshButton.setVisibility(View.GONE);
                         try {
@@ -230,6 +232,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 7th APRIL, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
                                 //progressBar.dismiss();
                             } catch (Exception e) {
+                                bar.setVisibility(View.GONE);
                                 barImage.setVisibility(View.VISIBLE);
                                 queLayout.setVisibility(View.VISIBLE);
                                 String imgUrl = resp.getString("image");
@@ -252,6 +255,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 //progressBar.dismiss();
                             }
                         } catch (JSONException e) {
+                            bar.setVisibility(View.GONE);
                             //progressBar.dismiss();
                             refreshButton.setVisibility(View.VISIBLE);
                             e.printStackTrace();
@@ -264,7 +268,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     public void onErrorResponse(VolleyError volleyError) {
                         //progressBar.dismiss();
 
-                        bar.setVisibility(View.INVISIBLE);
+                        bar.setVisibility(View.GONE);
                         refreshButton.setVisibility(View.VISIBLE);
 
                         volleyError.printStackTrace();

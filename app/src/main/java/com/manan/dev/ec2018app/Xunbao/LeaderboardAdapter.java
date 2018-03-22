@@ -41,7 +41,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     @Override
-    public void onBindViewHolder(LeaderboardAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final LeaderboardAdapter.MyViewHolder holder,final int position) {
         LeaderboardList member = leaderboardList.get(position);
 
         holder.rank.setText(member.getRank()+".");
@@ -60,6 +60,15 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
                 holder.level.setTextColor(Color.parseColor("#fffb00"));
                 holder.rank.setTextColor(Color.parseColor("#fffb00"));
             }
+            else{
+                holder.name1.setTextColor(Color.parseColor("#ffffff"));
+                holder.level.setTextColor(Color.parseColor("#ffffff"));
+                holder.rank.setTextColor(Color.parseColor("#ffffff"));
+            }
+        }else{
+            holder.name1.setTextColor(Color.parseColor("#ffffff"));
+            holder.level.setTextColor(Color.parseColor("#ffffff"));
+            holder.rank.setTextColor(Color.parseColor("#ffffff"));
         }
     }
 
