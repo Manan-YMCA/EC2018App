@@ -44,10 +44,10 @@ public class SpecialsFragment extends Fragment {
         List<DeveloperModel> devlist = new ArrayList<>();
 
         DeveloperModel dev_obj1 = new DeveloperModel
-                ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAuBAAAAJGFlOTMyMTVjLTBlZTQtNGNlZi05YjE1LTdlYzc1NTZkNzgzYw.jpg", "Shubham Sharma", "", "EC Core Designer", "");
+                ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAuBAAAAJGFlOTMyMTVjLTBlZTQtNGNlZi05YjE1LTdlYzc1NTZkNzgzYw.jpg", "Shubham Sharma", "", "Core App Designer", "");
 
         DeveloperModel dev_obj2 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a6.jpg", "Kartik Singla", "", "EC Designer", "");
+                ("http://www.elementsculmyca.com/images/team/a6.jpg", "Kartik Singla", "", "Design Support", "");
 
         DeveloperModel dev_obj3 = new DeveloperModel
                 ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAArdAAAAJGYxNjJmNjlkLWEwYTAtNDI5Zi1iYzE4LWMyNjQyYWVhM2ZjOQ.jpg", "Shubham Kachroo", "", "Content Writer", "");
@@ -59,7 +59,7 @@ public class SpecialsFragment extends Fragment {
                 ("https://scontent.fdel13-1.fna.fbcdn.net/v/t1.0-9/16266232_217999301939790_3251840955779237127_n.jpg?oh=7466cb02836a81de3ca6f6cf64deef70&oe=5B441463", "Tanisha Tyagi", "", "Content Writer", "");
 
         DeveloperModel dev_obj6 = new DeveloperModel
-                ("https://scontent.fdel13-1.fna.fbcdn.net/v/t1.0-9/26167985_2237398856486896_7078806577793551786_n.jpg?_nc_cat=0&oh=71df234c93cbce985a7f1b84ea5358a9&oe=5B458C61", "Prince Augustine", "", "EC Video Animations", "");
+                ("https://scontent.fdel13-1.fna.fbcdn.net/v/t1.0-9/26167985_2237398856486896_7078806577793551786_n.jpg?_nc_cat=0&oh=71df234c93cbce985a7f1b84ea5358a9&oe=5B458C61", "Prince Augustine", "", "App Video Animations", "");
 
         devlist.add(dev_obj1);
         devlist.add(dev_obj6);

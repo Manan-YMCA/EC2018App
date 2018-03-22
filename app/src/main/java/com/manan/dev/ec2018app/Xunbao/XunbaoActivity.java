@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.manan.dev.ec2018app.ContentActivity;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.LoginActivity;
 import com.manan.dev.ec2018app.R;
@@ -43,6 +44,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
         backbutton_xun=findViewById(R.id.xunbao_back_button);
         navBar = (BottomNavigationView) findViewById(R.id.xunbao_nav_bar);
         navBar.getMenu().getItem(1).setChecked(true);
+
 
         backbutton_xun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +127,9 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
 
     @Override
     public void onBackPressed() {
-        finish();
+        startActivity(new Intent(XunbaoActivity.this, ContentActivity.class).setFlags((Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)));
+
+
     }
 
     @Override
@@ -197,4 +201,5 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     public interface loadQuestionFragment {
         void makeQuestionVisible(String fbId);
     }
+
 }

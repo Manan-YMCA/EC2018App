@@ -155,7 +155,7 @@ public class DashboardSliderFragment1 extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (contenttv.getTag().equals(0)) {
-                            startActivity(new Intent(getActivity(), XunbaoActivity.class));
+                            startActivity(new Intent(getActivity(), XunbaoActivity.class).setFlags((Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)));
                         } else if (contenttv.getTag().equals(1)) {
                             startActivity(new Intent(getActivity(), CulmycaTimesActivity.class));
 

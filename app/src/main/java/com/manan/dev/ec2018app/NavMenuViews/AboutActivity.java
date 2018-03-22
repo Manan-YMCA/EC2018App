@@ -13,8 +13,8 @@ public class AboutActivity extends AppCompatActivity {
 
     private ViewPager abtviewPager;
     private AboutAdapter abtViewPagerAdapter;
-    private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
-    private ImageView aboutBackButton;
+
+    private ImageView aboutBackButton,aboutChangeLeft,aboutChangeRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,68 @@ public class AboutActivity extends AppCompatActivity {
         abtviewPager.setAdapter(abtViewPagerAdapter);
         abtviewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
+
+
+        aboutChangeRight=findViewById(R.id.about_change_button_right);
+        aboutChangeLeft=findViewById(R.id.about_change_button_left);
+
+        check();
         aboutBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        aboutChangeLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+         abtviewPager.setCurrentItem(0,true);
+
+            }
+        });
+        aboutChangeRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               abtviewPager.setCurrentItem(1,true);
+            }
+        });
     }
+    private int getCurrItem() {
+        return abtviewPager.getCurrentItem();
+    }
+
+
+    private void check() {
+        if(abtviewPager.getCurrentItem()==0)
+        {
+            aboutChangeLeft.setVisibility(View.GONE);
+            aboutChangeRight.setVisibility(View.VISIBLE);
+        }
+        else if(abtviewPager.getCurrentItem()==1)
+        {
+            aboutChangeRight.setVisibility(View.GONE);
+            aboutChangeLeft.setVisibility(View.VISIBLE);
+        }
+
+
+
+    }
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            check();
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
+
 }

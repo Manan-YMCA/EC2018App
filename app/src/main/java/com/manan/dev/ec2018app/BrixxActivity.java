@@ -13,7 +13,7 @@ public class BrixxActivity extends AppCompatActivity {
     private BrixxAdapter iViewPagerAdapter;
     private ViewPager iViewpager;
     private ImageView next_btn, pre_btn;
-    private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
+
 
 
     @Override
@@ -42,7 +42,7 @@ public class BrixxActivity extends AppCompatActivity {
                 else
                 {
                 iViewpager.setCurrentItem(getCurrItem() + 1);}
-                check();
+
             }
 
         });
@@ -58,7 +58,7 @@ public class BrixxActivity extends AppCompatActivity {
                else {
                    iViewpager.setCurrentItem(getCurrItem() - 1);
                }
-                check();
+
             }
         });
 
@@ -91,7 +91,23 @@ public class BrixxActivity extends AppCompatActivity {
 
 
 
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
+        @Override
+        public void onPageSelected(int position) {
+            check();
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
 
 
 }

@@ -376,7 +376,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(ContentActivity.this, XunbaoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        startActivity(new Intent(ContentActivity.this, XunbaoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     }
                 }, 130);
                 break;
@@ -394,7 +394,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(ContentActivity.this, AboutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        startActivity(new Intent(ContentActivity.this, AboutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                     }
                 }, 130);
                 break;

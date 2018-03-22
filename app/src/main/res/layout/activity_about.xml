@@ -42,10 +42,36 @@
 
     </RelativeLayout>
 
+
+
     <android.support.v4.view.ViewPager
         android:id="@+id/about_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/action_bar_abt" />
+
+    <ImageView
+        android:id="@+id/about_change_button_left"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/action_bar_abt"
+        android:src="@drawable/vector_arrow"
+        android:tint="#717070" />
+
+    <ImageView
+        android:id="@+id/about_change_button_right"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:rotation="180"
+        android:layout_below="@id/action_bar_abt"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+
+        android:src="@drawable/vector_arrow"
+        android:tint="#717070" />
 
 </RelativeLayout>
