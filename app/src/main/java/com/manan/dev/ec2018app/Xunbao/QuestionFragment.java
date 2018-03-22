@@ -1,7 +1,12 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,17 +29,34 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 
-public class QuestionFragment extends Fragment implements XunbaoActivity.loadQuestionFragment {
+
+public class QuestionFragment extends Fragment implements XunbaoActivity.loadQuestionFragment, ConnectivityReciever.ConnectivityReceiverListener {
     TextView question, contestEnd, refreshText, stage;
     ImageView xunbaoimg, refreshButton;
     LinearLayout submit;
@@ -48,11 +70,16 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     //ProgressDialog progressBar;
     int xstatus = 2;
     private String currFbid;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+    private FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_question, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
 
         bar = (ProgressBar) view.findViewById(R.id.pb_question);
         bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -60,10 +87,36 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         barImage.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
         bar.setVisibility(View.VISIBLE);
         barImage.setVisibility(View.GONE);
-//        progressBar = new ProgressDialog(getActivity());
-//        progressBar.setMessage("Loading Question!");
-//        progressBar.setCanceledOnTouchOutside(false);
-//        progressBar.show();
+
+        loginButton = (LoginButton) view.findViewById(R.id.login_button);
+
+        final String EMAIL = "email";
+
+        callbackManager = CallbackManager.Factory.create();
+
+        loginButton.setReadPermissions(Arrays.asList(EMAIL));
+        loginButton.setFragment(this);
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                AccessToken accessToken = loginResult.getAccessToken();
+                FragmentFbLogin.fbLoginButton activity = (FragmentFbLogin.fbLoginButton) getActivity();
+                handleFacebookAccessToken(loginResult.getAccessToken());
+                activity.fbStatus(true, accessToken.getUserId());
+                Toast.makeText(getActivity(), "Facebook Login Done!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getActivity(), "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Log.e("TAG", "onError: " + exception.getMessage() );
+            }
+        });
 
         queURL = getActivity().getResources().getString(R.string.xunbao_get_question_api);
         ansURL = getActivity().getResources().getString(R.string.xunbao_check_answer_api);
@@ -158,6 +211,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         contestEnd.setVisibility(View.GONE);
         refreshButton.setVisibility(View.GONE);
         refreshText.setVisibility(View.GONE);
+        loginButton.setVisibility(View.GONE);
         queue.add(stat);
     }
 
@@ -180,8 +234,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 bar.setVisibility(View.VISIBLE);
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
+                                loginButton.setVisibility(View.GONE);
                             } else {
                                 refreshText.setVisibility(View.VISIBLE);
+                                loginButton.setVisibility(View.VISIBLE);
                             }
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
@@ -283,8 +339,57 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         currFbid = fbId;
         Log.d("xunbao", currFbid);
 
-        checkStatus();
-        if (!currFbid.equals("notLoggedIn"))
-            getQuestion();
+        if(isNetworkAvailable()) {
+            checkStatus();
+            if (!currFbid.equals("notLoggedIn"))
+                getQuestion();
+        } else {
+            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+        }
+    }
+
+    private void handleFacebookAccessToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("loginStatus", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("loginStatus", "signInWithCredential:failure", task.getException());
+                            Toast.makeText(getActivity(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if(isConnected){
+            checkStatus();
+            if (!currFbid.equals("notLoggedIn"))
+                getQuestion();
+        } else {
+            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

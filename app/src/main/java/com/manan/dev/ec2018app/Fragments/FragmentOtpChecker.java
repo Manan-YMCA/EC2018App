@@ -416,6 +416,6 @@ public class FragmentOtpChecker extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getDialog().setCancelable(false);
+        getDialog().setCancelable(true);
     }
 }

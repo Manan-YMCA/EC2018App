@@ -114,12 +114,13 @@
                 android:layout_height="match_parent"
                 android:background="#aaa" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/iv_event_fees_status"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
                 android:layout_weight="1"
-                />
+                android:textAlignment="center" />
 
 
         </LinearLayout>

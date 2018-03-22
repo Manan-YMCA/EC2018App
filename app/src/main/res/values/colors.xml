@@ -16,6 +16,8 @@
     <color name="xunbaotabs">#001d54</color>
     <color name="xunbaotabselected">#0d1d54</color>
     <color name="pb_xunbao">#290101</color>
+    <color name="status_free">#2a48e1</color>
+    <color name="status_paid">#3cc22d</color>
 
 
     <color name="gplus_color_1">#3e802f</color>

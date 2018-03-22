@@ -162,9 +162,25 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/futura"
+            android:textAlignment="center"
             android:text="Contest has Started.\nTo continue, you must login with facebook"
             android:visibility="gone"
              />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/refresh_text"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:visibility="gone"/>
+
         <ProgressBar
             android:id="@+id/pb_question"
             android:layout_width="wrap_content"

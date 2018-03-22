@@ -3,6 +3,8 @@ package com.manan.dev.ec2018app.Xunbao;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,7 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.manan.dev.ec2018app.NavMenuViews.ProfileActivity;
 import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LeaderboardFragment extends Fragment {
+public class LeaderboardFragment extends Fragment implements ConnectivityReciever.ConnectivityReceiverListener {
 
     static LeaderboardAdapter leaderboardAdapter;
     static RecyclerView recyclerView;
@@ -65,7 +70,11 @@ public class LeaderboardFragment extends Fragment {
         bar = (ProgressBar) view.findViewById(R.id.pb_leaderboard);
         bar.setVisibility(View.VISIBLE);
         bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
-        setData();
+        if(isNetworkAvailable()){
+            setData();
+        } else {
+            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+        }
 //        progressBar = new ProgressDialog(getActivity());
 //        progressBar.setMessage("Loading");
 //        progressBar.setCanceledOnTouchOutside(false);
@@ -150,5 +159,21 @@ public class LeaderboardFragment extends Fragment {
         recyclerView.setVisibility(View.GONE);
         refresh.setVisibility(View.GONE);
         queue.add(stringRequest);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if(isConnected){
+            setData();
+        } else {
+            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+        }
     }
 }

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Swipe down to refresh"
+        android:text="Connect to Internet"
         android:textSize="14dp"
         android:visibility="gone" />
 

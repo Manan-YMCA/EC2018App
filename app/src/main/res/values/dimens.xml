@@ -4,7 +4,7 @@
     <dimen name="onefifty">150dp</dimen>
     <dimen name="four">4dp</dimen>
     <dimen name="threefifty">350dp</dimen>
-    <dimen name="twoforty">240dp</dimen>
+    <dimen name="twoforty">200dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="three_hundred">300dp</dimen>
     <dimen name="five_hundred">450dp</dimen>

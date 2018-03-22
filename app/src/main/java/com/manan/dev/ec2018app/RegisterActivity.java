@@ -269,4 +269,3 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         }
     }
 }
-

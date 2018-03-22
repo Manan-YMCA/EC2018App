@@ -1,16 +1,20 @@
 package com.manan.dev.ec2018app.NavMenuViews;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -43,11 +47,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.manan.dev.ec2018app.ContentActivity;
 import com.manan.dev.ec2018app.Models.UserDetails;
 import com.manan.dev.ec2018app.R;
+import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.GetRoundedImage;
+import com.manan.dev.ec2018app.Utilities.MyApplication;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONObject;
 
@@ -55,14 +63,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements ConnectivityReciever.ConnectivityReceiverListener {
     private UserDetails userDetails;
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private RelativeLayout profilePictureFrame;
-    private ImageView profilePicture,backbutton;
+    private ImageView profilePicture, backbutton;
     private TextView textView1;
-    private TextView textView2;
     private ProfileTracker mProfileTracker;
     private FirebaseAuth mAuth;
     private ProgressBar ivBar, detailsBar;
@@ -70,6 +77,11 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvName;
     private TextView tvMail;
     private TextView tvPhone;
+    private EditText input1;
+    private EditText input2;
+    private EditText input3;
+    private String phoneNumber;
+    private boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +95,14 @@ public class ProfileActivity extends AppCompatActivity {
         tvCollege = (TextView) findViewById(R.id.tv_college);
         tvPhone = (TextView) findViewById(R.id.tv_phone);
         final String EMAIL = "email";
-        backbutton=findViewById(R.id.pr_back_button);
+        backbutton = findViewById(R.id.pr_back_button);
 
 
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-        final String phoneNumber = prefs.getString("Phone", null);
+        phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
             Log.e("TAG", "onCreate : " + "Shared pref no data!");
         }
-        getDetails(phoneNumber);
 
         ivBar = (ProgressBar) findViewById(R.id.pb_profile_image);
         detailsBar = (ProgressBar) findViewById(R.id.pb_user_profile);
@@ -106,7 +117,6 @@ public class ProfileActivity extends AppCompatActivity {
         profilePictureFrame = (RelativeLayout) findViewById(R.id.profile_picture_layout);
         profilePicture = (ImageView) findViewById(R.id.profile_pic);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
-        checkStatus();
         // If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration
@@ -159,14 +169,15 @@ public class ProfileActivity extends AppCompatActivity {
 //        Bitmap conv_bm = getRoundedImage.getRoundedShape(resized);
 //        BitmapDrawable background = new BitmapDrawable(conv_bm);
 //        profilePicture.setBackground(background);
-        LayoutInflater factory = LayoutInflater.from(this);
+        final LayoutInflater factory = LayoutInflater.from(this);
         ImageView editButton = (ImageView) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EditText input1 = new EditText(ProfileActivity.this);
-                final EditText input2 = new EditText(ProfileActivity.this);
-                final EditText input3 = new EditText(ProfileActivity.this);
+                input1 = new EditText(ProfileActivity.this);
+                input2 = new EditText(ProfileActivity.this);
+                input3 = new EditText(ProfileActivity.this);
+                flag = false;
                 final AlertDialog.Builder alert = new AlertDialog.Builder(ProfileActivity.this);
                 final LinearLayout layout = new LinearLayout(ProfileActivity.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
@@ -210,16 +221,23 @@ public class ProfileActivity extends AppCompatActivity {
                                 Log.i("AlertDialog", "TextEntry 1 Entered " + input1.getText().toString());
                                 Log.i("AlertDialog", "TextEntry 2 Entered " + input2.getText().toString());
     /* User clicked OK so do some stuff */
-                                detailsBar.setVisibility(View.VISIBLE);
-                                userDetails.setmName(input1.getText().toString());
-                                userDetails.setEmail(input2.getText().toString());
-                                userDetails.setmCollege(input3.getText().toString());
-                                tvName.setText("");
-                                tvCollege.setText("");
-                                tvMail.setText("");
-                                tvPhone.setText("");
-                                registerUser(userDetails);
-                                layout.removeAllViews();
+                                boolean checker = checkDetails();
+                                if (checker) {
+                                    Log.e("TAG", "onClick: hello" );
+                                    detailsBar.setVisibility(View.VISIBLE);
+                                    userDetails.setmName(input1.getText().toString());
+                                    userDetails.setEmail(input2.getText().toString());
+                                    userDetails.setmCollege(input3.getText().toString());
+                                    tvName.setText("");
+                                    tvCollege.setText("");
+                                    tvMail.setText("");
+                                    tvPhone.setText("");
+
+                                    registerUser(userDetails);
+                                    layout.removeAllViews();
+                                } else {
+                                    MDToast.makeText(ProfileActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                                }
                             }
                         }).setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
@@ -232,10 +250,35 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         });
 
-                alert.show();
+               alert.show();
+
             }
         });
 
+    }
+
+    private boolean checkDetails() {
+        if (!isNetworkAvailable()) {
+            MDToast.makeText(ProfileActivity.this, "No Internet Access", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            return false;
+        }
+        if (input1.getText().toString().equals("")) {
+            input1.setError("Enter a Name");
+            return false;
+        }
+        if (input2.getText().toString().equals("")){
+            input2.setError("Enter an Email Address");
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(input2.getText().toString()).matches()) {
+            input2.setError("Enter a Valid Email Address");
+            Log.e("TAG", "checkDetails: " + input2.getText().toString() );
+            return false;
+        }
+        if (input3.getText().toString().equals("")){
+            input3.setError("Enter a College Name");
+        }
+        return true;
     }
 
     private void handleFirebaseLogin(AccessToken token) {
@@ -287,6 +330,7 @@ public class ProfileActivity extends AppCompatActivity {
                             userDetails.setEmail(obj.getString("email"));
                             userDetails.setmCollege(obj.getString("college"));
                             userDetails.setmPhone(phone);
+                            checkStatus();
 //                            if (!obj.getString("fb").equals("null")) {
 //                                userDetails.setmFbId(obj.getString("fb"));
 //                                loginButton.setVisibility(View.GONE);
@@ -375,7 +419,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                         @Override
                         public void onBitmapFailed(Drawable errorDrawable) {
-                            Log.d("fbProfile", errorDrawable.toString());
+
                         }
 
                         @Override
@@ -410,5 +454,40 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if(isConnected){
+            SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+            phoneNumber = prefs.getString("Phone", null);
+            if (phoneNumber == null) {
+                Log.e("TAG", "onCreate : " + "Shared pref no data!");
+            }
+            getDetails(phoneNumber);
+        } else {
+            MDToast.makeText(ProfileActivity.this, "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+        phoneNumber = prefs.getString("Phone", null);
+        if (phoneNumber == null) {
+            Log.e("TAG", "onCreate : " + "Shared pref no data!");
+        }
+        if(isNetworkAvailable()){
+            getDetails(phoneNumber);
+        }
+        MyApplication.getInstance().setConnectivityListener(ProfileActivity.this);
     }
 }

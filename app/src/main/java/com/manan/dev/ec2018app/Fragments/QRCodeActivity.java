@@ -22,8 +22,8 @@ import java.util.Locale;
 
 
 public class QRCodeActivity extends DialogFragment {
-    TextView eventName, eventDate, eventTime, fees;
-    ImageView qrTicketImage, status;
+    TextView eventName, eventDate, eventTime, fees, status;
+    ImageView qrTicketImage, back;
     private String eventId;
     private EventDetails eventDetails;
     private DatabaseController getEventDetails;
@@ -47,10 +47,18 @@ public class QRCodeActivity extends DialogFragment {
         eventDate = (TextView) rootView.findViewById(R.id.tv_event_date);
         eventTime = (TextView) rootView.findViewById(R.id.tv_event_time);
         fees = (TextView) rootView.findViewById(R.id.eventfees);
-        status = (ImageView) rootView.findViewById(R.id.iv_event_fees_status);
+        status = (TextView) rootView.findViewById(R.id.iv_event_fees_status);
+        back = (ImageView) rootView.findViewById(R.id.iv_cross);
         getEventDetails = new DatabaseController(getActivity());
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
         eventName.setText(eventDetails.getmName());
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(eventDetails.getmStartTime());
@@ -65,17 +73,16 @@ public class QRCodeActivity extends DialogFragment {
 
         fees.setText(String.valueOf("RS " + eventDetails.getmFees()));
 
-        if(String.valueOf(eventDetails.getmFees()).equals("0")) {
-            status.setImageResource(R.drawable.paid);
+        if (String.valueOf(eventDetails.getmFees()).equals("0")) {
+            status.setTextColor(getActivity().getResources().getColor(R.color.status_free));
+            status.setText("FREE");
+        } else if (String.valueOf(paymentStatus).equals("0")) {
+            status.setTextColor(getActivity().getResources().getColor(R.color.primaryFocused));
+            status.setText("PENDING");
+        } else {
+            status.setTextColor(getActivity().getResources().getColor(R.color.status_paid));
+            status.setText("PAID");
         }
-        else if (String.valueOf(paymentStatus).equals("0")){
-            status.setImageResource(R.drawable.unpaid);
-        }
-
-        else
-            {
-                status.setImageResource(R.drawable.paid);
-            }
 
 
         TicketsGenerator ticketsGenerator = new TicketsGenerator();
