@@ -1,7 +1,10 @@
 package com.manan.dev.ec2018app;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.Adapters.TicketLayoutAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,6 +42,7 @@ public class Tickets extends AppCompatActivity {
     private DatabaseController databaseController;
     private RecyclerView userTicketsView;
     private ImageView tickback;
+    private TextView noTickets;
     SwipeRefreshLayout s;
     private String phoneNumber;
 
@@ -52,6 +59,7 @@ public class Tickets extends AppCompatActivity {
         mProgress.setMessage("Showing your ticket.");
         mProgress.setTitle("Loading...");
         mProgress.setCanceledOnTouchOutside(false);
+        noTickets = (TextView) findViewById(R.id.tv_no_tickets);
 
         userTicketsView = (RecyclerView) findViewById(R.id.gl_user_tickets);
         userTicketsView.setLayoutManager(new LinearLayoutManager(Tickets.this));
@@ -61,20 +69,26 @@ public class Tickets extends AppCompatActivity {
         mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
         Log.d("Tickets", phoneNumber);
         Log.d("Tickets", Integer.toString(userTickets.size()));
+        if(userTickets.size() > 0){
+            noTickets.setVisibility(View.GONE);
+        }
         userTicketsView.setAdapter(mAdapter);
         tickback = findViewById(R.id.tic_back_button);
 
-        s=findViewById(R.id.swipe_refresh_layout);
+        s = findViewById(R.id.swipe_refresh_layout);
 
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                reload(phoneNumber);
+                if (isNetworkAvailable())
+                    reload(phoneNumber);
+                else
+                    MDToast.makeText(Tickets.this, "No Internet Connection", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                 s.setRefreshing(false);
             }
         });
         if (phoneNumber == null) {
-            Log.e("TAG", "onCreate: " + "No data in shared pref!" );
+            Log.e("TAG", "onCreate: " + "No data in shared pref!");
         } else {
             displayTickets(phoneNumber);
         }
@@ -136,14 +150,15 @@ public class Tickets extends AppCompatActivity {
     private void displayTickets(String phoneNumber) {
 
         userTickets = databaseController.retrieveAllTickets();
-        if(userTickets.size() > 0) {
+        if (userTickets.size() > 0) {
+            noTickets.setVisibility(View.GONE);
             mProgress.dismiss();
             Log.d("yatin", String.valueOf(userTickets.get(0).getQRcode()));
             mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
             userTicketsView.setAdapter(mAdapter);
         }
         //mAdapter.notifyDataSetChanged();
-   }
+    }
 
     public class IncomingHandler extends Handler {
         private WeakReference<Tickets> yourActivityWeakReference;
@@ -166,17 +181,23 @@ public class Tickets extends AppCompatActivity {
         }
 
         private void updateDatabase() {
-            if(userTickets.size()>databaseController.getTicketCount()){
-                for(int i=0;i<userTickets.size();i++) {
+            if (userTickets.size() > databaseController.getTicketCount()) {
+                for (int i = 0; i < userTickets.size(); i++) {
                     databaseController.addTicketsToDb(userTickets.get(i));
                 }
-            }
-            else {
-                for(int i=0;i<userTickets.size();i++) {
+            } else {
+                for (int i = 0; i < userTickets.size(); i++) {
                     databaseController.updateDbTickets(userTickets.get(i));
                 }
             }
             displayTickets(phoneNumber);
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

@@ -167,6 +167,17 @@
             android:visibility="gone"
              />
 
+        <TextView
+            android:id="@+id/tv_log_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura"
+            android:text="Click Here to Log in"
+            android:textAlignment="center"
+            android:layout_below="@id/refresh_text"
+            android:padding="8dp"
+            android:visibility="gone"/>
+
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="match_parent"

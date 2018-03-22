@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:layout_height="wrap_content"
+    tools:context="com.manan.dev.ec2018app.SingleEventActivity">
 
-    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/contaner_se"
+    <RelativeLayout
+        android:id="@+id/rl_action_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context="com.manan.dev.ec2018app.SingleEventActivity">
-
-        <!--<ProgressBar-->
-            <!--android:id="@+id/pb_view_ticket"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:indeterminate="true" />-->
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/tv_back_button"
@@ -26,7 +19,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/vector_arrow"
-            android:tint="@color/Black" />
+            android:tint="@color/Black"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp" />
 
         <TextView
             android:id="@+id/tv_event_name"
@@ -39,7 +34,9 @@
             android:text="Event name"
             android:textAllCaps="true"
             android:textColor="#000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp" />
 
         <TextView
             android:id="@+id/tv_cat_name"
@@ -52,7 +49,9 @@
             android:text="Category"
             android:textAllCaps="true"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp" />
 
         <View
             android:id="@+id/line1"
@@ -62,459 +61,478 @@
             android:layout_margin="10dp"
             android:background="#222" />
 
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_action_bar"
+        android:scrollbars="none">
+
         <RelativeLayout
-            android:id="@+id/ll_btn_register"
+            android:id="@+id/contaner_se"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/line1"
-            android:background="@drawable/default_image_1">
+            android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:id="@+id/pb_event_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:indeterminate="true"
-                android:visibility="gone" />
+            <!--<ProgressBar-->
+            <!--android:id="@+id/pb_view_ticket"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:indeterminate="true" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <Button
-                    android:id="@+id/btn_register"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="0.75"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/futura"
-                    android:text="Register"
-                    android:textColor="#fff"
-                    android:textSize="26sp" />
-
-                <ImageView
-                    android:id="@+id/btn_share"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="0.25"
-                    android:src="@drawable/vector_share" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/ll_btn_register"
-            android:layout_margin="10dp"
-            android:background="#222" />
-
-        <LinearLayout
-            android:id="@+id/ll_loc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line2"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp">
 
             <RelativeLayout
-                android:id="@+id/rl_time_date"
-                android:layout_width="0dp"
+                android:id="@+id/ll_btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/default_image_1">
+
+                <ProgressBar
+                    android:id="@+id/pb_event_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <Button
+                        android:id="@+id/btn_register"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="0.75"
+                        android:background="@drawable/edit_text_background"
+                        android:fontFamily="@font/futura"
+                        android:text="Register"
+                        android:textColor="#fff"
+                        android:textSize="26sp" />
+
+                    <ImageView
+                        android:id="@+id/btn_share"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="0.25"
+                        android:src="@drawable/vector_share" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/ll_btn_register"
+                android:layout_margin="10dp"
+                android:background="#222" />
+
+            <LinearLayout
+                android:id="@+id/ll_loc"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/line2"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_time_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_vector_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/vector_time"
+                        android:tint="#217c31" />
+
+                    <TextView
+                        android:id="@+id/tv_event_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/iv_vector_time"
+                        android:layout_toRightOf="@+id/iv_vector_time"
+                        android:fontFamily="@font/futura"
+                        android:text="Sunday, 18 March 2018"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/tv_event_date"
+                        android:layout_alignStart="@id/tv_event_date"
+                        android:layout_below="@id/tv_event_date">
+
+                        <TextView
+                            android:id="@+id/tv_event_start_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/futura"
+                            android:text="10:00"
+                            android:textColor="#333"
+                            android:textSize="13dp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/futura"
+                            android:text=" To "
+                            android:textColor="#333"
+                            android:textSize="13dp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tv_event_end_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/futura"
+                            android:text="16:00"
+                            android:textColor="#333"
+                            android:textSize="13dp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/vector_money_inr"
+                        android:tint="#217c31" />
+
+                    <TextView
+                        android:id="@+id/tv_fees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/iv_money"
+                        android:layout_toRightOf="@+id/iv_money"
+                        android:fontFamily="@font/futura"
+                        android:padding="5dp"
+                        android:text="Fees : Rs. 10"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:textStyle="normal" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rl_money_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_loc"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_vector_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:src="@drawable/vector_location"
+                        android:tint="#217c31" />
+
+                    <TextView
+                        android:id="@+id/tv_event_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura"
+                        android:padding="5dp"
+                        android:text="Lal Chowk"
+                        android:textAllCaps="true"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_type_of_event"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/vector_team"
+                        android:tint="#217c31" />
+
+                    <TextView
+                        android:id="@+id/tv_type_of_event"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura"
+                        android:padding="5dp"
+                        android:text="Single/Team Event"
+                        android:textAllCaps="true"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/rl_money_type"
+                android:layout_margin="10dp"
+                android:background="#222" />
+
+            <RelativeLayout
+                android:id="@+id/rl_prizes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line5"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:id="@+id/iv_vector_time"
+                    android:id="@+id/iv_vector_prize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:padding="5dp"
-                    android:src="@drawable/vector_time"
+                    android:src="@drawable/vector_prizes"
                     android:tint="#217c31" />
 
                 <TextView
-                    android:id="@+id/tv_event_date"
+                    android:id="@+id/tv_prize_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/iv_vector_time"
-                    android:layout_toRightOf="@+id/iv_vector_time"
+                    android:layout_toEndOf="@+id/iv_vector_prize"
+                    android:layout_toRightOf="@+id/iv_vector_prize"
                     android:fontFamily="@font/futura"
-                    android:text="Sunday, 18 March 2018"
+                    android:text="Prizes:"
                     android:textColor="#111"
                     android:textSize="15dp"
                     android:textStyle="italic" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_event_date"
-                    android:layout_alignStart="@id/tv_event_date"
-                    android:layout_below="@id/tv_event_date">
+                    android:layout_alignLeft="@id/iv_vector_prize"
+                    android:layout_alignStart="@id/tv_prize_heading"
+                    android:layout_below="@id/tv_prize_heading"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_event_start_time"
+                        android:id="@+id/tv_prize_first"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/futura"
-                        android:text="10:00"
-                        android:textColor="#333"
+                        android:text="First Prize: Rs.2000 "
                         android:textSize="13dp"
                         android:textStyle="normal" />
 
                     <TextView
+                        android:id="@+id/tv_prize_second"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/futura"
-                        android:text=" To "
-                        android:textColor="#333"
+                        android:text="Second Prize: Rs.1000 "
                         android:textSize="13dp"
                         android:textStyle="normal" />
 
                     <TextView
-                        android:id="@+id/tv_event_end_time"
+                        android:id="@+id/tv_prize_third"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/futura"
-                        android:text="16:00"
-                        android:textColor="#333"
+                        android:text="Third Prize: Rs.500 "
                         android:textSize="13dp"
                         android:textStyle="normal" />
                 </LinearLayout>
             </RelativeLayout>
 
+            <View
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/rl_prizes"
+                android:layout_margin="10dp"
+                android:background="#222" />
+
             <RelativeLayout
-                android:id="@+id/rl_location"
-                android:layout_width="0dp"
+                android:id="@+id/rl_description"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/line6"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/iv_money"
+                    android:id="@+id/iv_vector_description"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/vector_money_inr"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/vector_description"
                     android:tint="#217c31" />
 
                 <TextView
-                    android:id="@+id/tv_fees"
+                    android:id="@+id/tv_description_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/iv_money"
-                    android:layout_toRightOf="@+id/iv_money"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/iv_vector_description"
+                    android:layout_toRightOf="@+id/iv_vector_description"
                     android:fontFamily="@font/futura"
-                    android:padding="5dp"
-                    android:text="Fees : Rs. 10"
+                    android:text="Description:"
                     android:textColor="#111"
-                    android:textSize="15dp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_description_heading"
+                    android:layout_alignStart="@id/tv_description_heading"
+                    android:layout_below="@+id/tv_description_heading"
+                    android:fontFamily="@font/futura"
+                    android:text="This exceeding trifling witling, considering ranting criticizing concerning adopting fitting wording being exhibiting transcending learning, was displaying, notwithstanding ridiculing, surpassing boasting swelling reasoning, respecting correcting erring writing, and touching detecting deceiving arguing during debating."
+                    android:textColor="#333"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+            <View
+                android:id="@+id/line7"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/rl_description"
+                android:layout_margin="10dp"
+                android:background="#222" />
 
-        <LinearLayout
-            android:id="@+id/rl_money_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_loc"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp">
-
-            <LinearLayout
-                android:id="@+id/ll_location"
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:id="@+id/rl_rules"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_below="@+id/line7"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/iv_vector_location"
+                    android:id="@+id/iv_vector_rules"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:src="@drawable/vector_location"
+                    android:src="@drawable/vector_rules"
                     android:tint="#217c31" />
 
                 <TextView
-                    android:id="@+id/tv_event_location"
+                    android:id="@+id/tv_rules_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/iv_vector_rules"
+                    android:layout_toRightOf="@+id/iv_vector_rules"
                     android:fontFamily="@font/futura"
-                    android:padding="5dp"
-                    android:text="Lal Chowk"
-                    android:textAllCaps="true"
+                    android:text="Rules:"
                     android:textColor="#111"
-                    android:textSize="15dp"
-                    android:textStyle="italic" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/iv_type_of_event"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/vector_team"
-                    android:tint="#217c31" />
+                    android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/tv_type_of_event"
+                    android:id="@+id/tv_rules"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_rules_heading"
+                    android:layout_alignStart="@id/tv_rules_heading"
+                    android:layout_below="@+id/tv_rules_heading"
                     android:fontFamily="@font/futura"
-                    android:padding="5dp"
-                    android:text="Single/Team Event"
-                    android:textAllCaps="true"
-                    android:textColor="#111"
-                    android:textSize="15dp"
+                    android:text=" 1. Mah Life, My Rulz! \n 2. Android is Lyf! \n 3. I set ma own rulz! \n 4. My lyf is kewl!"
+                    android:textColor="#333"
+                    android:textSize="13dp"
                     android:textStyle="normal" />
 
-            </LinearLayout>
-        </LinearLayout>
+            </RelativeLayout>
 
-        <View
-            android:id="@+id/line5"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/rl_money_type"
-            android:layout_margin="10dp"
-            android:background="#222" />
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/rl_rules"
+                android:layout_margin="10dp"
+                android:background="#222" />
 
-        <RelativeLayout
-            android:id="@+id/rl_prizes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line5"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/iv_vector_prize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/vector_prizes"
-                android:tint="#217c31" />
-
-            <TextView
-                android:id="@+id/tv_prize_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/iv_vector_prize"
-                android:layout_toRightOf="@+id/iv_vector_prize"
-                android:fontFamily="@font/futura"
-                android:text="Prizes:"
-                android:textColor="#111"
-                android:textSize="15dp"
-                android:textStyle="italic" />
-
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rl_coords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/iv_vector_prize"
-                android:layout_alignStart="@id/tv_prize_heading"
-                android:layout_below="@id/tv_prize_heading"
-                android:orientation="vertical">
+                android:layout_below="@+id/line3"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/tv_prize_first"
+                    android:id="@+id/tv_coords_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
-                    android:text="First Prize: Rs.2000 "
-                    android:textSize="13dp"
-                    android:textStyle="normal" />
+                    android:text="Event Co-ordinators:"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/tv_prize_second"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_coordinators"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura"
-                    android:text="Second Prize: Rs.1000 "
-                    android:textSize="13dp"
-                    android:textStyle="normal" />
+                    android:layout_below="@+id/tv_coords_heading"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_prize_third"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura"
-                    android:text="Third Prize: Rs.500 "
-                    android:textSize="13dp"
-                    android:textStyle="normal" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/line6"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/rl_prizes"
-            android:layout_margin="10dp"
-            android:background="#222" />
-
-        <RelativeLayout
-            android:id="@+id/rl_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line6"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_vector_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/vector_description"
-                android:tint="#217c31" />
-
-            <TextView
-                android:id="@+id/tv_description_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/iv_vector_description"
-                android:layout_toRightOf="@+id/iv_vector_description"
-                android:fontFamily="@font/futura"
-                android:text="Description:"
-                android:textColor="#111"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/tv_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_description_heading"
-                android:layout_alignStart="@id/tv_description_heading"
-                android:layout_below="@+id/tv_description_heading"
-                android:fontFamily="@font/futura"
-                android:text="This exceeding trifling witling, considering ranting criticizing concerning adopting fitting wording being exhibiting transcending learning, was displaying, notwithstanding ridiculing, surpassing boasting swelling reasoning, respecting correcting erring writing, and touching detecting deceiving arguing during debating."
-                android:textColor="#333"
-                android:textSize="13dp"
-                android:textStyle="normal" />
+                </LinearLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
-
-        <View
-            android:id="@+id/line7"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/rl_description"
-            android:layout_margin="10dp"
-            android:background="#222" />
-
-        <RelativeLayout
-            android:id="@+id/rl_rules"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line7"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_vector_rules"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/vector_rules"
-                android:tint="#217c31" />
-
-            <TextView
-                android:id="@+id/tv_rules_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/iv_vector_rules"
-                android:layout_toRightOf="@+id/iv_vector_rules"
-                android:fontFamily="@font/futura"
-                android:text="Rules:"
-                android:textColor="#111"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/tv_rules"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_rules_heading"
-                android:layout_alignStart="@id/tv_rules_heading"
-                android:layout_below="@+id/tv_rules_heading"
-                android:fontFamily="@font/futura"
-                android:text=" 1. Mah Life, My Rulz! \n 2. Android is Lyf! \n 3. I set ma own rulz! \n 4. My lyf is kewl!"
-                android:textColor="#333"
-                android:textSize="13dp"
-                android:textStyle="normal" />
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/line3"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/rl_rules"
-            android:layout_margin="10dp"
-            android:background="#222" />
-
-        <RelativeLayout
-            android:id="@+id/rl_coords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line3"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tv_coords_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura"
-                android:text="Event Co-ordinators:"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="15dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_coordinators"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_coords_heading"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </RelativeLayout>
-
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</RelativeLayout>

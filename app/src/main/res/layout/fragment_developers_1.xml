@@ -8,13 +8,13 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/dev_recycler_view_f1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
             android:padding="5dp"
             android:scrollbars="none" />
     </RelativeLayout>

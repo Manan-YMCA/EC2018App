@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,14 @@ RangritiFragment extends Fragment {
     private TextView date_view, content_view;
     private ImageView fb_btn, insta;
     private ImageView back_image;
+
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 
     public RangritiFragment() {
         // Required empty public constructor
@@ -125,16 +134,16 @@ RangritiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(w.getFblink().toString()));
-                getActivity().startActivity(myIntent);
+                mContext.startActivity(myIntent);
             }
         });
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(w.getInstalink().toString()));
-                getActivity().startActivity(myIntent);
+                mContext.startActivity(myIntent);
             }
         });
-        Picasso.with(getActivity()).load(w.getPhotourl().toString()).into(back_image);
+        Picasso.with(mContext).load(w.getPhotourl().toString()).into(back_image);
     }
 }

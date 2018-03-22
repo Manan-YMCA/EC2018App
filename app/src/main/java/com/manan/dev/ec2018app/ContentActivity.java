@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +54,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.manan.dev.ec2018app.Adapters.DashboardCategoryScrollerAdapter;
 import com.manan.dev.ec2018app.Adapters.DashboardSlideAdapter;
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
+import com.manan.dev.ec2018app.Fragments.DashboardSliderFragment1;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.NavMenuViews.AboutActivity;
@@ -72,7 +75,7 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ConnectivityReciever.ConnectivityReceiverListener {
+public class ContentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ConnectivityReciever.ConnectivityReceiverListener, DashboardSliderFragment1.navBarOpenStatus {
 
     private ViewPager viewPager;
     private TextView[] dots;
@@ -427,12 +430,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
                                 finish();
-                                MDToast.makeText(ContentActivity.this,"Logout Successful", Toast.LENGTH_SHORT,MDToast.TYPE_SUCCESS).show();
+                                MDToast.makeText(ContentActivity.this, "Logout Successful", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
                                 //No button clicked
-                                MDToast.makeText(ContentActivity.this,"Logout Cancelled", Toast.LENGTH_SHORT,MDToast.TYPE_INFO).show();
+                                MDToast.makeText(ContentActivity.this, "Logout Cancelled", Toast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
                                 break;
                         }
                     }
@@ -536,11 +539,19 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             Menu menu = nav_view.getMenu();
             menu.findItem(R.id.nav_logout).setVisible(true);
             menu.findItem(R.id.nav_profile).setTitle("Profile");
-            checkCount(phoneNumber);
+            if (isNetworkAvailable())
+                checkCount(phoneNumber);
         }
         if (nav_view != null) {
             nav_view.setCheckedItem(R.id.nav_home);
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void checkCount(final String phone) {
@@ -610,7 +621,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
             tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.colorWhite));
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             } else {
                 tv.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -627,12 +638,21 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
             tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.Black));
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             } else {
                 tv.setGravity(Gravity.CENTER_HORIZONTAL);
             }
             snack.show();
+        }
+    }
+
+    @Override
+    public void openNavBar(boolean open) {
+        if(open){
+            if(!drawer.isDrawerOpen(GravityCompat.START)){
+                drawer.openDrawer(GravityCompat.START);
+            }
         }
     }
 

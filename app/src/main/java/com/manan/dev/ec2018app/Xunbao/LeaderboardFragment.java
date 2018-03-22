@@ -49,6 +49,13 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
     static StringRequest stringRequest;
 //    ImageView refreshB;
     SwipeRefreshLayout swipeRefreshLayout;
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
     //ProgressDialog progressBar;
 
     public LeaderboardFragment() {
@@ -57,7 +64,7 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        c = getActivity();
+        c = mContext;
 //        refreshB=view.findViewById(R.id.refresh_butto);
         refresh=view.findViewById(R.id.refresh_text);
         swipeRefreshLayout=view.findViewById(R.id.swipe);
@@ -69,13 +76,13 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
         });
         bar = (ProgressBar) view.findViewById(R.id.pb_leaderboard);
         bar.setVisibility(View.VISIBLE);
-        bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
+        bar.getIndeterminateDrawable().setColorFilter(mContext.getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
         if(isNetworkAvailable()){
             setData();
         } else {
-            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            MDToast.makeText(mContext.getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
-//        progressBar = new ProgressDialog(getActivity());
+//        progressBar = new ProgressDialog(mContext);
 //        progressBar.setMessage("Loading");
 //        progressBar.setCanceledOnTouchOutside(false);
 //        progressBar.show();
@@ -163,7 +170,7 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
@@ -173,7 +180,7 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
         if(isConnected){
             setData();
         } else {
-            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            MDToast.makeText(mContext.getApplicationContext(), "Connect to Internet", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
     }
 }

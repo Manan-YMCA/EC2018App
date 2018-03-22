@@ -20,6 +20,7 @@ public class DashboardSliderFragment2 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
     private static final String FORMAT = "%02d:%02d:%02d:%02d";
+    private Context mContext;
 
     int seconds , minutes;
 
@@ -29,7 +30,7 @@ public class DashboardSliderFragment2 extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment2, container, false);
 
-        SharedPreferences preferences = this.getActivity().getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.mContext.getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
           long fest_day=1522866600;
@@ -58,6 +59,12 @@ public class DashboardSliderFragment2 extends Fragment {
         }.start();
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
     }
 }
 

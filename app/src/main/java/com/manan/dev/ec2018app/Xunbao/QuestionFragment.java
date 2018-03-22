@@ -1,8 +1,10 @@
 package com.manan.dev.ec2018app.Xunbao;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -43,6 +45,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
+import com.manan.dev.ec2018app.LoginActivity;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.squareup.picasso.Callback;
@@ -55,9 +58,11 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class QuestionFragment extends Fragment implements XunbaoActivity.loadQuestionFragment, ConnectivityReciever.ConnectivityReceiverListener {
-    TextView question, contestEnd, refreshText, stage;
+    TextView question, contestEnd, refreshText, stage, loginText;
     ImageView xunbaoimg, refreshButton;
     LinearLayout submit;
     EditText ans;
@@ -73,6 +78,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private FirebaseAuth mAuth;
+    private Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -82,13 +88,23 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         mAuth = FirebaseAuth.getInstance();
 
         bar = (ProgressBar) view.findViewById(R.id.pb_question);
-        bar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
+        bar.getIndeterminateDrawable().setColorFilter(mContext.getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
         barImage = (ProgressBar) view.findViewById(R.id.pb_image);
-        barImage.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
+        barImage.getIndeterminateDrawable().setColorFilter(mContext.getResources().getColor(R.color.pb_xunbao), android.graphics.PorterDuff.Mode.MULTIPLY);
         bar.setVisibility(View.VISIBLE);
         barImage.setVisibility(View.GONE);
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginText = (TextView) view.findViewById(R.id.tv_log_in);
+
+        loginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, LoginActivity.class);
+                in.putExtra("parent", "xunbao");
+                startActivity(in);
+            }
+        });
 
         final String EMAIL = "email";
 
@@ -101,15 +117,15 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
             @Override
             public void onSuccess(LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
-                FragmentFbLogin.fbLoginButton activity = (FragmentFbLogin.fbLoginButton) getActivity();
+                FragmentFbLogin.fbLoginButton activity = (FragmentFbLogin.fbLoginButton) mContext;
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
-                Toast.makeText(getActivity(), "Facebook Login Done!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Facebook Login Done!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(getActivity(), "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -118,9 +134,9 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
             }
         });
 
-        queURL = getActivity().getResources().getString(R.string.xunbao_get_question_api);
-        ansURL = getActivity().getResources().getString(R.string.xunbao_check_answer_api);
-        statusURL = getActivity().getResources().getString(R.string.xunbao_status);
+        queURL = mContext.getResources().getString(R.string.xunbao_get_question_api);
+        ansURL = mContext.getResources().getString(R.string.xunbao_check_answer_api);
+        statusURL = mContext.getResources().getString(R.string.xunbao_status);
         queLayout = view.findViewById(R.id.question_layout);
         stage = view.findViewById(R.id.tv_question_number);
         question = view.findViewById(R.id.tv_question_text);
@@ -131,7 +147,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         refreshButton = view.findViewById(R.id.refresh_button);
         refreshText = view.findViewById(R.id.refresh_text);
 
-        queue = Volley.newRequestQueue(getActivity());
+        queue = Volley.newRequestQueue(mContext);
 
         refreshButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -160,7 +176,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         try {
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             answer.put("email", currFbid);
-            answer.put("skey",getActivity().getResources().getString(R.string.skey));
+            answer.put("skey",mContext.getResources().getString(R.string.skey));
             answer.put("ans", ans.getText());
 
             final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL, answer,
@@ -173,15 +189,15 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
                                 if(end.equals("1")) {
-                                    Toast.makeText(getActivity(), "Congrats! Right answer!", Toast.LENGTH_SHORT).show();
+                                    MDToast.makeText(mContext, "Congrats! Right answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
                                     reload();
                                 }
                                 else
-                                    Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
+                                    MDToast.makeText(mContext, "Wrong answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
 
                             } catch (JSONException e) {
 
-                                Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                                MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                                 //progressBar.dismiss();
                                 e.printStackTrace();
                             }
@@ -192,14 +208,14 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         public void onErrorResponse(VolleyError volleyError) {
                             bar.setVisibility(View.GONE);
                             //progressBar.dismiss();
-                            Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                            MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             volleyError.printStackTrace();
                         }
                     });
             queue.add(answ);
         } catch (JSONException e) {
             bar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+            MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             //progressBar.dismiss();
         }
     }
@@ -212,6 +228,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         refreshButton.setVisibility(View.GONE);
         refreshText.setVisibility(View.GONE);
         loginButton.setVisibility(View.GONE);
+        loginText.setVisibility(View.GONE);
         queue.add(stat);
     }
 
@@ -235,9 +252,16 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                                 loginButton.setVisibility(View.GONE);
+                                loginText.setVisibility(View.GONE);
                             } else {
                                 refreshText.setVisibility(View.VISIBLE);
-                                loginButton.setVisibility(View.VISIBLE);
+                                SharedPreferences prefs = mContext.getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                                String phoneNumber = prefs.getString("Phone", null);
+                                if(phoneNumber == null){
+                                    loginText.setVisibility(View.VISIBLE);
+                                } else {
+                                    loginButton.setVisibility(View.VISIBLE);
+                                }
                             }
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
@@ -252,7 +276,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 Log.d("hey", "" + error);
                 //progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "Problem loading!", Toast.LENGTH_SHORT).show();
+//                MDToast.makeText(mContext, "Problem loading!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             }
         });
         queue.add(stat);
@@ -264,7 +288,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         try {
             params.put("fid", currFbid);
             if(Profile.getCurrentProfile()!=null) {
-                params.put("skey", getActivity().getResources().getString(R.string.skey));
+                params.put("skey", mContext.getResources().getString(R.string.skey));
                 params.put("fname",Profile.getCurrentProfile().getFirstName());
                 params.put("lname",Profile.getCurrentProfile().getLastName());
             }
@@ -297,7 +321,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 question.setText(que);
                                 stage.setText("STAGE - " + Integer.toString(level));
 
-                                Picasso.with(getActivity()).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg, new Callback() {
+                                Picasso.with(mContext).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg, new Callback() {
                                     @Override
                                     public void onSuccess() {
                                         barImage.setVisibility(View.GONE);
@@ -344,14 +368,14 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
             if (!currFbid.equals("notLoggedIn"))
                 getQuestion();
         } else {
-            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            MDToast.makeText(mContext.getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -361,7 +385,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("loginStatus", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(getActivity(), "Authentication failed.",
+                            Toast.makeText(mContext, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -382,14 +406,20 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
             if (!currFbid.equals("notLoggedIn"))
                 getQuestion();
         } else {
-            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            MDToast.makeText(mContext.getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
     }
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
     }
 }
