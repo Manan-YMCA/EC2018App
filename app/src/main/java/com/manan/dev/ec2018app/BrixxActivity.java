@@ -12,8 +12,9 @@ public class BrixxActivity extends AppCompatActivity {
 
     private BrixxAdapter iViewPagerAdapter;
     private ViewPager iViewpager;
-    private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
     private ImageView next_btn, pre_btn;
+    private ViewPager.OnPageChangeListener viewPagerPageChangeListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +30,68 @@ public class BrixxActivity extends AppCompatActivity {
         next_btn = findViewById(R.id.next);
         pre_btn = findViewById(R.id.pre);
 
+        check();
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iViewpager.setCurrentItem(getCurrItem() + 1);
+                if(iViewpager.getCurrentItem()==3)
+                {
+                    iViewpager.setCurrentItem(0);
+
+                }
+                else
+                {
+                iViewpager.setCurrentItem(getCurrItem() + 1);}
+                check();
             }
+
         });
 
         pre_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iViewpager.setCurrentItem(getCurrItem() - 1);
+               if(iViewpager.getCurrentItem()==0)
+               {
+                   iViewpager.setCurrentItem(3);
+               }
+
+               else {
+                   iViewpager.setCurrentItem(getCurrItem() - 1);
+               }
+                check();
             }
         });
+
+
+
     }
+
+    private void check() {
+        if(iViewpager.getCurrentItem()==0)
+        {
+            pre_btn.setVisibility(View.GONE);
+        }
+        else if(iViewpager.getCurrentItem()==3)
+        {
+            next_btn.setVisibility(View.GONE);
+        }
+        else
+        {
+            next_btn.setVisibility(View.VISIBLE);
+            pre_btn.setVisibility(View.VISIBLE);
+        }
+
+
+    }
+
 
     private int getCurrItem() {
         return iViewpager.getCurrentItem();
     }
+
+
+
+
+
+
 }

@@ -606,7 +606,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 //            Snackbar.make(cotainer_root_frame, message, Snackbar.LENGTH_SHORT).show();
             Snackbar snack = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
             View view = snack.getView();
-            view.setBackgroundColor(Color.GREEN);
+            view.setBackgroundColor(getResources().getColor(R.color.gplus_color_1));
             TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
             tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.colorWhite));
 
