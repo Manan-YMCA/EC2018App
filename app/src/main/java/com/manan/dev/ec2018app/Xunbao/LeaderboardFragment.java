@@ -173,7 +173,7 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
         if(isConnected){
             setData();
         } else {
-            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            MDToast.makeText(getActivity().getApplicationContext(), "Connect to Internet", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
     }
 }

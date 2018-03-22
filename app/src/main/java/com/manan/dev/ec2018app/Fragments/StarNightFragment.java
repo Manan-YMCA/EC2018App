@@ -118,7 +118,7 @@ public class StarNightFragment extends Fragment {
     }
 
     private void updateUI(final BrixxEventModel w) {
-        title_view.setText(w.getTitle().toString());
+        title_view.setText(w.getTitle());
         date_view.setText(w.getDate().toString());
         content_view.setText(w.getContent().toString());
         fb_btn.setOnClickListener(new View.OnClickListener() {

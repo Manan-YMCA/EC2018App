@@ -168,7 +168,7 @@
             android:name=".Notifications.MyNotificationsActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="com.manan.dev.OPEN_ACTIVITY_NOTIFICATION" />
+                <action android:name="com.dev.manan.adminappec2018_TARGET_NOTIFICATION"/>
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
@@ -55,7 +54,6 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setChecked(true);
-                Toast.makeText(XunbaoActivity.this, Integer.toString(item.getOrder()), Toast.LENGTH_SHORT).show();
                 viewPagerXunbao.setCurrentItem(item.getOrder() - 1);
                 if (viewPagerXunbao.getAdapter().getPageTitle(item.getOrder() - 1).toString().equals("QUESTIONS")) {
                     loadQuestionFragment fragment = (loadQuestionFragment) adapter.instantiateItem(viewPagerXunbao, item.getOrder() - 1);

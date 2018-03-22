@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class FragmentFbLogin extends DialogFragment {
     TextView skipLogin;
     LoginButton loginButton;
     private CallbackManager callbackManager;
+    private ProgressBar barLogin;
     private FirebaseAuth mAuth;
 
 
@@ -54,6 +56,7 @@ public class FragmentFbLogin extends DialogFragment {
         loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
         FacebookSdk.sdkInitialize(getActivity());
         callbackManager = CallbackManager.Factory.create();
+        barLogin = (ProgressBar) rootView.findViewById(R.id.pb_login);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -77,6 +80,11 @@ public class FragmentFbLogin extends DialogFragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                barLogin.setVisibility(View.VISIBLE);
+                skipLogin.setClickable(false);
+                skipLogin.setLongClickable(false);
+                skipLogin.setVisibility(View.INVISIBLE);
+                getDialog().setCancelable(false);
                 AccessToken accessToken = loginResult.getAccessToken();
                 fbLoginButton activity = (fbLoginButton) getActivity();
                 handleFacebookAccessToken(loginResult.getAccessToken());
@@ -108,6 +116,7 @@ public class FragmentFbLogin extends DialogFragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("loginStatus", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            barLogin.setVisibility(View.GONE);
                             dismiss();
                         } else {
                             // If sign in fails, display a message to the user.

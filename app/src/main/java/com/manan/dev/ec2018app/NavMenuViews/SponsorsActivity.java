@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.Adapters.SponserAdapter;
 import com.manan.dev.ec2018app.Models.Sponsers;
 import com.manan.dev.ec2018app.R;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -118,7 +119,7 @@ public class SponsorsActivity extends AppCompatActivity {
         else{
             progressBar.dismiss();
             noSponTV.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Get a Hotspot fast!", Toast.LENGTH_SHORT).show();
+            MDToast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
         }
     }
 

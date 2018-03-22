@@ -81,17 +81,17 @@ public class DevelopesFragment_1 extends Fragment {
 
 
         devlist.add(dev_obj1);
+        devlist.add(dev_obj8);
         devlist.add(dev_obj2);
         devlist.add(dev_obj3);
         devlist.add(dev_obj4);
-        devlist.add(dev_obj8);
+        devlist.add(dev_obj11);
         devlist.add(dev_obj5);
         devlist.add(dev_obj6);
         devlist.add(dev_obj7);
         devlist.add(dev_obj9);
-        devlist.add(dev_obj10);
-        devlist.add(dev_obj11);
         devlist.add(dev_obj13);
+        devlist.add(dev_obj10);
 
         Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()));
         DevelopersAdapter dev_ad = new DevelopersAdapter(getActivity(), devlist);

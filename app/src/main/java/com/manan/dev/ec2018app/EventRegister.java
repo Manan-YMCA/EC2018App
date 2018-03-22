@@ -5,8 +5,11 @@ import android.app.AlarmManager;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,6 +38,7 @@ import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.Models.UserDetails;
 import com.manan.dev.ec2018app.Notifications.MyNotificationResponse;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -126,7 +131,9 @@ public class EventRegister extends AppCompatActivity {
         if (phoneNumber == null) {
             Log.e("TAG", "onCreate: " + "Shared Pref no data!!!!!!!!!!!!");
         }
-        getDetails(phoneNumber);
+        if(isNetworkAvailable()) {
+            getDetails(phoneNumber);
+        }
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -309,6 +316,12 @@ public class EventRegister extends AppCompatActivity {
     }
 
     private Boolean validateCredentials() {
+
+        if(!isNetworkAvailable()){
+            MDToast.makeText(EventRegister.this, "No Internet Connection", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+            return false;
+        }
+
         for (EditText nameTextView : nameText) {
             if (nameTextView.getText().toString().equals("")) {
                 nameTextView.setError("Enter a User Name");
@@ -434,5 +447,12 @@ public class EventRegister extends AppCompatActivity {
             }
         });
         queue.add(request);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

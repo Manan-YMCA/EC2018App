@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.manan.dev.ec2018app.Models.DeveloperModel;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Utilities.CircleTransform;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,15 +41,48 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         final DeveloperModel dev = item.get(position);
 
 //      Picasso.with(context).load(dev.getPhotoUrl().toString()).into(holder.photo);
-        Picasso.with(context).load(dev.getPhotoUrl().toString()).transform(new CircleTransform()).into(holder.photo);
+        holder.bar.setVisibility(View.VISIBLE);
+        holder.reload.setVisibility(View.GONE);
+
+        holder.reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.bar.setVisibility(View.VISIBLE);
+                holder.reload.setVisibility(View.GONE);
+                Picasso.with(context).load(dev.getPhotoUrl()).transform(new CircleTransform()).into(holder.photo, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.bar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.bar.setVisibility(View.GONE);
+                        holder.reload.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        });
+        Picasso.with(context).load(dev.getPhotoUrl()).transform(new CircleTransform()).into(holder.photo, new Callback() {
+            @Override
+            public void onSuccess() {
+                holder.bar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError() {
+                holder.bar.setVisibility(View.GONE);
+                holder.reload.setVisibility(View.VISIBLE);
+            }
+        });
 
         holder.name.setText(dev.getName());
-        holder.more.setText(dev.getMore().toString());
+        holder.more.setText(dev.getMore());
 
         if(dev.getGithubURL().equals("")){
             holder.github.setVisibility(View.GONE);
@@ -82,7 +117,8 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
         public ImageView photo;
         public TextView name;
         public TextView more;
-        public ImageView linkedin, github;
+        public ImageView linkedin, github, reload;
+        public ProgressBar bar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -91,6 +127,8 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
             linkedin = (ImageView) itemView.findViewById(R.id.dev_linkdin);
             more = (TextView) itemView.findViewById(R.id.dev_more);
             github = (ImageView) itemView.findViewById(R.id.dev_github);
+            bar = (ProgressBar) itemView.findViewById(R.id.pb_dev_image);
+            reload = (ImageView) itemView.findViewById(R.id.refresh_button);
         }
     }
 }

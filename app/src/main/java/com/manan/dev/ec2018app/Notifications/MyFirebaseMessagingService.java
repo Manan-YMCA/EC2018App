@@ -54,7 +54,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // message, here is where that should be initiated. See sendNotification method below.
         //sendNotification(notificationTitle, notificationBody, dataTitle, dataMessage);
 
-        sendNotification(notificationTitle, notificationBody, dataTitle, dataMessage);
+        sendNotification(remoteMessage, notificationTitle, notificationBody, dataTitle, dataMessage);
 
     }
 
@@ -62,12 +62,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * //     * Create and show a simple notification containing the received FCM message.
      * //
      */
-    private void sendNotification(String notificationTitle, String notificationBody, String dataTitle, String dataMessage) {
+    private void sendNotification(RemoteMessage remoteMessage, String notificationTitle, String notificationBody, String dataTitle, String dataMessage) {
 
         System.out.println("qweqwrwr");
-        Intent intent = new Intent(this, Notification.class);
-        intent.putExtra("title", dataTitle);
-        intent.putExtra("message", dataMessage);
+        Intent intent = new Intent(remoteMessage.getNotification().getClickAction());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

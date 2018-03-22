@@ -3,6 +3,7 @@ package com.manan.dev.ec2018app.Xunbao;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
+import com.manan.dev.ec2018app.LoginActivity;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.squareup.picasso.Callback;
@@ -55,9 +57,11 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class QuestionFragment extends Fragment implements XunbaoActivity.loadQuestionFragment, ConnectivityReciever.ConnectivityReceiverListener {
-    TextView question, contestEnd, refreshText, stage;
+    TextView question, contestEnd, refreshText, stage, loginText;
     ImageView xunbaoimg, refreshButton;
     LinearLayout submit;
     EditText ans;
@@ -89,6 +93,16 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         barImage.setVisibility(View.GONE);
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginText = (TextView) view.findViewById(R.id.tv_log_in);
+
+        loginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getActivity(), LoginActivity.class);
+                in.putExtra("parent", "xunbao");
+                startActivity(in);
+            }
+        });
 
         final String EMAIL = "email";
 
@@ -173,15 +187,15 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
                                 if(end.equals("1")) {
-                                    Toast.makeText(getActivity(), "Congrats! Right answer!", Toast.LENGTH_SHORT).show();
+                                    MDToast.makeText(getActivity(), "Congrats! Right answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
                                     reload();
                                 }
                                 else
-                                    Toast.makeText(getActivity(), "Wrong answer!", Toast.LENGTH_SHORT).show();
+                                    MDToast.makeText(getActivity(), "Wrong answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
 
                             } catch (JSONException e) {
 
-                                Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                                MDToast.makeText(getActivity(), "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                                 //progressBar.dismiss();
                                 e.printStackTrace();
                             }
@@ -192,14 +206,14 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         public void onErrorResponse(VolleyError volleyError) {
                             bar.setVisibility(View.GONE);
                             //progressBar.dismiss();
-                            Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+                            MDToast.makeText(getActivity(), "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             volleyError.printStackTrace();
                         }
                     });
             queue.add(answ);
         } catch (JSONException e) {
             bar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "Problem submitting answer!", Toast.LENGTH_SHORT).show();
+            MDToast.makeText(getActivity(), "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             //progressBar.dismiss();
         }
     }
@@ -212,6 +226,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         refreshButton.setVisibility(View.GONE);
         refreshText.setVisibility(View.GONE);
         loginButton.setVisibility(View.GONE);
+        loginText.setVisibility(View.GONE);
         queue.add(stat);
     }
 
@@ -235,9 +250,16 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 queue.add(jobReq);
                                 refreshText.setVisibility(View.GONE);
                                 loginButton.setVisibility(View.GONE);
+                                loginText.setVisibility(View.GONE);
                             } else {
                                 refreshText.setVisibility(View.VISIBLE);
-                                loginButton.setVisibility(View.VISIBLE);
+                                SharedPreferences prefs = getActivity().getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                                String phoneNumber = prefs.getString("Phone", null);
+                                if(phoneNumber == null){
+                                    loginText.setVisibility(View.VISIBLE);
+                                } else {
+                                    loginButton.setVisibility(View.VISIBLE);
+                                }
                             }
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();
@@ -252,7 +274,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 Log.d("hey", "" + error);
                 //progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "Problem loading!", Toast.LENGTH_SHORT).show();
+                MDToast.makeText(getActivity(), "Problem loading!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             }
         });
         queue.add(stat);
