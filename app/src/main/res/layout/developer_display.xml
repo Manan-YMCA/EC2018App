@@ -1,71 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
-
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/White"
-    android:layout_marginLeft="15dp"
-android:layout_marginTop="15dp"
-android:layout_marginRight="15dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_weight="0.4"
-        android:id="@+id/dev_photo"
-        android:scaleType="centerCrop"
-        android:src="@drawable/default_image_1"
-        android:layout_height="180dp"/>
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_weight="0.6"
-        android:paddingLeft="20dp"
-        android:gravity="center_vertical"
-        android:layout_height="150dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shubham Sharma"
-            android:textSize="22dp"
-            android:textColor="@color/Black"
-            android:id="@+id/dev_name"
-            android:fontFamily="@font/futura"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/White"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dev_photo"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_weight="0.4"
+            android:src="@drawable/default_image" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
             android:gravity="center_vertical"
-            android:layout_below="@id/dev_name"
-            android:orientation="horizontal">
+            android:paddingLeft="20dp">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight=".25"
-                android:layout_height="70dp"
-                android:id="@+id/dev_linkdin"
-                android:src="@drawable/linkedinlogo"/>
-            <ImageView
-                android:layout_height="70dp"
-                android:layout_width="0dp"
-                android:layout_weight=".25"
-
-                android:src="@drawable/crea"
-                android:id="@+id/dev_star"
-                android:tint="#ffd167"/>
             <TextView
-                android:layout_weight=".50"
-                android:layout_width="0dp"
+                android:id="@+id/dev_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dev_more"
                 android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Shubham Sharma"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_links"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dev_name"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:textAlignment="center">
+
+                <ImageView
+                    android:id="@+id/dev_linkdin"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/linkedinlogo" />
+
+                <ImageView
+                    android:id="@+id/dev_github"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/github_logo" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/dev_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_links"
+                android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Core App Developer"
                 android:textAlignment="center"
-                android:text="Core App Developer"/>
+                android:textSize="12sp" />
 
-
-        </LinearLayout>
-
-    </RelativeLayout>
-</LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

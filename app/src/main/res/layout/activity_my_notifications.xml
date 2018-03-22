@@ -41,12 +41,24 @@
             android:id="@+id/ec_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/logo_black" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_no_notify_un"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/futura"
+        android:text="Notifications Unavailable..."
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="14sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_notifications"

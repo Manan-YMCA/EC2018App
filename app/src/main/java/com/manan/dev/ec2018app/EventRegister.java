@@ -4,6 +4,7 @@ package com.manan.dev.ec2018app;
 import android.app.AlarmManager;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -68,6 +69,7 @@ public class EventRegister extends AppCompatActivity {
     private String qrCodeString;
     private DatabaseController databaseController;
     private ProgressBar barLoader;
+    ProgressDialog pd, pd1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +81,18 @@ public class EventRegister extends AppCompatActivity {
         eventType = getIntent().getStringExtra("eventType");
         userDetails = new UserDetails();
 
-        barLoader = (ProgressBar) findViewById(R.id.pb_register);
-        barLoader.setVisibility(View.VISIBLE);
+//        barLoader = (ProgressBar) findViewById(R.id.pb_register);
+//        barLoader.setVisibility(View.VISIBLE);
+
+        pd = new ProgressDialog(EventRegister.this);
+        pd.setMessage("Making your Ticket...");
+        pd.setCancelable(false);
+        pd.setCanceledOnTouchOutside(false);
+
+        pd1 = new ProgressDialog(EventRegister.this);
+        pd1.setMessage("Loading your details...");
+        pd1.setCancelable(true);
+        pd1.show();
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -160,29 +172,38 @@ public class EventRegister extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intentName = "";
-                intentClg = "";
-                intentMail = "";
-                intentPhone = "";
-                intentPhone += mainPhone.getText().toString();
-                intentMail += mainmail.getText().toString();
-                for (int i = 0; i < nameText.size(); i++) {
-                    intentName += nameText.get(i).getText().toString() + ",";
-                }
-                intentName = intentName.substring(0, intentName.length() - 1);
+                pd.show();
 
-                for (int i = 0; i < collegeText.size(); i++) {
-                    intentClg += collegeText.get(i).getText().toString() + ",";
-                }
-                intentClg = intentClg.substring(0, intentClg.length() - 1);
-                Log.d("RegisterEvent", "intentname" + intentName + "intentclg " + intentClg + "intentphone" +
-                        intentPhone + "intentmail" + intentMail);
+                Thread mThread = new Thread() {
+                    @Override
+                    public void run() {
+                        intentName = "";
+                        intentClg = "";
+                        intentMail = "";
+                        intentPhone = "";
+                        intentPhone += mainPhone.getText().toString();
+                        intentMail += mainmail.getText().toString();
+                        for (int i = 0; i < nameText.size(); i++) {
+                            intentName += nameText.get(i).getText().toString() + ",";
+                        }
+                        intentName = intentName.substring(0, intentName.length() - 1);
+
+                        for (int i = 0; i < collegeText.size(); i++) {
+                            intentClg += collegeText.get(i).getText().toString() + ",";
+                        }
+                        intentClg = intentClg.substring(0, intentClg.length() - 1);
+                        Log.d("RegisterEvent", "intentname" + intentName + "intentclg " + intentClg + "intentphone" +
+                                intentPhone + "intentmail" + intentMail);
 //                Toast.makeText(EventRegister.this, "intentname" + intentName + "intentclg " + intentClg
 //                        + "intentphone" + intentPhone +"intentmail" + intentMail, Toast.LENGTH_SHORT).show();
-                Boolean checker = validateCredentials();
-                if (checker) {
-                    registerEvent();
-                }
+                        Boolean checker = validateCredentials();
+                        if (checker) {
+                            registerEvent();
+                            pd.dismiss();
+                        }
+                    }
+                };
+                mThread.start();
 
             }
         });
@@ -260,7 +281,6 @@ public class EventRegister extends AppCompatActivity {
     }
 
     public void sendNotification() {
-
         Intent my_intent = new Intent(EventRegister.this, MyNotificationResponse.class);
         my_intent.putExtra("eventId", eventId);
         my_intent.putExtra("eventName", eventName);
@@ -332,7 +352,8 @@ public class EventRegister extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            barLoader.setVisibility(View.GONE);
+//                            barLoader.setVisibility(View.GONE);
+                            pd1.dismiss();
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
                             Log.e("TAG", "onResponse: " + obj.getString("name"));

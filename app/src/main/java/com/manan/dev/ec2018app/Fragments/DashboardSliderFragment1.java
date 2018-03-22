@@ -29,7 +29,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DashboardSliderFragment1 extends Fragment {
-                                                                                                                                  private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
     public ArrayList<WhatsNewModel> whatsnewarraylist;
     private ChildEventListener mChildEventListCurEvent;
@@ -148,15 +148,6 @@ public class DashboardSliderFragment1 extends Fragment {
                 WhatsNewModel mode = whatsnewarraylist.get(i);
                 contenttv.setText(mode.getContent());
                 contenttv.setTag(mode.getIntent());
-                if (contenttv.getTag().equals(0)) {
-                    explore.setText("Xunbao");
-                } else if (contenttv.getTag().equals(1)) {
-                    explore.setText("EC Times");
-
-                } else if (contenttv.getTag().equals(2)) {
-                    explore.setText("Maps");
-                }
-
                 //          timer.cancel();
                 //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
@@ -176,10 +167,20 @@ public class DashboardSliderFragment1 extends Fragment {
 //                            }
                             MDToast.makeText(getActivity(), "Pull Navigation Drawer", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
                         }
-
-
                     }
                 });//
+
+                if (contenttv.getTag().equals(0)) {
+                    explore.setText("Xunbao");
+                } else if (contenttv.getTag().equals(1)) {
+                    explore.setText("EC Times");
+
+                } else if (contenttv.getTag().equals(2)) {
+                    explore.setText("Maps");
+                } else {
+                    explore.setText("Explore");
+                }
+
 
                 // this function can change value of mInterval.
                 i++;

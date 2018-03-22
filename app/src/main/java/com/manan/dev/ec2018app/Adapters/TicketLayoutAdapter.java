@@ -1,9 +1,9 @@
 package com.manan.dev.ec2018app.Adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
-import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
 import com.manan.dev.ec2018app.Models.EventDetails;
 import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.R;
@@ -29,10 +29,10 @@ import java.util.Locale;
 public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapter.MyViewHolder> {
     private ArrayList<QRTicketModel> itemsList;
     private Context mContext;
-
+    ProgressDialog mProgress;
+    android.app.FragmentManager fm;
 
     public TicketLayoutAdapter(Context context, ArrayList<QRTicketModel> itemsList) {
-        Log.d("Tickets", "view builder");
         this.itemsList = itemsList;
         this.mContext = context;
     }
@@ -46,13 +46,12 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         final QRTicketModel singleItem = itemsList.get(position);
         EventDetails currEvent = new EventDetails();
         DatabaseController mDatabaseController = new DatabaseController(mContext);
 
         currEvent = mDatabaseController.retreiveEventsByID(singleItem.getEventID());
-
 
         Log.d("Tickets", singleItem.getQRcode());
         if(currEvent.getmFees() == 0){
@@ -65,8 +64,14 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
             holder.feeStatus.setTextColor(mContext.getResources().getColor(R.color.status_paid));
             holder.feeStatus.setText("PAID");
         }
+
+        mProgress = new ProgressDialog(mContext);
+        mProgress.setMessage("Showing your ticket.");
+        mProgress.setTitle("Loading...");
+        mProgress.setCanceledOnTouchOutside(false);
+
         TicketsGenerator generate = new TicketsGenerator();
-        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext,(int) mContext.getResources().getDimension(R.dimen.onefifty),(int) mContext.getResources().getDimension(R.dimen.onefifty), 80, 80);
+        Bitmap currTicket = generate.GenerateClick(singleItem.getQRcode(), mContext, (int) mContext.getResources().getDimension(R.dimen.onefifty), (int) mContext.getResources().getDimension(R.dimen.onefifty), 80, 80);
         holder.itemImage.setImageBitmap(currTicket);
         holder.eventName.setText(currEvent.getmName());
         holder.eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));
@@ -80,26 +85,32 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
         SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
         String formattedTime = sdf1.format(cal.getTime());
         holder.eventTime.setText(formattedTime);
-        Log.d("Tickets", "data setSuccessfully");
+        Log.d("Tickets", "Data setSuccessfully");
 
-        final EventDetails finalCurrEvent = currEvent;
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                android.app.FragmentManager fm = ((Activity) mContext).getFragmentManager();
-                Bundle bundle = new Bundle();
-                bundle.putString("qrcodestring", singleItem.getQRcode());
-                bundle.putString("eventid", finalCurrEvent.getmEventId());
-                bundle.putInt("activity", 0);
-                bundle.putInt("paymentStatus", singleItem.getPaymentStatus());
-                bundle.putInt("arrivalStatus", singleItem.getArrivalStatus());
-// set Fragmentclass Arguments
-                QRCodeActivity fragobj = new QRCodeActivity();
-                fragobj.setArguments(bundle);
-                fragobj.show(fm,"drff");
+        fm = ((Activity) mContext).getFragmentManager();
 
-            }
-        });
+//        final EventDetails finalCurrEvent = currEvent;
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                mProgress.show();
+//
+//                holder.pb.setVisibility(View.VISIBLE);
+//
+//                MDToast.makeText(mContext, "Loading Ticket...", Toast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("qrcodestring", singleItem.getQRcode());
+//                bundle.putString("eventid", finalCurrEvent.getmEventId());
+//                bundle.putInt("activity", 0);
+//                bundle.putInt("paymentStatus", singleItem.getPaymentStatus());
+//                bundle.putInt("arrivalStatus", singleItem.getArrivalStatus());
+//                // set Fragmentclass Arguments
+//
+//                QRCodeActivity fragobj = new QRCodeActivity();
+//                fragobj.setArguments(bundle);
+//                fragobj.show(fm, "TAG");
+//            }
+//        });
     }
 
     @Override
@@ -113,6 +124,7 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
         public ImageView itemImage;
         public TextView eventDate, eventTime, eventFee, eventName, feeStatus;
         public CardView cardView;
+        ProgressBar pb;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -123,8 +135,8 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
             eventTime = (TextView) itemView.findViewById(R.id.tv_event_time);
             eventFee = (TextView) itemView.findViewById(R.id.tv_event_fees);
             eventName = (TextView) itemView.findViewById(R.id.tv_event_name);
-            cardView=(CardView)itemView.findViewById(R.id.cv_qr_ticket);
-
+            cardView = (CardView) itemView.findViewById(R.id.cv_qr_ticket);
+            pb = itemView.findViewById(R.id.progress_bar_ticket);
         }
     }
 }

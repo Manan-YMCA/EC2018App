@@ -29,7 +29,6 @@ public class CreativeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,33 +45,48 @@ public class CreativeFragment extends Fragment {
         Boolean k = true;
         List<DeveloperModel> devlist = new ArrayList<>();
         DeveloperModel dev_obj1 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/sourabh_final.png?alt=media&token=cb8d55f1-7a2e-4256-8e11-821fd8c7ea11", "Sourabh", "https://www.google.co.in/", "Marketing", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a12.jpg", "Sourabh", "", "Marketing", "");
+
         DeveloperModel dev_obj2 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/anuj.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Anuj Raj Sharma", "https://www.google.co.in/", "Marketing", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a1.jpg", "Anuj Raj Sharma", "", "Marketing", "");
+
         DeveloperModel dev_obj3 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/sanjog.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Sanjog Garv", "https://www.google.co.in/", "Marketing", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a11.jpg", "Sanjog Garv", "", "Marketing", "");
+
         DeveloperModel dev_obj4 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/sushant.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Sushant Sharma", "https://www.google.co.in/", "Marketing", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a13.jpg", "Sushant Sharma", "", "Marketing", "");
+
         DeveloperModel dev_obj5 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/randeep.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Randeep", "https://www.google.co.in/", "Marketing", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a9.jpg", "Randeep", "", "Marketing", "");
+
         DeveloperModel dev_obj6 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/nishant.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Nishant", "https://www.google.co.in/", "Logistics", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a8.jpg", "Nishant", "", "Logistics", "");
+
         DeveloperModel dev_obj7 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/devd.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Davinderpreet Bedi", "https://www.google.co.in/", "Logistics", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a4.jpg", "Davinderpreet Bedi", "", "Logistics", "");
+
         DeveloperModel dev_obj8 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/kushal.png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Kushal Sharma", "https://www.google.co.in/", "Logistics", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a7.jpg", "Kushal Sharma", "", "Logistics", "");
+
         DeveloperModel dev_obj9 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/sushantg_png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Karan Handa", "https://www.google.co.in/", "Logistics", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a5.jpg", "Karan Handa", "", "Logistics", "");
+
         DeveloperModel dev_obj10 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/payal_png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Sushant Gawri", "https://www.google.co.in/", "Logistics", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a14.jpg", "Sushant Gawri", "", "Logistics", "");
+
         DeveloperModel dev_obj11 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/karan_png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Payal", "https://www.google.co.in/", "Hospitality", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a3.jpg", "Payal", "", "Hospitality", "");
+
         DeveloperModel dev_obj12 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/karan_png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Kshitiz Manocha", "https://www.google.co.in/", "Hospitality", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a2.jpg", "Kshitiz Manocha", "", "Hospitality", "");
 
         DeveloperModel dev_obj13 = new DeveloperModel
-                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/sahil_png?alt=media&token=cbdd7d6f-f9d2-43aa-82d9-5ee2295e741a", "Sahil Kasana", "https://www.google.co.in/", "Seurity", k, k, k, k);
+                ("http://www.elementsculmyca.com/images/team/a10.jpg", "Sahil Kasana", "", "Seurity", "");
 
+        DeveloperModel dev_obj14 = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a6.jpg", "Kartik Singla", "", "Designer", "");
+
+        devlist.add(dev_obj14);
         devlist.add(dev_obj2);
         devlist.add(dev_obj1);
         devlist.add(dev_obj3);

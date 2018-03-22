@@ -38,6 +38,7 @@ public class Tickets extends AppCompatActivity {
     private ImageView tickback;
     SwipeRefreshLayout s;
     private String phoneNumber;
+
     private Handler mIncomingHandler;
 
     @Override
@@ -45,12 +46,13 @@ public class Tickets extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets);
         SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-
         phoneNumber = preferences.getString("Phone", null);
+
         mProgress = new ProgressDialog(this);
-        mProgress.setMessage("I am working");
-        mProgress.setTitle("yes i am");
+        mProgress.setMessage("Showing your ticket.");
+        mProgress.setTitle("Loading...");
         mProgress.setCanceledOnTouchOutside(false);
+
         userTicketsView = (RecyclerView) findViewById(R.id.gl_user_tickets);
         userTicketsView.setLayoutManager(new LinearLayoutManager(Tickets.this));
         userTickets = new ArrayList<>();
@@ -60,14 +62,13 @@ public class Tickets extends AppCompatActivity {
         Log.d("Tickets", phoneNumber);
         Log.d("Tickets", Integer.toString(userTickets.size()));
         userTicketsView.setAdapter(mAdapter);
-        tickback=findViewById(R.id.tic_back_button);
+        tickback = findViewById(R.id.tic_back_button);
 
         s=findViewById(R.id.swipe_refresh_layout);
 
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 reload(phoneNumber);
                 s.setRefreshing(false);
             }
@@ -83,19 +84,15 @@ public class Tickets extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
     }
 
     private void reload(final String phone) {
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Log.e("TAG", "reload url : " + url );
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("My success", "" + response);
                 mProgress.dismiss();
                 try {
                     JSONObject obj1 = new JSONObject(response);
@@ -140,6 +137,7 @@ public class Tickets extends AppCompatActivity {
 
         userTickets = databaseController.retrieveAllTickets();
         if(userTickets.size() > 0) {
+            mProgress.dismiss();
             Log.d("yatin", String.valueOf(userTickets.get(0).getQRcode()));
             mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
             userTicketsView.setAdapter(mAdapter);
@@ -159,7 +157,6 @@ public class Tickets extends AppCompatActivity {
         public void handleMessage(Message message) {
             if (yourActivityWeakReference != null) {
                 Tickets yourActivity = yourActivityWeakReference.get();
-
                 switch (message.what) {
                     case 0:
                         updateDatabase();

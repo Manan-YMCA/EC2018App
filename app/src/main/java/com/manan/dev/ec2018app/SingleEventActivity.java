@@ -2,6 +2,7 @@ package com.manan.dev.ec2018app;
 
 import android.Manifest;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -24,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.manan.dev.ec2018app.DatabaseHandler.DatabaseController;
 import com.manan.dev.ec2018app.Fragments.QRCodeActivity;
@@ -74,6 +77,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private QRCodeActivity fragobj;
     String startTime, endTime, formattedDate;
     private static boolean deep = false;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,15 +112,33 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             //  Log.v("nodeeplink", appLinkData + "");
             eventId = getIntent().getStringExtra("eventId");
         }
-        Log.e("TAG", "onCreate: " + eventId );
+        Log.e("TAG", "onCreate: " + eventId);
         container_se_view = findViewById(R.id.contaner_se);
 
         getEventDetails = new DatabaseController(SingleEventActivity.this);
         eventDetails = new EventDetails();
 
         registerButton = (Button) findViewById(R.id.btn_register);
-        barViewTicket = (ProgressBar) findViewById(R.id.pb_view_ticket);
-        barViewTicket.setVisibility(View.GONE);
+
+//        barViewTicket = (ProgressBar) findViewById(R.id.pb_view_ticket);
+//        barViewTicket.setIndeterminate(false);
+//        barViewTicket.setVisibility(View.GONE);
+//        barViewTicket.setProgress(0);
+
+//        pd = new ProgressDialog(SingleEventActivity.this);
+//        pd.setMessage("Loading Tickets...");
+//        pd.setCancelable(false);
+//        pd.setCanceledOnTouchOutside(false);
+
+        pd = new ProgressDialog(SingleEventActivity.this);
+        pd.setTitle("Loading Tickets");
+        final Runnable progressRunnable = new Runnable() {
+            @Override
+            public void run() {
+                pd.cancel();
+            }
+        };
+
         fragobj = new QRCodeActivity();
 
         barEventImage = (ProgressBar) findViewById(R.id.pb_event_image);
@@ -177,7 +199,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             backbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(deep){
+                    if (deep) {
                         startActivity(new Intent(SingleEventActivity.this, UserLoginActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -296,15 +318,18 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 public void onClick(View v) {
                     MDToast.makeText(SingleEventActivity.this, "Search on Maps!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
                     Intent intentMap = new Intent(SingleEventActivity.this, MapsActivity.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentMap);
                 }
             });
             registerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    barViewTicket.setVisibility(View.VISIBLE);
                     if (registerButton.getText().toString().equals("View Ticket")) {
+//                        barViewTicket.setVisibility(View.VISIBLE);
+                        pd.show();
+                        Handler pdCanceller = new Handler();
+                        pdCanceller.postDelayed(progressRunnable, 3000);
                         FragmentManager fm = getFragmentManager();
                         Bundle bundle = new Bundle();
                         bundle.putString("qrcodestring", TicketModel.getQRcode());
@@ -312,9 +337,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                         bundle.putInt("activity", 0);
                         bundle.putInt("paymentStatus", TicketModel.getPaymentStatus());
                         bundle.putInt("arrivalStatus", TicketModel.getArrivalStatus());
-
                         fragobj.setArguments(bundle);
-                        fragobj.show(fm, "hiiiii");
+                        if (fragobj != null) {
+                            fragobj.show(fm, "hiiiii");
+                            pd.dismiss();
+                        } else {
+                            MDToast.makeText(SingleEventActivity.this, "Unable to load ticket.", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                            pd.dismiss();
+                        }
                     } else {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
                                 .putExtra("eventName", eventDetails.getmName())
@@ -331,7 +361,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     String baseUrl = "http://elementsculmyca.com/event/";
                     String parsedUrl = baseUrl + "#" + eventDetails.getmName().toString().replaceAll(" ", "%20");
 
-                    Log.e("TAG", "onClick: " + parsedUrl );
+                    Log.e("TAG", "onClick: " + parsedUrl);
                     String message = "Elements Culmyca 2018:" + eventDetails.getmName().toString() + " View the event clicking the link: " + parsedUrl;
                     shareEventMessage(message);
 
@@ -377,7 +407,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_share_event:
-                Log.e("TAG", "onOptionsItemSelected: " + item.getTitle() );
+                Log.e("TAG", "onOptionsItemSelected: " + item.getTitle());
                 break;
             default:
                 Log.e("TAG", "onOptionsItemSelected: " + "Invalid Selection!");
@@ -433,7 +463,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         } else {
             message = "Get a hotspot Buddy";
             Snackbar.make(container_se_view, message, Snackbar.LENGTH_SHORT).show();
-
         }
     }
 
@@ -487,7 +516,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
     @Override
     public void onBackPressed() {
-        if(deep){
+        if (deep) {
             startActivity(new Intent(SingleEventActivity.this, UserLoginActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

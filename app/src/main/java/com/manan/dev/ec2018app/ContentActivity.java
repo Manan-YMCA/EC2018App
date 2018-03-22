@@ -370,7 +370,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                     .show();
                         }
                     }
-                }, 130);
+                }, 10);
                 break;
             case R.id.nav_xunbao:
                 handler.postDelayed(new Runnable() {

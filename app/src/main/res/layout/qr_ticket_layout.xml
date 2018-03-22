@@ -4,115 +4,126 @@
     android:id="@+id/cv_qr_ticket"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="4dp"
-    android:layout_marginTop="8dp"
-    app:cardBackgroundColor="@color/White"
     android:layout_centerHorizontal="true"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="8dp"
     android:padding="4dp"
-    android:layout_gravity="center_horizontal">
+    app:cardBackgroundColor="@color/White"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
 
-    <RelativeLayout
-        android:id="@+id/ticket_layout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ticket_qr_iv"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:adjustViewBounds="true"
+        <ProgressBar
+            android:id="@+id/progress_bar_ticket"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
-            android:src="@drawable/qr_logo" />
-
-        <View
-            android:layout_width="10dp"
-            android:layout_height="20dp"
-            android:layout_below="@id/ticket_qr_iv"
-            android:background="@drawable/shape_circle" />
-
-        <View
-            android:layout_width="10dp"
-            android:layout_height="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/ticket_qr_iv"
-            android:background="@drawable/shape_circle"
-            android:rotation="180" />
-
-        <View
-            android:id="@+id/v_dotted_line"
-            android:layout_width="wrap_content"
-            android:layout_height="3dp"
-            android:layout_below="@id/ticket_qr_iv"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/dotted_line" />
-
-        <TextView
-            android:id="@+id/tv_event_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/v_dotted_line"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/futura"
-            android:maxLines="1"
-            android:text="CODE GOLF"
-            android:textAllCaps="true"
-            android:textColor="@color/Black"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_event_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_event_name"
-            android:layout_centerHorizontal="true"
-            android:text="March 22, 2018"
-            android:textColor="#FF949393"/>
-
-        <TextView
-            android:id="@+id/tv_event_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_event_date"
-            android:layout_centerHorizontal="true"
-            android:text="2 PM"
-            android:textColor="#FF949393" />
-
-        <TextView
-            android:id="@+id/tv_text_fees_dummy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_event_time"
-            android:layout_centerHorizontal="true"
-            android:text="FEE DETAILS"
-            android:textSize="10dp"
-            android:textColor="#FF949393" />
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/ticket_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_text_fees_dummy"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_event_fees"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="monospace"
-                android:text="Rs 50"
-                android:textAlignment="center"
-                android:textSize="18dp"
-                android:textColor="#FF949393" />
+            <ImageView
+                android:id="@+id/ticket_qr_iv"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+
+                android:src="@drawable/qr_logo" />
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#aaa" />
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/ticket_qr_iv"
+                android:background="@drawable/shape_circle" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/ticket_qr_iv"
+                android:background="@drawable/shape_circle"
+                android:rotation="180" />
+
+            <View
+                android:id="@+id/v_dotted_line"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_below="@id/ticket_qr_iv"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/dotted_line" />
+
+            <TextView
+                android:id="@+id/tv_event_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/v_dotted_line"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/futura"
+                android:maxLines="1"
+                android:text="CODE GOLF"
+                android:textAllCaps="true"
+                android:textColor="@color/Black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_event_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_event_name"
+                android:layout_centerHorizontal="true"
+                android:text="March 22, 2018"
+                android:textColor="#FF949393" />
+
+            <TextView
+                android:id="@+id/tv_event_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_event_date"
+                android:layout_centerHorizontal="true"
+                android:text="2 PM"
+                android:textColor="#FF949393" />
+
+            <TextView
+                android:id="@+id/tv_text_fees_dummy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_event_time"
+                android:layout_centerHorizontal="true"
+                android:text="FEE DETAILS"
+                android:textColor="#FF949393"
+                android:textSize="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_text_fees_dummy"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_event_fees"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="Rs 50"
+                    android:textAlignment="center"
+                    android:textColor="#FF949393"
+                    android:textSize="18dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#aaa" />
 
             <TextView
                 android:id="@+id/iv_event_fees_status"
@@ -123,6 +134,7 @@
                 android:textAlignment="center" />
 
 
-        </LinearLayout>
-    </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
 </android.support.v7.widget.CardView>

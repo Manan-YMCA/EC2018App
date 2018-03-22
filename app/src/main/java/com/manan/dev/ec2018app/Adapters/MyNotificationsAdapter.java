@@ -1,6 +1,7 @@
 package com.manan.dev.ec2018app.Adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class MyNotificationsAdapter extends RecyclerView.Adapter<MyNotifications
         holder.notificationDescriptionTextView.setText(nm.getText());
 
         holder.logoImageView.setTag(1);
-        holder.logoImageView.setOnClickListener(new View.OnClickListener() {
+        holder.notifyCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                if(!flag[0]){
@@ -89,10 +90,12 @@ public class MyNotificationsAdapter extends RecyclerView.Adapter<MyNotifications
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView notificationHeadingTextView, notificationDescriptionTextView, notificationTimeTextView, notificationDateTextView;
         ImageView logoImageView;
+        CardView notifyCardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             logoImageView = itemView.findViewById(R.id.iv_ec_logo);
+            notifyCardView = itemView.findViewById(R.id.cv_event_card);
             notificationHeadingTextView = itemView.findViewById(R.id.tv_notification_heading);
             notificationDescriptionTextView = itemView.findViewById(R.id.tv_notification_description);
             notificationDateTextView = itemView.findViewById(R.id.tv_notification_date);

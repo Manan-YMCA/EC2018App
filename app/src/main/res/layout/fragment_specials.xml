@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context="com.manan.dev.ec2018app.Fragments.DevelopesFragment_1">
+    tools:context="com.manan.dev.ec2018app.Fragments.SpecialsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -11,12 +10,11 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/dev_recycler_view_f1"
+            android:id="@+id/dev_recycler_view_f_spl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="50dp"
             android:padding="5dp"
             android:scrollbars="none" />
     </RelativeLayout>
-
 </FrameLayout>

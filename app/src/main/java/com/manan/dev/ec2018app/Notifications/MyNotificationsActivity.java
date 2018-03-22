@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +38,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
     ImageView backButton;
     ProgressDialog pd;
     ProgressDialog progress;
+    TextView noNotifyTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +54,19 @@ public class MyNotificationsActivity extends AppCompatActivity {
 
         notifyRecyclerView = findViewById(R.id.rv_notifications);
         allNotificationsArrayList = new ArrayList<>();
+        noNotifyTextView = findViewById(R.id.tv_no_notify_un);
 
         long lTime = 1521523868202L;
         allNotificationsArrayList.add(new NotificationModel("Attention!", "Welcome to Culmyca 18.", lTime));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MyNotificationsActivity.this);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(MyNotificationsActivity.this);\
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManagerWrapper(MyNotificationsActivity.this, LinearLayoutManager.VERTICAL, false);
+//        notifyRecyclerView.setLayoutManager(layoutManager);
 
-        notifyRecyclerView.setLayoutManager(layoutManager);
+        notifyRecyclerView.setLayoutManager(new WrapContentLinearLayoutManager(MyNotificationsActivity.this, LinearLayoutManager.VERTICAL, false));
         notifyRecyclerView.setHasFixedSize(true);
 
+        notifyRecyclerView.getRecycledViewPool().clear();
         myNotificationsAdapter = new MyNotificationsAdapter(this, allNotificationsArrayList);
         notifyRecyclerView.setAdapter(myNotificationsAdapter);
 
@@ -72,7 +79,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
             }
         });
 
-        if(!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             progress.dismiss();
             MDToast.makeText(MyNotificationsActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
         }
@@ -151,6 +158,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
             progress.dismiss();
         }
         sort(allNotificationsArrayList);
+        notifyRecyclerView.getRecycledViewPool().clear();
         myNotificationsAdapter.notifyDataSetChanged();
     }
 
@@ -159,6 +167,42 @@ public class MyNotificationsActivity extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public class LinearLayoutManagerWrapper extends LinearLayoutManager {
+
+        public LinearLayoutManagerWrapper(Context context) {
+            super(context);
+        }
+
+        public LinearLayoutManagerWrapper(Context context, int orientation, boolean reverseLayout) {
+            super(context, orientation, reverseLayout);
+        }
+
+        public LinearLayoutManagerWrapper(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+            super(context, attrs, defStyleAttr, defStyleRes);
+        }
+
+        @Override
+        public boolean supportsPredictiveItemAnimations() {
+            return false;
+        }
+    }
+
+    public class WrapContentLinearLayoutManager extends LinearLayoutManager {
+        public WrapContentLinearLayoutManager(Context context, int horizontal, boolean b) {
+            super(context);
+        }
+
+        //... constructor
+        @Override
+        public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+            try {
+                super.onLayoutChildren(recycler, state);
+            } catch (IndexOutOfBoundsException e) {
+                Log.e("probe", "meet a IOOBE in RecyclerView");
+            }
+        }
     }
 
 }

@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         tools:context="com.manan.dev.ec2018app.SingleEventActivity">
 
-        <ProgressBar
-            android:id="@+id/pb_view_ticket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:indeterminate="true" />
+        <!--<ProgressBar-->
+            <!--android:id="@+id/pb_view_ticket"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:indeterminate="true" />-->
 
         <ImageView
             android:id="@+id/tv_back_button"

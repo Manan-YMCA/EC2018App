@@ -30,6 +30,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manan.dev.ec2018app.R;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.Arrays;
 
@@ -80,17 +81,17 @@ public class FragmentFbLogin extends DialogFragment {
                 fbLoginButton activity = (fbLoginButton) getActivity();
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
-                Toast.makeText(getActivity(), "Facebook Login Done!", Toast.LENGTH_SHORT).show();
+                MDToast.makeText(getActivity(), "Facebook login done", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(getActivity(), "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
+                MDToast.makeText(getActivity(), "Facebook login cancelled", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Log.e("TAG", "onError: " + exception.getMessage() );
+                Log.e("TAG", "onError: " + exception.getMessage());
             }
         });
 
@@ -111,11 +112,9 @@ public class FragmentFbLogin extends DialogFragment {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("loginStatus", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(getActivity(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            MDToast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             dismiss();
                         }
-
                     }
                 });
     }
