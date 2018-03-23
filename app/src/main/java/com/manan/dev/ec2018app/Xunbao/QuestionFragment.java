@@ -94,6 +94,8 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         bar.setVisibility(View.VISIBLE);
         barImage.setVisibility(View.GONE);
 
+
+
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
         loginText = (TextView) view.findViewById(R.id.tv_log_in);
 
@@ -146,6 +148,15 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         contestEnd = view.findViewById(R.id.contest_ends);
         refreshButton = view.findViewById(R.id.refresh_button);
         refreshText = view.findViewById(R.id.refresh_text);
+
+
+        queLayout.setVisibility(View.GONE);
+        contestEnd.setVisibility(View.GONE);
+        refreshButton.setVisibility(View.GONE);
+        refreshText.setVisibility(View.GONE);
+        loginButton.setVisibility(View.GONE);
+        loginText.setVisibility(View.GONE);
+
 
         queue = Volley.newRequestQueue(mContext);
 
@@ -229,10 +240,11 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         refreshText.setVisibility(View.GONE);
         loginButton.setVisibility(View.GONE);
         loginText.setVisibility(View.GONE);
-        queue.add(stat);
+        checkStatus();
     }
 
     public void checkStatus() {
+        Log.d("hey","chut");
         stat = new StringRequest(Request.Method.GET, statusURL,
                 new Response.Listener<String>() {
                     @Override
@@ -242,11 +254,11 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         refreshButton.setVisibility(View.GONE);
                         xstatus = Integer.parseInt(response);
                         Log.d("hey", "" + xstatus);
-                        if (xstatus == 2) {
+                        if (xstatus == 1) {
                             //progressBar.dismiss();
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START!");
                             contestEnd.setVisibility(View.VISIBLE);
-                        } else if (xstatus == 1) {
+                        } else if (xstatus == 2) {
                             if (AccessToken.getCurrentAccessToken() != null) {
                                 bar.setVisibility(View.VISIBLE);
                                 queue.add(jobReq);
@@ -362,7 +374,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         Log.d("xunbao", currFbid);
 
         if(isNetworkAvailable()) {
-            checkStatus();
+            reload();
             if (!currFbid.equals("notLoggedIn"))
                 getQuestion();
         } else {
