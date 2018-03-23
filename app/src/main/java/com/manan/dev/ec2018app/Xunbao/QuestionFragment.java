@@ -62,7 +62,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class QuestionFragment extends Fragment implements XunbaoActivity.loadQuestionFragment, ConnectivityReciever.ConnectivityReceiverListener {
-    TextView question, contestEnd, refreshText, stage, loginText;
+    TextView question, contestEnd, refreshText, level, loginText;
     ImageView xunbaoimg, refreshButton;
     LinearLayout submit;
     EditText ans;
@@ -138,7 +138,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         ansURL = mContext.getResources().getString(R.string.xunbao_check_answer_api);
         statusURL = mContext.getResources().getString(R.string.xunbao_status);
         queLayout = view.findViewById(R.id.question_layout);
-        stage = view.findViewById(R.id.tv_question_number);
+        level = view.findViewById(R.id.tv_question_number);
         question = view.findViewById(R.id.tv_question_text);
         xunbaoimg = view.findViewById(R.id.iv_xunbao_question_image);
         ans = view.findViewById(R.id.et_xunbao_answer);
@@ -310,7 +310,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
                                 contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 7th APRIL, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
-                                //progressBar.dismiss();
+                                refreshButton.setVisibility(View.GONE);
                             } catch (Exception e) {
                                 bar.setVisibility(View.GONE);
                                 barImage.setVisibility(View.VISIBLE);
@@ -319,8 +319,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 String que = resp.getString("desc");
                                 Integer level = resp.getInt("pk");
                                 question.setText(que);
-                                stage.setText("STAGE - " + Integer.toString(level));
-
+                                QuestionFragment.this.level.setText("Level " + Integer.toString(level));
                                 Picasso.with(mContext).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg, new Callback() {
                                     @Override
                                     public void onSuccess() {
@@ -332,7 +331,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                         barImage.setVisibility(View.GONE);
                                     }
                                 });
-                                //progressBar.dismiss();
                             }
                         } catch (JSONException e) {
                             bar.setVisibility(View.GONE);

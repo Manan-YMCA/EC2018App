@@ -5,10 +5,22 @@
     android:fillViewport="true"
     android:fitsSystemWindows="true">
 
+    <TextView
+        android:id="@+id/tv_question_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="26dp"
+        android:textColor="@color/Black"
+        android:text="Question"
+        android:fontFamily="@font/futura"
+        android:layout_marginTop="90dp"/>
+
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_below="@+id/tv_question_heading"
         android:layout_height="match_parent"
-        android:layout_marginTop="130dp">
+        android:layout_marginTop="10dp">
 
         <RelativeLayout
             android:id="@+id/question_layout"
@@ -24,12 +36,12 @@
             <ImageView
                 android:id="@+id/iv_xunbao_question_image"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="200dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="centerCrop"
-             android:background="@drawable/default_image_1" />
+                android:background="@drawable/default_image_1" />
 
                 <ProgressBar
                     android:id="@+id/pb_image"
@@ -60,69 +72,56 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"
-                    android:background="@drawable/vector_map" />
-
                 <TextView
                     android:id="@+id/tv_question_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_margin="10dp"
                     android:fontFamily="@font/futura"
                     android:padding="4dp"
                     android:text="It can put even the most powerful on their back essential non negotiable a nests?"
                     android:textAlignment="center"
-                    android:textColor="@color/White"
+                    android:textColor="@color/Black"
                     android:textSize="18dp" />
 
             </LinearLayout>
 
             <EditText
                 android:id="@+id/et_xunbao_answer"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/ll_question_text"
-                android:layout_marginRight="30dp"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/White"
+                android:textColor="@color/Black"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/xunbao_question_background"
                 android:inputType="text"
                 android:padding="8dp"
-                android:layout_marginEnd="30dp"
-                android:layout_alignParentEnd="true" />
+                android:layout_centerHorizontal="true"/>
 
             <LinearLayout
                 android:id="@+id/ll_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/et_xunbao_answer"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="4dp"
+                android:layout_centerHorizontal="true"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/futura"
-                    android:text="Hit Me in!"
-                    android:textColor="@color/White"
+                    android:text="Hit me in!"
+                    android:textColor="@color/Black"
                     android:textSize="22dp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
                     android:src="@drawable/vector_key" />
 
             </LinearLayout>
@@ -198,7 +197,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:indeterminate="true" />
-
 
     </RelativeLayout>
 </RelativeLayout>
