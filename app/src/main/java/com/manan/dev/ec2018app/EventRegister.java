@@ -97,7 +97,6 @@ public class EventRegister extends AppCompatActivity {
         pd1 = new ProgressDialog(EventRegister.this);
         pd1.setMessage("Loading your details...");
         pd1.setCancelable(true);
-        pd1.show();
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -132,6 +131,7 @@ public class EventRegister extends AppCompatActivity {
             Log.e("TAG", "onCreate: " + "Shared Pref no data!!!!!!!!!!!!");
         }
         if(isNetworkAvailable()) {
+            pd1.show();
             getDetails(phoneNumber);
         }
         Add.setOnClickListener(new View.OnClickListener() {
@@ -179,11 +179,6 @@ public class EventRegister extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.show();
-
-                Thread mThread = new Thread() {
-                    @Override
-                    public void run() {
                         intentName = "";
                         intentClg = "";
                         intentMail = "";
@@ -205,14 +200,12 @@ public class EventRegister extends AppCompatActivity {
 //                        + "intentphone" + intentPhone +"intentmail" + intentMail, Toast.LENGTH_SHORT).show();
                         Boolean checker = validateCredentials();
                         if (checker) {
+                            pd.show();
                             registerEvent();
-                            pd.dismiss();
+
                         }
                     }
-                };
-                mThread.start();
 
-            }
         });
 
 
@@ -235,10 +228,16 @@ public class EventRegister extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
 
-                    Log.e("TAG", "onResponse: " + obj.getString("qrcode"));
+                    Log.e("TAG", "onResponse: " + response);
 
                     qrCodeString = (obj.getString("qrcode"));
 
+                    SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                    String phoneNumber = prefs.getString("Phone", null);
+                    if(phoneNumber == null) {
+                        MDToast.makeText(EventRegister.this, "To view your Ticket Login with your registered Mobile Number", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show();
+                    }
+                    pd.dismiss();
                     sendNotification();
                     FragmentManager fm = getFragmentManager();
                     Bundle bundle = new Bundle();
@@ -251,7 +250,6 @@ public class EventRegister extends AppCompatActivity {
                     fragobj.setCancelable(true);
                     fragobj.setArguments(bundle);
                     fragobj.show(fm, "drff");
-                    SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
                     final String phone = prefs.getString("Phone", null);
                     if (phone == null) {
                         Log.e("TAG", "onResponse: " + "Shared Pref no data!");
@@ -261,6 +259,7 @@ public class EventRegister extends AppCompatActivity {
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
                     // If an error occurs, this prints the error to the log
+                    pd.dismiss();
                     e.printStackTrace();
                     Log.e("TAG", "onResponse: " + e.getMessage());
                 }
@@ -268,6 +267,7 @@ public class EventRegister extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
                 Log.e("TAG", "onErrorResponse: my errrrrrrrrrrrror" + error);
                 Log.i("My error", "" + error);
             }

@@ -277,6 +277,7 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
         }
         if (input3.getText().toString().equals("")){
             input3.setError("Enter a College Name");
+            return false;
         }
         return true;
     }
