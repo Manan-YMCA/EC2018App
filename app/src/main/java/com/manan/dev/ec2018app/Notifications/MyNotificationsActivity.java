@@ -70,6 +70,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
         notifyRecyclerView.setAdapter(myNotificationsAdapter);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Notification");
+        mDatabaseReference.keepSynced(true);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

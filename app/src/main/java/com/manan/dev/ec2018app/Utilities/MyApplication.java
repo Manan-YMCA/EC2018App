@@ -2,25 +2,36 @@ package com.manan.dev.ec2018app.Utilities;
 
 /**
  * Created by subham on 17/03/18.
-**/
- import android.app.Application;
+ **/
 
- public class MyApplication extends Application {
+import android.app.Application;
 
- private static MyApplication mInstance;
+import com.google.firebase.database.FirebaseDatabase;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
- @Override
- public void onCreate() {
- super.onCreate();
+public class MyApplication extends Application {
 
- mInstance = this;
- }
+    private static MyApplication mInstance;
 
- public static synchronized MyApplication getInstance() {
- return mInstance;
- }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mInstance = this;
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//        Picasso.Builder builder = new Picasso.Builder(this);
+//        builder.downloader(new OkHttp3Downloader(this,Integer.MAX_VALUE));
+//        Picasso built = builder.build();
+//        built.setIndicatorsEnabled(true);
+//        built.setLoggingEnabled(true);
+//        Picasso.setSingletonInstance(built);
+    }
 
- public void setConnectivityListener(ConnectivityReciever.ConnectivityReceiverListener listener) {
- ConnectivityReciever.connectivityReceiverListener = listener;
- }
- }
+    public static synchronized MyApplication getInstance() {
+        return mInstance;
+    }
+
+    public void setConnectivityListener(ConnectivityReciever.ConnectivityReceiverListener listener) {
+        ConnectivityReciever.connectivityReceiverListener = listener;
+    }
+}

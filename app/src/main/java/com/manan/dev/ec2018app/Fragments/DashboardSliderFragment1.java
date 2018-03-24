@@ -64,6 +64,7 @@ public class DashboardSliderFragment1 extends Fragment {
         contenttv = rootView.findViewById(R.id.content_whatnew);
         explore = rootView.findViewById(R.id.buuton_explore);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("whatsnew");
+        mDatabaseReference.keepSynced(true);
         int t1 = whatsnewarraylist.size();
         Log.e("value", String.valueOf(t1));
 

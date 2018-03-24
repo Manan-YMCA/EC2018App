@@ -75,9 +75,9 @@ public class SpecialsFragment extends Fragment {
 
         devlist.add(dev_obj1);
         devlist.add(dev_obj6);
+        devlist.add(dev_obj2);
         devlist.add(dev_obj3);
         devlist.add(dev_obj4);
-        devlist.add(dev_obj2);
         devlist.add(dev_obj5);
 
         Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()));

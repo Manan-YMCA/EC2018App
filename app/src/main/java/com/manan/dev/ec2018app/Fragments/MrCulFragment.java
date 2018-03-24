@@ -59,6 +59,7 @@ public class MrCulFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("brixx");
+        mDatabaseReference.keepSynced(true);
         title_view = rootView.findViewById(R.id.inf_event_title);
         date_view = rootView.findViewById(R.id.inf_date);
         content_view = rootView.findViewById(R.id.inf_content);
