@@ -60,7 +60,7 @@
             <item
                 android:id="@+id/nav_dev"
                 android:icon="@drawable/vector_developers"
-                android:title="Developers" />
+                android:title="Credits" />
         </menu>
     </item>
 
