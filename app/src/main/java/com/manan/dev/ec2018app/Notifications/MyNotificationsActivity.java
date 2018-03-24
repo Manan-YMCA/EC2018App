@@ -48,7 +48,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
         progress = new ProgressDialog(MyNotificationsActivity.this);
         progress.setTitle("Loading...");
         progress.setCanceledOnTouchOutside(false);
-        progress.setCancelable(false);
+//        progress.setCancelable(false);
         progress.show();
 
         notifyRecyclerView = findViewById(R.id.rv_notifications);

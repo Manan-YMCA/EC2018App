@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     private CTAdapter mAdapter;
     SwipeRefreshLayout s;
     ImageView backButton;
+    TextView noPostsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
         backButton = findViewById(R.id.cul_back_button);
         recyclerView = findViewById(R.id.ctc_recycler_view);
+        noPostsTextView = findViewById(R.id.tv_no_posts);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +65,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Loading!");
-        progressBar.setCancelable(false);
+//        progressBar.setCancelable(false);
         progressBar.setCanceledOnTouchOutside(false);
         progressBar.show();
 
@@ -73,8 +76,10 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
             @Override
             public void onRefresh() {
                 if (isNetworkAvailable()) {
+                    noPostsTextView.setVisibility(View.GONE);
                     reload();
                 } else {
+                    noPostsTextView.setVisibility(View.VISIBLE);
                     progressBar.dismiss();
                     s.setRefreshing(false);
                 }
@@ -82,8 +87,10 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
         });
 
         if (isNetworkAvailable()) {
+            noPostsTextView.setVisibility(View.GONE);
             reload();
         } else {
+            noPostsTextView.setVisibility(View.VISIBLE);
             MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
             progressBar.dismiss();
             s.setRefreshing(false);
@@ -93,12 +100,14 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     @Override
     public void onBackPressed() {
         if (allposts.size() > 0) {
+            noPostsTextView.setVisibility(View.GONE);
             if (!recyclerView.canScrollVertically(-1)) {
                 super.onBackPressed();
             }
             recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(CulmycaTimesActivity.this));
             recyclerView.smoothScrollToPosition(0);
         } else {
+            noPostsTextView.setVisibility(View.GONE);
             super.onBackPressed();
         }
     }
@@ -127,9 +136,8 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
                         Log.e("TAG", "onDataChange: postiddddddddddddddddddd" + post.getPostid());
 
                         allposts.add(post);
-                        if (allposts.size() > 0) {
-                            progressBar.dismiss();
-                        }
+
+                        Check();
                     }
                 }
                 mLayoutManager = new LinearLayoutManager(CulmycaTimesActivity.this);
@@ -139,7 +147,8 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
                 mAdapter = new CTAdapter(getApplicationContext(), allposts);
                 recyclerView.setAdapter(mAdapter);
-                progressBar.dismiss();
+
+                Check();
 
                 s.setRefreshing(false);
             }
@@ -166,11 +175,24 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
     private void showNetError(boolean isConnected) {
         if (isConnected) {
+            Check();
             reload();
         } else {
+            Check();
             progressBar.dismiss();
             MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
             s.setRefreshing(false);
+        }
+    }
+
+    void Check(){
+        if(allposts.size() == 0){
+            noPostsTextView.setVisibility(View.VISIBLE);
+            progressBar.dismiss();
+        }
+        if (allposts.size() > 0) {
+            noPostsTextView.setVisibility(View.GONE);
+            progressBar.dismiss();
         }
     }
 

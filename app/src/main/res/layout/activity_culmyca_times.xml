@@ -9,46 +9,62 @@
     <RelativeLayout
         android:id="@+id/action_bar_cul_times"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:background="@color/White">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/logo_black" />
 
         <ImageView
             android:id="@+id/cul_back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:src="@drawable/vector_arrow"
             android:tint="#717070" />
 
         <TextView
+            android:id="@+id/tv_notification_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/futura"
             android:text="Culmyca Times"
-            android:textSize="24dp" />
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="22sp" />
 
+        <ImageView
+            android:id="@+id/ec_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo_black"
+            android:tint="#717070" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_no_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Posts Unavailable..."
+        android:visibility="gone" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/action_bar_cul_times"
-        android:background="#d7d7d7">
-
+        android:layout_below="@id/action_bar_cul_times">
+        <!--android:background="#d7d7d7"-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ctc_recycler_view"
             android:layout_width="match_parent"

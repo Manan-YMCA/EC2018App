@@ -12,6 +12,7 @@
         android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp">
 
         <ImageView
@@ -21,7 +22,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/vector_arrow" />
+            android:src="@drawable/vector_arrow"
+            android:tint="#717070" />
 
         <TextView
             android:id="@+id/tv_notification_heading"
@@ -45,12 +47,12 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/logo_black" />
+            android:src="@drawable/logo_black"
+            android:tint="#717070" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_no_notify_un"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -58,7 +60,8 @@
         android:text="Notifications Unavailable..."
         android:textAlignment="center"
         android:textColor="#000"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_notifications"

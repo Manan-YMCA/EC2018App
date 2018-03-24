@@ -13,7 +13,6 @@ public class AboutActivity extends AppCompatActivity {
 
     private ViewPager abtviewPager;
     private AboutAdapter abtViewPagerAdapter;
-
     private ImageView aboutBackButton,aboutChangeLeft,aboutChangeRight;
 
     @Override
@@ -26,8 +25,6 @@ public class AboutActivity extends AppCompatActivity {
         abtViewPagerAdapter = new AboutAdapter(getSupportFragmentManager());
         abtviewPager.setAdapter(abtViewPagerAdapter);
         abtviewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-
 
         aboutChangeRight=findViewById(R.id.about_change_button_right);
         aboutChangeLeft=findViewById(R.id.about_change_button_left);

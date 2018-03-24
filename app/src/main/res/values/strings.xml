@@ -22,8 +22,17 @@
     <string name="hassrathdata">"Is there a Kapil Sharma in you? Or is it Ellen Degeneres? Whoever it is. Get ready to put it upfront at HassRath-The Laughter Chariot. The stage is open for any kind of comedy. Language barrier is a thing of past, Comedy is what we ask for."</string>
     <string name="title_activity_brixx">BrixxActivity</string>
     <string name="aboutymca">The YMCA University of Science and Technology, Faridabad erstwhile YMCA Institute Of Engineering, was established as a joint venture of the National Council of YMCAs of India, Govt of Haryana, and the Central Agencies for Development Aid, Bonn, Germany.YMCAUST has been awarded \'AAA+\' by the Career360 Magazine in the year 2013, 2014 and 2015. YMCA University has also been accrediated with \'A\' grade by NAAC. Our University has been mandated to affiliate 50+ B.Tech and B.Ed institutions.</string>
-    <string name="xunbao_about">Xunbao is a mind boggling online cryptic quest designed to put your cognitive abilities to test. It is a multi-level contest where you will be given cues which can be hidden anywhere on the internet, just about anywhere your wits may let you. Let the rolling of brain race with every passion of minute and zero in on the answers using the given cues to get your stakes and adrenaline higher.
-    \n \n To all the smarty pants out there who think they can win by cheating, don\'t even try. Because every breath you take, every move you make, every bond you break, every step you take, we\'ll be watching you. Adoption of wrong means(asking or telling answers to other teams, handing over the clue to another team) shall lead to immediate disqualification.
- \n \nThe participant who reaches the last questions first wins the event. </string>
+    <string name="xunbao_about">
+        To all Lara Crofts and Indiana Jones out there, there is a new treasure in town. Where? It is up to you to find. Hidden in the depths of the Internet, do not lose trail while following or you might get lost forever.
+\n\n Xunbao is a multi-level contest where you will be given cues to solve.
+\n\n With every step challenging your wit, it is a race against time and fellows. So get on your Black Pearls, in other words your Mobile and surf the waves on the internet to claim your fame.
+\n\n This year the stakes could not get any higher. Conquerors of the event will get prizes like Mi Band 2 and more exciting goodies.
+\n\n To all the smarty pants out there who think they can win by cheating, don\'t even try because every move you make we\'ll be watching you! Adoption of wrong means (asking or telling answers to other players, handing over the clue to another players) shall lead to immediate disqualification!
+\n\n GOOD LUCK EXPLORING!
+\n\n <br> Rules :-> </br>
+\n 1. All the answers are to be submitted in lowercase only.
+\n 2. Date format is DD/MM/YYY. E.g.- 12/05/2018.
+\n 3. 24-hour format is HH/MM/SS. E.g.- 19/45/15.
+    </string>
     <string name="aboutEc">Elements Culmyca, the annual inter college cultech festival of YMCAUST has grown on to become one of the most popular college festivals of NCR. With 1000+ participating students, 40+ participating colleges and an expected footfall of over 10000, ELEMENTS CULMYCA 18 guarantees to be a sure hit The upcoming \'Kalakaars\' painting the entire college in the colours of their vivacity, the gaming freaks, the coding addicts. They are all a part of the same institution, busy doing what they do best.</string>
 </resources>

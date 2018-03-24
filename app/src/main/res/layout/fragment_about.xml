@@ -29,6 +29,7 @@
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:paddingTop="20dp"
+            android:textColor="@color/Black"
             android:text="@string/xunbao_about"
             android:textAlignment="center"
             android:textSize="14dp" />

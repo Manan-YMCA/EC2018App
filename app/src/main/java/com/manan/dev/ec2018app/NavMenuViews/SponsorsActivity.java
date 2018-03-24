@@ -45,7 +45,7 @@ public class SponsorsActivity extends AppCompatActivity {
 
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Loading Sponsors...");
-        progressBar.setCancelable(false);
+//        progressBar.setCancelable(false);
         progressBar.setCanceledOnTouchOutside(false);
         progressBar.show();
 

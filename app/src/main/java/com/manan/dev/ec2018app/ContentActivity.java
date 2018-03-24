@@ -386,7 +386,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(ContentActivity.this, XunbaoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        startActivity(new Intent(ContentActivity.this, XunbaoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     }
                 }, 130);
                 break;
@@ -404,24 +404,24 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(ContentActivity.this, AboutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
+                        startActivity(new Intent(ContentActivity.this, AboutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 }, 130);
                 break;
 
             case R.id.nav_logout:
-                SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.apply();
-
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                //Yes button clicked
+                                SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.apply();
+
                                 FirebaseAuth.getInstance().signOut();
+
                                 if (AccessToken.getCurrentAccessToken() != null) {
                                     new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
                                             .Callback() {
@@ -432,6 +432,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                         }
                                     }).executeAsync();
                                 }
+
                                 startActivity(new Intent(getApplicationContext(), UserLoginActivity.class)
                                         .putExtra("logout", true)
                                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -656,8 +657,8 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void openNavBar(boolean open) {
-        if(open){
-            if(!drawer.isDrawerOpen(GravityCompat.START)){
+        if (open) {
+            if (!drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.openDrawer(GravityCompat.START);
             }
         }

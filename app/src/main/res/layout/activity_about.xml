@@ -9,40 +9,46 @@
     <RelativeLayout
         android:id="@+id/action_bar_abt"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:background="@color/White">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/logo_black" />
 
         <ImageView
             android:id="@+id/about_back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/vector_arrow"
             android:tint="#717070" />
 
         <TextView
+            android:id="@+id/tv_notification_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/futura"
             android:text="About"
-            android:textSize="24dp" />
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="22sp" />
 
+        <ImageView
+            android:id="@+id/ec_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo_black"
+            android:tint="#717070" />
     </RelativeLayout>
-
-
 
     <android.support.v4.view.ViewPager
         android:id="@+id/about_viewpager"
@@ -55,9 +61,9 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentLeft="true"
+        android:layout_below="@id/action_bar_abt"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/action_bar_abt"
         android:src="@drawable/vector_arrow"
         android:tint="#717070" />
 
@@ -65,12 +71,11 @@
         android:id="@+id/about_change_button_right"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:rotation="180"
-        android:layout_below="@id/action_bar_abt"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/action_bar_abt"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-
+        android:rotation="180"
         android:src="@drawable/vector_arrow"
         android:tint="#717070" />
 
