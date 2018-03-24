@@ -53,6 +53,10 @@ public class MrCulFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_mr_cul, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("brixx");
         title_view = rootView.findViewById(R.id.inf_event_title);

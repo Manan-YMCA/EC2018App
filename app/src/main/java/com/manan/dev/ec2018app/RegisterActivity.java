@@ -58,11 +58,6 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
 
         setContentView(R.layout.activity_register);
 
@@ -126,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             otpChecker.setArguments(bundle);
             otpChecker.show(fm, "otpCheckerFragment");
         }
-        mProgress.hide();
+        mProgress.dismiss();
     }
 
     private void registerUser(final UserDetails userDetails) {
@@ -138,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             public void onResponse(String response) {
                 MDToast.makeText(RegisterActivity.this, "Registered!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
                 Log.i("My success", "" + response);
-                mProgress.hide();
+                mProgress.dismiss();
                 SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
                 editor.putString("Phone", userDetails.getmPhone());
                 editor.apply();
@@ -156,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             public void onErrorResponse(VolleyError error) {
                 Log.e("TAG", "onErrorResponse error : " + error);
                 Log.i("My error", "" + error);
-                mProgress.hide();
+                mProgress.dismiss();
             }
         }) {
             @Override
@@ -223,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
             mProgress.show();
             registerUser(userDetails);
         } else {
-            mProgress.hide();
+            mProgress.dismiss();
         }
     }
 
@@ -262,11 +257,11 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
 
     private void startSession() {
         if (parent.equals("xunbao") || parent.equals("ct")) {
-            mProgress.hide();
+            mProgress.dismiss();
             finish();
         } else {
             startActivity(new Intent(RegisterActivity.this, ContentActivity.class));
-            mProgress.hide();
+            mProgress.dismiss();
             finish();
         }
     }

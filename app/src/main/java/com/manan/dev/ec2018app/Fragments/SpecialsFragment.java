@@ -43,6 +43,10 @@ public class SpecialsFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_specials, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
 
         devrecyclerView = (RecyclerView) rootView.findViewById(R.id.dev_recycler_view_f_spl);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

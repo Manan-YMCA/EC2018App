@@ -39,6 +39,10 @@ public class CreativeFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_creative, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
 
         devrecyclerView = (RecyclerView) rootView.findViewById(R.id.dev_recycler_view_f3);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

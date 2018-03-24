@@ -85,6 +85,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         mAuth = FirebaseAuth.getInstance();
 
         bar = (ProgressBar) view.findViewById(R.id.pb_question);

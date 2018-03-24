@@ -35,6 +35,10 @@ public class DashboardSliderFragment3 extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment3, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(),
                 R.raw.sae);
         final CategoryItemModel singleItem = new CategoryItemModel();

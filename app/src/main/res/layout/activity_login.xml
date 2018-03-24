@@ -16,6 +16,12 @@
         android:indeterminate="true"
         android:visibility="gone" />
 
+    <RelativeLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/rl_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="40dp"
@@ -41,107 +47,119 @@
         android:text="Mobile Login"
         android:textColor="@color/White"
         android:textSize="28dp" />
-
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/futura"
-        android:gravity="center"
-        android:text="Enter your phone number to continue."
-        android:textColor="@color/White"
-        android:textSize="16dp" />
-
+    </RelativeLayout>
     <LinearLayout
-        android:id="@+id/ll_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv1"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_action_bar"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_phone"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_local_phone" />
-
-        <EditText
-            android:id="@+id/mobileNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/edit_text_background"
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
             android:fontFamily="@font/futura"
-            android:hint="Phone Number"
-            android:inputType="number"
-            android:padding="16dp"
-            android:shadowColor="@color/baseDark"
-            android:singleLine="true"
+            android:gravity="center"
+            android:text="Enter your phone number to continue."
             android:textColor="@color/White"
-            android:textColorHint="#ddd"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_phone"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_local_phone" />
+
+            <EditText
+                android:id="@+id/mobileNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/futura"
+                android:hint="Phone Number"
+                android:inputType="number"
+                android:padding="16dp"
+                android:shadowColor="@color/baseDark"
+                android:singleLine="true"
+                android:textColor="@color/White"
+                android:textColorHint="#ddd"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/td"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
+            android:fontFamily="@font/futura"
+            android:gravity="center"
+            android:text="Your number will be verified with \n a One-Time-Password."
+            android:textColor="@color/White"
+            android:textSize="16dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/login_mobileNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/edit_text_background"
+                android:backgroundTint="@color/baseDark"
+                android:fontFamily="@font/futura"
+                android:padding="16dp"
+                android:text="Submit"
+                android:textColor="@color/White"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_register_option"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/futura"
+            android:text="Haven't completed the details? Click Here!"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="@color/White"
             android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/need_help"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:fontFamily="@font/futura"
+            android:gravity="center_vertical"
+            android:text="Need Help?"
+            android:paddingLeft="8dp"
+            android:textColor="@color/White" />
+
     </LinearLayout>
-
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:id="@+id/td"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_1"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/futura"
-        android:text="Your number will be verified with \n a One-Time-Password."
-        android:textColor="@color/White"
-        android:textSize="16dp" />
-
-    <Button
-        android:id="@+id/login_mobileNum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/td"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/edit_text_background"
-        android:backgroundTint="@color/baseDark"
-        android:fontFamily="@font/futura"
-        android:padding="16dp"
-        android:text="Submit"
-        android:textColor="@color/White"
-        android:textSize="16dp" />
-
-    <TextView
-        android:id="@+id/tv_register_option"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_mobileNum"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/futura"
-        android:text="Haven't completed the details? Click Here!"
-        android:textAlignment="center"
-        android:textColor="@color/White"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/need_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:fontFamily="@font/futura"
-        android:padding="20dp"
-        android:text="Need Help?"
-        android:textColor="@color/White" />
 </RelativeLayout>

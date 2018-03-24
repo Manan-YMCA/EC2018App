@@ -52,6 +52,11 @@ public class DashboardSliderFragment1 extends Fragment {
         handler = new Handler();
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment1, container, false);
+
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         mAuth = FirebaseAuth.getInstance();
         WhatsNewModel w;
         whatsnewarraylist = new ArrayList<>();

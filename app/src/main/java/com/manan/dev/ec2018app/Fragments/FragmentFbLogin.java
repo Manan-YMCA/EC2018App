@@ -62,6 +62,11 @@ public class FragmentFbLogin extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fblogin_dialog_box, container, false);
+
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         skipLogin = (TextView) rootView.findViewById(R.id.tv_skip_fb_login);
         loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
         FacebookSdk.sdkInitialize(mContext);
@@ -73,7 +78,7 @@ public class FragmentFbLogin extends DialogFragment {
         skipLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fbLoginButton activity = (fbLoginButton) mContext;
+                fbLoginButton activity = (fbLoginButton) getActivity();
                 activity.fbStatus(false, null);
                 dismiss();
             }

@@ -1,5 +1,6 @@
 package com.manan.dev.ec2018app.Fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -68,6 +69,10 @@ public class FragmentOtpChecker extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.otp_checker_fragment_layout, container, false);
         phoneNum = getArguments().getString("phone");
+
+        if(mContext == null){
+            mContext = getActivity();
+        }
 
         bar = (ProgressBar) rootView.findViewById(R.id.pb_otp);
         et1 = (EditText) rootView.findViewById(R.id.et_otp_dig_1);
@@ -141,7 +146,7 @@ public class FragmentOtpChecker extends DialogFragment {
             }
         };
         queue.add(smsReq);
-        if (ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             bar.setVisibility(View.GONE);
             Log.d("TAG", "sendSMS: type otp");
         } else {

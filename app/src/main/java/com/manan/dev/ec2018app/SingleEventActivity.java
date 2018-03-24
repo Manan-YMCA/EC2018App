@@ -9,12 +9,14 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -51,6 +53,7 @@ import static com.manan.dev.ec2018app.Utilities.ConnectivityReciever.isConnected
 public class SingleEventActivity extends AppCompatActivity implements ConnectivityReciever.ConnectivityReceiverListener {
 
     Button registerButton;
+    private static final int MY_PERMISSIONS_REQUEST = 1024;
     TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, feesTextView,
             typeOfEventTextView, firstPrizeTextView, secondPrizeTextView, thirdPrizeTextView, descriptionTextView,
             rulesTextView, coordsHeading, eventCategoryTextView;
@@ -77,6 +80,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     private QRCodeActivity fragobj;
     String startTime, endTime, formattedDate;
     private static boolean deep = false;
+    private boolean permission = false;
     ProgressDialog pd;
 
     @Override
@@ -250,11 +254,15 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                         @Override
                         public void onClick(View v) {
                             phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + coord.getmCoordPhone()));
-                            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED && !permission) {
                                 final String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
                                 //Asking request Permissions
                                 ActivityCompat.requestPermissions(SingleEventActivity.this, PERMISSIONS_CALL, 9);
+                                permission = true;
+                            } else if(ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED && permission){
+                                MDToast.makeText(SingleEventActivity.this, "Please grant Permissions first", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             } else {
+                                permission = true;
                                 startActivity(phoneIntent);
                             }
 
@@ -299,17 +307,16 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 public void onClick(View v) {
                     MDToast.makeText(SingleEventActivity.this, "Set a reminder!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
 
-                    Intent intent = new Intent(Intent.ACTION_INSERT)
-                            .setData(CalendarContract.EventsEntity.CONTENT_URI)
-                            .setType("vnd.android.cursor.item/event")
-                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventDetails.getmStartTime())
-                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, eventDetails.getmEndTime())
-                            .putExtra(CalendarContract.EventsEntity.TITLE, eventDetails.getmName())
-                            .putExtra(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
-                            .putExtra(CalendarContract.Reminders.MINUTES, 5);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    try {
+                        if(!permissionGranted(android.Manifest.permission.READ_CALENDAR, android.Manifest.permission.WRITE_CALENDAR)) {
+                            askForPermission(android.Manifest.permission.READ_CALENDAR, android.Manifest.permission.WRITE_CALENDAR);
+                        } else {
+                            addToCalendar();
+                        }
+                    } catch (Exception ex){
+                        Log.e("TAG", "onClick: " + ex.getMessage());
+                    }
 
-                    startActivity(intent);
                 }
             });
 
@@ -372,6 +379,39 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         }
     }
 
+    private boolean permissionGranted(String permission, String permission2) {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+                ||
+                (
+                        ContextCompat.checkSelfPermission(SingleEventActivity.this, permission)
+                                == PackageManager.PERMISSION_GRANTED &&
+                                ContextCompat.checkSelfPermission(SingleEventActivity.this, permission2)
+                                        == PackageManager.PERMISSION_GRANTED
+                )
+                ;
+    }
+
+
+    private void askForPermission(String permission, String permission2) {
+        ActivityCompat.requestPermissions(SingleEventActivity.this,
+                new String[]{permission, permission2},
+                MY_PERMISSIONS_REQUEST);
+    }
+
+    private void addToCalendar() {
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.EventsEntity.CONTENT_URI)
+                .setType("vnd.android.cursor.item/event")
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventDetails.getmStartTime())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, eventDetails.getmEndTime())
+                .putExtra(CalendarContract.EventsEntity.TITLE, eventDetails.getmName())
+                .putExtra(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
+                .putExtra(CalendarContract.Reminders.MINUTES, 5);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity(intent);
+    }
+
     private void shareEventMessage(String msg) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
@@ -386,14 +426,29 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         switch (requestCode) {
             case 9:
                 permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (permissionGranted) {
+                    permission = true;
+                    startActivity(phoneIntent);
+                } else {
+                    permission = false;
+                    MDToast.makeText(SingleEventActivity.this, "You didn't assign permission.", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        ) {
+                            addToCalendar();
+                } else {
+                    MDToast.makeText(SingleEventActivity.this, permissions[0] + " or " + permissions[1] + " denied", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                }
                 break;
         }
         Log.v("permission", "permission" + permissionGranted);
-        if (permissionGranted) {
-            startActivity(phoneIntent);
-        } else {
-            MDToast.makeText(SingleEventActivity.this, "You didn't assign permission.", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
-        }
+
     }
 
 
@@ -525,4 +580,5 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             super.onBackPressed();
         }
     }
+
 }

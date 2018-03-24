@@ -30,6 +30,10 @@ public class DashboardSliderFragment2 extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment2, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         SharedPreferences preferences = this.mContext.getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 

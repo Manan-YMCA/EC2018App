@@ -126,8 +126,6 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
     @Override
     public void onBackPressed() {
         startActivity(new Intent(XunbaoActivity.this, ContentActivity.class).setFlags((Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)));
-
-
     }
 
     @Override

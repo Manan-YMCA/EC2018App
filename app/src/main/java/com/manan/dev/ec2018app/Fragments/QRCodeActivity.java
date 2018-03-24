@@ -45,6 +45,11 @@ public class QRCodeActivity extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.qrcode_dialog_box, container, false);
+
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         String qrcodestring = getArguments().getString("qrcodestring");
         eventId = getArguments().getString("eventid");
         activity = getArguments().getInt("activity");
@@ -58,7 +63,7 @@ public class QRCodeActivity extends DialogFragment {
         fees = (TextView) rootView.findViewById(R.id.eventfees);
         status = (TextView) rootView.findViewById(R.id.iv_event_fees_status);
         back = (ImageView) rootView.findViewById(R.id.iv_cross);
-        getEventDetails = new DatabaseController(mContext);
+        getEventDetails = new DatabaseController(getActivity());
         eventDetails = getEventDetails.retreiveEventsByID(eventId);
         eventName.setText(eventDetails.getmName());
 

@@ -51,6 +51,10 @@ public class StarNightFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_star_night, container, false);
 
+        if(mContext == null){
+            mContext = getActivity();
+        }
+
         mAuth = FirebaseAuth.getInstance();
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("brixx");
