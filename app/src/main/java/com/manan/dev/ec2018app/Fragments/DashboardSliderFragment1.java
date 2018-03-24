@@ -23,7 +23,6 @@ import com.manan.dev.ec2018app.NavMenuViews.CulmycaTimesActivity;
 import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
-import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -158,7 +157,7 @@ public class DashboardSliderFragment1 extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (contenttv.getTag().equals(0)) {
-                         //   startActivity(new Intent(mContext, XunbaoActivity.class));
+                            //   startActivity(new Intent(mContext, XunbaoActivity.class));
                             startActivity(new Intent(getActivity(), XunbaoActivity.class).setFlags((Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)));
                             activity.openNavBar(false);
                         } else if (contenttv.getTag().equals(1)) {
@@ -172,7 +171,6 @@ public class DashboardSliderFragment1 extends Fragment {
 //                                drawer.openDrawer(GravityCompat.START);
 //                            }
                             activity.openNavBar(true);
-                            MDToast.makeText(mContext, "Pull Navigation Drawer", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
                         }
                     }
                 });//

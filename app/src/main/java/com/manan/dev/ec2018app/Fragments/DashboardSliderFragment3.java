@@ -37,11 +37,11 @@ public class DashboardSliderFragment3 extends Fragment {
 
         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(),
                 R.raw.sae);
-      final CategoryItemModel singleItem = new CategoryItemModel();
-      singleItem.setClubName("Brixx");
-      singleItem.setDisplayName("Non-Formal");
-      singleItem.setImage(icon);
- Button expre=rootView.findViewById(R.id.buuton_explore_brixx);
+        final CategoryItemModel singleItem = new CategoryItemModel();
+        singleItem.setClubName("Brixx");
+        singleItem.setDisplayName("Non-Formal");
+        singleItem.setImage(icon);
+        Button expre = rootView.findViewById(R.id.buuton_explore_brixx);
         circleLinearLayout = rootView.findViewById(R.id.dsb_tap);
 
         expre.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ public class DashboardSliderFragment3 extends Fragment {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-           //     Toast.makeText(mContext,singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
+                //     Toast.makeText(mContext,singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(mContext, BrixxActivity.class));
 //                        .putExtra("clubname", singleItem.getClubName())
 //                        .putExtra("clubPhoto", byteArray)

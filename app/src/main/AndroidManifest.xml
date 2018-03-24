@@ -59,7 +59,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -166,9 +165,9 @@
             android:theme="@style/CodeFont" />
         <activity
             android:name=".Notifications.MyNotificationsActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.dev.manan.adminappec2018_TARGET_NOTIFICATION"/>
+                <action android:name="com.dev.manan.adminappec2018_TARGET_NOTIFICATION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

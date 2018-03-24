@@ -59,7 +59,7 @@ public class DevelopesFragment_1 extends Fragment {
                 ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAuBAAAAJGFlOTMyMTVjLTBlZTQtNGNlZi05YjE1LTdlYzc1NTZkNzgzYw.jpg", "Shubham Sharma", "https://linkedin.com/in/shubham-sharma-ba185614b", "Core App Developer", "https://github.com/shubham0008");
 
         DeveloperModel dev_obj3 = new DeveloperModel
-                ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAArdAAAAJGYxNjJmNjlkLWEwYTAtNDI5Zi1iYzE4LWMyNjQyYWVhM2ZjOQ.jpg", "Shubham Kachroo", "https://www.linkedin.com/in/alchemister", "Core App Developer", "https://github.com/the-Alchemister");
+                ("https://media.licdn.com/dms/image/C5603AQFkgj7DX14oSA/profile-displayphoto-shrink_200_200/0?e=1527058800&v=alpha&t=dy4AvqHiWMO8Ls6x2CloM8T0cPTSmLwLkSdlGC3jjFM", "Shubham Kachroo", "https://www.linkedin.com/in/alchemister", "Core App Developer", "https://github.com/the-Alchemister");
 
         DeveloperModel dev_obj4 = new DeveloperModel
                 ("https://avatars2.githubusercontent.com/u/23135250", "Kashish Gupta", "https://linkedin.com/in/kashish-gupta-19562b144", "Core App Developer", "https://github.com/gkashish");

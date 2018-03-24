@@ -7,26 +7,24 @@
     android:background="#000"
     android:orientation="vertical"
     tools:context="com.manan.dev.ec2018app.UserLoginActivity">
+
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
         android:src="@drawable/logo_opacity" />
+
     <LinearLayout
-       android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-
-
-
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
 
         <LinearLayout
@@ -34,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal" />
 
 
         <LinearLayout
@@ -50,11 +48,11 @@
                 android:id="@+id/ReadyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
 
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/futura"
                 android:padding="5dp"
-                android:layout_marginBottom="20dp"
                 android:text="Explore the Extravagenza of Culture enriched \n with Technology"
                 android:textAlignment="center"
                 android:textColor="@color/White"
@@ -81,11 +79,9 @@
                 android:id="@+id/guest_user_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
-                android:padding="4dp"
-                android:background="@drawable/ripple_effect"
-                >
+                android:padding="4dp">
 
                 <TextView
                     android:id="@+id/ContinueText"

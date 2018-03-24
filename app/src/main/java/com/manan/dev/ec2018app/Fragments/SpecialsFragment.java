@@ -58,7 +58,7 @@ public class SpecialsFragment extends Fragment {
                 ("http://www.elementsculmyca.com/images/team/a6.jpg", "Kartik Singla", "", "Design Support", "");
 
         DeveloperModel dev_obj3 = new DeveloperModel
-                ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAArdAAAAJGYxNjJmNjlkLWEwYTAtNDI5Zi1iYzE4LWMyNjQyYWVhM2ZjOQ.jpg", "Shubham Kachroo", "", "Content Writer", "");
+                ("https://media.licdn.com/dms/image/C5603AQFkgj7DX14oSA/profile-displayphoto-shrink_200_200/0?e=1527058800&v=alpha&t=dy4AvqHiWMO8Ls6x2CloM8T0cPTSmLwLkSdlGC3jjFM", "Shubham Kachroo", "", "Content Writer", "");
 
         DeveloperModel dev_obj4 = new DeveloperModel
                 ("https://scontent.fdel13-1.fna.fbcdn.net/v/t1.0-9/16387986_936688949807174_5989047283443205597_n.jpg?oh=1af0268bc94fcda344767084b27831e7&oe=5B38CD58", "Bhumika Mudgal", "", "Content Writer", "");

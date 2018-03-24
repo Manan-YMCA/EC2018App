@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,8 +55,8 @@ public class MyNotificationsActivity extends AppCompatActivity {
         allNotificationsArrayList = new ArrayList<>();
         noNotifyTextView = findViewById(R.id.tv_no_notify_un);
 
-        long lTime = 1521523868202L;
-        allNotificationsArrayList.add(new NotificationModel("Attention!", "Welcome to Culmyca 18.", lTime));
+//        long lTime = 1521523868202L;
+//        allNotificationsArrayList.add(new NotificationModel("Attention!", "Welcome to Culmyca 18.", lTime));
 
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(MyNotificationsActivity.this);\
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManagerWrapper(MyNotificationsActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -79,8 +78,15 @@ public class MyNotificationsActivity extends AppCompatActivity {
             }
         });
 
+        if (allNotificationsArrayList.size() == 0) {
+            noNotifyTextView.setVisibility(View.VISIBLE);
+        }
+
         if (!isNetworkAvailable()) {
             progress.dismiss();
+            if (allNotificationsArrayList.size() == 0) {
+                noNotifyTextView.setVisibility(View.VISIBLE);
+            }
             MDToast.makeText(MyNotificationsActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
         }
     }
@@ -110,7 +116,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Log.e(TAG, "onChildAdded:" + dataSnapshot.getKey());
                     NotificationModel nm = dataSnapshot.getValue(NotificationModel.class);
                     updateList(nm);
                     progress.dismiss();
@@ -118,7 +123,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    Log.e(TAG, "onChildChanged:" + dataSnapshot.getKey());
                     try {
                         NotificationModel nm = dataSnapshot.getValue(NotificationModel.class);
                         updateList(nm);
@@ -142,7 +146,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Log.e("The read failed: ", databaseError.getDetails());
                     progress.dismiss();
                 }
             };
@@ -151,11 +154,15 @@ public class MyNotificationsActivity extends AppCompatActivity {
     }
 
     private void updateList(NotificationModel nm) {
-        Log.e(TAG, "updateList: " + allNotificationsArrayList.size());
         allNotificationsArrayList.add(nm);
+
+        if (allNotificationsArrayList.size() == 0) {
+            noNotifyTextView.setVisibility(View.VISIBLE);
+        }
 
         if (allNotificationsArrayList.size() > 0) {
             progress.dismiss();
+            noNotifyTextView.setVisibility(View.GONE);
         }
         sort(allNotificationsArrayList);
         notifyRecyclerView.getRecycledViewPool().clear();
@@ -167,26 +174,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    public class LinearLayoutManagerWrapper extends LinearLayoutManager {
-
-        public LinearLayoutManagerWrapper(Context context) {
-            super(context);
-        }
-
-        public LinearLayoutManagerWrapper(Context context, int orientation, boolean reverseLayout) {
-            super(context, orientation, reverseLayout);
-        }
-
-        public LinearLayoutManagerWrapper(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-            super(context, attrs, defStyleAttr, defStyleRes);
-        }
-
-        @Override
-        public boolean supportsPredictiveItemAnimations() {
-            return false;
-        }
     }
 
     public class WrapContentLinearLayoutManager extends LinearLayoutManager {

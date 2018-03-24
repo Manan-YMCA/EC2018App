@@ -54,13 +54,13 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
         currEvent = mDatabaseController.retreiveEventsByID(singleItem.getEventID());
 
         Log.d("Tickets", singleItem.getQRcode());
-        if(currEvent.getmFees() == 0){
+        if (currEvent.getmFees() == 0) {
             holder.feeStatus.setTextColor(mContext.getResources().getColor(R.color.status_free));
             holder.feeStatus.setText("FREE");
-        } else if(singleItem.getPaymentStatus() == 0){
+        } else if (singleItem.getPaymentStatus() == 0) {
             holder.feeStatus.setTextColor(mContext.getResources().getColor(R.color.primaryFocused));
             holder.feeStatus.setText("PENDING");
-        } else if(singleItem.getPaymentStatus() == 1){
+        } else if (singleItem.getPaymentStatus() == 1) {
             holder.feeStatus.setTextColor(mContext.getResources().getColor(R.color.status_paid));
             holder.feeStatus.setText("PAID");
         }

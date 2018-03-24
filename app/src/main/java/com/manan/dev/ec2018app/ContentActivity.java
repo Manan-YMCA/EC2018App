@@ -100,11 +100,11 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.navbar_content);
         cotainer_root_frame = (RelativeLayout) findViewById(R.id.content_frame);
 
-        try {
-            Log.d("auth", FirebaseAuth.getInstance().getCurrentUser().getUid());
-        } catch (Exception e) {
-            Log.d("auth", e.getMessage());
-        }
+//        try {
+//            Log.d("auth", FirebaseAuth.getInstance().getCurrentUser().getUid());
+//        } catch (Exception e) {
+//            Log.d("auth", e.getMessage());
+//        }
 
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,22 +112,29 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 ContentActivity.this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        mProgress = new ProgressDialog(this);
+
+        mProgress = new ProgressDialog(ContentActivity.this);
         mProgress.setMessage("I am working");
         mProgress.setTitle("yes i am");
         mProgress.setCanceledOnTouchOutside(false);
+
         nav_view = (NavigationView) findViewById(R.id.nav_view);
         pdfTextView = (TextView) findViewById(R.id.tv_pdf);
         nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
+
         userTickets = new ArrayList<QRTicketModel>();
+
         databaseController = new DatabaseController(ContentActivity.this);
         mIncomingHandler = new IncomingHandler(ContentActivity.this);
+
         categoriesHeadingTextView = findViewById(R.id.text_viewcategories);
         viewPager = (ViewPager) findViewById(R.id.slliderview_pager);
+
         myViewPagerAdapter = new DashboardSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
         ImageView img = findViewById(R.id.drawerTogglebtn);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +144,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 }
             }
         });
+
         pdfTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -252,7 +260,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
-
 
         dotsLayout.removeAllViews();
         for (int i = 0; i < dots.length; i++) {
@@ -636,7 +643,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             View view = snack.getView();
             view.setBackgroundColor(Color.GRAY);
             TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-            tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.Black));
+            tv.setTextColor(ContextCompat.getColor(ContentActivity.this, R.color.colorWhite));
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

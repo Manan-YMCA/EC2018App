@@ -6,21 +6,16 @@
     android:background="#000"
     android:fitsSystemWindows="true">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <android.support.v4.view.ViewPager
             android:id="@+id/slliderview_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6"
-
-            />
-
+            android:layout_weight="0.6" />
 
         <LinearLayout
             android:id="@+id/layoutDots"
@@ -36,7 +31,6 @@
             android:layout_weight="0.4"
             android:orientation="vertical">
 
-
             <TextView
                 android:id="@+id/text_viewcategories"
                 android:layout_width="wrap_content"
@@ -49,26 +43,27 @@
                 android:textColor="@color/White"
                 android:textSize="32dp" />
 
-
             <View
                 android:id="@+id/boo"
                 android:layout_width="200dp"
                 android:layout_height="2dp"
                 android:background="@color/baseLight" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.85">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/category_recycler_view"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:foregroundGravity="center_vertical"
-                android:scrollbars="none" />
+                android:layout_height="0dp"
+                android:layout_weight="0.85">
 
-</LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/category_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:foregroundGravity="center_vertical"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
             <View
                 android:id="@+id/categories_underline_view"
                 android:layout_width="200dp"
@@ -77,33 +72,31 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/baseLight" />
 
-                    <TextView
-                        android:id="@+id/tv_pdf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.15"
-                        android:layout_gravity="right"
-                        android:fontFamily="@font/futura"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/ripple_effect"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="2dp"
+            <TextView
+                android:id="@+id/tv_pdf"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="right"
+                android:layout_weight="0.15"
+                android:fontFamily="@font/futura"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="1dp"
+                android:text="Want to see day-wise schedule? Tap here!"
+                android:textColor="@color/White"
+                android:textSize="14dp"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+    </LinearLayout>
 
-                        android:text="Want to see day-wise schedule? Tap here!"
-                        android:textColor="@color/White"
-                        android:textSize="16dp"
-                        android:paddingEnd="5dp"
-                        tools:ignore="RtlSymmetry"/>
-                </LinearLayout>
-            </LinearLayout>
     <ImageView
         android:id="@+id/drawerTogglebtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="8dp"
         android:src="@drawable/vector_menu" />
-
 
     <ImageView
         android:id="@+id/ddss"

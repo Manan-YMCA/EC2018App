@@ -8,17 +8,20 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,7 +48,7 @@ import static com.manan.dev.ec2018app.Fragments.FragmentOtpChecker.REQUEST_ID_MU
 public class RegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus, FragmentFbLogin.fbLoginButton {
 
     private EditText userName, userEmail, userPhone, userCollege;
-    private FrameLayout view;
+    private RelativeLayout view;
     private ProgressDialog mProgress;
     private TextView LoginText;
     private UserDetails userDetails;
@@ -54,6 +57,13 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
         setContentView(R.layout.activity_register);
 
         parent = getIntent().getStringExtra("parent");
@@ -62,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         userEmail = (EditText) findViewById(R.id.et_reg_email);
         userCollege = (EditText) findViewById(R.id.et_reg_clg);
         userPhone = (EditText) findViewById(R.id.et_reg_mob);
-        view = (FrameLayout) findViewById(R.id.rl_main_view);
+        view = (RelativeLayout) findViewById(R.id.rl_main_view);
         LoginText = (TextView) this.findViewById(R.id.tv_log_in);
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Registering You");
@@ -70,6 +80,10 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
         mProgress.setCanceledOnTouchOutside(false);
         userDetails = new UserDetails();
         userDetails.setmFbId("null");
+
+        String first = "Already a User? ";
+        String next = "<font color='#f55246'>Just Login!</font>";
+        LoginText.setText(Html.fromHtml(first + next));
 
         TextView submit = (TextView) findViewById(R.id.tv_reg_submit);
         submit.setOnClickListener(new View.OnClickListener() {

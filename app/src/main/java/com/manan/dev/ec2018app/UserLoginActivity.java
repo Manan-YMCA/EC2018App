@@ -48,9 +48,7 @@ public class UserLoginActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
 
-
         setContentView(R.layout.activity_user_login);
-
 
         guestLogin = (LinearLayout) this.findViewById(R.id.guest_user_ll);
 

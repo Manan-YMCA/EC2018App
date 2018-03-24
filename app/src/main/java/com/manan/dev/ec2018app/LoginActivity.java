@@ -8,20 +8,24 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -62,6 +66,13 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
         setContentView(R.layout.activity_login);
 
         parent = getIntent().getStringExtra("parent");
@@ -74,6 +85,11 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         NeedHelp = (TextView) findViewById(R.id.need_help);
         registerView = (TextView) findViewById(R.id.tv_register_option);
         databaseController = new DatabaseController(LoginActivity.this);
+
+        String first = "Haven't completed the details? ";
+        String next = "<font color='#f55246'>Click Here!</font>";
+        registerView.setText(Html.fromHtml(first + next));
+
         NeedHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,7 +162,11 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                                 }
                             } else {
                                 pbLogin.setVisibility(View.GONE);
-                                Snackbar.make(RelativeView, "User doesn't exist.", Snackbar.LENGTH_LONG).show();
+//                                Snackbar.make(RelativeView, "Please register yourself first!", Snackbar.LENGTH_LONG).show();
+                                MDToast.makeText(LoginActivity.this,"Please register yourself first!", Toast.LENGTH_LONG,MDToast.TYPE_INFO).show();
+                                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                                startActivity(i);
+                                finish();
                             }
                         }
                         // Try and catch are included to handle any errors due to JSON

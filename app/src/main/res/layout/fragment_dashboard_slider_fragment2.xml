@@ -4,37 +4,38 @@
     android:layout_height="match_parent"
     android:background="@color/Black"
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment2">
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="#000">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:orientation="vertical"
-         >
-           <ImageView
-               android:layout_width="100dp"
-               android:layout_height="100dp"
-               android:layout_marginTop="30dp"
-               android:src="@drawable/logo_300"
-               android:layout_gravity="center"/>
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/logo_300" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Starts in:"
-
-                android:textSize="32dp"
                 android:fontFamily="@font/futura"
+                android:gravity="center"
+                android:text="Starts in:"
                 android:textColor="@color/White"
-                android:gravity="center"/>
+                android:textSize="32dp" />
 
             <TextView
+                android:id="@+id/timer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -42,7 +43,6 @@
                 android:fontFamily="@font/futura"
                 android:gravity="center"
                 android:maxLines="8"
-android:id="@+id/timer"
                 android:text="22:18:13:44 "
                 android:textColor="@color/White"
                 android:textSize="30dp" />

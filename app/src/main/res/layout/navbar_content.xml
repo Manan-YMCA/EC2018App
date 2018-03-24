@@ -25,4 +25,5 @@
         app:itemTextColor="@color/nav_bar_dashboard_selector"
         app:menu="@menu/menu_dashboard_content" />
 
+
 </android.support.v4.widget.DrawerLayout>

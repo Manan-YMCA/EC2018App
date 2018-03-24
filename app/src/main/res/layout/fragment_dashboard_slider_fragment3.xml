@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Black"
-
     tools:context="com.manan.dev.ec2018app.Fragments.DashboardSliderFragment3">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="#000">
 
         <LinearLayout
@@ -18,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-         android:gravity="center"
-
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -34,25 +31,25 @@
                 android:textSize="36dp" />
 
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="5dp"
                 android:fontFamily="@font/futura"
                 android:gravity="center_horizontal"
+                android:padding="5dp"
                 android:text="Mr and Ms Culmyca"
                 android:textColor="@color/White"
                 android:textSize="18dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/futura"
                 android:gravity="center_horizontal"
-                android:text="Fashion Show"
                 android:padding="5dp"
+                android:text="Fashion Show"
                 android:textColor="@color/White"
                 android:textSize="18dp" />
 
@@ -61,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/futura"
-                android:padding="5dp"
                 android:gravity="center_horizontal"
+                android:padding="5dp"
                 android:text="Stand Up Comedy"
                 android:textColor="@color/White"
                 android:textSize="18dp" />
@@ -76,19 +73,20 @@
                 android:text="Star Night"
                 android:textColor="@color/White"
                 android:textSize="18dp" />
+
             <Button
+                android:id="@+id/buuton_explore_brixx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_white"
+                android:fontFamily="@font/futura"
                 android:paddingBottom="10dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:paddingTop="10dp"
-                android:id="@+id/buuton_explore_brixx"
-                android:layout_gravity="center"
-                android:text=" Explore"
-                android:background="@drawable/edit_text_white"
-                android:fontFamily="@font/futura"/>
+                android:text=" Explore" />
 
         </LinearLayout>
     </RelativeLayout>
