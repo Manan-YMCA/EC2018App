@@ -341,7 +341,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         }
                     }
-                }, 150);
+                }, 230);
 
                 break;
 
@@ -388,7 +388,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, XunbaoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     }
-                }, 150);
+                }, 230);
                 break;
 
             case R.id.nav_culmyca:
@@ -397,7 +397,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, CulmycaTimesActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
-                }, 150);
+                }, 230);
                 break;
 
             case R.id.nav_about:
@@ -406,7 +406,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, AboutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
-                }, 150);
+                }, 230);
                 break;
 
             case R.id.nav_logout:
@@ -461,7 +461,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, SponsorsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
-                }, 150);
+                }, 230);
                 break;
 
             case R.id.nav_notifications:
@@ -470,7 +470,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, MyNotificationsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
-                }, 150);
+                }, 230);
                 break;
 
             case R.id.nav_share:
@@ -497,7 +497,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     public void run() {
                         startActivity(new Intent(ContentActivity.this, MapsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
-                }, 150);
+                }, 230);
                 break;
         }
         return true;
