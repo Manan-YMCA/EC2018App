@@ -148,7 +148,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         pdfTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("http://www.elementsculmyca.com/schedule"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }

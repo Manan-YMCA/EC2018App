@@ -408,6 +408,7 @@ public class FragmentOtpChecker extends DialogFragment {
     public void onDestroy() {
         otpCheckStatus activity = (otpCheckStatus) mContext;
         activity.updateResult(false);
+
         super.onDestroy();
     }
 
@@ -415,6 +416,7 @@ public class FragmentOtpChecker extends DialogFragment {
     public void onDestroyView() {
         otpCheckStatus activity = (otpCheckStatus) mContext;
         activity.updateResult(false);
+        IncomingSms.removeListenr();
         super.onDestroyView();
     }
 

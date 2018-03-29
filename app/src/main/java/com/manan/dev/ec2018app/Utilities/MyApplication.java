@@ -6,6 +6,7 @@ package com.manan.dev.ec2018app.Utilities;
 
 import android.app.Application;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -18,7 +19,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        if (!FirebaseApp.getApps(this).isEmpty())
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 //        Picasso.Builder builder = new Picasso.Builder(this);
 //        builder.downloader(new OkHttp3Downloader(this,Integer.MAX_VALUE));
 //        Picasso built = builder.build();

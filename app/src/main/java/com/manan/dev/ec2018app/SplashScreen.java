@@ -57,18 +57,12 @@ public class SplashScreen extends AppCompatActivity {
     private int mDirection = 1;
     private RectF mDisplayRect = new RectF();
     private IncomingHandler incomingHandler;
-    private static boolean offline = true;
     private boolean flag = false;
     static boolean flagJSONParse = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (offline) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            offline = false;
-        }
 
         com.google.firebase.messaging.FirebaseMessaging.getInstance().subscribeToTopic("Topic");
         requestWindowFeature(Window.FEATURE_NO_TITLE);

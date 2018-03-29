@@ -77,13 +77,27 @@
             android:layout_below="@id/ctc_posttitle"
             android:background="#000" />
 
-        <ImageView
-            android:id="@+id/ctc_postimage"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:layout_below="@id/lin2"
-            android:scaleType="centerCrop"
-            android:src="@drawable/default_image_1" />
+            android:layout_below="@id/lin2">
+
+            <ImageView
+                android:id="@+id/ctc_postimage"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/default_image_1" />
+
+            <ProgressBar
+                android:id="@+id/pb_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                android:visibility="gone" />
+        </RelativeLayout>
+
 
         <View
             android:id="@+id/lin3"
@@ -92,6 +106,8 @@
             android:layout_below="@id/ctc_postimage"
             android:layout_marginTop="0.5dp"
             android:background="#000" />
+
+
     </RelativeLayout>
 
 </RelativeLayout>

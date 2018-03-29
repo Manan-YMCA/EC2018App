@@ -38,6 +38,7 @@ import com.manan.dev.ec2018app.Models.QRTicketModel;
 import com.manan.dev.ec2018app.NavMenuViews.MapsActivity;
 import com.manan.dev.ec2018app.Utilities.ConnectivityReciever;
 import com.manan.dev.ec2018app.Utilities.MyApplication;
+import com.manan.dev.ec2018app.Xunbao.XunbaoActivity;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.io.IOException;
@@ -234,6 +235,10 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 registerButton.setVisibility(View.GONE);
                 //  line1.setVisibility(View.GONE);
                 typeOfEventTextView.setText("Presentation Event");
+                if (eventDetails.getmName().equals("XUNBAO")) {
+                    registerButton.setVisibility(View.VISIBLE);
+                    registerButton.setText("PLAY NOW!");
+                }
             } else {
                 typeOfEventTextView.setText(eventDetails.getmEventTeamSize());
             }
@@ -259,7 +264,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                                 //Asking request Permissions
                                 ActivityCompat.requestPermissions(SingleEventActivity.this, PERMISSIONS_CALL, 9);
                                 permission = true;
-                            } else if(ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED && permission){
+                            } else if (ActivityCompat.checkSelfPermission(SingleEventActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED && permission) {
                                 MDToast.makeText(SingleEventActivity.this, "Please grant Permissions first", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             } else {
                                 permission = true;
@@ -308,12 +313,12 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     MDToast.makeText(SingleEventActivity.this, "Set a reminder!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
 
                     try {
-                        if(!permissionGranted(android.Manifest.permission.READ_CALENDAR, android.Manifest.permission.WRITE_CALENDAR)) {
+                        if (!permissionGranted(android.Manifest.permission.READ_CALENDAR, android.Manifest.permission.WRITE_CALENDAR)) {
                             askForPermission(android.Manifest.permission.READ_CALENDAR, android.Manifest.permission.WRITE_CALENDAR);
                         } else {
                             addToCalendar();
                         }
-                    } catch (Exception ex){
+                    } catch (Exception ex) {
                         Log.e("TAG", "onClick: " + ex.getMessage());
                     }
 
@@ -351,6 +356,14 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                         } else {
                             MDToast.makeText(SingleEventActivity.this, "Unable to load ticket.", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             pd.dismiss();
+                        }
+                    } else if (registerButton.getText().toString().equals("PLAY NOW!")) {
+                        if (eventDetails.getmName().equals("XUNBAO"))
+                            startActivity(new Intent(SingleEventActivity.this, XunbaoActivity.class));
+                        else if(eventDetails.getmName().equals("HACKON")){
+                            Uri uri = Uri.parse("http://www.elementsculmyca.com/schedule"); // missing 'http://' will cause crashed
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
                         }
                     } else {
                         startActivity(new Intent(SingleEventActivity.this, EventRegister.class)
@@ -441,7 +454,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED
                         ) {
-                            addToCalendar();
+                    addToCalendar();
                 } else {
                     MDToast.makeText(SingleEventActivity.this, permissions[0] + " or " + permissions[1] + " denied", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                 }

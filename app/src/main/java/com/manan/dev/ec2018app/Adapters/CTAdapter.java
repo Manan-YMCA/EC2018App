@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.ProfileTracker;
 import com.manan.dev.ec2018app.Models.postsModel;
 import com.manan.dev.ec2018app.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -31,6 +34,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView clubName, caption, postTime;
         public ImageView clubIcon, postImage;
+        public ProgressBar bar;
 
 
         public MyViewHolder(View view) {
@@ -40,6 +44,7 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder> {
             postTime = (TextView) view.findViewById(R.id.ctc_posttime);
             clubIcon = (ImageView) view.findViewById(R.id.ctc_clubicon);
             postImage = (ImageView) view.findViewById(R.id.ctc_postimage);
+            bar = (ProgressBar) view.findViewById(R.id.pb_image);
         }
     }
 
@@ -76,25 +81,22 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder> {
         holder.caption.setText(topic.title);
         Log.d("CT Adapterrrrrrrrrrr", topic.title);
         holder.clubName.setText(topic.clubName.toUpperCase());
+        holder.bar.setVisibility(View.VISIBLE);
 
-        Target mTarget;
-        mTarget = new Target() {
+        Log.d("photoUrl", topic.getphotoid());
+
+
+        Picasso.with(context).load(topic.getphotoid()).into(holder.postImage, new Callback() {
             @Override
-            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                holder.postImage.setImageBitmap(bitmap);
+            public void onSuccess() {
+                holder.bar.setVisibility(View.GONE);
             }
 
             @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
+            public void onError() {
 
             }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
-        Picasso.with(context).load(topic.photoURL).into(mTarget);
+        });
     }
 
     @Override

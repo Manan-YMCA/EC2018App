@@ -37,4 +37,8 @@ public class IncomingSms extends BroadcastReceiver {
     public static void bindListener(SmsListener listener) {
         mListener = listener;
     }
+
+    public static void removeListenr(){
+        mListener = null;
+    }
 }

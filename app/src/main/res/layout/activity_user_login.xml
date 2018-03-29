@@ -79,9 +79,9 @@
                 android:id="@+id/guest_user_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="12dp"
                 android:layout_marginTop="10dp"
-                android:padding="4dp">
+                android:padding="12dp">
 
                 <TextView
                     android:id="@+id/ContinueText"
