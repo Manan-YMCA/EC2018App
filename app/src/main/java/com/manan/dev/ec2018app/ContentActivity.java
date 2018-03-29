@@ -350,7 +350,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                     @Override
                     public void run() {
                         if (prefs.getString("Phone", null) != null) {
-                            startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            startActivity(new Intent(ContentActivity.this, Tickets.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                         } else {
                             AlertDialog.Builder builder;
                             builder = new AlertDialog.Builder(ContentActivity.this);
@@ -419,6 +419,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.clear();
                                 editor.apply();
+                                databaseController.deleteTickets();
 
                                 FirebaseAuth.getInstance().signOut();
 

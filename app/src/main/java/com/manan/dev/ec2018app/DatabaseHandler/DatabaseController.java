@@ -330,4 +330,12 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.close();
         return true;
     }
+
+
+    public void deleteTickets()
+    { SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from "+ Schema.DbEntry.QR_TICKET_TABLE_NAME);
+        db.close();
+
+    }
 }

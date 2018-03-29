@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,8 +18,6 @@ import android.text.Html;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,6 +54,8 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        parent="default";
+
 
 
         setContentView(R.layout.activity_register);
@@ -103,9 +102,10 @@ public class RegisterActivity extends AppCompatActivity implements FragmentOtpCh
                 if (parent.equals("xunbao") || parent.equals("ct")) {
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
                             .putExtra("parent", "xunbao"));
+                }else {
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
+                            .putExtra("parent", "normal"));
                 }
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
-                        .putExtra("parent", "normal"));
             }
         });
 
