@@ -215,7 +215,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         CategoryItemModel microbird = new CategoryItemModel();
         microbird.setClubName("Microbird");
         microbird.setDisplayName("Electronics");
-        microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.micobird));
+        microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.microbird));
         allSampleData.add(microbird);
 
         CategoryItemModel natraja = new CategoryItemModel();

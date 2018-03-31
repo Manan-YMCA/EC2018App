@@ -180,6 +180,12 @@
                     android:fontFamily="@font/futura"
                     android:text="Member: 1" />
 
+                <LinearLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_width="0px"
+                    android:layout_height="0px"/>
+
                 <EditText
                     android:id="@+id/ld_reg_name"
                     android:layout_width="match_parent"
@@ -191,6 +197,8 @@
                     android:background="@drawable/edit_text_white"
                     android:fontFamily="@font/futura"
                     android:hint="Name"
+                    android:nextFocusUp="@id/ld_reg_name"
+
                     android:padding="18dp"
                     android:singleLine="true"
                     android:textColor="@color/Black"

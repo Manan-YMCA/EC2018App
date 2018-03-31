@@ -86,6 +86,9 @@ public class QRCodeActivity extends DialogFragment {
         eventTime.setText(formattedTime);
 
         fees.setText(String.valueOf("RS " + eventDetails.getmFees()));
+        TicketsGenerator ticketsGenerator = new TicketsGenerator();
+        Bitmap qrTicket = ticketsGenerator.GenerateClick(qrcodestring, mContext, (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty), 120, 120);
+        qrTicketImage.setImageBitmap(qrTicket);
 
         if (String.valueOf(eventDetails.getmFees()).equals("0")) {
             status.setTextColor(mContext.getResources().getColor(R.color.status_free));
@@ -93,15 +96,20 @@ public class QRCodeActivity extends DialogFragment {
         } else if (String.valueOf(paymentStatus).equals("0")) {
             status.setTextColor(mContext.getResources().getColor(R.color.primaryFocused));
             status.setText("PENDING");
-        } else {
+        }
+        else {
             status.setTextColor(mContext.getResources().getColor(R.color.status_paid));
             status.setText("PAID");
         }
 
 
-        TicketsGenerator ticketsGenerator = new TicketsGenerator();
-        Bitmap qrTicket = ticketsGenerator.GenerateClick(qrcodestring, mContext, (int) getResources().getDimension(R.dimen.threefifty), (int) getResources().getDimension(R.dimen.twoforty), 120, 120);
-        qrTicketImage.setImageBitmap(qrTicket);
+        if(arrivalStatus==1)
+        {
+            qrTicketImage.setImageResource(R.drawable.arrived_qr);
+        }
+
+
+
         return rootView;
     }
 
