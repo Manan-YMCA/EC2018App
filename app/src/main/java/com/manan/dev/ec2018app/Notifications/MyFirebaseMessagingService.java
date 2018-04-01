@@ -33,18 +33,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String notificationTitle = null, notificationBody = null;
         String dataTitle = null, dataMessage = null;
 
-        Log.d("hi", "received");
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData().get("message"));
             dataTitle = remoteMessage.getData().get("title");
             dataMessage = remoteMessage.getData().get("message");
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             notificationTitle = remoteMessage.getNotification().getTitle();
             notificationBody = remoteMessage.getNotification().getBody();
         }
@@ -72,7 +69,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.logo_300)
+                .setSmallIcon(R.drawable.notfication_icon)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)
                 .setAutoCancel(true)

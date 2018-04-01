@@ -68,8 +68,7 @@ public class Tickets extends AppCompatActivity {
         mIncomingHandler = new IncomingHandler(Tickets.this);
         databaseController = new DatabaseController(Tickets.this);
         mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
-        Log.d("Tickets", phoneNumber);
-        Log.d("Tickets", Integer.toString(userTickets.size()));
+
         if(userTickets.size() > 0){
             noTickets.setVisibility(View.GONE);
         }
@@ -89,7 +88,6 @@ public class Tickets extends AppCompatActivity {
             }
         });
         if (phoneNumber == null) {
-            Log.e("TAG", "onCreate: " + "No data in shared pref!");
         } else {
             new DisplayTickets().execute(phoneNumber);
         }
@@ -125,15 +123,11 @@ public class Tickets extends AppCompatActivity {
 
                         userTickets.add(TicketModel);
                     }
-                    Log.d("Tickets", Integer.toString(userTickets.size()));
-                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
                     mIncomingHandler.sendEmptyMessage(0);
-                    Log.d("prerna", String.valueOf(databaseController.getTicketCount()));
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("Tickets", e.getMessage());
                 }
 
 
@@ -142,7 +136,6 @@ public class Tickets extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.i("Tickets", "" + error);
                 mProgress.dismiss();
             }
         });
@@ -155,7 +148,6 @@ public class Tickets extends AppCompatActivity {
         if (userTickets.size() > 0) {
             noTickets.setVisibility(View.GONE);
             mProgress.dismiss();
-            Log.d("yatin", String.valueOf(userTickets.get(0).getQRcode()));
             mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
             userTicketsView.setAdapter(mAdapter);
         }

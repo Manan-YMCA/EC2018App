@@ -88,7 +88,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     == PackageManager.PERMISSION_GRANTED)
                 mMap.setMyLocationEnabled(true);
         } catch (SecurityException e) {
-            Log.e("Maps", "" + e);
         }
 
         try {
@@ -99,10 +98,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             this, R.raw.style_json));
 
             if (!success) {
-                Log.e("TAG", "Style parsing failed.");
             }
         } catch (Resources.NotFoundException e) {
-            Log.e("TAG", "Can't find style. Error: ", e);
         }
         LatLng ymca = new LatLng(28.3674761, 77.3169494);
         CameraPosition target = CameraPosition.builder().target(ymca).zoom((float) 17.6).bearing(85).tilt(30).build();

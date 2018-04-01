@@ -80,7 +80,6 @@ public class SpecialsFragment extends Fragment {
         devlist.add(dev_obj4);
         devlist.add(dev_obj5);
 
-        Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()));
         DevelopersAdapter dev_ad = new DevelopersAdapter(mContext, devlist);
         devrecyclerView.setAdapter(dev_ad);
 

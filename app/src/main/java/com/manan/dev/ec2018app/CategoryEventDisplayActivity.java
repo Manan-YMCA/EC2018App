@@ -51,8 +51,6 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         clubName = getIntent().getStringExtra("clubname");
         databaseController = new DatabaseController(getApplicationContext());
         eventList = databaseController.retreiveCategory(clubName);
-//        Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
-
         byte[] byteArray = getIntent().getByteArrayExtra("clubPhoto");
         Bitmap clubphoto = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
@@ -77,7 +75,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(DialogInterface dialog, int which) {
 //                dialog.dismiss();
-//                Toast.makeText(CategoryEventDisplayActivity.this, "Error!", Toast.LENGTH_LONG).show();
+//
 //            }
 //        });
 //        myDialog.show();

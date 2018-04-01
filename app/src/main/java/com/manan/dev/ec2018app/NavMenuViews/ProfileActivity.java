@@ -101,7 +101,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
-            Log.e("TAG", "onCreate : " + "Shared pref no data!");
         }
 
         ivBar = (ProgressBar) findViewById(R.id.pb_profile_image);
@@ -136,13 +135,11 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                     mProfileTracker = new ProfileTracker() {
                         @Override
                         protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                            Log.d("fbProfile", currentProfile.getFirstName() + "bond");
                             mProfileTracker.stopTracking();
                         }
                     };
                 } else {
                     Profile profile = Profile.getCurrentProfile();
-                    Log.d("fbProfile", profile.getFirstName());
                 }
 
                 userDetails.setmFbId(loginResult.getAccessToken().getUserId());
@@ -150,17 +147,16 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                 profilePicture.setImageBitmap(null);
                 checkStatus();
                 handleFirebaseLogin(loginResult.getAccessToken());
-                Log.d("hogya", "hogya");
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(ProfileActivity.this, "Facebook login cancelled!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Log.e("TAG", "onError: " + exception.getMessage());
+
             }
         });
 //        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dashboard_image);
@@ -200,7 +196,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                 final TextView tv_college = new TextView(ProfileActivity.this);
                 tv_college.setText("College Name");
 
-                Log.e("TAG", "onClick: " + userDetails.getmName());
 
                 input1.setText(userDetails.getmName());
                 input3.setText(userDetails.getmCollege());
@@ -218,12 +213,9 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                             public void onClick(DialogInterface dialog,
                                                 int whichButton) {
 
-                                Log.i("AlertDialog", "TextEntry 1 Entered " + input1.getText().toString());
-                                Log.i("AlertDialog", "TextEntry 2 Entered " + input2.getText().toString());
     /* User clicked OK so do some stuff */
                                 boolean checker = checkDetails();
                                 if (checker) {
-                                    Log.e("TAG", "onClick: hello" );
                                     detailsBar.setVisibility(View.VISIBLE);
                                     userDetails.setmName(input1.getText().toString());
                                     userDetails.setEmail(input2.getText().toString());
@@ -272,7 +264,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(input2.getText().toString()).matches()) {
             input2.setError("Enter a Valid Email Address");
-            Log.e("TAG", "checkDetails: " + input2.getText().toString() );
             return false;
         }
         if (input3.getText().toString().equals("")){
@@ -290,12 +281,10 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("loginStatus", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             checkStatus();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("loginStatus", "signInWithCredential:failure", task.getException());
                             Toast.makeText(ProfileActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
 
@@ -304,14 +293,12 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
     }
 
     private void getDetails(final String phone) {
-        Log.i("tg", "bgg");
         final TextView tvName = (TextView) findViewById(R.id.tv_name);
         final TextView tvMail = (TextView) findViewById(R.id.tv_email);
         final TextView tvCollege = (TextView) findViewById(R.id.tv_college);
         final TextView tvPhone = (TextView) findViewById(R.id.tv_phone);
         String url = getResources().getString(R.string.get_user_details_api) + phone;
 
-        Log.e("TAG", "getDetails url: " + url);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
@@ -322,7 +309,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                             detailsBar.setVisibility(View.GONE);
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
-                            Log.e("TAG", "onResponse: " + obj.getString("name"));
                             tvName.setText(obj.getString("name"));
                             tvMail.setText(obj.getString("email"));
                             tvCollege.setText(obj.getString("college"));
@@ -342,9 +328,8 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                         }
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
-                            // If an error occurs, this prints the error to the log
                             e.printStackTrace();
-                            Log.e("TAG", "onResponse: " + e.getMessage());
+
                         }
                     }
                 },
@@ -352,8 +337,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                     @Override
                     // Handles errors that occur due to Volley
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("TAG", "onErrorResponse: " + error.getMessage());
-                        Log.e("Volley", "Error");
                     }
                 }
         );
@@ -362,7 +345,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
 
     private void registerUser(final UserDetails userDetails) {
         String url = getResources().getString(R.string.register_user_api);
-        Log.e("TAG", "registerUser url : " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -373,16 +355,10 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                 tvCollege.setText(userDetails.getmCollege());
                 tvPhone.setText(userDetails.getmPhone());
 
-                Log.e("TAG", "onResponse: " + response);
-                Log.i("My success", "" + response);
-
-                Log.e("TAG", "onResponse: " + "API info updated!");
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", "onErrorResponse error : " + error);
-                Log.i("My error", "" + error);
             }
         }) {
             @Override
@@ -404,7 +380,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
         try {
 
             Picasso.with(getApplicationContext()).load(Profile.getCurrentProfile().getProfilePictureUri(800, 800));
-            Log.d("fbProfile", Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getProfilePictureUri(800, 800).toString());
             Picasso.with(ProfileActivity.this).load(Profile.getCurrentProfile().getProfilePictureUri(800, 800).toString())
                     .into(new Target() {
                         @Override
@@ -414,7 +389,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                             BitmapDrawable background = new BitmapDrawable(conv_bm);
                             profilePictureFrame.setBackground(background);
                             profilePicture.setImageResource(R.drawable.frame_profile_2);
-                            Log.e("TAG", "onBitmapLoaded: " + "Image Loaded!");
                             ivBar.setVisibility(View.GONE);
                         }
 
@@ -430,7 +404,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
                     });
 
         } catch (Exception e) {
-            Log.d("fbProfile", e.getMessage());
         }
 
 
@@ -470,7 +443,7 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
             SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
             phoneNumber = prefs.getString("Phone", null);
             if (phoneNumber == null) {
-                Log.e("TAG", "onCreate : " + "Shared pref no data!");
+
             }
             getDetails(phoneNumber);
         } else {
@@ -484,7 +457,6 @@ public class ProfileActivity extends AppCompatActivity implements ConnectivityRe
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
-            Log.e("TAG", "onCreate : " + "Shared pref no data!");
         }
         if(isNetworkAvailable()){
             getDetails(phoneNumber);

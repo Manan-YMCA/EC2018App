@@ -15,7 +15,6 @@ public class MyNotificationResponse extends BroadcastReceiver {
         String eventId = intent.getStringExtra("eventId");
         String eventName = intent.getStringExtra("eventName");
         Integer uniqueId = intent.getIntExtra("uniqueId", 0);
-        Log.d("notifications", eventId);
 
         Intent serviceringtone = new Intent(context, MyNotificationService.class);
         serviceringtone.putExtra("eventId", eventId);

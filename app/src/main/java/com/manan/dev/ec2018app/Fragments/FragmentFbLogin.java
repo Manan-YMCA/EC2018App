@@ -104,7 +104,6 @@ public class FragmentFbLogin extends DialogFragment {
                 fbLoginButton activity = (fbLoginButton) mContext;
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
-                MDToast.makeText(mContext, "Facebook login done", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
             }
 
             @Override
@@ -114,7 +113,6 @@ public class FragmentFbLogin extends DialogFragment {
 
             @Override
             public void onError(FacebookException exception) {
-                Log.e("TAG", "onError: " + exception.getMessage());
             }
         });
 
@@ -129,13 +127,12 @@ public class FragmentFbLogin extends DialogFragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("loginStatus", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             barLogin.setVisibility(View.GONE);
                             dismiss();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("loginStatus", "signInWithCredential:failure", task.getException());
+
                             MDToast.makeText(mContext, "Authentication failed.", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                             dismiss();
                         }

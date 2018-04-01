@@ -120,7 +120,6 @@ public class UserLoginActivity extends AppCompatActivity {
 
 
     void changeslide() {
-        // Toast.makeText(UserLoginActivity.this,"Timer Started",Toast.LENGTH_SHORT).show();
         handler = new Handler();
         Update = new Runnable() {
             public void run() {
@@ -173,7 +172,6 @@ public class UserLoginActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
-            // Toast.makeText(UserLoginActivity.this,"Timer Ended",Toast.LENGTH_SHORT).show();
 
         }
 

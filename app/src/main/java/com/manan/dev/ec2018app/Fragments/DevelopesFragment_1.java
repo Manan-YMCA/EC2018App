@@ -105,7 +105,6 @@ public class DevelopesFragment_1 extends Fragment {
         devlist.add(dev_obj13);
         devlist.add(dev_obj10);
 
-        Log.e("TAG", "onCreateView: " + String.valueOf(devlist.size()));
         DevelopersAdapter dev_ad = new DevelopersAdapter(mContext, devlist);
         devrecyclerView.setAdapter(dev_ad);
 

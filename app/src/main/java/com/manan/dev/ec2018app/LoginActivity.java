@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
 
     private void getDetails(final UserDetails userDetails, final String phone) {
         String url = getResources().getString(R.string.get_user_details_api) + phone;
-        Log.e("TAG", "getDetails url: " + url);
+
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -163,9 +163,8 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                         }
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
-                            // If an error occurs, this prints the error to the log
                             e.printStackTrace();
-                            Log.e("TAG", "onResponse: " + e.getMessage());
+
                         }
                     }
                 },
@@ -173,8 +172,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
                     @Override
                     // Handles errors that occur due to Volley
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("TAG", "onErrorResponse: " + "Errorrrrrr");
-                        Log.e("Volley", "Error");
+
                     }
                 }
         );
@@ -292,7 +290,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
     private void registerUser(final UserDetails userDetails) {
 
         String url = getResources().getString(R.string.register_user_api);
-        Log.e("TAG", "registerUser url: " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -304,8 +301,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentOtpCheck
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", "onErrorResponse my errorrrrrrrrrrr: " + error);
-                Log.i("My error", "" + error);
+
             }
         }) {
             @Override
