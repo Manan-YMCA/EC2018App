@@ -159,6 +159,7 @@
             android:background="@drawable/edit_text_background"
             android:fontFamily="@font/futura"
             android:hint="Mobile No."
+            android:maxLength="10"
             android:inputType="phone"
             android:maxLines="1"
             android:padding="12dp"

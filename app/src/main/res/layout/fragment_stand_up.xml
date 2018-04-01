@@ -65,10 +65,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="5dp"
+                android:padding="4dp"
                 android:src="@drawable/insta" />
 
             <ImageView
                 android:id="@+id/fb"
+                android:padding="4dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"

@@ -37,7 +37,7 @@ public class DashboardSliderFragment2 extends Fragment {
         SharedPreferences preferences = this.mContext.getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-          long fest_day=1522866600;
+          long fest_day= 1523502000;
           long curr =System.currentTimeMillis()/1000;
           long diff=fest_day-curr;
           Log.e("CurrentTime",String.valueOf(curr));
