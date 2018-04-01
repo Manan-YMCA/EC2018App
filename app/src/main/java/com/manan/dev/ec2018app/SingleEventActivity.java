@@ -104,7 +104,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             revStr = revStr.substring(0, i);
             String eventName = new StringBuilder(revStr).reverse().toString().toUpperCase();
             eventName = eventName.replace("%20", " ");
-            Log.v("deeplink", eventName);
             deep = true;
             eventId = databaseController.retrieveEventIdByName(eventName);
             if (eventId.equals("wrong")) {
@@ -114,10 +113,10 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 startActivity(new Intent(this, SplashScreen.class));
             }
         } else {
-            //  Log.v("nodeeplink", appLinkData + "");
+
             eventId = getIntent().getStringExtra("eventId");
         }
-        Log.e("TAG", "onCreate: " + eventId);
+
         container_se_view = findViewById(R.id.contaner_se);
 
         getEventDetails = new DatabaseController(SingleEventActivity.this);
@@ -319,7 +318,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                             addToCalendar();
                         }
                     } catch (Exception ex) {
-                        Log.e("TAG", "onClick: " + ex.getMessage());
+
                     }
 
                 }
@@ -381,7 +380,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     String baseUrl = "http://elementsculmyca.com/event/";
                     String parsedUrl = baseUrl + "#" + eventDetails.getmName().toString().replaceAll(" ", "%20");
 
-                    Log.e("TAG", "onClick: " + parsedUrl);
                     String message = "Elements Culmyca 2018:" + eventDetails.getmName().toString() + " View the event clicking the link: " + parsedUrl;
                     shareEventMessage(message);
 
@@ -460,7 +458,6 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                 }
                 break;
         }
-        Log.v("permission", "permission" + permissionGranted);
 
     }
 
@@ -475,10 +472,8 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_share_event:
-                Log.e("TAG", "onOptionsItemSelected: " + item.getTitle());
                 break;
             default:
-                Log.e("TAG", "onOptionsItemSelected: " + "Invalid Selection!");
                 break;
         }
         return super.onOptionsItemSelected(item);

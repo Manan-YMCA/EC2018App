@@ -136,7 +136,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
             @Override
             public void onError(FacebookException exception) {
-                Log.e("TAG", "onError: " + exception.getMessage() );
             }
         });
 
@@ -248,7 +247,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     }
 
     public void checkStatus() {
-        Log.d("hey","chut");
         stat = new StringRequest(Request.Method.GET, statusURL,
                 new Response.Listener<String>() {
                     @Override
@@ -257,7 +255,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                         bar.setVisibility(View.GONE);
                         refreshButton.setVisibility(View.GONE);
                         xstatus = Integer.parseInt(response);
-                        Log.d("hey", "" + xstatus);
                         if (xstatus == 1) {
                             //progressBar.dismiss();
                             contestEnd.setText("KEEP CALM! CONTEST YET TO START!");
@@ -289,7 +286,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
             @Override
             public void onErrorResponse(VolleyError error) {
                 bar.setVisibility(View.GONE);
-                Log.d("hey", "" + error);
                 //progressBar.dismiss();
                 refreshButton.setVisibility(View.VISIBLE);
 //                MDToast.makeText(mContext, "Problem loading!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
@@ -375,7 +371,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     @Override
     public void makeQuestionVisible(String fbId) {
         currFbid = fbId;
-        Log.d("xunbao", currFbid);
 
         if(isNetworkAvailable()) {
             reload();
@@ -394,12 +389,10 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("loginStatus", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("loginStatus", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(mContext, "Authentication failed.",
+                            MDToast.makeText(mContext, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
 

@@ -116,7 +116,6 @@ public class FragmentOtpChecker extends DialogFragment {
         bar.setVisibility(View.VISIBLE);
         String url = getResources().getString(R.string.send_sms_api);
 
-        Log.e("TAG", "sendSMS url: " + url);
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
         StringRequest smsReq = new StringRequest(Request.Method.POST, url,
@@ -125,14 +124,12 @@ public class FragmentOtpChecker extends DialogFragment {
 
                     public void onResponse(String response) {
                         // TODO
-                        Log.v("sms", "response: " + response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO
                 bar.setVisibility(View.GONE);
-                Log.v("sms", "error: " + error.getMessage());
             }
         }) {
             @Override
@@ -148,25 +145,19 @@ public class FragmentOtpChecker extends DialogFragment {
         queue.add(smsReq);
         if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             bar.setVisibility(View.GONE);
-            Log.d("TAG", "sendSMS: type otp");
         } else {
             IncomingSms.bindListener(new SmsListener() {
                 @Override
                 public void messageReceived(String messageText) {
-                    Log.e("TAG", "messageReceived: " + messageText);
                     if (messageText.contains("Culmyca")) {
                         otp = messageText.substring(0, 6);
-                        Log.e("TAG", "messageReceived OTP : " + otp);
                         if (otp.length() == 6) {
-                            Log.d("yatin", otp.substring(0, 1));
                             et1.setText(otp.substring(0, 1));
                             et2.setText(otp.substring(1, 2));
                             et3.setText(otp.substring(2, 3));
                             et4.setText(otp.substring(3, 4));
                             et5.setText(otp.substring(4, 5));
                             et6.setText(otp.substring(5, 6));
-                            Log.e("TAG", "setOtpText: " + et1.getText().toString() + et2.getText().toString() + et3.getText().toString() + et4.getText().toString()
-                                    + et5.getText().toString() + et6.getText().toString());
                         } else {
                             bar.setVisibility(View.GONE);
                         }

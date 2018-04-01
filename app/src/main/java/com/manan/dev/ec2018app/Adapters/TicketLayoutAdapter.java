@@ -53,7 +53,6 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
 
         currEvent = mDatabaseController.retreiveEventsByID(singleItem.getEventID());
 
-        Log.d("Tickets", singleItem.getQRcode());
         if (currEvent.getmFees() == 0) {
             holder.feeStatus.setTextColor(mContext.getResources().getColor(R.color.status_free));
             holder.feeStatus.setText("FREE");
@@ -85,7 +84,6 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
         SimpleDateFormat sdf1 = new SimpleDateFormat("kk:mm", Locale.US);
         String formattedTime = sdf1.format(cal.getTime());
         holder.eventTime.setText(formattedTime);
-        Log.d("Tickets", "Data setSuccessfully");
 
         fm = ((Activity) mContext).getFragmentManager();
 

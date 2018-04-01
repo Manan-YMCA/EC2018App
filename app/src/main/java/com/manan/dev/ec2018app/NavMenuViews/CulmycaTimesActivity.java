@@ -128,12 +128,10 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
                 for (DataSnapshot club : dataSnapshot.getChildren()) {
                     String clubName = club.getKey();
                     for (DataSnapshot posts : club.getChildren()) {
-                        Log.e("posts", posts.toString());
 
                         postsModel post = posts.getValue(postsModel.class);
                         post.postid = posts.getKey();
 
-                        Log.e("TAG", "onDataChange: postiddddddddddddddddddd" + post.getPostid());
 
                         allposts.add(post);
 

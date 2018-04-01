@@ -40,7 +40,6 @@ public class DashboardSliderFragment2 extends Fragment {
           long fest_day=1522866600;
           long curr =System.currentTimeMillis()/1000;
           long diff=fest_day-curr;
-          Log.e("CurrentTime",String.valueOf(curr));
 
             time=rootView.findViewById(R.id.timer);
 

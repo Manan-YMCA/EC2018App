@@ -44,7 +44,6 @@ public class TicketsGenerator {
             userTicket =  CreateQRCode(qrCodeData, charset, hintMap, smallestDimension, smallestDimension, logoWidth, logoHeight);
 
         } catch (Exception ex) {
-            Log.e("Tickets", ex.getMessage());
         }
         return userTicket;
     }
@@ -80,7 +79,6 @@ public class TicketsGenerator {
             return mergeBitmaps(overlay, bitmap);
 
         } catch (Exception er) {
-            Log.e("Tickets", er.getMessage());
             return null;
         }
     }

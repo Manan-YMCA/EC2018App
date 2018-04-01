@@ -243,15 +243,13 @@ public class SplashScreen extends AppCompatActivity {
                     event.setmEventId(currEvent.getString("_id"));
                 if (currEvent.has("eventtype")) {
                     event.setmEventTeamSize(currEvent.getString("eventtype"));
-                    //Toast.makeText(ContentActivity.this, currEvent.getString("eventtype"), Toast.LENGTH_SHORT).show();
+
                 }
-                //Toast.makeText(ContentActivity.this, event.getmEventId() + " " + event.getmPrizes().toString(), Toast.LENGTH_LONG).show();
+
                 allEvents.add(event);
             }
             incomingHandler.sendEmptyMessage(0);
         } catch (Exception e) {
-            Log.e("TAG", "JsonParse: " + e.getMessage() );
-            Log.d("DBChecker", e.getMessage());
             e.printStackTrace();
         }
 

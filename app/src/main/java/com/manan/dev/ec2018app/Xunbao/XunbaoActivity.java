@@ -178,13 +178,11 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
 
     @Override
     protected void onPause() {
-        Log.d("pauser", String.valueOf(adapter.getCount()));
         super.onPause();
         adapter.removeFragment(0);
         adapter.removeFragment(0);
         adapter.removeFragment(0);
         adapter.notifyDataSetChanged();
-        Log.d("pauser", String.valueOf(adapter.getCount()));
     }
 
     @Override

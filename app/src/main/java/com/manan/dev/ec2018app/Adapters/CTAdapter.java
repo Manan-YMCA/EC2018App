@@ -79,11 +79,9 @@ public class CTAdapter extends RecyclerView.Adapter<CTAdapter.MyViewHolder> {
         holder.postTime.setText(formattedDate + " " + formattedTime);
 
         holder.caption.setText(topic.title);
-        Log.d("CT Adapterrrrrrrrrrr", topic.title);
         holder.clubName.setText(topic.clubName.toUpperCase());
         holder.bar.setVisibility(View.VISIBLE);
 
-        Log.d("photoUrl", topic.getphotoid());
 
 
         Picasso.with(context).load(topic.getphotoid()).into(holder.postImage, new Callback() {

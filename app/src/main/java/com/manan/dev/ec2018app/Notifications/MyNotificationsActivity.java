@@ -189,7 +189,6 @@ public class MyNotificationsActivity extends AppCompatActivity {
             try {
                 super.onLayoutChildren(recycler, state);
             } catch (IndexOutOfBoundsException e) {
-                Log.e("probe", "meet a IOOBE in RecyclerView");
             }
         }
     }

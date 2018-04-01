@@ -75,7 +75,6 @@ public class SponsorsActivity extends AppCompatActivity {
                 public void onResponse(String response) {
                     try {
                         JSONObject object = new JSONObject(response);
-                        Log.d("Errorrrrrrrrrrrrrrrrrr", response.toString());
                         JSONArray sponsersArray = object.getJSONArray("data");
                         for (int i = 0; i < sponsersArray.length(); i++) {
                             Sponsers sponsers = new Sponsers();
@@ -83,7 +82,6 @@ public class SponsorsActivity extends AppCompatActivity {
 
                             if (currEvent.has("name")) {
                                 sponsers.setSname(currEvent.getString("name"));
-                                Log.d("Errorrrrrrrrrrrrrrrrrr",sponsers.getSname());
                             }
                             if (currEvent.has("title"))
                                 sponsers.setTitle(currEvent.getString("title"));
@@ -97,20 +95,17 @@ public class SponsorsActivity extends AppCompatActivity {
                                 sponsers.setUrl(currEvent.getString("url"));
                             sponserList.add(sponsers);
                             progressBar.dismiss();
-                            Log.d("Errorrrrrrrrrrrrrr", sponsers.getSname());
                         }
 
                         mAdapter.notifyDataSetChanged();
 
                     } catch (Exception e) {
-                        Log.d("Errorrrrrrrrrrrrrr",e.getMessage() );
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressBar.dismiss();
-                    Log.e("TAG", "onErrorResponse: " + error.getLocalizedMessage() );
                     noSponTV.setVisibility(View.VISIBLE);
                 }
             });

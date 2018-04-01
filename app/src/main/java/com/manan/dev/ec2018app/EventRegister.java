@@ -128,7 +128,7 @@ public class EventRegister extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         final String phoneNumber = prefs.getString("Phone", null);
         if (phoneNumber == null) {
-            Log.e("TAG", "onCreate: " + "Shared Pref no data!!!!!!!!!!!!");
+
         }
         if(isNetworkAvailable()) {
             pd1.show();
@@ -150,10 +150,9 @@ public class EventRegister extends AppCompatActivity {
                         ViewGroup p2 = (ViewGroup) p1.getParent();
                         ViewGroup p3 = (ViewGroup) p2.getParent();
                         Integer remove_member = Integer.parseInt(tv_2.getText().toString());
-                        Log.d("counter", String.valueOf(remove_member));
+
                         nameText.remove(remove_member - 1);
                         collegeText.remove(remove_member - 1);
-                        Log.d("counter", String.valueOf(nameText.size()));
                         memberno.remove(tv_2);
                         update();
                         p3.removeView(p2);
@@ -194,10 +193,7 @@ public class EventRegister extends AppCompatActivity {
                             intentClg += collegeText.get(i).getText().toString() + ",";
                         }
                         intentClg = intentClg.substring(0, intentClg.length() - 1);
-                        Log.d("RegisterEvent", "intentname" + intentName + "intentclg " + intentClg + "intentphone" +
-                                intentPhone + "intentmail" + intentMail);
-//                Toast.makeText(EventRegister.this, "intentname" + intentName + "intentclg " + intentClg
-//                        + "intentphone" + intentPhone +"intentmail" + intentMail, Toast.LENGTH_SHORT).show();
+//
                         Boolean checker = validateCredentials();
                         if (checker) {
                             pd.show();
@@ -219,7 +215,6 @@ public class EventRegister extends AppCompatActivity {
 
     private void registerEvent() {
         String url = getResources().getString(R.string.event_register_api);
-        Log.e("TAG", "registerEvent: " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -227,8 +222,6 @@ public class EventRegister extends AppCompatActivity {
 
                 try {
                     JSONObject obj = new JSONObject(response);
-
-                    Log.e("TAG", "onResponse: " + response);
 
                     qrCodeString = (obj.getString("qrcode"));
 
@@ -252,24 +245,20 @@ public class EventRegister extends AppCompatActivity {
                     fragobj.show(fm, "drff");
                     final String phone = prefs.getString("Phone", null);
                     if (phone == null) {
-                        Log.e("TAG", "onResponse: " + "Shared Pref no data!");
                     }
                     addTicket(phone);
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
                     // If an error occurs, this prints the error to the log
-                    pd.dismiss();
-                    e.printStackTrace();
-                    Log.e("TAG", "onResponse: " + e.getMessage());
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 pd.dismiss();
-                Log.e("TAG", "onErrorResponse: my errrrrrrrrrrrror" + error);
-                Log.i("My error", "" + error);
+
             }
         }) {
             @Override
@@ -307,7 +296,6 @@ public class EventRegister extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
 
-        Log.d("values", sdf1.format(calendar.getTime()) + " " + sdf.format(calendar.getTime()));
         my_intent.putExtra("uniqueId", currEvent.getmUniqueKey());
 
         pending_intent = PendingIntent.getBroadcast(EventRegister.this, currEvent.getmUniqueKey(), my_intent, PendingIntent.FLAG_ONE_SHOT);
@@ -354,10 +342,7 @@ public class EventRegister extends AppCompatActivity {
     }
 
     private void getDetails(final String phone) {
-        Log.i("tg", "bgg");
         String url = getResources().getString(R.string.get_user_details_api) + phone;
-
-        Log.e(getPackageName(), "getDetails url : " + url);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest obreq = new StringRequest(Request.Method.GET, url,
@@ -369,7 +354,6 @@ public class EventRegister extends AppCompatActivity {
                             pd1.dismiss();
                             JSONObject obj1 = new JSONObject(response);
                             JSONObject obj = obj1.getJSONObject("data");
-                            Log.e("TAG", "onResponse: " + obj.getString("name"));
                             mainName.setText(obj.getString("name"));
                             mainmail.setText(obj.getString("email"));
                             mainClg.setText(obj.getString("college"));
@@ -381,9 +365,8 @@ public class EventRegister extends AppCompatActivity {
                         }
                         // Try and catch are included to handle any errors due to JSON
                         catch (Exception e) {
-                            // If an error occurs, this prints the error to the log
                             e.printStackTrace();
-                            Log.e("TAG", "onResponse: " + e.getMessage());
+
                         }
                     }
                 },
@@ -391,8 +374,7 @@ public class EventRegister extends AppCompatActivity {
                     @Override
                     // Handles errors that occur due to Volley
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("TAG", "onErrorResponse: " + error);
-                        Log.e("Volley", "Error");
+
                     }
                 }
         );
@@ -407,12 +389,12 @@ public class EventRegister extends AppCompatActivity {
     private void addTicket(final String phoneNumber) {
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phoneNumber;
-        Log.e("TAG", "addTicket: " + url);
+
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("My success", "" + response);
+
                 try {
                     JSONObject obj1 = new JSONObject(response);
                     JSONArray ticketDetails = obj1.getJSONArray("data");
@@ -434,7 +416,7 @@ public class EventRegister extends AppCompatActivity {
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("Tickets", e.getMessage());
+
                 }
 
 
@@ -443,7 +425,7 @@ public class EventRegister extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.i("Tickets", "" + error);
+
             }
         });
         queue.add(request);

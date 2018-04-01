@@ -54,7 +54,6 @@ public class DashboardSliderFragment3 extends Fragment {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 singleItem.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                //     Toast.makeText(mContext,singleItem.getClubName()+byteArray,Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(mContext, BrixxActivity.class));
 //                        .putExtra("clubname", singleItem.getClubName())
 //                        .putExtra("clubPhoto", byteArray)

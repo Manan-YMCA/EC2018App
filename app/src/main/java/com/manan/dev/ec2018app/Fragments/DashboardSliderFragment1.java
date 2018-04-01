@@ -66,7 +66,6 @@ public class DashboardSliderFragment1 extends Fragment {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("whatsnew");
         mDatabaseReference.keepSynced(true);
         int t1 = whatsnewarraylist.size();
-        Log.e("value", String.valueOf(t1));
 
         return rootView;
     }
@@ -156,7 +155,6 @@ public class DashboardSliderFragment1 extends Fragment {
                 contenttv.setText(mode.getContent());
                 contenttv.setTag(mode.getIntent());
                 //          timer.cancel();
-                //Toast.makeText(getActivity(),whatsnewarraylist.get(i[0]).getContent().toString(),Toast.LENGTH_SHORT).show();
 
                 final navBarOpenStatus activity = (navBarOpenStatus) mContext;
                 explore.setOnClickListener(new View.OnClickListener() {

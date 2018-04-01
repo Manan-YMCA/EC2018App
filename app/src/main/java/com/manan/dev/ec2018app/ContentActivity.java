@@ -100,11 +100,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.navbar_content);
         cotainer_root_frame = (RelativeLayout) findViewById(R.id.content_frame);
 
-//        try {
-//            Log.d("auth", FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        } catch (Exception e) {
-//            Log.d("auth", e.getMessage());
-//        }
+//
 
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -215,7 +211,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         CategoryItemModel microbird = new CategoryItemModel();
         microbird.setClubName("Microbird");
         microbird.setDisplayName("Electronics");
-        microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.microbird));
+       // microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.micobird));
         allSampleData.add(microbird);
 
         CategoryItemModel natraja = new CategoryItemModel();
@@ -302,7 +298,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     public void onBackPressed() {
         //super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            Log.e(getApplication().getPackageName(), "onBackPressed: " + "Errrrrrrrrrrrrror");
             drawer.closeDrawer(GravityCompat.START, true);
         } else {
             startActivity(new Intent(ContentActivity.this, UserLoginActivity.class)
@@ -429,7 +424,6 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                                         @Override
                                         public void onCompleted(GraphResponse graphResponse) {
                                             LoginManager.getInstance().logOut();
-                                            Log.e("TAG", "onCompleted: " + "FB logout successful.");
                                         }
                                     }).executeAsync();
                                 }
@@ -566,12 +560,10 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
     private void checkCount(final String phone) {
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
-        Log.e("TAG", "checkCount url : " + url);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("My success", "" + response);
                 mProgress.dismiss();
                 try {
                     JSONObject obj1 = new JSONObject(response);
@@ -588,15 +580,12 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
                         userTickets.add(TicketModel);
                     }
-                    Log.d("Tickets", Integer.toString(userTickets.size()));
-                    Log.d("Ticket Countttt", String.valueOf(databaseController.getTicketCount()));
-                    mIncomingHandler.sendEmptyMessage(0);
-                    Log.d("Ticket Countttt", String.valueOf(databaseController.getTicketCount()));
+
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("Tickets", e.getMessage());
+
                 }
 
 
@@ -605,7 +594,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.i("Tickets", "" + error);
+
                 mProgress.dismiss();
             }
         });

@@ -109,7 +109,6 @@ public class LeaderboardFragment extends Fragment implements ConnectivityRecieve
     @Override
     public void onResume() {
         super.onResume();
-        Log.v("heyt", "resume");
     }
 
     public void setData() {
