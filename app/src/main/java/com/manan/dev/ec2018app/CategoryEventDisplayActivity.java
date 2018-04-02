@@ -36,7 +36,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
     private RecyclerView myRecyclerView;
     private DatabaseController databaseController;
     private ImageView backButton;
-//    private ProgressDialog myDialog;
+    //    private ProgressDialog myDialog;
     ArrayList<EventDetails> eventList;
     private TextView clubDescpTextView;
     private boolean flag;
@@ -51,6 +51,8 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         clubName = getIntent().getStringExtra("clubname");
         databaseController = new DatabaseController(getApplicationContext());
         eventList = databaseController.retreiveCategory(clubName);
+//        Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
+
         byte[] byteArray = getIntent().getByteArrayExtra("clubPhoto");
         Bitmap clubphoto = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
@@ -68,80 +70,33 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 
         clubDescpTextView = findViewById(R.id.tv_category_descp_heading);
 
-//        myDialog = new ProgressDialog(CategoryEventDisplayActivity.this);
-//        myDialog.setMessage("Events Loading...");
-//        myDialog.setCancelable(false);
-//        myDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//
-//            }
-//        });
-//        myDialog.show();
-
-        if(clubName.equals("Manan")){
-            clubDescpTextView.setText("01010011 01010111 \n01000001 01000111");
-            clubDescpTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(!flag) {
-                        flag = true;
-                        clubDescpTextView.setText("You just touched SWAG of Manan!");
-                        MDToast.makeText(CategoryEventDisplayActivity.this, "You just touched SWAG of Manan!", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
-                    }
-                }
-            });
-        }
-        else if(clubName.equals("Ananya")){
+        if (clubName.equals("Manan")) {
+            clubDescpTextView.setText("Eat. Sleep. Code. Repeat.");
+        } else if (clubName.equals("Ananya")) {
             clubDescpTextView.setText("We can break the world into words.");
-        }
-
-        else if(clubName.equals("Vividha")){
+        } else if (clubName.equals("Vividha")) {
             clubDescpTextView.setText("Dramatics is what that keeps you in the seats");
-        }
-
-        else if(clubName.equals("Jhalak")){
+        } else if (clubName.equals("Jhalak")) {
             clubDescpTextView.setText("The word “photography” is derived from the Greek words photos (light) and graphé (representation by means of lines)....");
-        }
-
-        else if(clubName.equals("Eklavya")){
+        } else if (clubName.equals("Eklavya")) {
             clubDescpTextView.setText("If you can't have fun there is no sense of doing it. So, Ask yourself, 'Am I having fun?'");
-        }
-
-        else if(clubName.equals("IEEE")){
+        } else if (clubName.equals("IEEE")) {
             clubDescpTextView.setText("People who are crazy enough enough to think they can change the world are the ones who do.");
-        }
-
-        else if(clubName.equals("Mechnext")){
+        } else if (clubName.equals("Mechnext")) {
             clubDescpTextView.setText("Blood, Sweat and Tears? Nah! Blood, Swear and Gears. ;)");
-        }
-
-        else if(clubName.equals("Microbird")){
+        } else if (clubName.equals("Microbird")) {
             clubDescpTextView.setText("Oh, come on! You are going to compile codes for some MNC all your life anyway. Try hands-on these robotic beasts this year!");
-        }
-
-        else if(clubName.equals("Nataraja")){
+        } else if (clubName.equals("Nataraja")) {
             clubDescpTextView.setText("Dance dance dance till your feet will follow your heart.");
-        }
-
-        else if(clubName.equals("SAE/BAJA")){
+        } else if (clubName.equals("SAE/BAJA")) {
             clubDescpTextView.setText("We create! We destroy! But when we screw, even metals would cry.");
-        }
-
-        else if(clubName.equals("Samarpan")){
+        } else if (clubName.equals("Samarpan")) {
             clubDescpTextView.setText("The different merited people who gets together and extends the technical bond to family bond.");
-        }
-
-        else if(clubName.equals("Srijan")){
+        } else if (clubName.equals("Srijan")) {
             clubDescpTextView.setText("People here play with colours and experiment with varied forms of  art to embrace the hidden artistic element in every sphere of life as what are days with no colours...");
-        }
-
-        else if(clubName.equals("Taranuum")){
+        } else if (clubName.equals("Taranuum")) {
             clubDescpTextView.setText("Tarannum originated in India meaning 'melody' and justifying the name we give melody to the words; calling it music.");
-        }
-
-        else if(clubName.equals("Vivekanand Manch")){
+        } else if (clubName.equals("Vivekanand Manch")) {
             clubDescpTextView.setText("Inspired by Swami Vivekanand this is the category where cultural and fun activities fuse with social values. Witness the Social Bonanza.");
         }
 
@@ -192,23 +147,22 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
             holder.date.setText(formattedDate);
             holder.time.setText(formattedTime);
 
-            if(!eventDetails.getmEventTeamSize().equals("solo")) {
+            if (!eventDetails.getmEventTeamSize().equals("solo")) {
                 holder.typeOfEventPhoto.setImageDrawable(getResources().getDrawable(R.drawable.vector_team));
 //              Picasso.with(CategoryEventDisplayActivity.this).load(R.drawable.vector_team).resize(50, 50).centerCrop().into(holder.typeOfEventPhoto);
-            }
-            else if(eventDetails.getmEventTeamSize().equals("solo")){
+            } else if (eventDetails.getmEventTeamSize().equals("solo")) {
                 holder.typeOfEventPhoto.setImageDrawable(getResources().getDrawable(R.drawable.vector_single));
 //              Picasso.with(CategoryEventDisplayActivity.this).load(R.drawable.vector_single).resize(50, 50).centerCrop().into(holder.typeOfEventPhoto);
             }
 
-            if(!eventDetails.getmEventTeamSize().equals("NA")) {
+            if (!eventDetails.getmEventTeamSize().equals("NA")) {
                 holder.eventType.setText(eventDetails.getmEventTeamSize());
-            }else if(eventDetails.getmEventTeamSize().equals("NA")){
+            } else if (eventDetails.getmEventTeamSize().equals("NA")) {
                 holder.eventType.setText("Open to All");
             }
 
             holder.desc.setText(eventDetails.getmDesc().substring(0, Math.min(eventDetails.getmDesc().length(), 100)));
-            if(eventDetails.getmDesc().length()>100)
+            if (eventDetails.getmDesc().length() > 100)
                 holder.desc.append("...");
 
             if (eventDetails.getmFees() == 0) {
@@ -232,7 +186,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView typeOfEventPhoto;
-            public TextView name, date, time, fees, venue, eventType,desc;
+            public TextView name, date, time, fees, venue, eventType, desc;
             public CardView mCardView;
             public Button viewmore;
 

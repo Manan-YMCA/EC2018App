@@ -91,6 +91,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
         databaseController = new DatabaseController(this);
         default_image = getResources().getDrawable(R.drawable.default_image_1);
 
+        LinearLayout layout = (LinearLayout) findViewById(R.id.ll_team_type);
 
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
@@ -232,9 +233,15 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
             if (eventDetails.getmEventTeamSize().equals("NA")) {
                 registerButton.setVisibility(View.GONE);
+
                 //  line1.setVisibility(View.GONE);
                 typeOfEventTextView.setText("Presentation Event");
+                layout.setVisibility(View.GONE);
                 if (eventDetails.getmName().equals("XUNBAO")) {
+                    registerButton.setVisibility(View.VISIBLE);
+                    registerButton.setText("PLAY NOW!");
+                }
+                if (eventDetails.getmName().equals("HACKON")){
                     registerButton.setVisibility(View.VISIBLE);
                     registerButton.setText("PLAY NOW!");
                 }
@@ -360,7 +367,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                         if (eventDetails.getmName().equals("XUNBAO"))
                             startActivity(new Intent(SingleEventActivity.this, XunbaoActivity.class));
                         else if(eventDetails.getmName().equals("HACKON")){
-                            Uri uri = Uri.parse("http://www.elementsculmyca.com/schedule"); // missing 'http://' will cause crashed
+                            Uri uri = Uri.parse("http://hackon.elementsculmyca.com"); // missing 'http://' will cause crashed
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             startActivity(intent);
                         }

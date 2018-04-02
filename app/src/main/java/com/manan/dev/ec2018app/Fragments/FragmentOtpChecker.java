@@ -425,4 +425,11 @@ public class FragmentOtpChecker extends DialogFragment {
         super.onResume();
         getDialog().setCancelable(true);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("OTPChecker", "fragment paused");
+        IncomingSms.removeListenr();
+    }
 }

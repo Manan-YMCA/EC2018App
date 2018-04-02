@@ -22,7 +22,7 @@ public class DashboardSliderFragment2 extends Fragment {
     private static final String FORMAT = "%02d:%02d:%02d:%02d";
     private Context mContext;
 
-    int seconds , minutes;
+    int seconds, minutes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +30,7 @@ public class DashboardSliderFragment2 extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_dashboard_slider_fragment2, container, false);
 
-        if(mContext == null){
+        if (mContext == null) {
             mContext = getActivity();
         }
 
@@ -41,21 +41,26 @@ public class DashboardSliderFragment2 extends Fragment {
           long curr =System.currentTimeMillis()/1000;
           long diff=fest_day-curr;
 
-            time=rootView.findViewById(R.id.timer);
+        if (curr > 1523750400) {
+            time.setText("See You at CULMYCA 19");
+        }
 
-                new CountDownTimer((diff*1000), 1000) { // adjust the milli seconds here
+        time = rootView.findViewById(R.id.timer);
+
+        new CountDownTimer((diff * 1000), 1000) { // adjust the milli seconds here
 
             public void onTick(long millisUntilFinished) {
 
-                time.setText(""+String.format(FORMAT,
+                time.setText("" + String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toDays(millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished)- TimeUnit.DAYS.toHours(
+                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished) - TimeUnit.DAYS.toHours(
                                 TimeUnit.MILLISECONDS.toDays(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
             }
+
             public void onFinish() {
                 time.setText("Fest is Live");
             }

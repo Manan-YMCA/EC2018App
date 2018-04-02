@@ -46,7 +46,7 @@ public class QRCodeActivity extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.qrcode_dialog_box, container, false);
 
-        if(mContext == null){
+        if (mContext == null) {
             mContext = getActivity();
         }
 
@@ -96,18 +96,15 @@ public class QRCodeActivity extends DialogFragment {
         } else if (String.valueOf(paymentStatus).equals("0")) {
             status.setTextColor(mContext.getResources().getColor(R.color.primaryFocused));
             status.setText("PENDING");
-        }
-        else {
+        } else {
             status.setTextColor(mContext.getResources().getColor(R.color.status_paid));
             status.setText("PAID");
         }
 
 
-        if(arrivalStatus==1)
-        {
+        if (arrivalStatus == 1) {
             qrTicketImage.setImageResource(R.drawable.arrived_qr);
         }
-
 
 
         return rootView;

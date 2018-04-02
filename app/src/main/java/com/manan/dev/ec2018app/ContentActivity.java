@@ -211,7 +211,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         CategoryItemModel microbird = new CategoryItemModel();
         microbird.setClubName("Microbird");
         microbird.setDisplayName("Electronics");
-       // microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.micobird));
+        microbird.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.microbird));
         allSampleData.add(microbird);
 
         CategoryItemModel natraja = new CategoryItemModel();
@@ -469,7 +469,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
                 break;
 
             case R.id.nav_share:
-                String msg = "Install the elements culmyca app to stay updated about the latest events. Follow the link: ";
+                String msg = "Install the elements culmyca app to stay updated about the latest events. Follow the link: http://elementsculmyca.com/app";
                 shareTextMessage(msg);
                 break;
 

@@ -48,7 +48,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.iv_back_button);
         progress = new ProgressDialog(MyNotificationsActivity.this);
         progress.setTitle("Loading...");
-        progress.setCanceledOnTouchOutside(false);
+        progress.setCanceledOnTouchOutside(true);
 //        progress.setCancelable(false);
         progress.show();
 

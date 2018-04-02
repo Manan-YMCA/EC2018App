@@ -94,7 +94,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
         holder.linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dev.getLinkedDUrl().toString()));
+                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dev.getLinkedDUrl()));
                 context.startActivity(myIntent);
             }
         });
@@ -102,7 +102,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
         holder.github.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dev.getGithubURL().toString()));
+                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dev.getGithubURL()));
                 context.startActivity(myIntent);
             }
         });

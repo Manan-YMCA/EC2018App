@@ -64,6 +64,7 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
             holder.feeStatus.setText("PAID");
         }
 
+
         mProgress = new ProgressDialog(mContext);
         mProgress.setMessage("Showing your ticket.");
         mProgress.setTitle("Loading...");
@@ -74,6 +75,11 @@ public class TicketLayoutAdapter extends RecyclerView.Adapter<TicketLayoutAdapte
         holder.itemImage.setImageBitmap(currTicket);
         holder.eventName.setText(currEvent.getmName());
         holder.eventFee.setText("RS " + String.valueOf(currEvent.getmFees()));
+
+
+        if (singleItem.getArrivalStatus() == 1) {
+            holder.itemImage.setImageResource(R.drawable.arrived_qr);
+        }
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(currEvent.getmStartTime());

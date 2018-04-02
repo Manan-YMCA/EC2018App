@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/futura"
             android:text="Event name"
@@ -36,7 +36,7 @@
             android:textColor="#000"
             android:textSize="21sp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/tv_cat_name"
@@ -44,14 +44,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_event_name"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="8dp"
             android:fontFamily="@font/futura"
             android:text="Category"
             android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="15sp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="8dp" />
 
         <View
             android:id="@+id/line1"
@@ -287,7 +287,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:id="@+id/ll_team_type">
 
                     <ImageView
                         android:id="@+id/iv_type_of_event"

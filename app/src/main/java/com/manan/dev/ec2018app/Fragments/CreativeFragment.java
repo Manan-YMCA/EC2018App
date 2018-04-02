@@ -39,7 +39,7 @@ public class CreativeFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_creative, container, false);
 
-        if(mContext == null){
+        if (mContext == null) {
             mContext = getActivity();
         }
 
@@ -50,62 +50,47 @@ public class CreativeFragment extends Fragment {
 
         Boolean k = true;
         List<DeveloperModel> devlist = new ArrayList<>();
-        DeveloperModel dev_obj1 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a12.jpg", "Sourabh", "", "Marketing", "");
 
-        DeveloperModel dev_obj2 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a1.jpg", "Anuj Raj Sharma", "", "Marketing", "");
-
-        DeveloperModel dev_obj3 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a11.jpg", "Sanjog Garv", "", "Marketing", "");
-
-        DeveloperModel dev_obj4 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a13.jpg", "Sushant Sharma", "", "Marketing", "");
-
-        DeveloperModel dev_obj5 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a9.jpg", "Randeep", "", "Marketing", "");
-
-        DeveloperModel dev_obj6 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a8.jpg", "Nishant", "", "Logistics", "");
-
-        DeveloperModel dev_obj7 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a4.jpg", "Davinderpreet Bedi", "", "Logistics", "");
-
-        DeveloperModel dev_obj8 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a7.jpg", "Kushal Sharma", "", "Logistics", "");
-
-        DeveloperModel dev_obj9 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a5.jpg", "Karan Handa", "", "Logistics", "");
-
-        DeveloperModel dev_obj10 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a14.jpg", "Sushant Gawri", "", "Logistics", "");
-
-        DeveloperModel dev_obj11 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a3.jpg", "Payal", "", "Hospitality", "");
-
-        DeveloperModel dev_obj12 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a2.jpg", "Kshitiz Manocha", "", "Hospitality", "");
-
-        DeveloperModel dev_obj13 = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a10.jpg", "Sahil Kasana", "", "Seurity", "");
-
-        DeveloperModel dev_obj14 = new DeveloperModel
+        DeveloperModel kartik = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a6.jpg", "Kartik Singla", "", "Designer", "");
+        DeveloperModel saurabh = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a12.jpg", "Sourabh", "", "Marketing", "");
+        DeveloperModel anuj = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a1.jpg", "Anuj Raj Sharma", "", "Marketing", "");
+        DeveloperModel sanjog = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a11.jpg", "Sanjog Garv", "", "Marketing", "");
+        DeveloperModel sushant = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a13.jpg", "Sushant", "", "Marketing", "");
+        DeveloperModel randeep = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a9.jpg", "Randeep", "", "Logistics", "");
+        DeveloperModel nishant = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a8.jpg", "Nishant Chetiwal", "", "Logistics", "");
+        DeveloperModel bedi = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a4.jpg", "Devinderpreet Bedi", "", "Logistics", "");
+        DeveloperModel alok = new DeveloperModel
+                ("https://manan-ymca.github.io/ElementsCulmyca2018Website/images/team/a15.jpg", "Alok Tyagi", "", "Logistics", "");
+        DeveloperModel shubham = new DeveloperModel
+                ("https://manan-ymca.github.io/ElementsCulmyca2018Website/images/team/a16.jpg", "Shubham Saini", "", "Logistics", "");
+        DeveloperModel payal = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a3.jpg", "Payal Malik", "", "Hospitality", "");
+        DeveloperModel kshitiz = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a2.jpg", "Kshitiz Manocha", "", "Hospitality", "");
+        DeveloperModel sahil = new DeveloperModel
+                ("http://www.elementsculmyca.com/images/team/a10.jpg", "Sahil Kasana", "", "Security", "");
 
-        devlist.add(dev_obj14);
-        devlist.add(dev_obj2);
-        devlist.add(dev_obj1);
-        devlist.add(dev_obj3);
-        devlist.add(dev_obj4);
-        devlist.add(dev_obj5);
-        devlist.add(dev_obj6);
-        devlist.add(dev_obj7);
-        devlist.add(dev_obj8);
-        devlist.add(dev_obj9);
-        devlist.add(dev_obj10);
-        devlist.add(dev_obj11);
-        devlist.add(dev_obj12);
-        devlist.add(dev_obj13);
+        devlist.add(kartik);
+        devlist.add(saurabh);
+        devlist.add(anuj);
+        devlist.add(sanjog);
+        devlist.add(sushant);
+        devlist.add(randeep);
+        devlist.add(nishant);
+        devlist.add(bedi);
+        devlist.add(alok);
+        devlist.add(shubham);
+        devlist.add(payal);
+        devlist.add(kshitiz);
+        devlist.add(sahil);
 
         DevelopersAdapter dev_ad = new DevelopersAdapter(mContext, devlist);
         devrecyclerView.setAdapter(dev_ad);

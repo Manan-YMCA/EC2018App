@@ -86,10 +86,13 @@ public class DevelopesFragment_1 extends Fragment {
                 ("https://scontent.fdel13-1.fna.fbcdn.net/v/t31.0-8/17097542_1767506106898555_8444256737289112828_o.jpg?oh=2287d64a0ec2c2f722429ea6014697e5&oe=5B3CAB2A", "Hemant Bansal", "https://linkedin.com/in/hemantbansal950", "Backend Developer", "https://github.com/HemantGTX950");
 
         DeveloperModel dev_obj11 = new DeveloperModel
-                ("https://he-s3.s3.amazonaws.com/media/avatars/aashifkhanate/resized/160/241a36c90687384.jpg", "Aashif Khan", "https://linkedin.com/in/aashifkhan", "App Developer", "https://github.com/aashifkhanate");
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/Screenshot_20180331-171720_2.png?alt=media&token=90b78435-723c-40c2-a7ab-2035032b1f44", "Aashif Khan", "https://linkedin.com/in/aashifkhan", "App Developer", "https://github.com/aashifkhanate");
 
         DeveloperModel dev_obj13 = new DeveloperModel
                 ("https://scontent.fdel13-1.fna.fbcdn.net/v/t1.0-1/c0.0.362.362/1425622_626759307375859_1002566326_n.jpg?_nc_cat=0&oh=97f27b3d89de3c673df46949dd44a07c&oe=5B2FD76E", "Himanshu Vishwakarma", "https://linkedin.com/in/himanshu-vishwakarma-a10b60119", "Admin App Developer", "https://github.com/HimanshuVishwakarma");
+
+        DeveloperModel dev_obj14 = new DeveloperModel
+                ("https://manan-ymca.github.io/ElementsCulmyca2018Website/images/team/t1.jpg", "Rishabh Mahajan", "https://www.linkedin.com/in/rishabh-mahajan-a12764151", "Admin App Developer", "https://github.com/rishabhrishabh");
 
 
         devlist.add(dev_obj1);
@@ -103,6 +106,7 @@ public class DevelopesFragment_1 extends Fragment {
         devlist.add(dev_obj7);
         devlist.add(dev_obj9);
         devlist.add(dev_obj13);
+        devlist.add(dev_obj14);
         devlist.add(dev_obj10);
 
         DevelopersAdapter dev_ad = new DevelopersAdapter(mContext, devlist);

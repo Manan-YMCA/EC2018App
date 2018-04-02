@@ -126,7 +126,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                 FragmentFbLogin.fbLoginButton activity = (FragmentFbLogin.fbLoginButton) mContext;
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 activity.fbStatus(true, accessToken.getUserId());
-                Toast.makeText(mContext, "Facebook Login Done!", Toast.LENGTH_SHORT).show();
+                MDToast.makeText(mContext, "Facebook Login Successful!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
             }
 
             @Override
@@ -197,6 +197,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject resp) {
+                            Log.d("xunbao", "onResponse: " + resp.toString());
                             bar.setVisibility(View.GONE);
                             try {
                                 //progressBar.dismiss();
@@ -213,7 +214,8 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
                                 MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                                 //progressBar.dismiss();
-                                e.printStackTrace();
+                                //Log.e("xunbao", "onResponse: " + e.getMessage());
+                                Log.d("xunbao", "onResponse: " + resp.toString());
                             }
                         }
                     },
@@ -223,7 +225,6 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                             bar.setVisibility(View.GONE);
                             //progressBar.dismiss();
                             MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
-                            volleyError.printStackTrace();
                         }
                     });
             queue.add(answ);
