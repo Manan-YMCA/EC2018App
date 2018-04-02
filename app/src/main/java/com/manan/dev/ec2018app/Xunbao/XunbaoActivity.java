@@ -13,13 +13,11 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.facebook.AccessToken;
-import com.manan.dev.ec2018app.ContentActivity;
 import com.manan.dev.ec2018app.Fragments.FragmentFbLogin;
 import com.manan.dev.ec2018app.LoginActivity;
 import com.manan.dev.ec2018app.R;
@@ -125,7 +123,7 @@ public class XunbaoActivity extends FragmentActivity implements FragmentFbLogin.
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(XunbaoActivity.this, ContentActivity.class).setFlags((Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)));
+        super.onBackPressed();
     }
 
     @Override

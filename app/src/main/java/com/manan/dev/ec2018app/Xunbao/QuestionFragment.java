@@ -268,14 +268,19 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
                                 loginButton.setVisibility(View.GONE);
                                 loginText.setVisibility(View.GONE);
                             } else {
-                                refreshText.setVisibility(View.VISIBLE);
-                                SharedPreferences prefs = mContext.getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
-                                String phoneNumber = prefs.getString("Phone", null);
-                                if(phoneNumber == null){
-                                    loginText.setVisibility(View.VISIBLE);
-                                } else {
-                                    loginButton.setVisibility(View.VISIBLE);
-                                }
+                                try {
+                                    refreshText.setVisibility(View.VISIBLE);
+                                    SharedPreferences prefs = mContext.getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
+                                    String phoneNumber = prefs.getString("Phone", null);
+                                    if(phoneNumber == null){
+                                        loginText.setVisibility(View.VISIBLE);
+                                    } else {
+                                        loginButton.setVisibility(View.VISIBLE);
+                                    }
+
+                                }catch (Exception e){}
+
+
                             }
                         } else if (xstatus == 3) {
                             //progressBar.dismiss();

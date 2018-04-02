@@ -11,10 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -75,9 +75,11 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 if (isNetworkAvailable()) {
                     noPostsTextView.setVisibility(View.GONE);
                     reload();
+                    Toast.makeText(CulmycaTimesActivity.this,"TER",Toast.LENGTH_SHORT).show();
                 } else {
                     noPostsTextView.setVisibility(View.VISIBLE);
                     progressBar.dismiss();
@@ -116,14 +118,19 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     @Override
     protected void onResume() {
         super.onResume();
+
         MyApplication.getInstance().setConnectivityListener(CulmycaTimesActivity.this);
     }
 
     public void reload() {
+        allposts.clear();
+
         postReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 allposts = new ArrayList<postsModel>();
+
 
                 for (DataSnapshot club : dataSnapshot.getChildren()) {
                     String clubName = club.getKey();
@@ -160,6 +167,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     }
 
     private boolean isNetworkAvailable() {
+
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
