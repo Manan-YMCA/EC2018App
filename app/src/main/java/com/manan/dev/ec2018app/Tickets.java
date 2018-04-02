@@ -69,7 +69,7 @@ public class Tickets extends AppCompatActivity {
         databaseController = new DatabaseController(Tickets.this);
         mAdapter = new TicketLayoutAdapter(Tickets.this, userTickets);
 
-        if(userTickets.size() > 0){
+        if (userTickets.size() > 0) {
             noTickets.setVisibility(View.GONE);
         }
         userTicketsView.setAdapter(mAdapter);
@@ -81,7 +81,7 @@ public class Tickets extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if (isNetworkAvailable())
-                    new LoadTickets().execute(phoneNumber);
+                    new LoadTickets().execute();
                 else
                     MDToast.makeText(Tickets.this, "No Internet Connection", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
                 s.setRefreshing(false);
@@ -89,7 +89,10 @@ public class Tickets extends AppCompatActivity {
         });
         if (phoneNumber == null) {
         } else {
-            new DisplayTickets().execute(phoneNumber);
+
+            displayTickets(phoneNumber);
+            //  new DisplayTickets().execute();
+
         }
         tickback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +103,8 @@ public class Tickets extends AppCompatActivity {
 
     }
 
-    private void reload(final String[] phone) {
+    private void reload(final String phone) {
+
         String url = getResources().getString(R.string.get_events_qr_code);
         url += phone;
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -111,8 +115,10 @@ public class Tickets extends AppCompatActivity {
                 try {
                     JSONObject obj1 = new JSONObject(response);
                     JSONArray ticketDetails = obj1.getJSONArray("data");
+                    Log.e("NO", String.valueOf(ticketDetails.length()));
                     for (int i = 0; i < ticketDetails.length(); i++) {
                         JSONObject obj2 = ticketDetails.getJSONObject(i);
+
                         QRTicketModel TicketModel = new QRTicketModel();
 
                         TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
@@ -143,6 +149,7 @@ public class Tickets extends AppCompatActivity {
     }
 
     private void displayTickets(String phoneNumber) {
+   //     Log.e("NO", String.valueOf(userTickets.size()));
 
         userTickets = databaseController.retrieveAllTickets();
         if (userTickets.size() > 0) {
@@ -173,6 +180,7 @@ public class Tickets extends AppCompatActivity {
                 }
             }
         }
+    }
 
         private void updateDatabase() {
             if (userTickets.size() > databaseController.getTicketCount()) {
@@ -184,19 +192,28 @@ public class Tickets extends AppCompatActivity {
                     databaseController.updateDbTickets(userTickets.get(i));
                 }
             }
-            new DisplayTickets().execute(phoneNumber);        }
-    }
+displayTickets(phoneNumber);
+            // new DisplayTickets().execute();
+        }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-    private class LoadTickets extends AsyncTask<String, Void, Void> {
+        private boolean isNetworkAvailable() {
+            ConnectivityManager connectivityManager
+                    = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+
+
+    private class LoadTickets extends AsyncTask<Void, Void, Void> {
         public LoadTickets() {
             super();
 
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            reload(phoneNumber);
+            return null;
         }
 
         @Override
@@ -211,34 +228,31 @@ public class Tickets extends AppCompatActivity {
             mProgress.dismiss();
         }
 
-        @Override
-        protected Void doInBackground(String... phone) {
-            reload(phone);
-            return null;
 
-        }
     }
-    private class DisplayTickets extends AsyncTask<String, Void, Void> {
-        public DisplayTickets() {
-            super();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            displayTickets(String.valueOf(strings));
-            return null;
-        }
-    }
+//    private class DisplayTickets extends AsyncTask<Void, Void, Void> {
+//        public DisplayTickets() {
+//            super();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//            displayTickets(phoneNumber);
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//        }
+//
+//
+//    }
 
 
 
