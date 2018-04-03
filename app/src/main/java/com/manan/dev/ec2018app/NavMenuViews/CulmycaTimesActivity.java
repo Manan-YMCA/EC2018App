@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,7 +78,6 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
                 if (isNetworkAvailable()) {
                     noPostsTextView.setVisibility(View.GONE);
                     reload();
-                    Toast.makeText(CulmycaTimesActivity.this,"TER",Toast.LENGTH_SHORT).show();
                 } else {
                     noPostsTextView.setVisibility(View.VISIBLE);
                     progressBar.dismiss();
