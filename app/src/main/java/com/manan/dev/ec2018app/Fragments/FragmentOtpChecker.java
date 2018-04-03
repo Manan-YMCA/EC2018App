@@ -35,6 +35,10 @@ import com.android.volley.toolbox.Volley;
 import com.manan.dev.ec2018app.R;
 import com.manan.dev.ec2018app.Utilities.IncomingSms;
 import com.manan.dev.ec2018app.Utilities.SmsListener;
+import com.valdesekamdem.library.mdtoast.MDToast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,8 +89,8 @@ public class FragmentOtpChecker extends DialogFragment {
         resendOtp = (TextView) rootView.findViewById(R.id.tv_otp_resend);
 
         addOnTextChangeListener();
-        otpNum = getOTP();
-        sendSMS(phoneNum, otpNum);
+        //otpNum = getOTP();
+        sendSMS(phoneNum);
         submitOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +102,7 @@ public class FragmentOtpChecker extends DialogFragment {
         resendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendSMS(phoneNum, otpNum);
+                sendSMS(phoneNum);
             }
         });
 
@@ -112,7 +116,7 @@ public class FragmentOtpChecker extends DialogFragment {
         return num.toString();
     }
 
-    private void sendSMS(final String phone, final String otpNum) {
+    private void sendSMS(final String phone) {
         bar.setVisibility(View.VISIBLE);
         String url = getResources().getString(R.string.send_sms_api);
 
@@ -135,10 +139,7 @@ public class FragmentOtpChecker extends DialogFragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("From", "CLMYCA");
-                params.put("To", phone);
-                params.put("TemplateName", "culmyca-otp");
-                params.put("VAR1", otpNum);
+                params.put("phone", phone);
                 return params;
             }
         };
@@ -363,20 +364,50 @@ public class FragmentOtpChecker extends DialogFragment {
     private void checkOtp() {
         bar.setVisibility(View.VISIBLE);
         retrieveEnteredText();
+
+        final String url = getResources().getString(R.string.check_otp_api);
+
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                final otpCheckStatus activity = (otpCheckStatus) mContext;
+                RequestQueue queue = Volley.newRequestQueue(mContext);
+                StringRequest smsReq = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
 
-                otpCheckStatus activity = (otpCheckStatus) mContext;
-                if (otp.equals(otpNum)) {
-                    activity.updateResult(true);
-                    bar.setVisibility(View.GONE);
-                    dismiss();
-                } else {
-                    bar.setVisibility(View.GONE);
-                    Toast.makeText(mContext, "Incorrect OTP!", Toast.LENGTH_SHORT).show();
-                }
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject object = new JSONObject(response);
+                                    int success = object.getInt("success");
+                                    if(success == 1){
+                                        activity.updateResult(true);
+                                        bar.setVisibility(View.GONE);
+                                        dismiss();
+                                    } else {
+                                        MDToast.makeText(mContext, "OTP did not match", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO
+                        bar.setVisibility(View.GONE);
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("phone", phoneNum);
+                        params.put("otp", otp);
+                        return params;
+                    }
+                };
+                queue.add(smsReq);
             }
         }, 2000);
     }

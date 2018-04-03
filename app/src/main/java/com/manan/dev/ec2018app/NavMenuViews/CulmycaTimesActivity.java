@@ -11,11 +11,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +33,9 @@ import com.manan.dev.ec2018app.Utilities.MyApplication;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Collections.sort;
 
@@ -37,13 +43,14 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
     DatabaseReference postReference;
     List<postsModel> allposts;
+    HashMap<String, ArrayList<postsModel>> postMaps;
     RecyclerView recyclerView;
-    ProgressDialog progressBar;
     LinearLayoutManager mLayoutManager;
     private CTAdapter mAdapter;
-    SwipeRefreshLayout s;
     ImageView backButton;
     TextView noPostsTextView;
+    private ChildEventListener mChildEventListener;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
         setContentView(R.layout.activity_culmyca_times);
 
         allposts = new ArrayList<postsModel>();
+        postMaps = new HashMap<>();
 
         backButton = findViewById(R.id.cul_back_button);
         recyclerView = findViewById(R.id.ctc_recycler_view);
@@ -63,39 +71,39 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
             }
         });
 
-        progressBar = new ProgressDialog(this);
-        progressBar.setMessage("Loading!");
-//        progressBar.setCancelable(false);
-        progressBar.setCanceledOnTouchOutside(false);
-        progressBar.show();
+        // = new ProgressDialog(this);
+        //.setMessage("Loading!");
+//        //.setCancelable(false);
+        //.setCanceledOnTouchOutside(false);
+        //.show();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading!");
+        progressDialog.setCancelable(true);
+        progressDialog.setCanceledOnTouchOutside(true);
+        progressDialog.show();
+
+        mLayoutManager = new LinearLayoutManager(CulmycaTimesActivity.this);
+        sort(allposts);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        mAdapter = new CTAdapter(getApplicationContext(), allposts);
+        recyclerView.setAdapter(mAdapter);
+
+        Check();
+
 
         postReference = FirebaseDatabase.getInstance().getReference("posts");
 
-        s = findViewById(R.id.swipe_refresh_layout);
-        s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                if (isNetworkAvailable()) {
-                    noPostsTextView.setVisibility(View.GONE);
-                    reload();
-                    Toast.makeText(CulmycaTimesActivity.this,"TER",Toast.LENGTH_SHORT).show();
-                } else {
-                    noPostsTextView.setVisibility(View.VISIBLE);
-                    progressBar.dismiss();
-                    s.setRefreshing(false);
-                }
-            }
-        });
 
         if (isNetworkAvailable()) {
             noPostsTextView.setVisibility(View.GONE);
-            reload();
+            //reload();
         } else {
             noPostsTextView.setVisibility(View.VISIBLE);
             MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
-            progressBar.dismiss();
-            s.setRefreshing(false);
+            //.dismiss();
+            //s.setRefreshing(false);
         }
     }
 
@@ -118,8 +126,111 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     @Override
     protected void onResume() {
         super.onResume();
-
+        attachDatabaseListener();
         MyApplication.getInstance().setConnectivityListener(CulmycaTimesActivity.this);
+    }
+
+    private void attachDatabaseListener() {
+        if(mChildEventListener == null){
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    //Log.d("yatin", dataSnapshot.toString());
+                    try {
+                        String clubName;
+                        clubName = dataSnapshot.getKey();
+                        if(!postMaps.containsKey(dataSnapshot.getKey())){
+                            postMaps.put(dataSnapshot.getKey(), new ArrayList<postsModel>());
+                        }
+                        postMaps.get(clubName).clear();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            //Log.d("yatin", data.toString());
+                            postsModel post = data.getValue(postsModel.class);
+                            assert post != null;
+                            post.setPostid(data.getKey());
+                            postMaps.get(clubName).add(post);
+                        }
+                        allposts.clear();
+                        progressDialog.dismiss();
+                        for (Map.Entry<String, ArrayList<postsModel>> entry : postMaps.entrySet()) {
+                            ArrayList<postsModel> posts = entry.getValue();
+                            allposts.addAll(posts);
+                        }
+                        sort(allposts);
+                        updateUi();
+                        Log.d("yatin", String.valueOf(allposts.size()));
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    try {
+                        String clubName;
+                        clubName = dataSnapshot.getKey();
+                        if(!postMaps.containsKey(dataSnapshot.getKey())){
+                            postMaps.put(dataSnapshot.getKey(), new ArrayList<postsModel>());
+                        }
+                        postMaps.get(clubName).clear();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            //Log.d("yatin", data.toString());
+                            postsModel post = data.getValue(postsModel.class);
+                            assert post != null;
+                            post.setPostid(data.getKey());
+                            postMaps.get(clubName).add(post);
+                        }
+                        allposts.clear();
+                        progressDialog.dismiss();
+                        for (Map.Entry<String, ArrayList<postsModel>> entry : postMaps.entrySet()) {
+                            ArrayList<postsModel> posts = entry.getValue();
+                            allposts.addAll(posts);
+                        }
+                        updateUi();
+                        Log.d("yatin", String.valueOf(allposts.size()));
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            postReference.addChildEventListener(mChildEventListener);
+        }
+    }
+
+    private void updateUi() {
+
+        Log.e("yatin", String.valueOf(allposts.size()));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        allposts.clear();
+        postMaps.clear();
+        detatchDatabaseListener();
+    }
+
+    private void detatchDatabaseListener() {
+        if(mChildEventListener != null){
+            postReference.removeEventListener(mChildEventListener);
+            mChildEventListener = null;
+        }
     }
 
     public void reload() {
@@ -155,13 +266,11 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
                 Check();
 
-                s.setRefreshing(false);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                progressBar.dismiss();
-                s.setRefreshing(false);
+                //.dismiss();
             }
         });
     }
@@ -182,23 +291,22 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     private void showNetError(boolean isConnected) {
         if (isConnected) {
             Check();
-            reload();
+            //reload();
         } else {
             Check();
-            progressBar.dismiss();
+            //.dismiss();
             MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
-            s.setRefreshing(false);
         }
     }
 
     void Check(){
         if(allposts.size() == 0){
             noPostsTextView.setVisibility(View.VISIBLE);
-            progressBar.dismiss();
+            //.dismiss();
         }
         if (allposts.size() > 0) {
             noPostsTextView.setVisibility(View.GONE);
-            progressBar.dismiss();
+            //.dismiss();
         }
     }
 

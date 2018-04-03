@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
@@ -44,6 +46,7 @@ import com.valdesekamdem.library.mdtoast.MDToast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,6 +79,8 @@ public class EventRegister extends AppCompatActivity {
     private DatabaseController databaseController;
     private ProgressBar barLoader;
     ProgressDialog pd, pd1;
+    private ArrayList<QRTicketModel> userTickets;
+    private IncomingHandler mIncomingHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,17 +91,19 @@ public class EventRegister extends AppCompatActivity {
         eventId = getIntent().getStringExtra("eventId");
         eventType = getIntent().getStringExtra("eventType");
         userDetails = new UserDetails();
+        userTickets = new ArrayList<>();
+        mIncomingHandler = new IncomingHandler(EventRegister.this);
 
 //        barLoader = (ProgressBar) findViewById(R.id.pb_register);
 //        barLoader.setVisibility(View.VISIBLE);
 
         pd = new ProgressDialog(EventRegister.this);
-        pd.setMessage("Making your Ticket...");
+        pd.setMessage("Making your Ticket");
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
 
         pd1 = new ProgressDialog(EventRegister.this);
-        pd1.setMessage("Loading your details...");
+        pd1.setMessage("Loading your details");
         pd1.setCancelable(true);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -131,7 +138,7 @@ public class EventRegister extends AppCompatActivity {
         if (phoneNumber == null) {
 
         }
-        if(isNetworkAvailable()) {
+        if (isNetworkAvailable()) {
             pd1.show();
             getDetails(phoneNumber);
         }
@@ -179,29 +186,29 @@ public class EventRegister extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                        intentName = "";
-                        intentClg = "";
-                        intentMail = "";
-                        intentPhone = "";
-                        intentPhone += mainPhone.getText().toString();
-                        intentMail += mainmail.getText().toString();
-                        for (int i = 0; i < nameText.size(); i++) {
-                            intentName += nameText.get(i).getText().toString() + ",";
-                        }
-                        intentName = intentName.substring(0, intentName.length() - 1);
+                intentName = "";
+                intentClg = "";
+                intentMail = "";
+                intentPhone = "";
+                intentPhone += mainPhone.getText().toString();
+                intentMail += mainmail.getText().toString();
+                for (int i = 0; i < nameText.size(); i++) {
+                    intentName += nameText.get(i).getText().toString() + ",";
+                }
+                intentName = intentName.substring(0, intentName.length() - 1);
 
-                        for (int i = 0; i < collegeText.size(); i++) {
-                            intentClg += collegeText.get(i).getText().toString() + ",";
-                        }
-                        intentClg = intentClg.substring(0, intentClg.length() - 1);
+                for (int i = 0; i < collegeText.size(); i++) {
+                    intentClg += collegeText.get(i).getText().toString() + ",";
+                }
+                intentClg = intentClg.substring(0, intentClg.length() - 1);
 //
-                        Boolean checker = validateCredentials();
-                        if (checker) {
-                            pd.show();
-                            registerEvent();
+                Boolean checker = validateCredentials();
+                if (checker) {
+                    pd.show();
+                    registerEvent();
 
-                        }
-                    }
+                }
+            }
 
         });
 
@@ -224,30 +231,36 @@ public class EventRegister extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
 
-                    qrCodeString = (obj.getString("qrcode"));
-
+                    int status = obj.getInt("success");
                     SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
                     String phoneNumber = prefs.getString("Phone", null);
-                    if(phoneNumber == null) {
-                        MDToast.makeText(EventRegister.this, "To view your Ticket Login with your registered Mobile Number", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show();
-                    }
-                    pd.dismiss();
-                    sendNotification();
-                    FragmentManager fm = getFragmentManager();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("qrcodestring", qrCodeString);
-                    bundle.putString("eventid", eventId);
-                    bundle.putInt("activity", 1);
-                    bundle.putString("eventid", eventId);
+
+                    if (status == 0) {
+                        pd.dismiss();
+                        checkCount(phoneNumber);
+                        MDToast.makeText(EventRegister.this, "Already Registered fro the Event", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                    } else {
+                        qrCodeString = (obj.getString("qrcode"));
+                        if (phoneNumber == null) {
+                            MDToast.makeText(EventRegister.this, "To view your Ticket Login with your registered Mobile Number", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show();
+                        }
+                        pd.dismiss();
+                        sendNotification();
+                        FragmentManager fm = getFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("qrcodestring", qrCodeString);
+                        bundle.putString("eventid", eventId);
+                        bundle.putInt("activity", 1);
+                        bundle.putString("eventid", eventId);
 // set Fragmentclass Arguments
-                    QRCodeActivity fragobj = new QRCodeActivity();
-                    fragobj.setCancelable(true);
-                    fragobj.setArguments(bundle);
-                    fragobj.show(fm, "drff");
-                    final String phone = prefs.getString("Phone", null);
-                    if (phone == null) {
+                        QRCodeActivity fragobj = new QRCodeActivity();
+                        fragobj.setCancelable(true);
+                        fragobj.setArguments(bundle);
+                        fragobj.show(fm, "drff");
+                        final String phone = prefs.getString("Phone", null);
+
+                        addTicket(phone);
                     }
-                    addTicket(phone);
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {
@@ -276,6 +289,49 @@ public class EventRegister extends AppCompatActivity {
         };
         queue.add(request);
     }
+
+    private void checkCount(final String phone) {
+        String url = getResources().getString(R.string.get_events_qr_code);
+        url += phone;
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject obj1 = new JSONObject(response);
+                    JSONArray ticketDetails = obj1.getJSONArray("data");
+                    for (int i = 0; i < ticketDetails.length(); i++) {
+                        JSONObject obj2 = ticketDetails.getJSONObject(i);
+                        QRTicketModel TicketModel = new QRTicketModel();
+
+                        TicketModel.setPaymentStatus(obj2.getInt("paymentstatus"));
+                        TicketModel.setArrivalStatus(obj2.getInt("arrived"));
+                        TicketModel.setQRcode(obj2.getString("qrcode"));
+                        TicketModel.setEventID(obj2.getString("eventid"));
+                        TicketModel.setTimeStamp(obj2.getLong("timestamp"));
+
+                        userTickets.add(TicketModel);
+                    }
+                    mIncomingHandler.sendEmptyMessage(0);
+                }
+                // Try and catch are included to handle any errors due to JSON
+                catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(request);
+
+    }
+
 
     public void sendNotification() {
         Intent my_intent = new Intent(EventRegister.this, MyNotificationResponse.class);
@@ -306,7 +362,7 @@ public class EventRegister extends AppCompatActivity {
 
     private Boolean validateCredentials() {
 
-        if(!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             MDToast.makeText(EventRegister.this, "No Internet Connection", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
             return false;
         }
@@ -437,5 +493,61 @@ public class EventRegister extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public class IncomingHandler extends Handler {
+        private WeakReference<EventRegister> yourActivityWeakReference;
+
+        IncomingHandler(EventRegister yourActivity) {
+            yourActivityWeakReference = new WeakReference<>(yourActivity);
+            databaseController = new DatabaseController(getApplicationContext());
+        }
+
+        @Override
+        public void handleMessage(Message message) {
+            if (yourActivityWeakReference != null) {
+                EventRegister yourActivity = yourActivityWeakReference.get();
+
+                switch (message.what) {
+                    case 0:
+                        updateDatabase();
+                        break;
+                }
+            }
+        }
+
+        private void updateDatabase() {
+            if (userTickets.size() > databaseController.getTicketCount()) {
+                for (int i = 0; i < userTickets.size(); i++) {
+                    databaseController.addTicketsToDb(userTickets.get(i));
+                }
+            } else {
+                for (int i = 0; i < userTickets.size(); i++) {
+                    databaseController.updateDbTickets(userTickets.get(i));
+                }
+            }
+
+            viewTicket();
+        }
+
+    }
+
+    private void viewTicket() {
+
+        QRTicketModel ticket = new QRTicketModel();
+        ticket = databaseController.retrieveTicketsByID(eventId);
+
+        FragmentManager fm = getFragmentManager();
+        Bundle bundle = new Bundle();
+        bundle.putString("qrcodestring", ticket.getQRcode());
+        bundle.putString("eventid", eventId);
+        bundle.putInt("activity", 1);
+        bundle.putString("eventid", eventId);
+// set Fragmentclass Arguments
+        QRCodeActivity fragobj = new QRCodeActivity();
+        fragobj.setCancelable(true);
+        fragobj.setArguments(bundle);
+        fragobj.show(fm, "drff");
+
     }
 }

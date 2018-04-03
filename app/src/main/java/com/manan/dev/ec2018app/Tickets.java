@@ -149,7 +149,7 @@ public class Tickets extends AppCompatActivity {
     }
 
     private void displayTickets(String phoneNumber) {
-   //     Log.e("NO", String.valueOf(userTickets.size()));
+        //     Log.e("NO", String.valueOf(userTickets.size()));
 
         userTickets = databaseController.retrieveAllTickets();
         if (userTickets.size() > 0) {
@@ -182,26 +182,26 @@ public class Tickets extends AppCompatActivity {
         }
     }
 
-        private void updateDatabase() {
-            if (userTickets.size() > databaseController.getTicketCount()) {
-                for (int i = 0; i < userTickets.size(); i++) {
-                    databaseController.addTicketsToDb(userTickets.get(i));
-                }
-            } else {
-                for (int i = 0; i < userTickets.size(); i++) {
-                    databaseController.updateDbTickets(userTickets.get(i));
-                }
+    private void updateDatabase() {
+        if (userTickets.size() > databaseController.getTicketCount()) {
+            for (int i = 0; i < userTickets.size(); i++) {
+                databaseController.addTicketsToDb(userTickets.get(i));
             }
-displayTickets(phoneNumber);
-            // new DisplayTickets().execute();
+        } else {
+            for (int i = 0; i < userTickets.size(); i++) {
+                databaseController.updateDbTickets(userTickets.get(i));
+            }
         }
+        displayTickets(phoneNumber);
+        // new DisplayTickets().execute();
+    }
 
-        private boolean isNetworkAvailable() {
-            ConnectivityManager connectivityManager
-                    = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-        }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 
     private class LoadTickets extends AsyncTask<Void, Void, Void> {
@@ -253,9 +253,6 @@ displayTickets(phoneNumber);
 //
 //
 //    }
-
-
-
 
 
 }

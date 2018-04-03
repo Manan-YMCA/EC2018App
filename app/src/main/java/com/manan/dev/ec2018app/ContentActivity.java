@@ -28,6 +28,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -220,7 +221,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
         allSampleData.add(natraja);
 
         CategoryItemModel sae = new CategoryItemModel();
-        sae.setClubName("SAE/BAJA");
+        sae.setClubName("SAE");
         sae.setDisplayName("Automobiles");
         sae.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.sae));
         allSampleData.add(sae);
@@ -579,7 +580,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
                         userTickets.add(TicketModel);
                     }
-
+                    mIncomingHandler.sendEmptyMessage(0);
                 }
                 // Try and catch are included to handle any errors due to JSON
                 catch (Exception e) {

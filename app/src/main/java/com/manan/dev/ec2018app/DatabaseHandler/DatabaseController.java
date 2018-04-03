@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class DatabaseController extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "ElementsCulmyca.db";
     private static final String TAG = "DbHelper";
     private Context context;
@@ -36,8 +36,13 @@ public class DatabaseController extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        if(i == 1 && i1 == 2) {
+            Log.d("yatin", String.valueOf(i + " " + i1));
+            db.execSQL("DROP TABLE IF EXISTS " + Schema.DbEntry.EVENT_LIST_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + Schema.DbEntry.QR_TICKET_TABLE_NAME);
+            onCreate(db);
+        }
     }
 
     public void addEntryToDb(EventDetails event) {

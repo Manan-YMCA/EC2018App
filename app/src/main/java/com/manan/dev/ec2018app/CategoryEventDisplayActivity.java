@@ -51,7 +51,6 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         clubName = getIntent().getStringExtra("clubname");
         databaseController = new DatabaseController(getApplicationContext());
         eventList = databaseController.retreiveCategory(clubName);
-//        Toast.makeText(this, clubName, Toast.LENGTH_SHORT).show();
 
         byte[] byteArray = getIntent().getByteArrayExtra("clubPhoto");
         Bitmap clubphoto = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -88,7 +87,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
             clubDescpTextView.setText("Oh, come on! You are going to compile codes for some MNC all your life anyway. Try hands-on these robotic beasts this year!");
         } else if (clubName.equals("Nataraja")) {
             clubDescpTextView.setText("Dance dance dance till your feet will follow your heart.");
-        } else if (clubName.equals("SAE/BAJA")) {
+        } else if (clubName.equals("SAE")) {
             clubDescpTextView.setText("We create! We destroy! But when we screw, even metals would cry.");
         } else if (clubName.equals("Samarpan")) {
             clubDescpTextView.setText("The different merited people who gets together and extends the technical bond to family bond.");

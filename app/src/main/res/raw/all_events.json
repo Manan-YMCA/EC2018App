@@ -4,19 +4,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523093400000,
-                "to": 1523102400000
+                "from": 1523698200000,
+                "to": 1523707200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa413abf4ace600044af07a"
+                    "_id": "5ac330f777b7050004ca7fde"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa413abf4ace600044af079"
+                    "_id": "5ac330f777b7050004ca7fdd"
                 }
             ],
             "prizes": {
@@ -29,8 +29,8 @@
             "title": "NUKKAD NATAK",
             "clubname": "Vividha",
             "category": "Cultural",
-            "desc": "Nukkad Natak is a form of theatrical performance and presentation in outdoor public spaces at the top of their voices with enthusiastic and energetic music.\nFeel closer to your roots by submerging in the art from the past, which was lost somewhere in urbanization. Grab your dholmanjira and come back to the nukkad with the message for the masses.<br>\n\nChedhenge Kuch Aise Saaz , <br>\nHarr Gali Me Gunjegi Humari Aawaz. <br>\n\nTeam Size: 12-25 members \nTime Limit: 15-20 minutes (Including setup) <br>",
-            "rules": "1. Language should be Hindi. However, some words or quotes from other languages may be used. <br>\n2. The theme for the nukkad natak should reveal a social issue and should clearly illustrate the message as well. <br>\n 3. Household items like utensils and instruments like dholak, drums and sticks are allowed. <br>\n4. Banners and posters are allowed.  <br>\n5. No electronic media is allowed. <br>\n6. The script should be original. If found copied, it will lead to direct disqualification. <br>\n7. Judgment will be based on script, clarity, expressions, crowd interaction and teamwork.<br>\n8. Exceeding the time limit will lead to negative marking.<br>\n<br>\nGeneral Rules:\n 1. Participants must bring their college identity cards along with them. <br>\n2. Participants must reach the venue an hour prior to the event. <br>\n3. Any form of obscenity or inappropriate behaviour with the management, judges, organizers and crowd will result in direct disqualification.<br>\n 4. The final decision regarding any matter lies in the hands of the organizers & judges, and is absolutely binding. <br>\n5. All the equipment provided by the college must be handles with proper care.<br>",
+            "desc": "Nukkad Natak is a form of theatrical performance and presentation in outdoor public spaces at the top of their voices with enthusiastic and energetic music.\nFeel closer to your roots by submerging in the art from the past, which was lost somewhere in urbanization. Grab your dholmanjira and come back to the nukkad with the message for the masses.\n\nChedhenge Kuch Aise Saaz , \nHarr Gali Me Gunjegi Humari Aawaz. \n\nTeam Size: 12-25 members \nTime Limit: 15-20 minutes (Including setup)",
+            "rules": "1. Language should be Hindi. However, some words or quotes from other languages may be used. \n2. The theme for the nukkad natak should reveal a social issue and should clearly illustrate the message as well. \n 3. Household items like utensils and instruments like dholak, drums and sticks are allowed. \n4. Banners and posters are allowed.  \n5. No electronic media is allowed. \n6. The script should be original. If found copied, it will lead to direct disqualification. \n7. Judgment will be based on script, clarity, expressions, crowd interaction and teamwork.\n8. Exceeding the time limit will lead to negative marking.\n\nGeneral Rules:\n 1. Participants must bring their college identity cards along with them. \n2. Participants must reach the venue an hour prior to the event. \n3. Any form of obscenity or inappropriate behaviour with the management, judges, organizers and crowd will result in direct disqualification.\n 4. The final decision regarding any matter lies in the hands of the organizers & judges, and is absolutely binding. \n5. All the equipment provided by the college must be handles with proper care.",
             "venue": "Lal Chowk",
             "__v": 0,
             "photolink": null
@@ -38,19 +38,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522890000000,
-                "to": 1522895400000
+                "from": 1523512800000,
+                "to": 1523709000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a74c0b471e700045fbd11"
+                    "_id": "5ac332f977b7050004ca7ff2"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a74c0b471e700045fbd10"
+                    "_id": "5ac332f977b7050004ca7ff1"
                 }
             ],
             "prizes": {
@@ -64,7 +64,7 @@
             "clubname": "Eklavya",
             "category": "Cultural",
             "desc": "A duo tries to shoot as many 3 pointers in a limited time to become the ultimate shooter.",
-            "rules": "1. Each Team gets 90 Sec to make the shots.<br>\n2. Players can shoot from 4 different spots marked on the court.<br>\n3. Players will shoot alternatively.<br>\n4. Making a shot with money ball lends extra points.<br>\n5. Team with most points wins.",
+            "rules": "1. Each Team gets 90 Sec to make the shots.\n2. Players can shoot from 4 different spots marked on the court.\n3. Players will shoot alternatively.\n4. Making a shot with money ball lends extra points.\n5. Team with most points wins.",
             "venue": "Basketball Court",
             "__v": 0,
             "photolink": null
@@ -72,19 +72,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522895400000,
-                "to": 1522902600000
+                "from": 1523511000000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a862ab471e700045fbd22"
+                    "_id": "5ac3330c77b7050004ca7ff4"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a862ab471e700045fbd21"
+                    "_id": "5ac3330c77b7050004ca7ff3"
                 }
             ],
             "prizes": {
@@ -98,7 +98,7 @@
             "clubname": "Eklavya",
             "category": "Cultural",
             "desc": "2 teams having 3 players each compete with each other to carry their flag safely to the finish point without being hit by opponent teams water balloon.",
-            "rules": "1. Each team consists of 3 members.<br>\n2. Players can’t change their roles in middle of the event.<br>\n3. A player can play in only one team.<br>\n4. Flag bearer needs to follow created fixed path strictly.<br>",
+            "rules": "1. Each team consists of 3 members.\n2. Players can’t change their roles in middle of the event.\n3. A player can play in only one team.\n4. Flag bearer needs to follow created fixed path strictly.",
             "venue": "Main Ground",
             "__v": 0,
             "photolink": null
@@ -106,19 +106,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522890000000,
-                "to": 1522897200000
+                "from": 1523512800000,
+                "to": 1523709000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a86d3b471e700045fbd24"
+                    "_id": "5ac3331e77b7050004ca7ff6"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a86d3b471e700045fbd23"
+                    "_id": "5ac3331e77b7050004ca7ff5"
                 }
             ],
             "prizes": {
@@ -140,19 +140,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1522906200000
+                "from": 1523511000000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a86eab471e700045fbd26"
+                    "_id": "5ac3332d77b7050004ca7ff8"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a86eab471e700045fbd25"
+                    "_id": "5ac3332d77b7050004ca7ff7"
                 }
             ],
             "prizes": {
@@ -166,7 +166,7 @@
             "clubname": "Eklavya",
             "category": "Cultural",
             "desc": "Catch more and more Volleyballs while keeping the previous ones in your hands.",
-            "rules": "1. Team consists of 2 players.<br>\n2. One teammate throws the balls from a fixed distance.<br>\n3. Catching the last ball(basketball) doubles the score.",
+            "rules": "1. Team consists of 2 players.\n2. One teammate throws the balls from a fixed distance.\n3. Catching the last ball(basketball) doubles the score.",
             "venue": "Main Ground",
             "__v": 0,
             "photolink": null
@@ -174,19 +174,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522886400000,
-                "to": 1523066400000
+                "from": 1523512800000,
+                "to": 1523707200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a86fab471e700045fbd28"
+                    "_id": "5ac3385477b7050004ca8015"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a86fab471e700045fbd27"
+                    "_id": "5ac3385477b7050004ca8014"
                 }
             ],
             "prizes": {
@@ -208,19 +208,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522882800000,
-                "to": 1522976400000
+                "from": 1523507400000,
+                "to": 1523601000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a8712b471e700045fbd2a"
+                    "_id": "5ac3390a77b7050004ca801b"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9a8712b471e700045fbd29"
+                    "_id": "5ac3390a77b7050004ca801a"
                 }
             ],
             "prizes": {
@@ -242,25 +242,25 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522923300000,
-                "to": 1522928700000
+                "from": 1523528100000,
+                "to": 1523533500000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9acbfbb471e700045fbd31"
+                    "_id": "5ac3317177b7050004ca7fe0"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9acbfbb471e700045fbd30"
+                    "_id": "5ac3317177b7050004ca7fdf"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9acbfbb471e700045fbd2f",
@@ -270,24 +270,25 @@
             "desc": "A short comedy sketch or piece of humorous writing, especially a parody.",
             "rules": "This is a presentation event.",
             "venue": "Auditorium",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522936800000,
-                "to": 1522941300000
+                "from": 1523541600000,
+                "to": 1523546100000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41491f4ace600044af07c"
+                    "_id": "5ac3319077b7050004ca7fe2"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41491f4ace600044af07b"
+                    "_id": "5ac3319077b7050004ca7fe1"
                 }
             ],
             "prizes": {
@@ -309,52 +310,53 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522996200000,
-                "to": 1523003400000
+                "from": 1523601000000,
+                "to": 1523608200000
             },
             "coordinators": [
                 {
-                    "name": "Karan",
-                    "phone": 8930694819,
-                    "_id": "5a9acd64b471e700045fbd37"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3319c77b7050004ca7fe4"
                 },
                 {
-                    "name": "Harsh",
-                    "phone": 8802562515,
-                    "_id": "5a9acd64b471e700045fbd36"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3319c77b7050004ca7fe3"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9acd64b471e700045fbd35",
             "title": "MIME",
             "clubname": "Vividha",
             "category": "Cultural",
-            "desc": " MIME is a performance art involving the acting out a story through body motions only without any speech.<br>\nSafed Kaale Ho Kar Aayenge,<br>\nBina Bole Sab Keh Jayenge.\n",
+            "desc": " MIME is a performance art involving the acting out a story through body motions only without any speech.\nSafed Kaale Ho Kar Aayenge,\nBina Bole Sab Keh Jayenge.\n",
             "rules": " 1. Only one entry per institute will be entertained. \n2. Maximum number of eight participants are allowed to participate in this item. (Including light and music) \n3. Judgment will most likely be based on the qualities like idea, creativity of presentation, use of make-up, music and general impression.  \n4. Duration of performance shall be maximum of 7 minutes.\n5. Exceeding the time limit will lead to negative marking. \n6. Any kind of fluid, live animals, flame or heavy objects are not allowed.\n\nGeneral Rules:\n 1. Participants must bring their college identity cards along with them. \n2. Participants must reach the venue an hour prior to the event. \n3. Any form of obscenity or inappropriate behaviour with the management, judges, organizers and crowd will result in direct disqualification.\n 4. The final decision regarding any matter lies in the hands of the organizers & judges, and is absolutely binding. \n5. All the equipment provided by the college must be handles with proper care.",
             "venue": "Auditorium",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523010600000,
-                "to": 1523017800000
+                "from": 1523615400000,
+                "to": 1523622600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa56a93d9842500041999db"
+                    "_id": "5ac331a677b7050004ca7fe6"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa56a93d9842500041999da"
+                    "_id": "5ac331a677b7050004ca7fe5"
                 }
             ],
             "prizes": {
@@ -376,19 +378,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523079000000,
-                "to": 1523089800000
+                "from": 1523683800000,
+                "to": 1523694600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa56c3ad9842500041999dd"
+                    "_id": "5ac331b277b7050004ca7fe8"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa56c3ad9842500041999dc"
+                    "_id": "5ac331b277b7050004ca7fe7"
                 }
             ],
             "prizes": {
@@ -410,19 +412,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522942200000,
-                "to": 1522943100000
+                "from": 1523543400000,
+                "to": 1523548800000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aaea305fbf9190004c37405"
+                    "_id": "5ac3394877b7050004ca8021"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aaea305fbf9190004c37404"
+                    "_id": "5ac3394877b7050004ca8020"
                 }
             ],
             "prizes": {
@@ -444,19 +446,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522944000000,
-                "to": 1522944900000
+                "from": 1523548800000,
+                "to": 1523549700000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa419d7f4ace600044af08a"
+                    "_id": "5ac3395777b7050004ca8023"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa419d7f4ace600044af089"
+                    "_id": "5ac3395777b7050004ca8022"
                 }
             ],
             "prizes": {
@@ -478,19 +480,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523088000000,
-                "to": 1523093400000
+                "from": 1523692800000,
+                "to": 1523698200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa418baf4ace600044af082"
+                    "_id": "5ac338ee77b7050004ca8019"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa418baf4ace600044af081"
+                    "_id": "5ac338ee77b7050004ca8018"
                 }
             ],
             "prizes": {
@@ -510,88 +512,21 @@
             "photolink": null
         },
         {
-            "fee": 10,
-            "timing": {
-                "from": 1520777100000,
-                "to": 1520775540000
-            },
-            "coordinators": [
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5aa528e4d9842500041999d2"
-                },
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5aa528e4d9842500041999d1"
-                }
-            ],
-            "prizes": {
-                "prize1": null,
-                "prize2": null,
-                "prize3": null
-            },
-            "eventtype": "team",
-            "_id": "5aa52628d9842500041999cb",
-            "title": "PS4 GAMING",
-            "clubname": "Manan",
-            "category": "Cultural",
-            "desc": "PS4 Gaming description",
-            "rules": "PS4 Gaming rules",
-            "venue": "CC - 07",
-            "__v": 0,
-            "photolink": null
-        },
-        {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
-            },
-            "coordinators": [
-                {
-                    "name": "Jayant",
-                    "phone": 8901360094,
-                    "_id": "5aaad4f6517e7700041bbd47"
-                },
-                {
-                    "name": "Meenakshi",
-                    "phone": 7982698994,
-                    "_id": "5aaad4f6517e7700041bbd46"
-                }
-            ],
-            "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
-            },
-            "eventtype": "solo",
-            "_id": "5aaad4f6517e7700041bbd45",
-            "title": "CANDID CANVAS",
-            "clubname": "Jhalak",
-            "category": "Cultural",
-            "desc": "Photography Event.",
-            "rules": "Rules will be described on the spot.",
-            "venue": "Lal Chowk",
-            "__v": 0
-        },
-        {
-            "fee": 0,
-            "timing": {
-                "from": 1523025000000,
-                "to": 1523026800000
+                "from": 1523629800000,
+                "to": 1523631600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41a10f4ace600044af08c"
+                    "_id": "5ac3396f77b7050004ca8025"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41a10f4ace600044af08b"
+                    "_id": "5ac3396f77b7050004ca8024"
                 }
             ],
             "prizes": {
@@ -613,19 +548,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523079000000,
-                "to": 1523086200000
+                "from": 1523683800000,
+                "to": 1523691000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41a97f4ace600044af08e"
+                    "_id": "5ac3398a77b7050004ca8027"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41a97f4ace600044af08d"
+                    "_id": "5ac3398a77b7050004ca8026"
                 }
             ],
             "prizes": {
@@ -647,19 +582,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523086200000,
-                "to": 1523093400000
+                "from": 1523691000000,
+                "to": 1523698200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41af0f4ace600044af090"
+                    "_id": "5ac3399c77b7050004ca8029"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa41af0f4ace600044af08f"
+                    "_id": "5ac3399c77b7050004ca8028"
                 }
             ],
             "prizes": {
@@ -681,19 +616,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523093400000,
-                "to": 1523100600000
+                "from": 1523698200000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4201ff4ace600044af096"
+                    "_id": "5ac339ae77b7050004ca802b"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4201ff4ace600044af095"
+                    "_id": "5ac339ae77b7050004ca802a"
                 }
             ],
             "prizes": {
@@ -715,19 +650,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522920600000,
-                "to": 1523014200000
+                "from": 1523525400000,
+                "to": 1523619000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa418dcf4ace600044af084"
+                    "_id": "5ac3391b77b7050004ca801d"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa418dcf4ace600044af083"
+                    "_id": "5ac3391b77b7050004ca801c"
                 }
             ],
             "prizes": {
@@ -749,19 +684,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523003400000,
-                "to": 1523010600000
+                "from": 1523608200000,
+                "to": 1523615400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa418f1f4ace600044af086"
+                    "_id": "5ac3392677b7050004ca801f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa418f1f4ace600044af085"
+                    "_id": "5ac3392677b7050004ca801e"
                 }
             ],
             "prizes": {
@@ -783,19 +718,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522904400000,
-                "to": 1522915200000
+                "from": 1523682000000,
+                "to": 1523696400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aaea210fbf9190004c37401"
+                    "_id": "5ac33b9b77b7050004ca804d"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aaea210fbf9190004c37400"
+                    "_id": "5ac33b9b77b7050004ca804c"
                 }
             ],
             "prizes": {
@@ -805,31 +740,31 @@
             },
             "eventtype": "solo",
             "_id": "5a9afa9fb471e700045fbd71",
-            "title": "DUAL SHADES",
+            "title": "WALL SCRAWL",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Black and white is never out of vogue. Every time it out stands the ecstasy of colours by its charm. Paint your own world of two shades and show the true power every colour holds.",
-            "rules": "1. Only 2 shades can be used (any 2).\n2.  There will be no prelims.\n3. 3 hours will be provided for submission.\n4. Charcoal sticks will be provided.\n5. Theme will be provided on the spot.\n",
-            "venue": "Lal Chowk",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "1.\tTeam of 3-4 members. \n2.\tThere will be prelims for 1 hour.\n3.\tFor prelims, paint colors and brushes will be provided.\n4.\tTheme will be provided on the spot.\n5.\t6 teams to be shortlisted on basis of prelims and provided with wall and sprays.\n6.\t3 hours will be provided for main event.\n7.\tExtra time will not be provided.",
+            "venue": "Prelims - Lal Chowk & Main Event - Shakuntalam",
             "__v": 0,
             "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522990800000,
-                "to": 1523005200000
+                "from": 1523595600000,
+                "to": 1523610000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa42191f4ace600044af09c"
+                    "_id": "5ac33af477b7050004ca803f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa42191f4ace600044af09b"
+                    "_id": "5ac33af477b7050004ca803e"
                 }
             ],
             "prizes": {
@@ -839,10 +774,10 @@
             },
             "eventtype": "team",
             "_id": "5a9afb16b471e700045fbd74",
-            "title": "SHOE MAKING",
+            "title": "SHOE DESIGNING",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "A man is judged by a shoe he wears. Show the world what you got up in your sleeves by designing your ideas on a shoe.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1.\tTeam of 2 members only. \n2.\tThere will be prelims for 1 hour.\n3.\tFor prelims, paint colors and brushes will be provided.\n4.\tTheme will be provided on the spot.\n5.\t10 teams to be shortlisted on basis of prelims and provided with shoes and acrylic colors.\n6.\t3 hours will be provided for submission.\n7.\tExtra time will not be provided.",
             "venue": "Lal Chowk",
             "__v": 0,
@@ -851,19 +786,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523521800000,
+                "to": 1523532600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa421def4ace600044af0a0"
+                    "_id": "5ac33b2577b7050004ca8041"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa421def4ace600044af09f"
+                    "_id": "5ac33b2577b7050004ca8040"
                 }
             ],
             "prizes": {
@@ -876,7 +811,7 @@
             "title": "TATTOO MAKING",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Tattoos make statements that need to be made. Is fashion your passion? Ink your tattoos with a wide range of colours.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Team of 2 members only.\n2. There will be no prelims.\n3. 3 hours will be provided for submission.\n4. Paints and brushes will be provided.\n5. Open theme.\n",
             "venue": "Lal Chowk",
             "__v": 0,
@@ -885,19 +820,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1523100600000
+                "from": 1523521800000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4220ff4ace600044af0a2"
+                    "_id": "5ac33b2e77b7050004ca8043"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4220ff4ace600044af0a1"
+                    "_id": "5ac33b2e77b7050004ca8042"
                 }
             ],
             "prizes": {
@@ -910,7 +845,7 @@
             "title": "DOODLING",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Too many ideas colliding in your mind. Can't decide what to do? Combine them into a wonderful doodle art and the prize is for you.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1.\tOnline platform will be provided to showcase your doodle art.\n2.\tMail us at ymcasrijan@gmail.com in any form.\n3.\tEntries before due date will be accepted.\n",
             "venue": "Online Event",
             "__v": 0,
@@ -919,85 +854,87 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522902600000,
-                "to": 1523100600000
+                "from": 1523507400000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Satyam",
-                    "phone": 8586010437,
-                    "_id": "5a9afd0bb471e700045fbd7f"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33b3777b7050004ca8045"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9afd0bb471e700045fbd7e"
+                    "_id": "5ac33b3777b7050004ca8044"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5a9afd0bb471e700045fbd7d",
             "title": "MADHUBANI ART",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Living on a land of diversity, are you a passionate lover of simplicity in diversity? Want to give a tribute to ancient history Make way for your prize by sending your entries.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1.\tOnline platform will be provided to showcase your Madhubani art.\n2.\tMail us at ymcasrijan@gmail.com in any form.\n3.\tEntries before due date will be accepted.\n",
             "venue": "Online Event",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522902600000,
-                "to": 1523100600000
+                "from": 1523507400000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Satyam",
-                    "phone": 8586010437,
-                    "_id": "5a9afd5eb471e700045fbd82"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33b6477b7050004ca8047"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9afd5eb471e700045fbd81"
+                    "_id": "5ac33b6477b7050004ca8046"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5a9afd5eb471e700045fbd80",
             "title": "BOOKMARK DESIGNING",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Sick of being called a nerd? Exhibit your artistic side by devising your idea and contriving it as a bookmark.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1.\t Online platform will be provided to showcase your idea for bookmark.\n2.\tMail us at ymcasrijan@gmail.com in any form.\n3.\tEntries before due date only be accepted.\n",
             "venue": "Online Event",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523005200000,
-                "to": 1523012400000
+                "from": 1523610000000,
+                "to": 1523617200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa42244f4ace600044af0a4"
+                    "_id": "5ac33b7377b7050004ca8049"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa42244f4ace600044af0a3"
+                    "_id": "5ac33b7377b7050004ca8048"
                 }
             ],
             "prizes": {
@@ -1010,7 +947,7 @@
             "title": "GUIDE 'N' DRAW",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Test how strong your friendship is by playing this thrilling  guide and draw  game, full of zeal and enthusiasm.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1.\tTeam of 2 members only.\n2.\tOne will be blinded and other will dictate the path.\n3.\tMarker and white board will be provided.\n",
             "venue": "Lal Chowk",
             "__v": 0,
@@ -1019,19 +956,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523091600000,
-                "to": 1523098800000
+                "from": 1523696400000,
+                "to": 1523703600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4225ef4ace600044af0a6"
+                    "_id": "5ac33b7f77b7050004ca804b"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4225ef4ace600044af0a5"
+                    "_id": "5ac33b7f77b7050004ca804a"
                 }
             ],
             "prizes": {
@@ -1044,7 +981,7 @@
             "title": "PICTIONARY",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "A fan of dumb charades? Want to play it with a new twist? Here is the place for you.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1.\tTeam of 2 members only.\n2.\tOne member will be given a movie title and need to be described to another member with the help of marker and white board.\n",
             "venue": "Lal Chowk",
             "__v": 0,
@@ -1053,85 +990,87 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523017800000,
-                "to": 1523019600000
+                "from": 1523622600000,
+                "to": 1523624400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bcb630ac5d700047200dc"
+                    "_id": "5ac33bd477b7050004ca804f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bcb630ac5d700047200db"
+                    "_id": "5ac33bd477b7050004ca804e"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9bcb630ac5d700047200da",
             "title": "KALAM KO SALAAM",
             "clubname": "Vivekanand Manch",
             "category": "Cultural",
-            "desc": "A tribute to the man who woke up the country. To the man who was a teacher until the very end. See the inspirational life of the People's President and know his message. Be there, believe me, you would not want to miss it. See you there.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Main Stage",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522902600000,
-                "to": 1523079000000
+                "from": 1523507400000,
+                "to": 1523683800000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bcccc0ac5d700047200df"
+                    "_id": "5ac33be277b7050004ca8051"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bcccc0ac5d700047200de"
+                    "_id": "5ac33be277b7050004ca8050"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9bcccc0ac5d700047200dd",
             "title": "YMCAGIRI (ZUMBA)",
             "clubname": "Vivekanand Manch",
             "category": "Cultural",
-            "desc": "Dance your heart out in the fun frenzy where nobody’s watching cause everybody is dancing. Friends, faculty, and family all are on the same side. Be the part of the havoc and start the CULMYCA with a bang. See you there. ",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Lal Chowk",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523093400000,
-                "to": 1523097000000
+                "from": 1523698200000,
+                "to": 1523701800000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa423b7f4ace600044af0a8"
+                    "_id": "5ac33beb77b7050004ca8053"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa423b7f4ace600044af0a7"
+                    "_id": "5ac33beb77b7050004ca8052"
                 }
             ],
             "prizes": {
@@ -1144,7 +1083,7 @@
             "title": "CATCH ME IF YOU CAN",
             "clubname": "Vivekanand Manch",
             "category": "Cultural",
-            "desc": "Taking your enthusiasm to cloud nine. Be ready to use your nerve and knowledge for a ride around YMCA Campus while picking up points.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "Rules will be told on the spot.",
             "venue": "Lal Chowk",
             "__v": 0,
@@ -1153,382 +1092,257 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522906200000,
-                "to": 1523104200000
+                "from": 1523511000000,
+                "to": 1523709000000
             },
             "coordinators": [
                 {
-                    "name": "Ashu",
-                    "phone": 8285856223,
-                    "_id": "5a9bcf450ac5d700047200e5"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33bfc77b7050004ca8055"
                 },
                 {
-                    "name": "Karan",
-                    "phone": 9896352743,
-                    "_id": "5a9bcf450ac5d700047200e4"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33bfc77b7050004ca8054"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9bcf450ac5d700047200e3",
             "title": "DOT - DAY OF TARANNUM",
             "clubname": "Taranuum",
             "category": "Cultural",
-            "desc": "Love bollywood masti! Here we are to the rescue with some related puzzles and quizzes. Juggle some jumbled words and unravel a melody, a song. It doesn't matter whether you sing it or not, all you need are the wits to untangle the puzzle and an eye of a music lover!\nSo join the DOTs, mark your dates, and spend a day with us, at Tarannum ;)\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. It may consist of individual/team.\n2. It includes certain fun events to choose from.\n",
             "venue": "Lal Chowk",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522935000000,
-                "to": 1522938600000
+                "from": 1523539800000,
+                "to": 1523543400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd08b0ac5d700047200e8"
+                    "_id": "5ac33c0677b7050004ca8057"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd08b0ac5d700047200e7"
+                    "_id": "5ac33c0677b7050004ca8056"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9bd08b0ac5d700047200e6",
             "title": "GROUP SONG",
             "clubname": "Taranuum",
             "category": "Cultural",
-            "desc": "Happiness is singing in a choir. We at Culmyca'18, present you a performance with harmonised and pitch perfect songs that will surely revive your spirits. So get ready for a unique blend of western and classical music!",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Main Stage",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523028600000,
-                "to": 1523035800000
+                "from": 1523633400000,
+                "to": 1523640600000
             },
             "coordinators": [
                 {
-                    "name": "Karan",
-                    "phone": 9896352743,
-                    "_id": "5a9bd1930ac5d700047200eb"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c1077b7050004ca8059"
                 },
                 {
-                    "name": "Ashu",
-                    "phone": 8285856223,
-                    "_id": "5a9bd1930ac5d700047200ea"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c1077b7050004ca8058"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9bd1930ac5d700047200e9",
             "title": "WOODSTOCK",
             "clubname": "Taranuum",
             "category": "Cultural",
-            "desc": "On the night of the April Dip, get ready to rock to the best and the brightest bands.  Head bang or head home!! The hospice for all the musicians, the dream of every college-based rock-a-holic, most awaited music gig Woodstock, Battle of Bands is here. Get ready for a massive sonic experience with varied genres. So brace yourself for a battle, for the greatest of glories. Come forward and be a part of it. Rock n roll mofos.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "- Team must contain 5-10 members\n- No pre-recorded tracks\n- 20 minutes including sound check\n- Only standard drum kit will be provided\n- Language no bar\n- Extra marks for original composition\n",
             "venue": "Main Stage",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522992600000,
-                "to": 1522999800000
+                "from": 1523597400000,
+                "to": 1523604600000
             },
             "coordinators": [
                 {
-                    "name": "Karan",
-                    "phone": 9896352743,
-                    "_id": "5a9bd2140ac5d700047200ee"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c1a77b7050004ca805b"
                 },
                 {
-                    "name": "Ashu",
-                    "phone": 8285856223,
-                    "_id": "5a9bd2140ac5d700047200ed"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c1a77b7050004ca805a"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9bd2140ac5d700047200ec",
             "title": "WEIS",
             "clubname": "Taranuum",
             "category": "Cultural",
-            "desc": "WESTERN EASTERN INSTRUMENT SOLO\nIf music is your passion, then we have the stage! Get your musical skills tested in our Western, Eastern and Instrument Solos.! May the best singer win! ;)\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "- Maximum 3 members\n- Time allowed would be 6 minutes\n- No pre-recorded karaoke tracks\n- Maximum 3 instruments allowed\n- Drums kit would be provided\n",
             "venue": "MMC",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522935000000,
-                "to": 1522938600000
+                "from": 1523539800000,
+                "to": 1523543400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd2a70ac5d700047200f1"
+                    "_id": "5ac33c2677b7050004ca805d"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd2a70ac5d700047200f0"
+                    "_id": "5ac33c2677b7050004ca805c"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9bd2a70ac5d700047200ef",
             "title": "QAWWALI",
             "clubname": "Taranuum",
             "category": "Cultural",
-            "desc": "Qawwali-a sufi devotional music-an elaborate verbal code sung to the beat of the dholak, reflecting regional styles and languages. Make sure you witness this musical ecstasy.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Main Stage",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523100600000,
-                "to": 1523104200000
+                "from": 1523705400000,
+                "to": 1523709000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd2ee0ac5d700047200f4"
+                    "_id": "5ac33c2e77b7050004ca805f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd2ee0ac5d700047200f3"
+                    "_id": "5ac33c2e77b7050004ca805e"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9bd2ee0ac5d700047200f2",
             "title": "SECRET SET",
             "clubname": "Taranuum",
             "category": "Cultural",
-            "desc": "A live and melodious acoustic performance by the group of students delivering an extravagant soulful and funky piece of music. It's time to ROCK!",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Lal Chowk",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523100600000
+                "from": 1523507400000,
+                "to": 1523518200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd4800ac5d700047200f7"
+                    "_id": "5ac33c6877b7050004ca8061"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bd4800ac5d700047200f6"
+                    "_id": "5ac33c6877b7050004ca8060"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
-            },
-            "eventtype": "solo",
-            "_id": "5a9bd4800ac5d700047200f5",
-            "title": "DROP THE GEAR 'N' STEER",
-            "clubname": "SAE/BAJA",
-            "category": "Technical",
-            "desc": "An interactive and immersive simulation to enable the users to experience sensations that are even more realistic than with a controller/keyboard and to provide them with a device that will hone their racing performance.",
-            "rules": "- The track would be chosen by the contender.\n- Fastest lap without (or less) damaged car will be considered.\n- For another run ,the contender will have to participate again.\n- Judges decision will be final.\n- Any damage to the simulation equipment will be fined heavily.",
-            "venue": "Projector Room",
-            "__v": 0
-        },
-        {
-            "fee": 0,
-            "timing": {
-                "from": 1522899000000,
-                "to": 1523010600000
-            },
-            "coordinators": [
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5a9bd5830ac5d700047200fa"
-                },
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5a9bd5830ac5d700047200f9"
-                }
-            ],
-            "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
-            },
-            "eventtype": "team",
-            "_id": "5a9bd5830ac5d700047200f8",
-            "title": "CANTILEVER",
-            "clubname": "SAE/BAJA",
-            "category": "Technical",
-            "desc": "A fun team-based event which will require your engineering skills. Two teams facing each other building their own catapult system with the provided materials and to hit the other team with a projectile.",
-            "rules": "- Team of four persons is to be made.\n- First to complete and hit the other team wins.\n- Time to construct is limited of 15 mins.\n- Judges decision will be final.",
-            "venue": "Main Ground",
-            "__v": 0
-        },
-        {
-            "fee": 0,
-            "timing": {
-                "from": 1522906200000,
-                "to": 1523010600000
-            },
-            "coordinators": [
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5a9bd5f90ac5d700047200fd"
-                },
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5a9bd5f90ac5d700047200fc"
-                }
-            ],
-            "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
-            },
-            "eventtype": "team",
-            "_id": "5a9bd5f90ac5d700047200fb",
-            "title": "BURNOUT PIT CREW",
-            "clubname": "SAE/BAJA",
-            "category": "Technical",
-            "desc": "Ever wanted to experience the thrill and feel that is experienced by the pit crew, here we have come with an idea that would fulfil your wish, become a crew member!!",
-            "rules": "- No of member for a team will be decided by the judge.\n- Fastest time for the task will be considered .\n- Compulsory to wear the mechanic suits and safety glasses.\n- Judges decision will be final.\n- Please handle the equipment carefully.\n",
-            "venue": "Main Ground",
-            "__v": 0
-        },
-        {
-            "fee": 0,
-            "timing": {
-                "from": 1522985400000,
-                "to": 1523100600000
-            },
-            "coordinators": [
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5a9bda7e0ac5d70004720100"
-                },
-                {
-                    "name": "",
-                    "phone": 0,
-                    "_id": "5a9bda7e0ac5d700047200ff"
-                }
-            ],
-            "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
-            },
-            "eventtype": "NA",
-            "_id": "5a9bda7e0ac5d700047200fe",
-            "title": "AUTOSPARX",
-            "clubname": "SAE/BAJA",
-            "category": "Technical",
-            "desc": "Unvielling the all new and better Supra 2018 Car . A fun event can be related as a social media contest.",
-            "rules": "The one with the greatest number of likes will be given merchandises and a shout-out on the SUPRA Facebook and Instagram page.",
-            "venue": "Lal Chowk",
-            "__v": 0
-        },
-        {
-            "fee": 0,
-            "timing": {
-                "from": 1522902600000,
-                "to": 1522913400000
-            },
-            "coordinators": [
-                {
-                    "name": "Amit",
-                    "phone": 9971934647,
-                    "_id": "5a9bdc760ac5d70004720103"
-                },
-                {
-                    "name": "Madhur",
-                    "phone": 8505950156,
-                    "_id": "5a9bdc760ac5d70004720102"
-                }
-            ],
-            "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9bdc760ac5d70004720101",
             "title": "BOT FUTBOL",
             "clubname": "Microbird",
             "category": "Technical",
-            "desc": "Ever thought about playing soccer with your creation and no physical exertion. Do you think you have an ability to fuse technology with sports ? So get ready for the challenge and make your own bots to compete in the soccer world.\n\nProblem Statement : Fabricate a manually controlled robot capable of playing football.\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "Maximum number of members in one team: 4.\nMaximum size : 35x35x25 cm.     \nPower supply :- The voltage at any point in the bot should not be more than 24 volts. Internal combustion engines are not allowed. \nOrganisers will provide 230 V AC supply.\nControl : Wired or wireless. For wired control, length of wire should be at least 10 m and for wireless control, the remote should have dual frequency.\nGeneral rules : The bot should not damage the arena.\nPoints will be deducted in any such case. Winner will be declared on knockout basis. \n- Decision of judges will be final.\n\nNote : There should not be any mechanism of trapping the ball. And the kicking mechanism employed should be well within the bot specifications.",
             "venue": "Shakuntalam",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522989000000,
-                "to": 1522992600000
+                "from": 1523593800000,
+                "to": 1523597400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa428f7f4ace600044af0ab"
+                    "_id": "5ac33c7177b7050004ca8063"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa428f7f4ace600044af0aa"
+                    "_id": "5ac33c7177b7050004ca8062"
                 }
             ],
             "prizes": {
@@ -1541,7 +1355,7 @@
             "title": "TECHCHEF",
             "clubname": "Microbird",
             "category": "Technical",
-            "desc": "Do you call yourself a techie? Here is a chance to enhance your knowledge and storm your brain. Not good at cooking ? Well, if you are a crazy electronic freak, components are your vegetables, breadboard is your base . Techchef presents you an event where you have to apply your basic knowledge and make a circuit with the given components. Do register yourself now and surely give it a try.\n\nRound 1 :It will be electronics questionnaire round. \nRound 2:Case Study of an electronic problem statement.\nRound 3:PCB Designing Round.\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Task will be performed individually. \n2. Accuracy in work will be given highest priviledge. \n3. Time constraints will be there.\n4. Use of internet will lead to immediate disqualification.\n5. Candidate getting maximum points will b the winner.\n6. Candidate should not carry any electronic equipment with themselves.\n7. Top 3 Winners will be awarded.",
             "venue": "F-06",
             "__v": 0,
@@ -1550,184 +1364,189 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523521800000,
+                "to": 1523532600000
             },
             "coordinators": [
                 {
-                    "name": "Amit",
-                    "phone": 9971934647,
-                    "_id": "5a9bdf2e0ac5d70004720109"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c7a77b7050004ca8065"
                 },
                 {
-                    "name": "Madhur",
-                    "phone": 8505950156,
-                    "_id": "5a9bdf2e0ac5d70004720108"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c7a77b7050004ca8064"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9bdf2e0ac5d70004720107",
             "title": "CATCH'EM ALL",
             "clubname": "Microbird",
             "category": "Technical",
-            "desc": "Ever dreamt of raining balls from the sky, colourful shinnying balls? Well here is a catch you have got to catch them all. This tricky game holds you prizes for your bot operating skills. Come along with your friends to catch your ball. For you gotta catch'em to win them.\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "General :\n1. Scores will be counted as per the no of balls collected by bot in fixed duration\n2. Two attempts will be provided to the participant maximum of two scores will be considered .\n3. Only one chance is provided to pick a particular ball . \n4. Any attempt to catch the same ball in second attempt will be considered as a foul . \n5. The bot should  not  cross the boundary line which will be marked at the end of ramp (path from with balls will flow).\n6. The team can have maximum of 4 members.\n\nBOT SPECIFICATIONS :\n1. The  manually  controlled  bot  must  fit  in  a  cube  of  25x25x25  cc.\n2. No kind of  AC  power supply  will  be  provided  at  the  event. \n3. Each team is allowed  to  have  only  one  bot. \n4. The  catching  area  of the  bot  must  be  a  hole  of  diameter  5  cm only.  There  must  not  be  any addition (like a v-funnel etc.) to the hole.\"\n",
             "venue": "Lal Chowk",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522999800000,
-                "to": 1523010600000
+                "from": 1523604600000,
+                "to": 1523615400000
             },
             "coordinators": [
                 {
-                    "name": "Amit",
-                    "phone": 9971934647,
-                    "_id": "5a9be01a0ac5d7000472010c"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c8477b7050004ca8067"
                 },
                 {
-                    "name": "Yavika",
-                    "phone": 9996201285,
-                    "_id": "5a9be01a0ac5d7000472010b"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c8477b7050004ca8066"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9be01a0ac5d7000472010a",
             "title": "DEADLIFT",
             "clubname": "Microbird",
             "category": "Technical",
-            "desc": "Does the world of robotics interest you? A robot which carries load, collects and overcomes all the hurdles, just like a superhero, is what dead lift is all about. Kindly mark your presence at this event because the world of technology awaits you.\n\nCHALLENGE:\n\" More speed , more power with minimum time\"",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "\nRobo-specification:\n* Maximum dimensions of bot can be 25×25×25cm.\n* Maximum weight can be 4kg.\n* Power supply will be provided.\n\nGeneral Rules :\n1. Each team can have maximum of  4 members.Students from different institutes can form a team.\n2. Robot should be as per the given specifications and it should not damage the arena or to other team's bots during the match in any manner.\n3. The competition is based on a time trail system.The bot taking the minimum time will be considered as winner.\n4. Two hand touches are allowed for the teams bringing their own bot with no penalty otherwise it is allowed with a penalty of 10 seconds.For each hand touch , penalty time will be added further to overall time taken by the bot for completion of track.\n5. Not all hurdles you can skip, only specific hurdles you can skip during the race.\n6. If the block falls in between , then bot have to restart.\n7. If the bot crosses the boundary by one wheel, penalty of 5 seconds is added and if the bot crosses the boundary by 2 wheels , penalty of 10 seconds will be added to the total time.",
             "venue": "Shakuntalam",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522996200000,
-                "to": 1523010600000
+                "from": 1523601000000,
+                "to": 1523615400000
             },
             "coordinators": [
                 {
-                    "name": "Amit",
-                    "phone": 9971934647,
-                    "_id": "5a9be0860ac5d7000472010f"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c8c77b7050004ca8069"
                 },
                 {
-                    "name": "Yavika",
-                    "phone": 9996201285,
-                    "_id": "5a9be0860ac5d7000472010e"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33c8c77b7050004ca8068"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9be0860ac5d7000472010d",
             "title": "MASTERMIND",
             "clubname": "Microbird",
             "category": "Technical",
-            "desc": "It is time to play your master stroke and leave everyone bewildered. All you need to do is ace the game with your lightening fast speed, versatility and technical knowledge. So, are you ready to leave everyone in an awe with your skills??\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. The maximum number of members in each team will be 4. Candidates from different institutes can make a team.\n2. There will be three rounds. Rounds will be declared at the moment.\n3. Use of internet is strictly prohibited.\n4. The team getting maximum points at the end of all rounds will be declared as winner.\n5. Top three teams will be awarded with exciting prizes.\n",
             "venue": "MMC",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522902600000,
-                "to": 1522999800000
+                "from": 1523507400000,
+                "to": 1523604600000
             },
             "coordinators": [
                 {
-                    "name": "Sahil",
-                    "phone": 8470880017,
-                    "_id": "5a9bf2a30ac5d70004720112"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33cf577b7050004ca8073"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9bf2a30ac5d70004720111"
+                    "_id": "5ac33cf577b7050004ca8072"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9bf2a30ac5d70004720110",
             "title": "GRAND PRIXX",
             "clubname": "Samarpan",
             "category": "Technical",
-            "desc": "Gear up to experience a challenging robot race where you will race your own robots, crossing the hurdles, overcoming the obstacles and going up and down over the planks! A competitive robo racing challenge awaits you.\nIn this a team of 3 members have to design a racing bot to run on a track consisting of some hurdles and obstructions. Total time taken by bot to complete the track and total score of team is calculated and recorded. The team which completes the given track in minimum time will win. The event has 2 rounds.\n\nScoring criteria (Round 1) :-\n1. In first round, wired and wireless bot have same scoring criteria.\n2. There are total 8 hurdles and after crossing each hurdle 10 points will be awarded.\n3. For skipping any hurdle, there is a penalty of 5 points. A team can skip maximum of 4 hurdles.\n4. For any human intervention, there is a penalty of 3 points.\n5. The team has to finish the race within 3 minutes.\n6. If any team has completed the race before the time limit then the remaining time (in seconds) is added to the total score of teams.\n7. If any team is not able to complete the race within the time limit, they can extend their limit by 20 seconds but corresponding points will be cut off from their scores.\n8. The team which still could not complete the race within 200 seconds (3 minutes+20 seconds) will directly be disqualified.\n\nScoring criteria (Round 2):-\n1. Wired and wireless bots have a little difference in scoring criteria.\n2. For Wired bot, the overall score achieved is multiplied by the factor of 1.3\nFor wireless bot, the overall score achieved is multiplied by the factor of 1.5\n3. There are mainly 6 technical hurdles and 3 non-technical hurdles within racing track.\n4. For crossing each technical hurdle by the bot, 10 points will be awarded.\nFor crossing each non-technical hurdle by the bot, 7 points will be awarded.\n5. Team can skip a maximum of 3 hurdles out of all hurdles in a run.\n6. Skipping of technical hurdles leads to penalty of 5 points and skipping of non-technical hurdles leads to penalty of 3 points.\n7. Total time given to participant team is maximum 6 minutes.\n8. If any team has complete the race before the time limit then the remaining time (in seconds) is added to the total score of teams.\n9. If any team is not able to complete the race within the time limit, they can extend their limit by 30 seconds but corresponding points will be cut off from their scores.\n10. The team which still could not complete the race within 390 seconds ( 6 minutes+ 30 seconds) will be directly disqualified.\n11. There is a penalty of 3 points for any human interventions introduced in race.\n12. If the wireless connection breaks down within the race then time will not be paused, so teams have to design their bot with keeping in mind that condition.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Each team should have maximum of 3 team members.\n2. All team members must be of same institute.\n3. Participants have to design their own bot for participation. However they can design their bot as Wired or Wireless.\n4. For wired bot , they have to bring their own power supply and the length of wires should be as long as it must not tangle within complete run.\n5. For wireless bot, team should on board power supply and a dual frequency remote.\n6. Voltage difference between any two terminals or path is not to be greater than 12 V.\n7. For wired bot, the weight of bot must not be greater than 1 kg.\n8. For wireless bot, the weight of bot must not be greater than 1.5 kg including weight of batteries.\n9. The bot designed by the team should be equal to or less than 25*25*25 cm.\n10. Any human intervention leads to penalty in scoring criteria.\n11. Any type of damage to track by bot or participant leads to direct disqualify.\n12. Decisions of judges and coordinators are final in every manner.",
             "venue": "Shakuntalam",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522989000000,
-                "to": 1522999800000
+                "from": 1523593800000,
+                "to": 1523604600000
             },
             "coordinators": [
                 {
-                    "name": "Sahil",
-                    "phone": 8470880017,
-                    "_id": "5a9c00a10ac5d70004720115"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33d0c77b7050004ca8075"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9c00a10ac5d70004720114"
+                    "_id": "5ac33d0c77b7050004ca8074"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9c00a10ac5d70004720113",
             "title": "TUG O BOT",
             "clubname": "Samarpan",
             "category": "Technical",
-            "desc": "We have always enjoyed playing tug of war with our friends. Ever heard about tug of bots? A game where you replace humans by robots! It sounds really enthralling! This event aims to conduct a tug of war between two robots.\nTug of bots is a type of technical event which will be organised in Elements Culmyca’18. In this event, each team will have to form their team and will have to design a bot whether wired or wireless. The robots will face each other on a pre-designed arena with a string attaching one to the other. There will be 3 rounds with increasing difficulty levels.\n\n\nFirst round would be easy with no hurdles and is the knockout round. Second round will have some hurdles and the third and the final round will be a surprise for the participants. The score will be recorded on the run.\nWinners will be selected on the basis of their scores and will be awarded with cash prizes and certificates.\n\nARENA -\n1. The game field consists of ‘SAND’ arena having dimensions 2.5×2 metres. The thickness of sand arena will be 50-100 mm.\n2. Finishing line will be provided at the end of both the sides of arena.\n3. Hurdles will be uniformly distributed in the arena.\n\nHURDLES -\n- Rollers\n- Cylinders (with up and down movement)\n- Holes\n- Surprise hurdles (not in control of the participants)\n\nNote - Hurdles will be live for 10 to 20 seconds.\n\nLIFELINE -\nParticipants will be provided with an extra switch to activate a wall. This will give a chance to the participants to have a ‘come back’ in the game if they are losing.\nNOTE - This life line can be activated in any round, only once throughout the whole game.\n\nBOT SPECIFICATIONS -\nDimensions -(25×25×25) cm with ± 5% error.\nWIRED BOTS - Weight -1 kg (max.). Length of wires should be as long as it must not get entangled during the game.\nWIRELESS BOTS - Weight -1.5 kg (max.) Including weight of battery. Team should on board power supply and a dual frequency remote.\n\nROUNDS - There will be 3 rounds -\nROUND 1 - Simple, with no hurdles (duration:-1-2 min)\nROUND 2 - switches for the above listed hurdles will be provided to the participating teams. ( Duration - 3-5 min)\nROUND 3 - SURPRISE!!!! ( Duration - 5 min)\n\nSCORING CRITERIA- \n1st ROUND - The bot that wins within the first 1 minute will be the winner. If the time exceeds then the bot that will be able to resist more or is able to drag the other bot more will be the winner.\n2nd ROUND - Scoring will be done on the basis of hurdles chosen by the participants. Taking the lifeline will also affect the final score.\n3rd ROUND - !!!…..SURPRISE…!!!",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "- Each team should have maximum of 3 team members.\n- Members of a team can be of same or different institutes. Members should bring their ID cards with them.\n- Participants have to design their own bots for participation. However they can design their bot as wired or wireless.\n- For wired bot, teams have to bring their own power supply.\n- Any human intervention will lead to penalty in the scoring criteria.\n- Any type of damage to arena by bot or participant will lead to disqualification.\n- Decisions of judges and coordinators will be final in every manner.\n\nRULES FOR HURDLES -\n- The switches for the hurdles will be provided to the participants in the second round.\n- The participant will be able to choose only a single hurdle for his/her competitor. As soon as a team chooses a hurdle, the other 2 hurdles will get deactivated for that team ; while for the other team, that hurdle would get deactivated which was chosen by the 1st team.\n- Rollers will be present at all times but they’ll get activated only when the switch is pressed.\n- Surprise hurdles will be there in the 3rd round.",
             "venue": "Shakuntalam",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522931400000
+                "from": 1523521800000,
+                "to": 1523536200000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa42daff4ace600044af0ae"
+                    "_id": "5ac33d6c77b7050004ca807f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa42daff4ace600044af0ad"
+                    "_id": "5ac33d6c77b7050004ca807e"
                 }
             ],
             "prizes": {
@@ -1740,7 +1559,7 @@
             "title": "BIG FACT HUNT",
             "clubname": "Ananya",
             "category": "Cultural",
-            "desc": "Not just about being deliberate or desperate globally active, but 'Big fact hunt' is about who leads the war of knowledge and takes this rebellion of awareness to enormous stature.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Participants from outside the university are allowed. \n2. Decisions of judges will be final.\n",
             "venue": "MMC",
             "__v": 0,
@@ -1749,19 +1568,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523089800000,
-                "to": 1523098800000
+                "from": 1523694600000,
+                "to": 1523703600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4300bf4ace600044af0b1"
+                    "_id": "5ac33d7a77b7050004ca8081"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa4300bf4ace600044af0b0"
+                    "_id": "5ac33d7a77b7050004ca8080"
                 }
             ],
             "prizes": {
@@ -1774,7 +1593,7 @@
             "title": "ALPHAAZ",
             "clubname": "Ananya",
             "category": "Cultural",
-            "desc": "A fiesta for all the writers, penmen, wordsmiths and scribblers to jot down their artistry in the most emancipating way and a gateway to fathom the deep oceans of their unexplored selves.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. A topic/phrase/story line/idea will be given on the spot for which the participant has to jot down his/her piece of writing.\n2. For more details, stay tuned to www.facebook.com/ymca.ananya\n",
             "venue": "LT-01",
             "__v": 0,
@@ -1783,266 +1602,274 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522990800000,
-                "to": 1523003400000
+                "from": 1523595600000,
+                "to": 1523608200000
             },
             "coordinators": [
                 {
-                    "name": "Mahi",
-                    "phone": 9990600113,
-                    "_id": "5a9edff8d3964f0004e11f80"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33d8977b7050004ca8083"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9edff8d3964f0004e11f7f"
+                    "_id": "5ac33d8977b7050004ca8082"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5a9edff8d3964f0004e11f7e",
             "title": "WITSVILLA",
             "clubname": "Ananya",
             "category": "Cultural",
-            "desc": "\"War of Words\" to \"Flip-Flop\" through diametric facets to an \"Impromptu\" ad-lib, 'WITSVILLA' is here again to challenge your wits and wisdom.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "Round 1: War of words (Group Discussion) \nRound 2: Flip Flop - A total of 2 minutes speaking time: 1 min in favour and 1 min against the topic \nRound 3: Impromptu: 1.5 minute for thinking and 1.5 minute for speaking OR a face off between two participants.\n",
             "venue": "Conference Hall & LT-01",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523077200000,
-                "to": 1523089800000
+                "from": 1523682000000,
+                "to": 1523694600000
             },
             "coordinators": [
                 {
-                    "name": "Anshul Koul",
-                    "phone": 9953878639,
-                    "_id": "5a9ee11dd3964f0004e11f83"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33de377b7050004ca8085"
                 },
                 {
-                    "name": "Anshul Sharma",
-                    "phone": 9560465594,
-                    "_id": "5a9ee11dd3964f0004e11f82"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33de377b7050004ca8084"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5a9ee11dd3964f0004e11f81",
             "title": "JAM",
             "clubname": "Ananya",
             "category": "Cultural",
-            "desc": "Spruce yourself up a little more, dilate your ears a little more, withhold your rat eyes a little more, since this game of spontaneity & reflexes will leave you agape in 'Just a Minute'.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Language: English. \n\u200e2. INDIVIDUAL participation \n\u200e3. In the group of participants, one starts speaking on the topic given on the spot. \n\u200e4. A mistake of any kind to upset the rules of British English leads to other participants banging the table. \n\u200e5. The one who bangs first gets to point the flaw and continue from there on. \n\u200e6. The JAM master is God.\n\u200e7. In case of any doubts, refer to the rules mentioned above.",
             "venue": "Conference Hall",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523003400000,
-                "to": 1523017800000
+                "from": 1523608200000,
+                "to": 1523622600000
             },
             "coordinators": [
                 {
-                    "name": "Rhidam",
-                    "phone": 9717564004,
-                    "_id": "5a9ee46fd3964f0004e11f86"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33df177b7050004ca8087"
                 },
                 {
-                    "name": "Mahi",
-                    "phone": 9990600113,
-                    "_id": "5a9ee46fd3964f0004e11f85"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33df177b7050004ca8086"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5a9ee46fd3964f0004e11f84",
             "title": "KAAVYOSTSAV",
             "clubname": "Ananya",
             "category": "Cultural",
-            "desc": "Unleash the kavi in you with 'Kaavyotsav' this year. The poetic symposium 'Mushaira', the audacious 'Slam poetry' and the conventional poetry 'Poemgasm'; three forms, one stage, one love - poetry!",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "Forms and styles - \n- Mushaira \n- Slam Poetry\n- Poemgasm\n\n1. This is a bilingual event.\n2. One or a maximum of two participants are allowed in a single entry. \n3. This event shall comprise of two rounds. \n4. The speaking time will be 3 to 5 minutes per entry for both rounds. \n\nRound 1: Every participating individual or team(2 max) will send their poems in doc being recited in the chosen form (mushaira, slam and normal recitation) at official ID of Kaavyotsav i.e. ananyakaavyotsav17@gmail.com.\n\nRound 2: The entries that will be shortlisted from the first round shall present their poems ( new one or the one they sent) in college. ",
             "venue": "Auditorium",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522904400000,
-                "to": 1522917000000
+                "from": 1523509200000,
+                "to": 1523521800000
             },
             "coordinators": [
                 {
-                    "name": "Anshul Koul",
-                    "phone": 9953878639,
-                    "_id": "5a9ee4ecd3964f0004e11f89"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e0c77b7050004ca8089"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9ee4ecd3964f0004e11f88"
+                    "_id": "5ac33e0c77b7050004ca8088"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5a9ee4ecd3964f0004e11f87",
             "title": "INSURRECTION",
             "clubname": "Ananya",
             "category": "Cultural",
-            "desc": "Passion, confidence and eloquence transform words into arguments and arguments into debates. If you think that it is better to debate than to surrender without a battle, 'Insurrection' awaits you!",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. It is a bilingual team event. \n2. Two participants are allowed per team. \n3. One participant will speak for the motion, and the other participant will speak against the motion. \n4. Speaking time will be 3+1. (3 minutes for putting forward your stance, and 1 minute for concluding) \n5. Topic will be released two days before the event.\n\n For more details about the literary and debating events in EC'18, stay tuned to www.facebook.com/ymca.ananya",
             "venue": "Conference Hall",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523025000000,
-                "to": 1523026800000
+                "from": 1523629800000,
+                "to": 1523631600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eeac0d3964f0004e11f8c"
+                    "_id": "5ac33d2077b7050004ca8077"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eeac0d3964f0004e11f8b"
+                    "_id": "5ac33d2077b7050004ca8076"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9eeac0d3964f0004e11f8a",
             "title": "AIR DRUM",
             "clubname": "Samarpan",
             "category": "Technical",
-            "desc": "You all might have seen a number of drum shows. But, have you ever seen drum sticks beating in air? Literally, there’s no base and we hear the drum beats! This is what is called an ‘Air Drum’.\nAir drum basically provides the same joy to the drummer like normal drum sets. But, it improves one’s creativity as well as virtuosity.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Main Stage",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522924200000,
-                "to": 1523122200000
+                "from": 1523529000000,
+                "to": 1523727000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eeba1d3964f0004e11f8f"
+                    "_id": "5ac33d2977b7050004ca8079"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eeba1d3964f0004e11f8e"
+                    "_id": "5ac33d2977b7050004ca8078"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9eeba1d3964f0004e11f8d",
             "title": "AIR SHIP",
             "clubname": "Samarpan",
             "category": "Technical",
-            "desc": "What if the Culmyca' slogan flies up in the air during those three most awaited days of the year? Wouldn’t it be fascinating to our eyes? Wouldn’t it be a creative idea to  use helium balloons?\nWouldn’t it be more appealing if a technical touch is added to it? Well, our this event revolves around the same!",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Main Ground",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522936800000,
-                "to": 1522938600000
+                "from": 1523541600000,
+                "to": 1523543400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eec44d3964f0004e11f92"
+                    "_id": "5ac33c9577b7050004ca806b"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eec44d3964f0004e11f91"
+                    "_id": "5ac33c9577b7050004ca806a"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9eec44d3964f0004e11f90",
-            "title": "ELECTRANCE",
-            "clubname": "Samarpan",
+            "title": "LUMOSTANZA",
+            "clubname": "Microbird",
             "category": "Technical",
-            "desc": "Have you ever seen illuminating dancers performing in the dark? Imagine, if this created beautiful patterns in the dark! Well, it would be quite attractive and innovative too! Adding more spice, what if lights on the dancer suits are synchronised with music? Definitely, it will bring spark to the dark. Electrance is a combination of dance, light and music.",
-            "rules": "This is a presentation event.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "This is a technical stage show.",
             "venue": "Main Stage",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523118600000
+                "from": 1523503800000,
+                "to": 1523723400000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eed52d3964f0004e11f95"
+                    "_id": "5ac33d4577b7050004ca807d"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5a9eed52d3964f0004e11f94"
+                    "_id": "5ac33d4577b7050004ca807c"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5a9eed52d3964f0004e11f93",
             "title": "VIRTUAL DISPLAY",
             "clubname": "Samarpan",
             "category": "Technical",
-            "desc": "Would you like to see the logo of the University in some unique way? Something illusive and eye-pleasing?\nHere, we have our event called Virtual Display which works on the concept of propeller display.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Administrative Block",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
@@ -2080,19 +1907,19 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523037600000,
-                "to": 1523052000000
+                "from": 1523509200000,
+                "to": 1523520000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa440f8f4ace600044af0b9"
+                    "_id": "5ac32d8e77b7050004ca7fdc"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa440f8f4ace600044af0b8"
+                    "_id": "5ac32d8e77b7050004ca7fdb"
                 }
             ],
             "prizes": {
@@ -2102,196 +1929,201 @@
             },
             "eventtype": "solo",
             "_id": "5a9af99db471e700045fbd68",
-            "title": "WALL SCRAWL",
+            "title": "DUAL SHADES",
             "clubname": "Srijan",
             "category": "Cultural",
-            "desc": "Want to give your painting a chance to mesmerise people ?Want to break the stereotypical idea of painting on a piece of paper?Excited to print the walls with your ideas? Grab the chance by registering for Wall Scrawl.",
-            "rules": "1.\tTeam of 3-4 members. \n2.\tThere will be prelims for 1 hour.\n3.\tFor prelims, paint colors and brushes will be provided.\n4.\tTheme will be provided on the spot.\n5.\t6 teams to be shortlisted on basis of prelims and provided with wall and sprays.\n6.\t3 hours will be provided for main event.\n7.\tExtra time will not be provided.",
-            "venue": "Prelims - Lal Chowk & Main Event - Shakuntalam",
+            "desc": "Black and white is never out of vogue. Every time it out stands the ecstasy of colours by its charm. Paint your own world of two shades and show the true power every colour holds.",
+            "rules": "1. Only 2 shades can be used (any 2).\n2.  There will be no prelims.\n3. 3 hours will be provided for submission.\n4. Charcoal sticks will be provided.\n5. Theme will be provided on the spot.\n",
+            "venue": "Lal Chowk",
             "__v": 0,
             "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523075400000,
-                "to": 1523086200000
+                "from": 1523680200000,
+                "to": 1523691000000
             },
             "coordinators": [
                 {
-                    "name": "Gaurav",
-                    "phone": 8860449388,
-                    "_id": "5aa44656f4ace600044af0bc"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e3277b7050004ca808b"
                 },
                 {
-                    "name": "Hemant",
-                    "phone": 7015321391,
-                    "_id": "5aa44656f4ace600044af0bb"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e3277b7050004ca808a"
                 }
             ],
             "prizes": {
-                "prize1": "1500",
-                "prize2": "1000",
-                "prize3": "500"
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5aa44656f4ace600044af0ba",
             "title": "CODEXPLOD",
             "clubname": "Manan",
             "category": "Technical",
-            "desc": "A coding challenge for all the geeks out there. We promise you a diverse set of problems, ranging from breadth-first-search to greedy approach, from bit-manipulation to dynamic programming. If you have an appetite for solving problems, this challenge is definitely for you.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Each team can have maximum 2 participants.\n2. Cross-college teams are allowed.\n3. Total number of problems - 6\n4. Total time - 3 hours\n5. Use of internet resources is prohibited.\n6. Judgement Criteria i) Number of problems solved ii) Total time taken iii) Plagiarism\n7. No extra time shall be given to the teams reaching late.",
             "venue": "CC-08",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522902600000,
-                "to": 1522909800000
+                "from": 1523507400000,
+                "to": 1523514600000
             },
             "coordinators": [
                 {
-                    "name": "Gaurav",
-                    "phone": 8860449388,
-                    "_id": "5aa446e4f4ace600044af0bf"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e8c77b7050004ca808d"
                 },
                 {
-                    "name": "Hemant",
-                    "phone": 7015321391,
-                    "_id": "5aa446e4f4ace600044af0be"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e8c77b7050004ca808c"
                 }
             ],
             "prizes": {
-                "prize1": "1500",
-                "prize2": "1000",
-                "prize3": "500"
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5aa446e4f4ace600044af0bd",
             "title": "CODE WARS",
             "clubname": "Manan",
             "category": "Technical",
-            "desc": "Debugging has always been a frustrating task for all. So.. here we are to 'help' you in the regard. Your task will be to debug the given erroneous code.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Each team can have maximum 2 participants.\n2. Cross college teams are allowed.\n3. Programming Language- C/C++.\n4. Minimum changes should be made to the given code.\n5. The teams, which debug the code in the minimum time,\n will reach the next round.\n6. In case of any dispute, the decision of organisers will be final.",
             "venue": "CC-08",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522915200000,
-                "to": 1522918800000
+                "from": 1523520000000,
+                "to": 1523523600000
             },
             "coordinators": [
                 {
-                    "name": "Gaurav",
-                    "phone": 8860449388,
-                    "_id": "5aa4479ef4ace600044af0c5"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e9677b7050004ca808f"
                 },
                 {
-                    "name": "Hemant",
-                    "phone": 7015321391,
-                    "_id": "5aa4479ef4ace600044af0c4"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e9677b7050004ca808e"
                 }
             ],
             "prizes": {
-                "prize1": "1500",
-                "prize2": "1000",
-                "prize3": "500"
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5aa4479ef4ace600044af0c3",
             "title": "FORCE CODE",
             "clubname": "Manan",
             "category": "Technical",
-            "desc": "Coding in a language that we already know, is cliche. What if we learn a new one and start coding then and there ? You'll be given a choice of languages, in which you haven't coded earlier (probably), and you'll have to solve the problem in that language.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Each team can have maximum 2 participants.\n2. Cross-college teams are allowed.\n3. Each team has to code in an esoteric language(eg. LOLCODE, brainfuck etc). \n4. Each team can select any esoteric language from the set of languages allowed.\n5. Teams are allowed to refer to the given documentation ONLY.\n6. Use of the Internet is prohibited.\n7. Judgment Criteria - Team that solves the maximum number of codes in event's span.\n 8. Total questions - 5",
             "venue": "CC-08",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522918800000,
-                "to": 1522926000000
+                "from": 1523523600000,
+                "to": 1523530800000
             },
             "coordinators": [
                 {
-                    "name": "Hemant",
-                    "phone": 7015321391,
-                    "_id": "5aa449a1f4ace600044af0cd"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e9f77b7050004ca8091"
                 },
                 {
-                    "name": "Naman",
-                    "phone": 8222831183,
-                    "_id": "5aa449a1f4ace600044af0cc"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33e9f77b7050004ca8090"
                 }
             ],
             "prizes": {
-                "prize1": "1500",
-                "prize2": "1000",
-                "prize3": "500"
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5aa449a1f4ace600044af0cb",
             "title": "CODE GOLF",
             "clubname": "Manan",
             "category": "Technical",
-            "desc": "Like in golf where the low score wins, the fewest amount of characters \"wins\". While certainly, the best solution in every case is not necessarily the solution that has the fewest characters or fewest lines of code, it can be a fun way to exercise your programming muscles.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Each team can have maximum 2 participants.\n2. Cross-college teams are allowed.\n3. Total number of problems - 6\n4. Total time - 2 hours\n5. Use of internet resources is prohibited.\n6. Judgement Criteria i) Number of problems solved ii) Number of characters iii) Plagiarism \n7. No extra time shall be given to the teams reaching late.",
             "venue": "cc - 08",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523089800000,
-                "to": 1523100600000
+                "from": 1523694600000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Hemant",
-                    "phone": 7015321391,
-                    "_id": "5aa44a24f4ace600044af0d0"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33ea877b7050004ca8093"
                 },
                 {
-                    "name": "Naman",
-                    "phone": 8222831183,
-                    "_id": "5aa44a24f4ace600044af0cf"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33ea877b7050004ca8092"
                 }
             ],
             "prizes": {
-                "prize1": "750",
-                "prize2": "500",
-                "prize3": "300"
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5aa44a24f4ace600044af0ce",
             "title": "TREASURE HUNT",
             "clubname": "Manan",
-            "category": "Technical",
-            "desc": "Put your mind and body into action to unravel the secrets spread around the college. A team event consisting of puzzles that'll take you to places, as occurring according to the current puzzle and the first team to go through all the checkpoints WINS!",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. Each team shall consist of 2 members.\n2. Use of mobile phones to solve the clues is permitted.\n3. Adoption of wrong means(asking or telling answers to other teams, handing over the clue to another team) shall lead to immediate disqualification.\n4. The team that reaches the Treasure Destination first, wins the event.\n5. Volunteers are free to enquire from participants about the solution of the previous clue.\n6. In case of any dispute, the decision of organisers will be considered final. \n 7. Cross-college teams are allowed.",
             "venue": "Whole Campus",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523107800000
+                "from": 1523503800000,
+                "to": 1523712600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa6cc8f46ba760004239a16"
+                    "_id": "5ac339f077b7050004ca802f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aa6cc8f46ba760004239a15"
+                    "_id": "5ac339f077b7050004ca802e"
                 }
             ],
             "prizes": {
@@ -2301,7 +2133,7 @@
             },
             "eventtype": "solo",
             "_id": "5aa6cabb46ba760004239a09",
-            "title": "COLOURS OF FARIDABAD",
+            "title": "THEMED PHOTOGRAPHY",
             "clubname": "Jhalak",
             "category": "Cultural",
             "desc": "Photography is an art of observation. It has little to do with the things you see and everything to do with the way you see them...\nHow amazing it feels to capture the essence of the place you've lived your college life in! \nSo in this event you have to capture different images from different corners of Faridabad... which shows different shades of our city, essence of our city, different colours of Faridabad.\n",
@@ -2313,25 +2145,25 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523107800000
+                "from": 1523503800000,
+                "to": 1523712600000
             },
             "coordinators": [
                 {
-                    "name": "Jayant",
-                    "phone": 8901360094,
-                    "_id": "5aa6cb2546ba760004239a0e"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a0077b7050004ca8031"
                 },
                 {
-                    "name": "Hiteshwar",
-                    "phone": 9416026957,
-                    "_id": "5aa6cb2546ba760004239a0d"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a0077b7050004ca8030"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5aa6cb2546ba760004239a0c",
@@ -2341,30 +2173,31 @@
             "desc": "A lit meme can lit your life for quite a time. Ready to join this social cause & make world a better place ;p",
             "rules": "1.\tIt is an online pre-fest event.\n2.\tRegistrations are compulsory to be able to participate in the event.\n3.\tToo vulgar or disturbing meme will be disqualified.\n",
             "venue": "Online Event",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523107800000
+                "from": 1523503800000,
+                "to": 1523712600000
             },
             "coordinators": [
                 {
-                    "name": "Jayant",
-                    "phone": 8901360094,
-                    "_id": "5aa6cb7e46ba760004239a11"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a2277b7050004ca8033"
                 },
                 {
-                    "name": "Aditi",
-                    "phone": 9891497275,
-                    "_id": "5aa6cb7e46ba760004239a10"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a2277b7050004ca8032"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5aa6cb7e46ba760004239a0f",
@@ -2374,57 +2207,25 @@
             "desc": "You can look at a picture for a week and never think of it again. You can also look at a picture for a second and think of it all your life. \nThere are pictures which make you speechless. \nAnd then there are those pictures which force you to write about them.\nSo, here this event is all about your creative thinking! \nAll you need to do is look at the picture, think about it and describe it! \n",
             "rules": "1. It is an online event.\n2. Registrations are compulsory to be able to participate in the event. \n3. The caption should not be more than 50 words.\n4. The caption should be unique and creative, any kind of duplicity not allowed.\n5. The pictures will be uploaded on the official page of JHALAK on alternate days. \n6. CAPTION with maximum likes will win! \n",
             "venue": "Online Event",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523107800000
-            },
-            "coordinators": [
-                {
-                    "name": "Meenakshi",
-                    "phone": 7982698994,
-                    "_id": "5aa6cc7046ba760004239a14"
-                },
-                {
-                    "name": "Aditi",
-                    "phone": 9891497275,
-                    "_id": "5aa6cc7046ba760004239a13"
-                }
-            ],
-            "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
-            },
-            "eventtype": "solo",
-            "_id": "5aa6cc7046ba760004239a12",
-            "title": "DUB SMASH",
-            "clubname": "Jhalak",
-            "category": "Cultural",
-            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
-            "rules": "1. It is an online event.\n2. Registrations are compulsory to be able to participate in the event. \n3. Objectionable dub smash will be disqualified.\n",
-            "venue": "Online Event",
-            "__v": 0
-        },
-        {
-            "fee": 0,
-            "timing": {
-                "from": 1522913400000,
-                "to": 1522927800000
+                "from": 1523518200000,
+                "to": 1523532600000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aaac60c517e7700041bbd35"
+                    "_id": "5ac33f5277b7050004ca809f"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aaac60c517e7700041bbd34"
+                    "_id": "5ac33f5277b7050004ca809e"
                 }
             ],
             "prizes": {
@@ -2437,7 +2238,7 @@
             "title": "UDAAN",
             "clubname": "Mechnext",
             "category": "Technical",
-            "desc": "Racing Tournament of RC Air crafts and Gliders-\n\nTime to conquer the air and rule the sky with your mightiest aircraft. Fasten your seat belts; bring on your mightiest air crafts. The mighty clash between the best racers is going to take off. Personalise your flying beasts and bring them in the ultimate race of the century. \nThe annual Aero-modelling and Racing competition for college students is launched with the vision to provide unified platform for students interested in aerospace and related engineering disciplines – to demonstrate their aero-modelling expertise.\nThe competition provides students an opportunity to design and build their own Air crafts to participate in the Championship. Winners are determined by a combination of their report score and their flight score. The contest will provide a real world aircraft design experience for engineering students by giving them the opportunity to validate their analytic studies.\n\nCriteria for Judgement - \n•\tExquisite Finish\n•\tFlight Performance\n•\tSleek Design\n•\tUpgraded Technologies\n•\tBest Aero -Modelling\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "•\tMaximum of 4 members in a team.\n•\tMembers of a team may be from same college/school or different.\n•\tAny number of teams can participate from one college/school.\n•\tProfessionals are not allowed. Only students can participate.\n",
             "venue": "Main Ground",
             "__v": 0,
@@ -2446,184 +2247,189 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523694600000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Manjeet",
-                    "phone": 9810634902,
-                    "_id": "5aaac7c8517e7700041bbd38"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fab77b7050004ca80ab"
                 },
                 {
-                    "name": "Divanshu",
-                    "phone": 7838106947,
-                    "_id": "5aaac7c8517e7700041bbd37"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fab77b7050004ca80aa"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "team",
             "_id": "5aaac7c8517e7700041bbd36",
             "title": "CLASH OF DESIGNERS",
             "clubname": "Mechnext",
             "category": "Technical",
-            "desc": "The main purpose of this designing competition is to inspire and prepare students for career in architecture, engineering and the digital arts.\nThe challenge offers a great opportunity for students to create some exclusive design projects.\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "•\tIt may consist of an individual/team.\n•\tCompetitors will model small objects within a designated time period.\n",
             "venue": "Main Ground",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523608200000,
+                "to": 1523619000000
             },
             "coordinators": [
                 {
-                    "name": "Manjeet",
-                    "phone": 9810634902,
-                    "_id": "5aaac8bd517e7700041bbd3b"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fbc77b7050004ca80ad"
                 },
                 {
-                    "name": "Divanshu",
-                    "phone": 7838106947,
-                    "_id": "5aaac8bd517e7700041bbd3a"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fbc77b7050004ca80ac"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5aaac8bd517e7700041bbd39",
             "title": "QUIZ ME UP!",
             "clubname": "Mechnext",
             "category": "Technical",
-            "desc": "Quiz competition is a pursuit of trivial knowledge, encourage students to achieve academic excellence and increase their awareness of the world around them. The quiz will be beneficial to those who are enthusiastic in technical field and the one who are ready to share and gain knowledge.\nThe quiz competition will feature the questionnaires from different aspect of technical world. \nThe competition provides an opportunity to the students to widen up their knowledge and be acquainted with the information in various fields of knowledge. \nIt provides a chance to realize and enhance their potentialities. ",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "•\tNo team is allowed in this event.\n•\tAny kind of discrepancy may lead to disqualification from the event.\n•\tThere will be two rounds:\n1.\tWritten Test - It will be conducted before the Quiz as a selection procedure.\n2.\tGrand Finale – The Final Championship Round.\n",
             "venue": "Mechanical Dept.",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523521800000,
+                "to": 1523532600000
             },
             "coordinators": [
                 {
-                    "name": "Manjeet",
-                    "phone": 9810634902,
-                    "_id": "5aaac96c517e7700041bbd3e"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f7477b7050004ca80a5"
                 },
                 {
-                    "name": "Divanshu",
-                    "phone": 7838106947,
-                    "_id": "5aaac96c517e7700041bbd3d"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f7477b7050004ca80a4"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "solo",
             "_id": "5aaac96c517e7700041bbd3c",
             "title": "ROBO RULES",
             "clubname": "Mechnext",
             "category": "Technical",
-            "desc": "The competition is carried out in a tournament format: competitors bring their bots ready to battle and are pitted against their competitor bots in one-on–one matches where the aim is to push the opponent robots off the arena and scoring maximum points.\nGet ready to witness the most incredible sports entertainment that the world has ever seen;\nMulti-ton behemoths will swing punches, tearing steel armor panels off each other until one king of the ring is left standing, while the opponent is a heap of scrap metal.\nWatch out for the bots, the builders, the flames, the sparks and all the robot guts and glory.\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "•\tThe bots need to clash inside the ring\n•\tNO RULES FURTHER!!!! ;)",
             "venue": "Mechanical Dept.",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523694600000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Manjeet",
-                    "phone": 9810634902,
-                    "_id": "5aaaca46517e7700041bbd41"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fcc77b7050004ca80af"
                 },
                 {
-                    "name": "Divanshu",
-                    "phone": 7838106947,
-                    "_id": "5aaaca46517e7700041bbd40"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fcc77b7050004ca80ae"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5aaaca46517e7700041bbd3f",
             "title": "TECH EXPO",
             "clubname": "Mechnext",
             "category": "Technical",
-            "desc": "Facilitate and develop the exchange of engineering knowledge and information between engineering personnel and technical specialists.\nAn opportunity to display their state of the art productsand technologies to the largest gathering.\n",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a presentation event.",
             "venue": "Lal Chowk",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522917000000,
-                "to": 1522927800000
+                "from": 1523521800000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Manjeet",
-                    "phone": 9810634902,
-                    "_id": "5aaacb47517e7700041bbd44"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fdf77b7050004ca80b1"
                 },
                 {
-                    "name": "Divanshu",
-                    "phone": 7838106947,
-                    "_id": "5aaacb47517e7700041bbd43"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33fdf77b7050004ca80b0"
                 }
             ],
             "prizes": {
-                "prize1": "",
-                "prize2": "",
-                "prize3": ""
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
             },
             "eventtype": "NA",
             "_id": "5aaacb47517e7700041bbd42",
             "title": "BOWLING ALLEY",
             "clubname": "Mechnext",
             "category": "Technical",
-            "desc": "A complete bowling alley with all the international standards for an amazing and fantastic game of ten-pin bowling with automatic pin-setters for the purpose of recreation.   ",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "This is a fun event.",
             "venue": "Lal Chowk",
-            "__v": 0
+            "__v": 0,
+            "photolink": null
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523003400000,
-                "to": 1523014200000
+                "from": 1523608200000,
+                "to": 1523619000000
             },
             "coordinators": [
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aab5fc58c946f000477e7a2"
+                    "_id": "5ac33a5777b7050004ca8037"
                 },
                 {
                     "name": "",
                     "phone": 0,
-                    "_id": "5aab5fc58c946f000477e7a1"
+                    "_id": "5ac33a5777b7050004ca8036"
                 }
             ],
             "prizes": {
@@ -2636,7 +2442,7 @@
             "title": "GHANCHAKKAR",
             "clubname": "Jhalak",
             "category": "Cultural",
-            "desc": "It is a fun event. Be ready with your cameras for some fun and excitement. It is an 'on the spot' event. Rounds will be disclosed then and there.",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
             "rules": "1. 2 members per team.\n2. It will have 3 rounds. The round will be disclosed during the event.\n3. The team requires to have a basic Phone camera for the event.\n",
             "venue": "Lal Chowk",
             "__v": 0,
@@ -2645,19 +2451,393 @@
         {
             "fee": 0,
             "timing": {
-                "from": 1523089800000,
-                "to": 1523100600000
+                "from": 1523694600000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Aditi",
-                    "phone": 9891497275,
-                    "_id": "5aaad5d5517e7700041bbd4d"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a6077b7050004ca8039"
                 },
                 {
-                    "name": "Hiteshwar",
-                    "phone": 9416026957,
-                    "_id": "5aaad5d5517e7700041bbd4c"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a6077b7050004ca8038"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "team",
+            "_id": "5aaad5d5517e7700041bbd4b",
+            "title": "DESIGNIGNG ART",
+            "clubname": "Jhalak",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "1. It is an on the spot designing competition. \n2. Team of maximum 2 members per team is allowed. \n3. Adobe Photoshop, Paint, Illustrator, GIMP, Inkscape, Blender and Corel Draw etc. can be used.\n4. Theme will be disclosed on the day of the event. \n",
+            "venue": "MBA Block",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523694600000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a6a77b7050004ca803b"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a6a77b7050004ca803a"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "solo",
+            "_id": "5aaad61b517e7700041bbd4e",
+            "title": "PIC OF THE DAY",
+            "clubname": "Jhalak",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "1. It is an individual event. \n2. Pictures should be clicked within the YMCA campus itself. \n3. Editing of pictures is allowed. \n4. Participants must be able to provide the original photographs. \n5. Minimum resolution 5MP. \n6. All participants must be college students. \n7. Cheaters would be disqualified. \n",
+            "venue": "Lal Chowk",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523503800000,
+                "to": 1523723400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a7377b7050004ca803d"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33a7377b7050004ca803c"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "NA",
+            "_id": "5aaad66d517e7700041bbd51",
+            "title": "PHOTO GALLERY",
+            "clubname": "Jhalak",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "This is a presentation event.",
+            "venue": "Electrical Chowk",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 20,
+            "timing": {
+                "from": 1523595600000,
+                "to": 1523601000000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33eb377b7050004ca8095"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33eb377b7050004ca8094"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "team",
+            "_id": "5ab0c611f2403e0004b3c252",
+            "title": "WYSIWYG Challenge",
+            "clubname": "Manan",
+            "category": "Technical",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "1. Each team can have maximum 2 participants.\n2. Cross-college teams are allowed.\n3. Scoring will be based on the similarities and dissimilarities between the mockup and the final output.\n4. Cases of plagiarism will lead to direct disqualification. \n5. Bootstrap and other frameworks should not be used.",
+            "venue": "CC - 09",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1520339400000,
+                "to": 1523125740000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f0f77b7050004ca8097"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f0f77b7050004ca8096"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "NA",
+            "_id": "5ab0e2e8d2eca80004778dc5",
+            "title": "XUNBAO",
+            "clubname": "Manan",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "1. Adoption of wrong means(asking or telling answers to other teams, handing over the clue to another team) shall lead to immediate disqualification. \n2. The participant who reaches the last questions first wins the event. ",
+            "venue": "Online Event",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 20,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523615400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f1f77b7050004ca8099"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f1f77b7050004ca8098"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "solo",
+            "_id": "5ab0e724d2eca80004778dcc",
+            "title": "PS4 GAMING",
+            "clubname": "Manan",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "Rules will be told on the spot.",
+            "venue": "CC - 07",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523507400000,
+                "to": 1523712600000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33cc077b7050004ca806d"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33cc077b7050004ca806c"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "NA",
+            "_id": "5ab2043cedc24700048fb13b",
+            "title": "LASER PIANO",
+            "clubname": "Microbird",
+            "category": "Technical",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "This is a presentation event.",
+            "venue": "Reception",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 10,
+            "timing": {
+                "from": 1523507400000,
+                "to": 1523691000000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33cd977b7050004ca806f"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33cd977b7050004ca806e"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "solo",
+            "_id": "5ab205c5edc24700048fb13e",
+            "title": "BLACK OUT",
+            "clubname": "Microbird",
+            "category": "Technical",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "Rules will be provided on the spot.",
+            "venue": "LC",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523507400000,
+                "to": 1523709000000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33ce477b7050004ca8071"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33ce477b7050004ca8070"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "NA",
+            "_id": "5ab20658edc24700048fb141",
+            "title": "EFFERVESCENCE",
+            "clubname": "Microbird",
+            "category": "Technical",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "This is a presentation event.",
+            "venue": "Reception",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523709000000,
+                "to": 1524076140000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f3477b7050004ca809b"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f3477b7050004ca809a"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "NA",
+            "_id": "5abc9ce47230690004dec269",
+            "title": "HACKON",
+            "clubname": "Manan",
+            "category": "Technical",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "Check the website for rules and other information.",
+            "venue": "Online Event",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 20,
+            "timing": {
+                "from": 1523683800000,
+                "to": 1523788200000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f4577b7050004ca809d"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac33f4577b7050004ca809c"
+                }
+            ],
+            "prizes": {
+                "prize1": null,
+                "prize2": null,
+                "prize3": null
+            },
+            "eventtype": "team",
+            "_id": "5abca29a7230690004dec26c",
+            "title": "LAN GAMING",
+            "clubname": "Manan",
+            "category": "Cultural",
+            "desc": "Do you often feel like your expressive face is made for the movie dialogues? Yep, we are looking for all that cringy stuff. Time to take vines & all other stuff to next level from this. Let your creativity be your guide.",
+            "rules": "1. Each team shall consist of 2 members.\n2. No cheat codes are allowed and will lead to direct disqualification otherwise.\n3. Other rules shall be provided on the spot.",
+            "venue": "CC - 07",
+            "__v": 0,
+            "photolink": null
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac333ce77b7050004ca7ffb"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac333ce77b7050004ca7ffa"
                 }
             ],
             "prizes": {
@@ -2666,31 +2846,31 @@
                 "prize3": ""
             },
             "eventtype": "team",
-            "_id": "5aaad5d5517e7700041bbd4b",
-            "title": "DESIGNIGNG ART",
-            "clubname": "Jhalak",
+            "_id": "5ac333ce77b7050004ca7ff9",
+            "title": "MOCK CID 2.0",
+            "clubname": "Eklavya",
             "category": "Cultural",
-            "desc": "\" Designing is thinking made visible \"\n\nYou are now a real graphic designer for your firm You just got instructions from your boss to create a POSTER for an upcoming event or a LOGO for the firm. You will be given all the required information needed for the logo or poster. So bring out the graphic designer in you and show your creativity and designing skills to the world .\n",
-            "rules": "1. It is an on the spot designing competition. \n2. Team of maximum 2 members per team is allowed. \n3. Adobe Photoshop, Paint, Illustrator, GIMP, Inkscape, Blender and Corel Draw etc. can be used.\n4. Theme will be disclosed on the day of the event. \n",
-            "venue": "MBA Block",
+            "desc": "Teams compete to be the first one to solve a crime mystery ",
+            "rules": "1.\tEach team consists of 5 members each\n2.\tTeams need to give a aptitude test at the time of registration\n3.\tTop 8 teams will compete to solve the mystery in least time\n",
+            "venue": "Main Ground",
             "__v": 0
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1523089800000,
-                "to": 1523100600000
+                "from": 1523511000000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Aditi",
-                    "phone": 9891497275,
-                    "_id": "5aaad61b517e7700041bbd50"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3353977b7050004ca7ffe"
                 },
                 {
-                    "name": "Jayant",
-                    "phone": 8901360094,
-                    "_id": "5aaad61b517e7700041bbd4f"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3353977b7050004ca7ffd"
                 }
             ],
             "prizes": {
@@ -2699,31 +2879,328 @@
                 "prize3": ""
             },
             "eventtype": "solo",
-            "_id": "5aaad61b517e7700041bbd4e",
-            "title": "PIC OF THE DAY",
-            "clubname": "Jhalak",
+            "_id": "5ac3353977b7050004ca7ffc",
+            "title": "CAN YOU RING IT??",
+            "clubname": "Eklavya",
             "category": "Cultural",
-            "desc": "They say, a picture can convey the untold stories. It contains the emotions and chapters of life one wants to cherish lifelong. Here we bring to you 'Pic of the Day', by which we want you to capture the beauty and vivacity of our grand fest.",
-            "rules": "1. It is an individual event. \n2. Pictures should be clicked within the YMCA campus itself. \n3. Editing of pictures is allowed. \n4. Participants must be able to provide the original photographs. \n5. Minimum resolution 5MP. \n6. All participants must be college students. \n7. Cheaters would be disqualified. \n",
-            "venue": "Lal Chowk",
+            "desc": "Participant aims different zones of a football goal post to score points by kicking a football through the rings placed at these zones ",
+            "rules": "1.\tEach participant gets 5 shoots\n2.\tTotal score will be sum of score of all the shots\n3.\tDifferents zones carry different points\n",
+            "venue": "Main Ground",
             "__v": 0
         },
         {
             "fee": 0,
             "timing": {
-                "from": 1522899000000,
-                "to": 1523118600000
+                "from": 1523511000000,
+                "to": 1523705400000
             },
             "coordinators": [
                 {
-                    "name": "Aditi",
-                    "phone": 9891497275,
-                    "_id": "5aaad66d517e7700041bbd53"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3368a77b7050004ca8001"
                 },
                 {
-                    "name": "Meenakshi",
-                    "phone": 7982698994,
-                    "_id": "5aaad66d517e7700041bbd52"
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3368a77b7050004ca8000"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "team",
+            "_id": "5ac3368a77b7050004ca7fff",
+            "title": "DRINK PONG",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "One teammate tries to put ping pong balls in glasses to help his teammate drink more and more glasses of cold drink",
+            "rules": "1.\tEach Team gets a time of 1 min\n2.\tThe teammate at the ball throwing end can not throw the ball until the other one has fully finished the glass of cold drink\n3.\t Players cannot switch roles once the time has started\n",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac336ba77b7050004ca8004"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac336ba77b7050004ca8003"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "team",
+            "_id": "5ac336ba77b7050004ca8002",
+            "title": "STACK THE SHUTTLES",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "A team mate tosses shuttle with help of a badminton racket while other catches them to form a stack single-handedly",
+            "rules": "1.\tEach team gets 1 min \n2.\tPlayers cannot switch roles once the time has started\n",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3370077b7050004ca8007"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3370077b7050004ca8006"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "team",
+            "_id": "5ac3370077b7050004ca8005",
+            "title": "THUG LIFE 2.0",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "2 teams of 2 members each compete to transfer max amount of water from one bucket to another using towels",
+            "rules": "To be declared on the spot",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3372b77b7050004ca800a"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3372b77b7050004ca8009"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "solo",
+            "_id": "5ac3372b77b7050004ca8008",
+            "title": "COCK FIGHT",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "Players push each other out of the circular area while balancing on one leg",
+            "rules": "1.\tParticipants can’t use their hands to push each other\n2.\tLast man standing on a single leg wins the game\n",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3376377b7050004ca800d"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3376377b7050004ca800c"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "team",
+            "_id": "5ac3376377b7050004ca800b",
+            "title": "HELP ME GET THERE",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "A duo guides their blindfolded pal to get out of the maze without hitting the obstacles in least time possible",
+            "rules": "To be declared on the spot\n\nTeam Size : 3",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac337da77b7050004ca8010"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac337da77b7050004ca800f"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "solo",
+            "_id": "5ac337da77b7050004ca800e",
+            "title": "BEST TRICKER",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "The pal who impresses (the most) the audience and the jury with his/her trick shot video takes away the prize",
+            "rules": "1.\tVideo can be of a max of 2 minutes\n2.\tVideo may contain multiple trick shots\n3.\tShots may be related to any sport\n",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3380a77b7050004ca8013"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3380a77b7050004ca8012"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "solo",
+            "_id": "5ac3380a77b7050004ca8011",
+            "title": "DIZZY AIMING",
+            "clubname": "Eklavya",
+            "category": "Cultural",
+            "desc": "The participant tries to aim targets after revolving multiple times around a bat with his/her forehead facing downwards",
+            "rules": "1.\tParticipant needs to shoot within a time span of 5 seconds after making rotations\n2.\tEach participant gets 3 shoots\n3.\tTotal score will b calculated after all the shots are made\n",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523503800000,
+                "to": 1523705400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac35b4d37cd6e0004d83ac8"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac35b4d37cd6e0004d83ac7"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "solo",
+            "_id": "5ac35b4d37cd6e0004d83ac6",
+            "title": "DROP THE GEAR N' STEER",
+            "clubname": "SAE",
+            "category": "Technical",
+            "desc": "An interactive and immersive simulation to enable the users to experience sensations that are even more realistic than with a controller/keyboard and to provide them with a device that will hone their racing performance.",
+            "rules": "•\tThe track would be chosen by the contender.\n•\tFastest lap without (or less) damaged car will be considered.\n•\tFor another run ,the contender will have to participate again.\n•\tJudges decision will be final.\n•\tAny damage to the simulation equipments will be fined heavily.\n",
+            "venue": "Projector Room",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523511000000,
+                "to": 1523615400000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3ab5cfc22740004b913d0"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3ab5cfc22740004b913cf"
+                }
+            ],
+            "prizes": {
+                "prize1": "",
+                "prize2": "",
+                "prize3": ""
+            },
+            "eventtype": "team",
+            "_id": "5ac3ab5cfc22740004b913ce",
+            "title": "BURNOUT PIT CREW",
+            "clubname": "SAE",
+            "category": "Technical",
+            "desc": "Ever wanted to experience the thrill and feel that is experienced by the pit crew ,here we have come with an idea that would fulfil your wish ,become a crew member!!",
+            "rules": "•\tNo of member for a team will be decided by the judge.\n•\tFastest time for the task will be considered .\n•\tCompulsory to wear the mechanic suits and safety glasses.\n•\tJudges decision will be final.\n•\tPlease handle the equipments carefully.\n",
+            "venue": "Main Ground",
+            "__v": 0
+        },
+        {
+            "fee": 0,
+            "timing": {
+                "from": 1523593800000,
+                "to": 1523712600000
+            },
+            "coordinators": [
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3abf1fc22740004b913d3"
+                },
+                {
+                    "name": "",
+                    "phone": 0,
+                    "_id": "5ac3abf1fc22740004b913d2"
                 }
             ],
             "prizes": {
@@ -2732,13 +3209,13 @@
                 "prize3": ""
             },
             "eventtype": "NA",
-            "_id": "5aaad66d517e7700041bbd51",
-            "title": "PHOTO GALLERY",
-            "clubname": "Jhalak",
-            "category": "Cultural",
-            "desc": "Brace Yourself! The Photography & designing Club of YMCA is ready to give you eyegasm with their gallery of art. Make your time to watch one of the most creative galleries you’ll ever witness.",
-            "rules": "This is a presentation event.",
-            "venue": "Electrical Chowk",
+            "_id": "5ac3abf1fc22740004b913d1",
+            "title": "AUTOSPARX",
+            "clubname": "SAE",
+            "category": "Technical",
+            "desc": "Unvielling the all new and better Supra 2018 Car . A fun event can be related as a social media contest. The one with the greatest number of likes will be given merchandises and a shout-out on the SUPRA Facebook and Instagram page.",
+            "rules": "There are no rules as such.",
+            "venue": "Lal Chowk",
             "__v": 0
         }
     ]
