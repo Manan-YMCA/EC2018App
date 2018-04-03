@@ -195,7 +195,7 @@ public class DashboardSliderFragment1 extends Fragment {
                 if (i == whatsnewarraylist.size()) {
                     i = 0;
                 }
-                handler.postDelayed(update, 4000);
+                handler.postDelayed(update, 6000);
             }
 
 //             void startRepeatingTask() {
