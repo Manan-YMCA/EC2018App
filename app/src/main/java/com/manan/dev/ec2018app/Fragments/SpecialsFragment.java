@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class SpecialsFragment extends Fragment {
         List<DeveloperModel> devlist = new ArrayList<>();
 
         DeveloperModel dev_obj1 = new DeveloperModel
-                ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAuBAAAAJGFlOTMyMTVjLTBlZTQtNGNlZi05YjE1LTdlYzc1NTZkNzgzYw.jpg", "Shubham Sharma", "", "Core App Designer", "");
+                ("https://media.licdn.com/dms/image/C5603AQEF5xNAR6L4lA/profile-displayphoto-shrink_800_800/0?e=1527966000&v=alpha&t=p7cNpJ0YcD-MBNn5GsCYkWGUkxPXJhti_AxsPWbU5Go", "Shubham Sharma", "", "Core App Designer", "");
 
         DeveloperModel dev_obj2 = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a6.jpg", "Kartik Singla", "", "Design Support", "");

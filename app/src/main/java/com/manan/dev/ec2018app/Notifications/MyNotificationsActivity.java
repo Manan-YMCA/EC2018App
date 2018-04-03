@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,7 +45,7 @@ public class MyNotificationsActivity extends AppCompatActivity {
 
         backButton = findViewById(R.id.iv_back_button);
         progress = new ProgressDialog(MyNotificationsActivity.this);
-        progress.setTitle("Loading...");
+        progress.setMessage("Loading...");
         progress.setCanceledOnTouchOutside(true);
 //        progress.setCancelable(false);
         progress.show();
