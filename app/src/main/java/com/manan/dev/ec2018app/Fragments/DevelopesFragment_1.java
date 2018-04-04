@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public class DevelopesFragment_1 extends Fragment {
                 ("https://media.licdn.com/mpr/mpr/AAIAAQDGAAAAAQAAAAAAAAnYAAAAJDAzMTUyY2Q4LTEwYjAtNDNlMi05ODFjLTI1MzZmYjIyNDczMg.jpg", "Yatin Dhingra", "https://linkedin.com/in/yatin-dhingra-58635a128", "App Team Head", "https://github.com/yatind01");
 
         DeveloperModel dev_obj2 = new DeveloperModel
-                ("https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAuBAAAAJGFlOTMyMTVjLTBlZTQtNGNlZi05YjE1LTdlYzc1NTZkNzgzYw.jpg", "Shubham Sharma", "https://linkedin.com/in/shubham-sharma-ba185614b", "Core App Developer", "https://github.com/shubham0008");
+                ("https://media.licdn.com/dms/image/C5603AQEF5xNAR6L4lA/profile-displayphoto-shrink_800_800/0?e=1527966000&v=alpha&t=p7cNpJ0YcD-MBNn5GsCYkWGUkxPXJhti_AxsPWbU5Go", "Shubham Sharma", "https://linkedin.com/in/shubham-sharma-ba185614b", "Core App Developer", "https://github.com/shubham0008");
 
         DeveloperModel dev_obj3 = new DeveloperModel
                 ("https://media.licdn.com/dms/image/C5603AQFkgj7DX14oSA/profile-displayphoto-shrink_200_200/0?e=1527058800&v=alpha&t=dy4AvqHiWMO8Ls6x2CloM8T0cPTSmLwLkSdlGC3jjFM", "Shubham Kachroo", "https://www.linkedin.com/in/alchemister", "Core App Developer", "https://github.com/the-Alchemister");
@@ -89,7 +88,7 @@ public class DevelopesFragment_1 extends Fragment {
                 ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/Screenshot_20180331-171720_2.png?alt=media&token=90b78435-723c-40c2-a7ab-2035032b1f44", "Aashif Khan", "https://linkedin.com/in/aashifkhan", "App Developer", "https://github.com/aashifkhanate");
 
         DeveloperModel dev_obj13 = new DeveloperModel
-                ("https://scontent.fdel13-1.fna.fbcdn.net/v/t1.0-1/c0.0.362.362/1425622_626759307375859_1002566326_n.jpg?_nc_cat=0&oh=97f27b3d89de3c673df46949dd44a07c&oe=5B2FD76E", "Himanshu Vishwakarma", "https://linkedin.com/in/himanshu-vishwakarma-a10b60119", "Admin App Developer", "https://github.com/HimanshuVishwakarma");
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/12705373_1054447334607052_709296921303246727_n.jpg?alt=media&token=696d367a-bd56-44f2-a80a-a719ae92f166", "Himanshu Vishwakarma", "https://linkedin.com/in/himanshu-vishwakarma-a10b60119", "Admin App Developer", "https://github.com/HimanshuVishwakarma");
 
         DeveloperModel dev_obj14 = new DeveloperModel
                 ("https://manan-ymca.github.io/ElementsCulmyca2018Website/images/team/t1.jpg", "Rishabh Mahajan", "https://www.linkedin.com/in/rishabh-mahajan-a12764151", "Admin App Developer", "https://github.com/rishabhrishabh");

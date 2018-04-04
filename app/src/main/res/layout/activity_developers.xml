@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/futura"
                 android:gravity="center"
-                android:text="Developers" />
+                android:text="Development" />
         </LinearLayout>
 
         <LinearLayout
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/futura"
                 android:gravity="center"
-                android:text="Brixx" />
+                android:text="Operations" />
         </LinearLayout>
 
         <LinearLayout
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/futura"
                 android:gravity="center"
-                android:text="Specials" />
+                android:text="Creative" />
         </LinearLayout>
 
     </LinearLayout>
