@@ -111,7 +111,6 @@ public class SplashScreen extends AppCompatActivity {
         mCurrentAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                retreiveEventsHardCode();
                 retreiveEvents();
                 startActivity(new Intent(SplashScreen.this, UserLoginActivity.class));
                 overridePendingTransition(R.anim.right_to_left_anim, R.anim.end_activity_anim);
