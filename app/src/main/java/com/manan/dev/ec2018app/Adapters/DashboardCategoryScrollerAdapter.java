@@ -15,12 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.manan.dev.ec2018app.CategoryEventDisplayActivity;
 import com.manan.dev.ec2018app.Models.CategoryItemModel;
 import com.manan.dev.ec2018app.R;
-
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -49,15 +47,14 @@ public class DashboardCategoryScrollerAdapter extends RecyclerView.Adapter<Dashb
 
         final CategoryItemModel singleItem = itemsList.get(i);
 
+        String displayName;
         if (singleItem.getDisplayName().length() <= 12) {
-            String displayName = singleItem.getDisplayName();
-            holder.tvTitle.setText(displayName);
-        } else if (singleItem.getDisplayName().length() > 12) {
-            String displayName = singleItem.getDisplayName().substring(0, 9);
-            displayName += "..";
-            holder.tvTitle.setText(displayName);
-        } else
-            holder.tvTitle.setText(singleItem.getDisplayName());
+            displayName = singleItem.getDisplayName();
+        } else {
+            displayName = singleItem.getDisplayName().substring(0, 9);
+            displayName += "...";
+        }
+        holder.tvTitle.setText(displayName);
         Drawable drawable = new BitmapDrawable(mContext.getResources(), singleItem.getImage());
 
         holder.itemImage.setImageDrawable(drawable);

@@ -179,7 +179,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         CategoryItemModel vividha = new CategoryItemModel();
         vividha.setClubName("Vividha");
-        vividha.setDisplayName("Drama");
+        vividha.setDisplayName("Dramatics");
         vividha.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.vividha));
         allSampleData.add(vividha);
 
