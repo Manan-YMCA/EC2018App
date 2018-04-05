@@ -61,7 +61,10 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         clubDisplayName = (TextView) findViewById(R.id.tv_category_name_heading);
         if (clubName.equals("Jhalak")) {
             clubDisplayName.setText("Photography");
-        } else {
+        } else if(displayName.equals("Lit-Deb")){
+            clubDisplayName.setText("Literature & Debating");
+        }
+        else {
             clubDisplayName.setText(displayName);
         }
         Drawable drawable = new BitmapDrawable(this.getResources(), clubphoto);

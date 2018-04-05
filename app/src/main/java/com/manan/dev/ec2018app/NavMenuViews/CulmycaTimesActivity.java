@@ -96,10 +96,10 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
 
 
         if (isNetworkAvailable()) {
-            noPostsTextView.setVisibility(View.GONE);
+            //noPostsTextView.setVisibility(View.GONE);
             //reload();
         } else {
-            noPostsTextView.setVisibility(View.VISIBLE);
+            ///noPostsTextView.setVisibility(View.VISIBLE);
             MDToast.makeText(CulmycaTimesActivity.this, "Connect to internet!", MDToast.LENGTH_SHORT, MDToast.TYPE_INFO).show();
             //.dismiss();
             //s.setRefreshing(false);
@@ -212,7 +212,7 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
     }
 
     private void updateUi() {
-
+        noPostsTextView.setVisibility(View.GONE);
         Log.e("yatin", String.valueOf(allposts.size()));
         mAdapter.notifyDataSetChanged();
     }
@@ -230,48 +230,6 @@ public class CulmycaTimesActivity extends AppCompatActivity implements Connectiv
             postReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
-    }
-
-    public void reload() {
-        allposts.clear();
-
-        postReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                allposts = new ArrayList<postsModel>();
-
-
-                for (DataSnapshot club : dataSnapshot.getChildren()) {
-                    String clubName = club.getKey();
-                    for (DataSnapshot posts : club.getChildren()) {
-
-                        postsModel post = posts.getValue(postsModel.class);
-                        post.postid = posts.getKey();
-
-
-                        allposts.add(post);
-
-                        Check();
-                    }
-                }
-                mLayoutManager = new LinearLayoutManager(CulmycaTimesActivity.this);
-                sort(allposts);
-                recyclerView.setLayoutManager(mLayoutManager);
-                recyclerView.setHasFixedSize(true);
-
-                mAdapter = new CTAdapter(getApplicationContext(), allposts);
-                recyclerView.setAdapter(mAdapter);
-
-                Check();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //.dismiss();
-            }
-        });
     }
 
     private boolean isNetworkAvailable() {

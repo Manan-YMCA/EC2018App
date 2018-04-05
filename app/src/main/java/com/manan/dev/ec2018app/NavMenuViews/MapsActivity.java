@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -56,6 +58,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         11);
             }
+
+        ImageView backBtn = (ImageView) findViewById(R.id.cul_back_button);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -104,7 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng ymca = new LatLng(28.3674761, 77.3169494);
         CameraPosition target = CameraPosition.builder().target(ymca).zoom((float) 17.6).bearing(85).tilt(30).build();
 
-        MarkerOptions defaultMarker = new MarkerOptions().position(ymca).title("YMCA University of Science and Technology").snippet("Elements Culmyca'17").icon(BitmapDescriptorFactory.fromResource(R.drawable.locationicon));
+        MarkerOptions defaultMarker = new MarkerOptions().position(ymca).title("YMCA University of Science and Technology").snippet("Elements Culmyca'18").icon(BitmapDescriptorFactory.fromResource(R.drawable.locationicon));
         mMap.addMarker(defaultMarker).showInfoWindow();
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.367732, 77.317092)).title("Main Stage"));
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.367005, 77.316748)).title("Shakuntalam Stage"));
@@ -120,6 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.367620, 77.317181)).title("Lal Chowk"));
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.367410, 77.315951)).title("Antarang 18"));
 
+        Log.d("yatin", "maps loaded success");
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             @Override

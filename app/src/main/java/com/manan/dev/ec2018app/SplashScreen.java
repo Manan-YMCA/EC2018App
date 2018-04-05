@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.net.ConnectivityManager;
@@ -59,6 +60,7 @@ public class SplashScreen extends AppCompatActivity {
     private IncomingHandler incomingHandler;
     private boolean flag = false;
     static boolean flagJSONParse = false;
+    private SharedPreferences pref = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,8 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+
+        pref = getSharedPreferences(getApplication().getResources().getString(R.string.sharedPrefName), MODE_PRIVATE);
         incomingHandler = new IncomingHandler(SplashScreen.this);
         allEvents = new ArrayList<>();
 
@@ -128,6 +132,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void retreiveEvents() {
         if (isNetworkAvailable()) {
+            Log.d("net", "net");
             RequestQueue queue = Volley.newRequestQueue(SplashScreen.this);
             String url = getResources().getString(R.string.get_all_events_api);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -135,18 +140,19 @@ public class SplashScreen extends AppCompatActivity {
                 public void onResponse(String response) {
                     flagJSONParse = true;
                     JsonParse(response);
+                    Log.d("net", "yes");
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    if (!flagJSONParse) {
-                        retreiveEventsHardCode();
-                    }
+                        Log.d("net", "na");
+                        //retreiveEventsHardCode();
                 }
             });
             queue.add(stringRequest);
-        } else if (!flagJSONParse) {
-            retreiveEventsHardCode();
+        } else {
+            Log.d("Rnet", "no");
+            //retreiveEventsHardCode();
         }
     }
 
@@ -310,6 +316,13 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (pref.getBoolean("firstrun", true)) {
+            Log.d("firstTime", "yes");
+            retreiveEventsHardCode();
+            pref.edit().putBoolean("firstrun", false).apply();
+        } else {
+            Log.d("firstTime", "no");
+        }
         if (flag)
             mCurrentAnimator.resume();
     }

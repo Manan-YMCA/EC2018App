@@ -173,7 +173,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         CategoryItemModel ananya = new CategoryItemModel();
         ananya.setClubName("Ananya");
-        ananya.setDisplayName("Literary & Debating");
+        ananya.setDisplayName("Lit-Deb");
         ananya.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.ananya));
         allSampleData.add(ananya);
 
@@ -245,7 +245,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         CategoryItemModel vivekanand = new CategoryItemModel();
         vivekanand.setClubName("Vivekanand Manch");
-        vivekanand.setDisplayName("Socio-cultural");
+        vivekanand.setDisplayName("Socio-Cultural");
         vivekanand.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.vivekanand));
         allSampleData.add(vivekanand);
     }

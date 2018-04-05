@@ -7,7 +7,7 @@
     android:layout_margin="0dp">
 
     <LinearLayout
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
         android:orientation="vertical"

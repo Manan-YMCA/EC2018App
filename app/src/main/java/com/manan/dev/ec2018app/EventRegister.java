@@ -283,7 +283,7 @@ public class EventRegister extends AppCompatActivity {
                 map.put("phone", intentPhone);
                 map.put("email", intentMail);
                 map.put("college", intentClg);
-                map.put("eventid", eventId);
+                map.put("eventname", eventName);
                 return map;
             }
         };

@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.manan.dev.ec2018app.Models.Sponsers;
 import com.manan.dev.ec2018app.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
         public TextView sname, title;
         public ImageView sponserPic;
         public CardView cardview;
+        public ProgressBar bar;
 
         public MyViewHolder(View view) {
             super(view);
@@ -33,6 +36,7 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
             title = (TextView) view.findViewById(R.id.tv2);
             sponserPic = (ImageView) view.findViewById(R.id.card_img);
             cardview = (CardView) view.findViewById(R.id.card_view);
+            bar = (ProgressBar) view.findViewById(R.id.pb_image);
         }
     }
 
@@ -51,10 +55,21 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Sponsers sponsers = sponsersList.get(position);
         holder.sname.setText(sponsers.getSname());
-        Picasso.with(mContext).load(sponsers.getImageUrl()).resize(750,500).into(holder.sponserPic);
+        holder.bar.setVisibility(View.VISIBLE);
+        Picasso.with(mContext).load(sponsers.getImageUrl()).resize(750,500).into(holder.sponserPic, new Callback() {
+            @Override
+            public void onSuccess() {
+                holder.bar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError() {
+                holder.bar.setVisibility(View.GONE);
+            }
+        });
         holder.title.setText(sponsers.getTitle());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
