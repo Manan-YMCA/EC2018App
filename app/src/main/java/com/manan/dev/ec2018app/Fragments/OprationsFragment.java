@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +20,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreativeFragment extends Fragment {
+public class OprationsFragment extends Fragment {
 
 
     private RecyclerView devrecyclerView;
     private Context mContext;
 
-    public CreativeFragment() {
+    public OprationsFragment() {
         // Required empty public constructor
     }
 
@@ -58,7 +57,7 @@ public class CreativeFragment extends Fragment {
         DeveloperModel anuj = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a1.jpg", "Anuj Raj Sharma", "", "Marketing", "");
         DeveloperModel sanjog = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a11.jpg", "Sanjog Garv", "", "Marketing", "");
+                ("http://www.elementsculmyca.com/images/team/a11.jpg", "Sanjog Garva", "", "Marketing", "");
         DeveloperModel sushant = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a13.jpg", "Sushant", "", "Marketing", "");
         DeveloperModel randeep = new DeveloperModel
@@ -66,7 +65,7 @@ public class CreativeFragment extends Fragment {
         DeveloperModel nishant = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a8.jpg", "Nishant Chetiwal", "", "Logistics", "");
         DeveloperModel bedi = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a4.jpg", "Devinderpreet Bedi", "", "Logistics", "");
+                ("http://www.elementsculmyca.com/images/team/a4.jpg", "Davinderpreet Bedi", "", "Logistics", "");
         DeveloperModel alok = new DeveloperModel
                 ("https://manan-ymca.github.io/ElementsCulmyca2018Website/images/team/a15.jpg", "Alok Tyagi", "", "Logistics", "");
         DeveloperModel shubham = new DeveloperModel
@@ -74,7 +73,7 @@ public class CreativeFragment extends Fragment {
         DeveloperModel payal = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a3.jpg", "Payal Malik", "", "Hospitality", "");
         DeveloperModel kshitiz = new DeveloperModel
-                ("http://www.elementsculmyca.com/images/team/a2.jpg", "Kshitiz Manocha", "", "Hospitality", "");
+                ("http://www.elementsculmyca.com/images/team/a2.jpg", "Kshitiz Minocha", "", "Hospitality", "");
         DeveloperModel sahil = new DeveloperModel
                 ("http://www.elementsculmyca.com/images/team/a10.jpg", "Sahil Kasana", "", "Security", "");
 

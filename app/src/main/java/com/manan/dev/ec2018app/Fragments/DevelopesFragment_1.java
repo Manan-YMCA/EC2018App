@@ -82,7 +82,7 @@ public class DevelopesFragment_1 extends Fragment {
                 ("https://firebasestorage.googleapis.com/v0/b/manan-club.appspot.com/o/dp%2FIMG_20160913_122252.jpg?alt=media&token=d1f41a74-af60-400b-8f1a-61cf74dfb9d7", "Shubham Goel", "https://linkedin.com/in/shubham-goel-0a2972141", "Admin App Developer", "https://github.com/Shubhamgoel123");
 
         DeveloperModel dev_obj10 = new DeveloperModel
-                ("https://scontent.fdel13-1.fna.fbcdn.net/v/t31.0-8/17097542_1767506106898555_8444256737289112828_o.jpg?oh=2287d64a0ec2c2f722429ea6014697e5&oe=5B3CAB2A", "Hemant Bansal", "https://linkedin.com/in/hemantbansal950", "Backend Developer", "https://github.com/HemantGTX950");
+                ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/17097542_1767506106898555_8444256737289112828_o.jpg?alt=media&token=d28c6798-8465-4e63-84a4-7ac6e5bece38", "Hemant Bansal", "https://linkedin.com/in/hemantbansal950", "Backend Developer", "https://github.com/HemantGTX950");
 
         DeveloperModel dev_obj11 = new DeveloperModel
                 ("https://firebasestorage.googleapis.com/v0/b/culmyca2018.appspot.com/o/Screenshot_20180331-171720_2.png?alt=media&token=90b78435-723c-40c2-a7ab-2035032b1f44", "Aashif Khan", "https://linkedin.com/in/aashifkhan", "App Developer", "https://github.com/aashifkhanate");

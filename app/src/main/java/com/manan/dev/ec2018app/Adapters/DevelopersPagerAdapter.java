@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.manan.dev.ec2018app.Fragments.CreativeFragment;
+import com.manan.dev.ec2018app.Fragments.OprationsFragment;
 import com.manan.dev.ec2018app.Fragments.DevelopesFragment_1;
 import com.manan.dev.ec2018app.Fragments.SpecialsFragment;
 
@@ -26,7 +26,7 @@ public class DevelopersPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new DevelopesFragment_1();
             case 1:
-                return new CreativeFragment();
+                return new OprationsFragment();
             case 2:
                 return new SpecialsFragment();
             default:

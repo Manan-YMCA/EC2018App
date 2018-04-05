@@ -28,7 +28,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -174,7 +173,7 @@ public class ContentActivity extends AppCompatActivity implements NavigationView
 
         CategoryItemModel ananya = new CategoryItemModel();
         ananya.setClubName("Ananya");
-        ananya.setDisplayName("Literature");
+        ananya.setDisplayName("Literary & Debating");
         ananya.setImage(BitmapFactory.decodeResource(ContentActivity.this.getResources(), R.raw.ananya));
         allSampleData.add(ananya);
 
