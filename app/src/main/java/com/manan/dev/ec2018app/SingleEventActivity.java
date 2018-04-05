@@ -295,19 +295,38 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             for (String prizes : eventDetails.getmPrizes()) {
                 if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 0) {
                     line3.setVisibility(View.VISIBLE);
-                    firstPrizeTextView.setVisibility(View.VISIBLE);
-                    firstPrizeTextView.setText("First Prize: Rs " + prizes);
-                    prizesRelativeLayout.setVisibility(View.VISIBLE);
+                    if(!prizes.equals("0")) {
+                        firstPrizeTextView.setVisibility(View.VISIBLE);
+                        firstPrizeTextView.setText("First Prize: Rs " + prizes);
+                        prizesRelativeLayout.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {firstPrizeTextView.setVisibility(View.GONE);
+                        prizesRelativeLayout.setVisibility(View.GONE);
+                    }
                     prizeCount++;
                 } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 1) {
-                    secondPrizeTextView.setVisibility(View.VISIBLE);
-                    secondPrizeTextView.setText("Second Prize: Rs " + prizes);
+                    if(!prizes.equals("0")) {
+                        secondPrizeTextView.setVisibility(View.VISIBLE);
+                        secondPrizeTextView.setText("Second Prize: Rs " + prizes);
+                    }
+                    else
+                    {
+                        secondPrizeTextView.setVisibility(View.GONE);
+                    }
                     prizeCount++;
                 } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 2) {
-                    thirdPrizeTextView.setVisibility(View.VISIBLE);
-                    thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
+                    if(!prizes.equals("0")) {
+                        thirdPrizeTextView.setVisibility(View.VISIBLE);
+                        thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
+                    }
+                    else {
+                        thirdPrizeTextView.setVisibility(View.GONE);
+                    }
                     prizeCount++;
+
                 }
+
 
             }
             descriptionTextView.setText(eventDetails.getmDesc());
