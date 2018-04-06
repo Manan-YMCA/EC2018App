@@ -54,7 +54,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
     Button registerButton;
     private static final int MY_PERMISSIONS_REQUEST = 1024;
-    TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, feesTextView,
+    TextView eventDateTextView, eventNameView, eventStartTimeTextView, locationTextView, eventEndTimeTextView, eventEndDateTextView, feesTextView,
             typeOfEventTextView, firstPrizeTextView, secondPrizeTextView, thirdPrizeTextView, descriptionTextView,
             rulesTextView, coordsHeading, eventCategoryTextView;
     RelativeLayout dateTimeRelativeLayout, prizesRelativeLayout;
@@ -147,9 +147,10 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
         barEventImage = (ProgressBar) findViewById(R.id.pb_event_image);
         eventDateTextView = (TextView) findViewById(R.id.tv_event_date);
+        eventEndDateTextView = (TextView) findViewById(R.id.tv_event_date_1);
         eventStartTimeTextView = (TextView) findViewById(R.id.tv_event_start_time);
         locationTextView = (TextView) findViewById(R.id.tv_event_location);
-        eventEndTimeTextView = (TextView) findViewById(R.id.tv_event_end_time);
+        eventEndTimeTextView = (TextView) findViewById(R.id.tv_event_start_time_1);
         // hostClubTextView = (TextView) findViewById(R.id.tv_host);
         feesTextView = (TextView) findViewById(R.id.tv_fees);
         typeOfEventTextView = (TextView) findViewById(R.id.tv_type_of_event);
@@ -194,9 +195,11 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
             Calendar endTimeMilis = Calendar.getInstance();
             endTimeMilis.setTimeInMillis(eventDetails.getmEndTime());
 
+            String endDate = sdf.format(endTimeMilis.getTime());
             startTime = sdf1.format(cal.getTime());
             endTime = sdf1.format(endTimeMilis.getTime());
 
+            eventEndDateTextView.setText(endDate);
             eventStartTimeTextView.setText(startTime);
             eventEndTimeTextView.setText(endTime);
 
@@ -240,7 +243,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     registerButton.setVisibility(View.VISIBLE);
                     registerButton.setText("PLAY NOW!");
                 }
-                if (eventDetails.getmName().equals("HACKON")){
+                if (eventDetails.getmName().equals("HACKON")) {
                     registerButton.setVisibility(View.VISIBLE);
                     registerButton.setText("PLAY NOW!");
                 }
@@ -294,33 +297,42 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
 
             for (String prizes : eventDetails.getmPrizes()) {
                 if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 0) {
-                    line3.setVisibility(View.VISIBLE);
-                    if(!prizes.equals("0")) {
+                    if (!prizes.equals("0")) {
+                        line3.setVisibility(View.VISIBLE);
                         firstPrizeTextView.setVisibility(View.VISIBLE);
-                        firstPrizeTextView.setText("First Prize: Rs " + prizes);
+
+                        if (prizes.matches("[0-9]+")) {
+                            firstPrizeTextView.setText("First Prize: Rs " + prizes);
+                        } else {
+                            firstPrizeTextView.setText("First Prize: " + prizes);
+                        }
                         prizesRelativeLayout.setVisibility(View.VISIBLE);
-                    }
-                    else
-                    {firstPrizeTextView.setVisibility(View.GONE);
+                    } else {
+                        firstPrizeTextView.setVisibility(View.GONE);
                         prizesRelativeLayout.setVisibility(View.GONE);
                     }
                     prizeCount++;
                 } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 1) {
-                    if(!prizes.equals("0")) {
+                    if (!prizes.equals("0")) {
                         secondPrizeTextView.setVisibility(View.VISIBLE);
-                        secondPrizeTextView.setText("Second Prize: Rs " + prizes);
-                    }
-                    else
-                    {
+                        if (prizes.matches("[0-9]+")) {
+                            secondPrizeTextView.setText("Second Prize: Rs " + prizes);
+                        } else {
+                            secondPrizeTextView.setText("Second Prize: " + prizes);
+                        }
+                    } else {
                         secondPrizeTextView.setVisibility(View.GONE);
                     }
                     prizeCount++;
                 } else if (!prizes.equals("") && !prizes.equals("null") && prizeCount == 2) {
-                    if(!prizes.equals("0")) {
+                    if (!prizes.equals("0")) {
                         thirdPrizeTextView.setVisibility(View.VISIBLE);
-                        thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
-                    }
-                    else {
+                        if (prizes.matches("[0-9]+")) {
+                            thirdPrizeTextView.setText("Third Prize: Rs " + prizes);
+                        } else {
+                            thirdPrizeTextView.setText("Third Prize: " + prizes);
+                        }
+                    } else {
                         thirdPrizeTextView.setVisibility(View.GONE);
                     }
                     prizeCount++;
@@ -384,7 +396,7 @@ public class SingleEventActivity extends AppCompatActivity implements Connectivi
                     } else if (registerButton.getText().toString().equals("PLAY NOW!")) {
                         if (eventDetails.getmName().equals("XUNBAO"))
                             startActivity(new Intent(SingleEventActivity.this, XunbaoActivity.class));
-                        else if(eventDetails.getmName().equals("HACKON")){
+                        else if (eventDetails.getmName().equals("HACKON")) {
                             Uri uri = Uri.parse("http://hackon.elementsculmyca.com"); // missing 'http://' will cause crashed
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             startActivity(intent);

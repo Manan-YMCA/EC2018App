@@ -62,7 +62,7 @@ public class CategoryEventDisplayActivity extends AppCompatActivity {
         if (clubName.equals("Jhalak")) {
             clubDisplayName.setText("Photography");
         } else if(displayName.equals("Lit-Deb")){
-            clubDisplayName.setText("Literature & Debating");
+            clubDisplayName.setText("Literary");
         }
         else {
             clubDisplayName.setText(displayName);
