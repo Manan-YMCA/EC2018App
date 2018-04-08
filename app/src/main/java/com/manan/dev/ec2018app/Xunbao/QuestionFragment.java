@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -57,6 +59,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -68,7 +72,7 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     EditText ans;
     String queURL, ansURL, statusURL;
     StringRequest stat;
-    JsonArrayRequest jobReq;
+    StringRequest jobReq;
     RequestQueue queue;
     RelativeLayout queLayout;
     private ProgressBar bar, barImage;
@@ -185,54 +189,57 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
     }
 
     private void submitAnswer() {
-        JSONObject answer = new JSONObject();
 
-        try {
-            AccessToken accessToken = AccessToken.getCurrentAccessToken();
-            answer.put("email", currFbid);
-            answer.put("skey",mContext.getResources().getString(R.string.skey));
-            answer.put("ans", ans.getText());
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
-            final JsonObjectRequest answ = new JsonObjectRequest(Request.Method.POST, ansURL, answer,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject resp) {
-                            Log.d("xunbao", "onResponse: " + resp.toString());
-                            bar.setVisibility(View.GONE);
-                            try {
-                                //progressBar.dismiss();
-                                String end = resp.getString("response");
-                                contestEnd.setVisibility(View.VISIBLE);
-                                if(end.equals("1")) {
-                                    MDToast.makeText(mContext, "Congrats! Right answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
-                                    reload();
-                                }
-                                else
-                                    MDToast.makeText(mContext, "Wrong answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
-
-                            } catch (JSONException e) {
-
-                                MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
-                                //progressBar.dismiss();
-                                //Log.e("xunbao", "onResponse: " + e.getMessage());
-                                Log.d("xunbao", "onResponse: " + resp.toString());
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            bar.setVisibility(View.GONE);
+        final StringRequest answ = new StringRequest(Request.Method.POST, ansURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("xunbao", "onResponse: " + response);
+                        bar.setVisibility(View.GONE);
+                        try {
                             //progressBar.dismiss();
+                            JSONObject resp = new JSONObject(response);
+                            String end = resp.getString("response");
+                            contestEnd.setVisibility(View.VISIBLE);
+                            if(end.equals("1")) {
+                                MDToast.makeText(mContext, "Congrats! Right answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                                ans.setText("");
+                                reload();
+                            }
+                            else
+                                MDToast.makeText(mContext, "Wrong answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+
+                        } catch (JSONException e) {
+
                             MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                            //progressBar.dismiss();
+                            //Log.e("xunbao", "onResponse: " + e.getMessage());
+                            Log.d("xunbao", "onResponse: " + response.toString());
                         }
-                    });
-            queue.add(answ);
-        } catch (JSONException e) {
-            bar.setVisibility(View.GONE);
-            MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
-            //progressBar.dismiss();
-        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        bar.setVisibility(View.GONE);
+                        //progressBar.dismiss();
+                        MDToast.makeText(mContext, "Problem submitting answer!", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("email", currFbid);
+                map.put("skey", mContext.getResources().getString(R.string.skey));
+                map.put("ans", ans.getText().toString());
+                return map;
+            }
+        };
+        queue.add(answ);
     }
 
     public void reload() {
@@ -315,40 +322,48 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
         }
         jsonArray.put(params);
 
-        jobReq = new JsonArrayRequest(Request.Method.POST, queURL, jsonArray,
-                new Response.Listener<JSONArray>() {
+        jobReq = new StringRequest(Request.Method.POST, queURL, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(String response) {
                         bar.setVisibility(View.GONE);
+
                         JSONObject resp;
                         refreshButton.setVisibility(View.GONE);
                         try {
-                            resp = response.getJSONObject(0);
+                            JSONArray re = new JSONArray(response);
+                            Log.d("yatin", response);
+                            resp = re.getJSONObject(0);
                             try {
                                 String end = resp.getString("response");
                                 contestEnd.setVisibility(View.VISIBLE);
-                                contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 7th APRIL, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
+                                contestEnd.setText("YOU HAVE SUCCESSFULLY COMPLETED ALL THE QUESTIONS.\n WE WILL ANNOUNCE THE WINNERS ON 14th APRIL, 2018.\nIF YOU HAVE WON, WE WILL CONTACT YOU SHORTLY");
                                 refreshButton.setVisibility(View.GONE);
                             } catch (Exception e) {
+
                                 bar.setVisibility(View.GONE);
-                                barImage.setVisibility(View.VISIBLE);
                                 queLayout.setVisibility(View.VISIBLE);
                                 String imgUrl = resp.getString("image");
                                 String que = resp.getString("desc");
-                                Integer level = resp.getInt("pk");
-                                question.setText(que);
-                                QuestionFragment.this.level.setText("Level " + Integer.toString(level));
-                                Picasso.with(mContext).load("https://xunbao-1.herokuapp.com" + imgUrl).into(xunbaoimg, new Callback() {
-                                    @Override
-                                    public void onSuccess() {
-                                        barImage.setVisibility(View.GONE);
-                                    }
+                                Integer level = resp.getInt("val");
+                                question.setText(Html.fromHtml(que));
+                                QuestionFragment.this.level.setText("Level " + String.valueOf(level));
+                                if(!imgUrl.equals("null")) {
+                                    barImage.setVisibility(View.GONE);
+                                    Picasso.with(mContext).load("http://xunbao.elementsculmyca.com" + imgUrl).fit().into(xunbaoimg, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                            barImage.setVisibility(View.GONE);
+                                        }
 
-                                    @Override
-                                    public void onError() {
-                                        barImage.setVisibility(View.GONE);
-                                    }
-                                });
+                                        @Override
+                                        public void onError() {
+                                            barImage.setVisibility(View.GONE);
+                                        }
+                                    });
+                                } else {
+                                    Log.d("yatin", "yess");
+                                    xunbaoimg.setVisibility(View.GONE);
+                                }
                             }
                         } catch (JSONException e) {
                             bar.setVisibility(View.GONE);
@@ -369,7 +384,18 @@ public class QuestionFragment extends Fragment implements XunbaoActivity.loadQue
 
                         volleyError.printStackTrace();
                     }
-                });
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("fid", currFbid);
+                map.put("skey", mContext.getResources().getString(R.string.skey));
+                map.put("fname", Profile.getCurrentProfile().getFirstName());
+                map.put("lname", Profile.getCurrentProfile().getLastName());
+                return map;
+            }
+        };
         queue.add(stat);
     }
 

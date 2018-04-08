@@ -41,7 +41,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="centerCrop"
-                android:background="@drawable/default_image_1" />
+                android:src="@drawable/xunbao_logo" />
 
                 <ProgressBar
                     android:id="@+id/pb_image"
