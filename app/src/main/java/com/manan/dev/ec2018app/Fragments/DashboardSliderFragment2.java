@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,30 +40,34 @@ public class DashboardSliderFragment2 extends Fragment {
           long curr =System.currentTimeMillis()/1000;
           long diff=fest_day-curr;
 
+        time = rootView.findViewById(R.id.timer);
+        TextView startin = rootView.findViewById(R.id.start_in_txt);
+
         if (curr > 1523750400) {
-            time.setText("See You at CULMYCA 19");
+            startin.setVisibility(View.GONE);
+            time.setText("See you at CULMYCA 19");
         }
 
-        time = rootView.findViewById(R.id.timer);
+        else {
+            new CountDownTimer((diff * 1000), 1000) { // adjust the milli seconds here
 
-        new CountDownTimer((diff * 1000), 1000) { // adjust the milli seconds here
+                public void onTick(long millisUntilFinished) {
 
-            public void onTick(long millisUntilFinished) {
+                    time.setText("" + String.format(FORMAT,
+                            TimeUnit.MILLISECONDS.toDays(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toHours(millisUntilFinished) - TimeUnit.DAYS.toHours(
+                                    TimeUnit.MILLISECONDS.toDays(millisUntilFinished)),
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                }
 
-                time.setText("" + String.format(FORMAT,
-                        TimeUnit.MILLISECONDS.toDays(millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished) - TimeUnit.DAYS.toHours(
-                                TimeUnit.MILLISECONDS.toDays(millisUntilFinished)),
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
-                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-            }
-
-            public void onFinish() {
-                time.setText("Fest is Live");
-            }
-        }.start();
+                public void onFinish() {
+                    time.setText("Fest is Live");
+                }
+            }.start();
+        }
 
         return rootView;
     }
